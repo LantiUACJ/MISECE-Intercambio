@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-xs-12">
+        <b>===DOMAINRESOURCE===</b>
+    </div>
+</div>
+
+@include('fhir.resource.resource',["obj"=>$obj])
+
+<div class="row">
+
+    @if (isset($obj->text) && false)
+        <div class="col-xs-4">Resumen:</div>
+        <div class="col-xs-8">
+            @include('fhir.element.narrative',["obj"=>$obj->text])
+        </div>
+    @endif
+    @if (isset($obj->contained) && true)
+        @foreach ($obj->contained as $contained)
+            <div class="col-xs-4">
+                Contenido
+                @include('fhir.resource.resource',["obj"=>$contained])
+            </div>
+        @endforeach
+    @endif
+    @if (isset($obj->modifierExtension) && false)
+        <div class="col-xs-4">
+            Modificador de extensión
+            {{$obj->modifierExtension}}
+        </div>
+    @endif
+</div>
+@if (isset($obj->extension))
+    <div class="row">
+        <div class="col-xs-12">Extensión:</div>
+        @foreach ($obj->extension as $extension)
+            <div class="col-xs-6 bloque">
+                @include('fhir.element.extension',["obj"=>$extension])
+            </div>
+        @endforeach
+    </div>
+@endif
+<div class="row">
+    <div class="col-xs-12">
+        <b>===END-DOMAINRESOURCE===</b>
+    </div>
+</div>
