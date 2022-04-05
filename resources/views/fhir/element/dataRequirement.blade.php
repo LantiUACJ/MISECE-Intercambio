@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===DATAREQUIREMENT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===DATAREQUIREMENT===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {doco
@@ -33,8 +35,10 @@
         "direction" : "<code>" // R!  ascending | descending
     }]
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-DATAREQUIREMENT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-DATAREQUIREMENT===</b>
+        </div>
     </div>
-</div>
+@endif

@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===USAGECONTEXT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===USAGECONTEXT===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {doco
@@ -15,8 +17,10 @@
     "valueReference" : { Reference(PlanDefinition|ResearchStudy|InsurancePlan|
      HealthcareService|Group|Location|Organization) }
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-USAGECONTEXT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-USAGECONTEXT===</b>
+        </div>
     </div>
-</div>
+@endif

@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===DOSAGE===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===DOSAGE===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {doco
@@ -32,8 +34,10 @@
     "maxDosePerAdministration" : { Quantity(SimpleQuantity) }, // Upper limit on medication per administration
     "maxDosePerLifetime" : { Quantity(SimpleQuantity) } // Upper limit on medication per lifetime of the patient
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-DOSAGE===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-DOSAGE===</b>
+        </div>
     </div>
-</div>
+@endif

@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===RELATEDARTIFACT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===RELATEDARTIFACT===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {doco
@@ -15,8 +17,10 @@
     "document" : { Attachment }, // What document is being referenced
     "resource" : { canonical(Any) } // What resource is being referenced
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-RELATEDARTIFACT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-RELATEDARTIFACT===</b>
+        </div>
     </div>
-</div>
+@endif

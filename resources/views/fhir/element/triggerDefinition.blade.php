@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===TRIGGERDEFINITION===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===TRIGGERDEFINITION===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {doco
@@ -17,8 +19,10 @@
     "data" : [{ DataRequirement }], // Triggering data of the event (multiple = 'and')
     "condition" : { Expression } // Whether the event triggers (boolean expression)
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-TRIGGERDEFINITION===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-TRIGGERDEFINITION===</b>
+        </div>
     </div>
-</div>
+@endif

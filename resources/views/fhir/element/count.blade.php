@@ -1,14 +1,17 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===COUNT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===COUNT===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {{dd($obj)}}
-
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-COUNT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-COUNT===</b>
+        </div>
     </div>
-</div>
+@endif

@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===RANGE===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===RANGE===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {
@@ -10,8 +12,10 @@
     "low" : { Quantity(SimpleQuantity) }, // Low limit
     "high" : { Quantity(SimpleQuantity) } // High limit
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-RANGE===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-RANGE===</b>
+        </div>
     </div>
-</div>
+@endif

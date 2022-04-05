@@ -26,14 +26,30 @@
                         </li>
                     @endguest
                     @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('/hospital/index')}}">Hospital</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('/indice/index')}}">Índice</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('/logout')}}">Cerrar sesión</a>
+                        @if (auth()->user()->isAdmin())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/hospital/index')}}">Hospital</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/indice/index')}}">Índice</a>
+                            </li>    
+                        @endif
+
+                        @if (auth()->user()->isMedico() || auth()->user()->isParamedico())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/paciente')}}">Consulta</a>
+                            </li>    
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/paciente/basico')}}">Consulta Básica</a>
+                            </li>
+                        @endif
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{auth()->user()->name}} </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="#">Configurar</a>
+                                <a class="dropdown-item" href="{{url('/logout')}}">Cerrar sesión</a>
+                            </div>
                         </li>
                     @endauth
                 </div>    

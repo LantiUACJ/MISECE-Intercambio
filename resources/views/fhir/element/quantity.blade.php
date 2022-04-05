@@ -1,37 +1,40 @@
 <div class="row">
-    <div class="col-xs-12">
-        <b>===QUANTITY===</b>
-    </div>
-    
+    @if (env("TEST", false))
+        <div class="col-12">
+            <b>===QUANTITY===</b>
+        </div>
+    @endif
     @include('fhir.element.element',["obj"=>$obj])
 
     @if (isset($obj->value))
-        <div class="col-xs-1">
+        <div class="col-1">
             {{$obj->value}}
         </div>
     @endif
     @if (isset($obj->comparator))
-        <div class="col-xs-1">
+        <div class="col-1">
             {{$obj->comparator}}
         </div>
     @endif
     @if (isset($obj->unit))
-        <div class="col-xs-2">
+        <div class="col-2">
             {{$obj->unit}}
         </div>
     @endif
     @if (isset($obj->system))
-        <div class="col-xs-5">
+        <!--<div class="col-5">
             sistema: {{$obj->system}}
-        </div>
+        </div>-->
     @endif
     @if (isset($obj->code))
-        <div class="col-xs-3">
+        <div class="col-3">
             código: {{$obj->code}}
         </div>
     @endif
-
-    <div class="col-xs-12">
-        <b>===END-QUANTITY===</b>
-    </div>
+    
+    @if (env("TEST", false))
+        <div class="col-12">
+            <b>===END-QUANTITY===</b>
+        </div>
+    @endif
 </div>

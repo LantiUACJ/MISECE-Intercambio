@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===CONTRIBUTOR===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===CONTRIBUTOR===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {doco
@@ -11,8 +13,10 @@
     "name" : "<string>", // R!  Who contributed the content
     "contact" : [{ ContactDetail }] // Contact details of the contributor
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-CONTRIBUTOR===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-CONTRIBUTOR===</b>
+        </div>
     </div>
-</div>
+@endif

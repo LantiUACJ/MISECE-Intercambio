@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===SIGNATURE===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===SIGNATURE===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {
@@ -17,8 +19,10 @@
     "sigFormat" : "<code>", // The technical format of the signature
     "data" : "<base64Binary>" // The actual signature content (XML DigSig. JWS, picture, etc.)
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-SIGNATURE===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-SIGNATURE===</b>
+        </div>
     </div>
-</div>
+@endif

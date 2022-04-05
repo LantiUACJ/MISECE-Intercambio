@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===PARAMETERDEFINITION===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===PARAMETERDEFINITION===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {doco
@@ -15,8 +17,10 @@
     "type" : "<code>", // R!  What type of value
     "profile" : { canonical(StructureDefinition) } // What profile the value is expected to be
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-PARAMETERDEFINITION===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-PARAMETERDEFINITION===</b>
+        </div>
     </div>
-</div>
+@endif

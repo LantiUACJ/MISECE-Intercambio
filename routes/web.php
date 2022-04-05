@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\HospitalController;
+use \App\Http\Controllers\PacienteController;
+use \App\Http\Controllers\PacienteBasicoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +17,9 @@ use \App\Http\Controllers\HospitalController;
 
 
 //API route for register new user
-Route::post('/register', [App\Http\Controllers\V1\AuthController::class, 'register']);
+//Route::post('/register', [App\Http\Controllers\V1\AuthController::class, 'register']);
 //API route for login user
-Route::post('/login', [App\Http\Controllers\V1\AuthController::class, 'login'])->name('login');
+//Route::post('/login', [App\Http\Controllers\V1\AuthController::class, 'login'])->name('login');
 
 //Protecting Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -26,15 +28,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     // API route for logout user
-    Route::post('/logout', [App\Http\Controllers\V1\AuthController::class, 'logout']);
+    //Route::post('/logout', [App\Http\Controllers\V1\AuthController::class, 'logout']);
 });
 
 Route::get('/', [\App\Http\Controllers\SiteController::class, "index"]);
-/*Route::get('/login', [\App\Http\Controllers\SiteController::class, "login"])->name('login');
+Route::get('/login', [\App\Http\Controllers\SiteController::class, "login"])->name('login');
 Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"]);
-Route::get('/logout', [\App\Http\Controllers\SiteController::class, "logout"]);*/
+Route::get('/logout', [\App\Http\Controllers\SiteController::class, "logout"]);
 
-Route::prefix('/hospital')->middleware(["auth"])->group(function(){
+Route::prefix('/hospital')->middleware(["auth", "admin"])->group(function(){
     Route::get('/index', [HospitalController::class, "index"]);
     Route::get('/view/{hospital}', [HospitalController::class, "show"]);
     Route::get('/create', [HospitalController::class, "create"]);
@@ -43,8 +45,17 @@ Route::prefix('/hospital')->middleware(["auth"])->group(function(){
     Route::post('/update/{hospital}', [HospitalController::class, "update"]);
     Route::post('/delete/{hospital}', [HospitalController::class, "destroy"]);
 });
-
-Route::prefix("/indice")->middleware(["auth"])->group(function (){
+Route::prefix("/indice")->middleware(["auth", "admin"])->group(function (){
     Route::get('/index', [\App\Http\Controllers\IndiceController::class, "index"]);
     Route::post('/delete/{indice}', [\App\Http\Controllers\IndiceController::class, "destroy"]);
+});
+
+Route::prefix('/paciente')->middleware(["auth", "medico"])->group(function(){
+    Route::get('/', [PacienteController::class, "formulario"]);
+    Route::post('/', [PacienteController::class, "consulta"]);
+});
+
+Route::prefix('/paciente/basico')->middleware(["auth", "medico"])->group(function(){
+    Route::get('/', [PacienteBasicoController::class, "formulario"]);
+    Route::post('/', [PacienteBasicoController::class, "consulta"]);
 });

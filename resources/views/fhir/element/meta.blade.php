@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===META===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===META===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 @if ( isset($obj->versionId) )
@@ -20,8 +22,8 @@
 @if ( isset($obj->profile) )
     <div class="row">
         @foreach ($obj->profile as $profile)
-            <div class="col-xs-4">Perfil</div>
-            <div class="col-xs-8">{{$profile}}</div>
+            <div class="col-4">Perfil</div>
+            <div class="col-8">{{$profile}}</div>
         @endforeach
     </div>
 @endif
@@ -37,8 +39,10 @@
         @include('fhir.element.coding',["obj"=>$tag])
     @endforeach
 @endif
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-META===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-META===</b>
+        </div>
     </div>
-</div>
+@endif

@@ -1,25 +1,32 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===PATIENT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===PATIENT===</b>
+        </div>
     </div>
-</div>
-@include('fhir.resource.domainResource',["obj"=>$obj])
+@endif
+
+@include('fhir.resource.resource',["obj"=>$obj])
+
 <div class="row">
     @if (isset($obj->name))
-        <div class="col-xs-12 bloque">
+        <div class="col-12">
             @foreach ($obj->name as $name)
                 @include('fhir.element.humanName',["obj"=>$name])
             @endforeach
         </div>
     @endif
 </div>
+
+@include('fhir.resource.domainResource',["obj"=>$obj, "excludeResource"=>true])
+
 @if (isset($obj->identifier))
-    <div class="row bloque">
-        <div class="col-xs-12">
+    <div class="row">
+        <div class="col-12">
             Identificadores:
         </div>
         @foreach ($obj->identifier as $identifier)
-            <div class="col-xs-6 bloque">
+            <div class="col-6">
                 @include('fhir.element.identifier',["obj"=>$identifier])
             </div>
         @endforeach
@@ -27,33 +34,38 @@
 @endif
 <div class="row">
     @if (isset($obj->active))
-        <div class="col-xs-2">Paciente {{$obj->active?"activo":"no activo"}}</div>
+        <div class="col-3">Paciente {{$obj->active?"activo":"no activo"}}</div>
     @endif
     @if (isset($obj->gender))
-        <div class="col-xs-2"><b>Género:</b> {{str_replace(["male", "female", "unknown", "other"],["hombre", "mujere", "desconocido", "otro"],strtolower($obj->gender))}}</div>
+        <div class="col-3"><b>Género:</b> 
+            <a href="#" data-toggle="tooltip" title="Snomed:1384173/female">
+                {{str_replace(["female", "male", "unknown", "other"],["mujer", "hombre", "desconocido", "otro"],strtolower($obj->gender))}}
+            </a>
+        </div>
+
     @endif
     @if (isset($obj->birthDate))
-        <div class="col-xs-2"><b>Fecha de nacimiento:</b> {{$obj->birthDate}}</div>
+        <div class="col-3"><b>Fecha de nacimiento:</b><br> {{$obj->birthDate}}</div>
     @endif
     @if (isset($obj->deceasedBoolean))
-        <div class="col-xs-2"><b>Estado:</b>{{$obj->deceasedBoolean?"Difunto":"Vivo"}}</div>
+        <div class="col-3"><b>Estado:</b>{{$obj->deceasedBoolean?"Difunto":"Vivo"}}</div>
     @endif
     @if (isset($obj->deceasedDateTime))
-        <div class="col-xs-2"><b>Fecha de defunción:</b> {{$obj->deceasedDateTime}}</div>
+        <div class="col-3"><b>Fecha de defunción:</b> {{$obj->deceasedDateTime}}</div>
     @endif
     @if (isset($obj->multipleBirthBoolean))
-        <div class="col-xs-2"><b>Nacimiento múltiple:</b> {{$obj->multipleBirthBoolean?"SI":"NO"}}</div>
+        <div class="col-3"><b>Nacimiento múltiple:</b> {{$obj->multipleBirthBoolean?"SI":"NO"}}</div>
     @endif
     @if (isset($obj->multipleBirthInteger))
-        <div class="col-xs-2"><b>Nacimiento múltiple:</b>{{$obj->multipleBirthInteger}}</div>
+        <div class="col-3"><b>Nacimiento múltiple:</b>{{$obj->multipleBirthInteger}}</div>
     @endif
 </div>
 @if (isset($obj->telecom))
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <b>Datos de contacto:</b>
         </div>
-        <div class="col-xs-6 bloque">
+        <div class="col-6">
             @foreach ($obj->telecom as $telecom)
                 @include('fhir.element.contactPoint',["obj"=>$telecom])
             @endforeach
@@ -62,14 +74,14 @@
 @endif
 @if (isset($obj->address))
     <div class="row">
-        <div class="col-xs-2">Dirección:</div>
-        <div class="col-xs-10">
+        <div class="col-2">Dirección:</div>
+        <div class="col-10">
             <div class="row">
                 @foreach ($obj->address as $address)
                     @if (sizeof($obj->address) > 1)
-                        <div class="col-xs-6">
+                        <div class="col-6">
                     @else
-                        <div class="col-xs-12">
+                        <div class="col-12">
                     @endif
                         @include('fhir.element.address',["obj"=>$address])
                     </div>
@@ -80,10 +92,10 @@
 @endif
 @if (isset($obj->maritalStatus))
     <div class="row">
-        <div class="col-xs-2">
+        <div class="col-2">
             Estado marital: 
         </div>
-        <div class="col-xs-10">
+        <div class="col-10">
             @include('fhir.element.codeableConcept',["obj"=>$obj->maritalStatus])
         </div>
     </div>
@@ -117,7 +129,7 @@
             @include('fhir.element.address',["obj"=>$contact->address])
         @endif
         @if (isset($contact->gender))
-            <div class="col-xs-4"><b>Género:</b> {{str_replace(["male", "female", "unknown", "other"],["hombre", "mujere", "desconocido", "otro"],strtolower($contact->gender))}}</div>
+            <div class="col-4"><b>Género:</b> {{str_replace(["male", "female", "unknown", "other"],["hombre", "mujere", "desconocido", "otro"],strtolower($contact->gender))}}</div>
         @endif
         @if (isset($contact->organization))
             Organización
@@ -131,22 +143,22 @@
 @endif
 @if (isset($obj->communication))
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <b>Comunicación:</b>
         </div>
     </div>
     @foreach ($obj->communication as $communication)
-        <div class="row bloque">
+        <div class="row">
             @if (isset($communication->language))
-                <div class="col-xs-3">
+                <div class="col-3">
                     Lenguaje:
                 </div>
-                <div class="col-xs-9">
+                <div class="col-9">
                     @include('fhir.element.codeableConcept',["obj"=>$communication->language])
                 </div>
             @endif
             @if (isset($communication->preferred))
-                <div class="col-xs-12">
+                <div class="col-12">
                     Preferido
                     {{$communication->preferred?"SI":"NO"}}
                 </div>
@@ -171,8 +183,10 @@
         Tipo {{$link}}
     @endforeach
 @endif
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-PATIENT===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-PATIENT===</b>
+        </div>
     </div>
-</div>
+@endif

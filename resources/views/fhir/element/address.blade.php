@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===ADDRESS===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===ADDRESS===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 @if (isset($obj->use))
@@ -39,14 +41,16 @@
 @endif
 @if (isset($obj->period))
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
         Período <br>
         @include('fhir.element.period',["obj"=>$obj->period])
     </div>
 </div>
 @endif
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-ADDRESS===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-ADDRESS===</b>
+        </div>
     </div>
-</div>
+@endif

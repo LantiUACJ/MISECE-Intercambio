@@ -1,16 +1,18 @@
-
-<div class="row">
-    <div class="col-xs-12">
-        <b>===DURATION===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===DURATION===</b>
+        </div>
     </div>
-</div>
-
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 @include('fhir.element.quantity',["obj"=>$obj])
 
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-DURATION===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-DURATION===</b>
+        </div>
     </div>
-</div>
+@endif

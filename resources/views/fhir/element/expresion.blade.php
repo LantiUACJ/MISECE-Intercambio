@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="col-xs-12">
-        <b>===EXPRESION===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===EXPRESION===</b>
+        </div>
     </div>
-</div>
+@endif
 @include('fhir.element.element',["obj"=>$obj])
 
 {doco
@@ -13,8 +15,10 @@
     "expression" : "<string>", // Expression in specified language
     "reference" : "<uri>" // Where the expression is found
 }
-<div class="row">
-    <div class="col-xs-12">
-        <b>===END-EXPRESION===</b>
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-EXPRESION===</b>
+        </div>
     </div>
-</div>
+@endif
