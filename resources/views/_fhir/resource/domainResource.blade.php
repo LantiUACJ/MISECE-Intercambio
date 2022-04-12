@@ -1,4 +1,13 @@
-@include('fhir.resource.resource',["obj"=>$obj])
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===DOMAINRESOURCE===</b>
+        </div>
+    </div>
+@endif
+@if (!isset($excludeResource))
+    @include('fhir.resource.resource',["obj"=>$obj])
+@endif
 <div class="row">
     @if (isset($obj->text) && false)
         <div class="col-4">Resumen:</div>
@@ -33,5 +42,12 @@
                 @include('fhir.element.extension',["obj"=>$extension])
             </div>
         @endforeach
+    </div>
+@endif
+@if (env("TEST", false))
+    <div class="row">
+        <div class="col-12">
+            <b>===END-DOMAINRESOURCE===</b>
+        </div>
     </div>
 @endif

@@ -38,7 +38,6 @@ class ApiController extends \App\Http\Controllers\Controller{
         /* Verifica si existe el paciente */
         $indice = Indice::where(["curp"=>$curp])->first();
         if(!$indice){
-            //dd("nada");
             return $this->pdf([]);
         }
         /* consultar al paciente de otro hospital */
@@ -46,9 +45,10 @@ class ApiController extends \App\Http\Controllers\Controller{
         $data = [];
         $log = "Hospital: ".$hospital_user. " Consultor: " . $consultor.  " paciente: ".$curp. " fecha: " . (new \Carbon\Carbon())->format("Y-m-d H-i-s") . " Respuestas: ";
         /* Verifica el código */
+        /*
         if( !isset($codigo) || (isset($codigo) && $indice->codigo !== $codigo) || $indice->updated_at->diffInSeconds(\Carbon\Carbon::now()) > env("TIEMPO_VALIDACION")){
             return $this->sendCode($indice);
-        }
+        }*/
         foreach($hospitalesIndices as $hospitalIndice){
             $tool = new \App\Tools\CurlHelper($hospitalIndice->hospital->url . "patient/", ["curp"=>$curp]);
             $bundle = $tool->get();
@@ -63,6 +63,7 @@ class ApiController extends \App\Http\Controllers\Controller{
         //$registroEventos = new \App\Tools\CurlHelper(env("MODULO_REGISTRO_EVENTOS"), ["msg"=>$log]);
         //$response = $registroEventos->noWaitPost();
         //return $this->most_actual($data);
+        //dd($data);
         return $this->pdf($this->most_actual($data));
     }
 
@@ -111,9 +112,7 @@ class ApiController extends \App\Http\Controllers\Controller{
         return $this->pdf($this->most_actual($data));
     }
 
-    /*
-        Función que se encarga de generar el PDF
-    */
+    /* Función que se encarga de generar el PDF */
     private function pdf($data){
         $start = round(microtime(true) * 1000);
         $txt = view("pdf",["data"=>$data]);
@@ -135,9 +134,7 @@ class ApiController extends \App\Http\Controllers\Controller{
         if(file_exists("$name.pdf")) unlink("$name.pdf");
         return response($data, 200)->header('Content-Type', 'application/pdf');
     }
-    /*
-    Función que llama al comando para generar el PDF.
-    */
+    /*Función que llama al comando para generar el PDF.*/
     private function runCommand($name){ //--disable-internal-links
         $command = "wkhtmltopdf toc --toc-header-text Índice -n  $name.html $name.pdf";
         shell_exec($command);
