@@ -42,9 +42,13 @@ class Setup extends Command
         $name = $this->ask('Introducir nombre');
         $email = $this->ask('Introducir email');
         $password = $this->secret('Introducir password');
+        $rol_id = $this->ask('Introducir rol:  1) Admin, 2) Hospital, 3) Médico, 4) Paramédico, 5) Paciente');
+        $hospital_id = $this->ask('Introducir hospital (0 para administrador)');
         $user = new \App\Models\User();
         $user->name = $name;
         $user->email = $email;
+        $user->rol_id = $rol_id;
+        $user->hospital_id = $hospital_id;
         $user->password = Hash::make($password);
 
         if($user->save()){

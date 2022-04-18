@@ -40,6 +40,15 @@ class HospitalController extends Controller
             "user"=>"required",
             "password"=>"required",
             "url"=>"required",
+            "nombre"=>"required",
+            "telefono"=>"required",
+            "email"=>"required",
+            "calle"=>"required",
+            "numero"=>"required",
+            "colonia"=>"required",
+            "codigo_postal"=>"required",
+            "ciudad"=>"required",
+            "estado"=>"required",
         ]);
 
         $input["password"] = Hash::make($input["password"]);
@@ -82,6 +91,15 @@ class HospitalController extends Controller
         $input = $request->validate([
             "user"=>"required",
             "url"=>"required",
+            "nombre"=>"required",
+            "telefono"=>"required",
+            "email"=>"required",
+            "calle"=>"required",
+            "numero"=>"required",
+            "colonia"=>"required",
+            "codigo_postal"=>"required",
+            "ciudad"=>"required",
+            "estado"=>"required",
         ]);
         if(isset( $request->input()["password"] ))
             $input["password"] = Hash::make($request->input()["password"]);
