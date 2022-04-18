@@ -14,7 +14,16 @@ class Hospital extends Authenticatable
     protected $fillable = [
         "url",
         "user",
-        "password"
+        "password",
+        "nombre",
+        "telefono",
+        "email",
+        "calle",
+        "numero",
+        "colonia",
+        "codigo_postal",
+        "ciudad",
+        "estado",
     ];
 
     public function lastIndice(){

@@ -61,8 +61,10 @@ class UpdateIndex extends Command
                     if(!$indice){
                         $indice = new Indice();
                         $indice->curp = $elemento->curp;
-                        if(isset($elemento->telefono)){
+                        if(isset($elemento->telefono) && isset($elemento->nombre) && isset($elemento->email)){
                             $indice->telefono = $elemento->telefono;
+                            $indice->nombre = $elemento->nombre;
+                            $indice->email = $elemento->email;
                             echo $indice->save()?" Nuevo Indice ":" no se guardo ";
                         }
                         else{
