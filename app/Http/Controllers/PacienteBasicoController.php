@@ -17,7 +17,7 @@ class PacienteBasicoController extends Controller
         $_GET["mode"] = "HTML";
         $apiController = new V1\ApiController();
 
-        $codigo = isset($input["codigo"])?$input["codigo"]:"";
+        //$codigo = isset($input["codigo"])?$input["codigo"]:"";
         
         $data = $apiController->expedientesBasico(auth()->user()->hospital->user, $input["curp"], auth()->user()->name, $codigo);
         if($data && $data instanceof \Illuminate\View\View){

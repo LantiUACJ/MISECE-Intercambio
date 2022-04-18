@@ -45,19 +45,19 @@ class ApiController extends \App\Http\Controllers\Controller{
         $data = [];
         $log = "Hospital: ".$hospital_user. " Consultor: " . $consultor.  " paciente: ".$curp. " fecha: " . (new \Carbon\Carbon())->format("Y-m-d H-i-s") . " Respuestas: ";
         /* Verifica el código */
-        /*
+        
         if( !isset($codigo) || (isset($codigo) && $indice->codigo !== $codigo) || $indice->updated_at->diffInSeconds(\Carbon\Carbon::now()) > env("TIEMPO_VALIDACION")){
             return $this->sendCode($indice);
-        }*/
+        }
         foreach($hospitalesIndices as $hospitalIndice){
             $tool = new \App\Tools\CurlHelper($hospitalIndice->hospital->url . "patient/", ["curp"=>$curp]);
             $bundle = $tool->get();
             if($bundle){
                 //$log .= " (".$hospitalIndice->hospital->user.")";
-                //$modulo_procesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
-                //$procesado = $modulo_procesamiento->postJson();
-                //$data[] = ["bundle"=>$procesado?$procesado:$bundle,"hospital"=>$hospitalIndice->hospital];
-                $data[] = ["bundle"=>$bundle,"hospital"=>$hospitalIndice->hospital];
+                $modulo_procesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
+                $procesado = $modulo_procesamiento->postJson();
+                $data[] = ["bundle"=>$procesado?$procesado:$bundle,"hospital"=>$hospitalIndice->hospital];
+                //$data[] = ["bundle"=>$bundle,"hospital"=>$hospitalIndice->hospital];
             }
         }
         //$registroEventos = new \App\Tools\CurlHelper(env("MODULO_REGISTRO_EVENTOS"), ["msg"=>$log]);
@@ -67,7 +67,11 @@ class ApiController extends \App\Http\Controllers\Controller{
         return $this->pdf($this->most_actual($data));
     }
 
-    /* Expediente básico */
+    /* ************************************************
+        
+                Expediente básico 
+
+    ***************************************************/
     public function consultarExpedientesBasico($curp, Request $request){
         $validator = Validator::make($request->all(), [
             "consultor"=>"required"
@@ -80,10 +84,10 @@ class ApiController extends \App\Http\Controllers\Controller{
         $input = $validator->validated();
         $hospital_user = $request->headers->get("php-auth-user");
 
-        return $this->expedientes($hospital_user, $curp, $input['consultor']);
+        return $this->expedientesBasico($hospital_user, $curp, $input['consultor']);
     }
 
-    public function expedientesBasico($hospital_user, $curp, $consultor, $codigo){
+    public function expedientesBasico($hospital_user, $curp, $consultor){
         /* adquirir hospital */
         $hospital = Hospital::where("user",$hospital_user)->first();
         /* Verifica si existe el paciente */
@@ -100,9 +104,6 @@ class ApiController extends \App\Http\Controllers\Controller{
             $bundle = $tool->get();
             if($bundle){
                 //$log .= " (".$hospitalIndice->hospital->user.")";
-                //$modulo_procesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
-                //$procesado = $modulo_procesamiento->postJson();
-                //$data[] = ["bundle"=>$procesado?$procesado:$bundle,"hospital"=>$hospitalIndice->hospital];
                 $data[] = ["bundle"=>$bundle,"hospital"=>$hospitalIndice->hospital];
             }
         }
@@ -145,8 +146,7 @@ class ApiController extends \App\Http\Controllers\Controller{
         $codigo = rand(100000,999999);
         $indice->codigo = $codigo;
         $indice->save();
-        //dd("Hola");
-        Mail::to($indice->telefono)->send(new \App\Mail\Codigo($codigo));
+        Mail::to($indice->email)->send(new \App\Mail\Codigo($codigo));
         return response("El código es incorrecto, expiro o no fue enviado", 400);
     }
 
