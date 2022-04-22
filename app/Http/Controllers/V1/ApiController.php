@@ -30,7 +30,7 @@ class ApiController extends \App\Http\Controllers\Controller{
         $input = $validator->validated();
         $hospital_user = $request->headers->get("php-auth-user");
 
-        return $this->expedientes($hospital_user, $curp, $input['consultor'], $input['codigo']);
+    return $this->expedientes($hospital_user, $curp, $input['consultor'], isset($input['codigo'])?$input['codigo']:""/*$input['codigo']*/);
     }
     public function expedientes($hospital_user, $curp, $consultor, $codigo){
         /* adquirir hospital */
