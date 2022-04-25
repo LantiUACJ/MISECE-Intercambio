@@ -54,10 +54,14 @@ class ApiController extends \App\Http\Controllers\Controller{
             $bundle = $tool->get();
             if($bundle){
                 //$log .= " (".$hospitalIndice->hospital->user.")";
-                $modulo_procesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
-                $procesado = $modulo_procesamiento->postJson();
-                $data[] = ["bundle"=>$procesado?$procesado:$bundle,"hospital"=>$hospitalIndice->hospital];
-                //$data[] = ["bundle"=>$bundle,"hospital"=>$hospitalIndice->hospital];
+                if(env("MODULO_PROCESAMIENTO", "ignore") != "ignore"){
+                    $modulo_procesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
+                    $procesado = $modulo_procesamiento->postJson();
+                    $data[] = ["bundle"=>$procesado?$procesado:$bundle,"hospital"=>$hospitalIndice->hospital];
+                }
+                else{
+                    $data[] = ["bundle"=>$bundle,"hospital"=>$hospitalIndice->hospital];
+                }
             }
         }
         //$registroEventos = new \App\Tools\CurlHelper(env("MODULO_REGISTRO_EVENTOS"), ["msg"=>$log]);
