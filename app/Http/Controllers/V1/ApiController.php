@@ -22,7 +22,6 @@ class ApiController extends \App\Http\Controllers\Controller{
             "consultor"=>"required",
             "codigo"=>"nullable"
         ]);
-        set_time_limit(180);
 
         if ($validator->fails()) {
             return $validator->errors();
@@ -30,9 +29,10 @@ class ApiController extends \App\Http\Controllers\Controller{
         $input = $validator->validated();
         $hospital_user = $request->headers->get("php-auth-user");
 
-    return $this->expedientes($hospital_user, $curp, $input['consultor'], isset($input['codigo'])?$input['codigo']:""/*$input['codigo']*/);
+        return $this->expedientes($hospital_user, $curp, $input['consultor'], isset($input['codigo'])?$input['codigo']:""/*$input['codigo']*/);
     }
     public function expedientes($hospital_user, $curp, $consultor, $codigo){
+        set_time_limit(180);
         /* adquirir hospital */
         $hospital = Hospital::where("user",$hospital_user)->first();
         /* Verifica si existe el paciente */

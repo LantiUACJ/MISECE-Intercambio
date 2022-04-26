@@ -27,6 +27,8 @@ class CurlHelper{
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ["content-type: application/json", "accept: application/json"]);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 300);
+        set_time_limit(180);
         return json_decode(curl_exec($ch));
     }
 
