@@ -46,7 +46,8 @@ class ApiController extends \App\Http\Controllers\Controller{
         $log = "Hospital: ".$hospital_user. " Consultor: " . $consultor.  " paciente: ".$curp. " fecha: " . (new \Carbon\Carbon())->format("Y-m-d H-i-s") . " Respuestas: ";
         /* Verifica el código */
         
-        if( !isset($codigo) || (isset($codigo) && $indice->codigo !== $codigo) || $indice->updated_at->diffInSeconds(\Carbon\Carbon::now()) > env("TIEMPO_VALIDACION")){
+        if( (!isset($codigo) || (isset($codigo) && $indice->codigo !== $codigo) || $indice->updated_at->diffInSeconds(\Carbon\Carbon::now()) > env("TIEMPO_VALIDACION")) && $codigo !="SKIP"){
+            //dd($codigo);
             return $this->sendCode($indice);
         }
         foreach($hospitalesIndices as $hospitalIndice){

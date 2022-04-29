@@ -1,29 +1,42 @@
 @extends('layout')
 
 @section('content')
-    <h1>Hospital</h1>
-    <a class="btn btn-success" href="{{url('/hospital/create/')}}">Registrar</a>
-    <table class="table">
-        <tr>
-            <th>Nombre:</th>
-            <th>Endpoit:</th>
-            <th>Opciones:</th>
-        </tr>
-        @foreach ($hospitales as $hospital)
-            <tr>
-                <td>{{$hospital->user}}</td>
-                <td>{{$hospital->url}}</td>
-                <td>
-                    <a class="btn btn-warning" href="{{url('/hospital/update/'.$hospital->id)}}">Editar</a>
-                    <div class="btn btn-danger" onclick="confirmModal('¿Borrar hospital?','{{url('/hospital/delete/'.$hospital->id)}}')">Borrar</div>
-                </td>
-            </tr>
-        @endforeach
-    </table>
+    
+    <div class="actions">
+        <p class="subtitle">Menú</p>
+        <a href="{{url('/hospital/create/')}}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Registrar Nuevo Hospital</a>
+    </div>
+    <hr style="opacity: 0.2;">
+    <div class="data-content">
+        <p class="subtitle">Datos</p>
+        <table class="striped responsive-table dashboard-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Endpoint</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($hospitales as $hospital)
+                    <tr>
+                        <td>{{$hospital->user}}</td>
+                        <td>{{$hospital->url}}</td>
+                        <td class="action-btns">
+                            <a class="" href="{{url('/hospital/update/'.$hospital->id)}}">
+                                <span class="table-btn">
+                                    <i class="material-icons">edit</i>
+                                </span>
+                            </a>
+                            <div class="" onclick="confirmModal('¿Borrar hospital?','{{url('/hospital/delete/'.$hospital->id)}}')">
+                                <span class="table-btn delete-icon">
+                                    <i class="material-icons">delete</i>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
-
-
-@section('script')
-    @include('components.confirm')
-@endsection
-

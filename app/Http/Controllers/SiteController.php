@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Auth;
 class SiteController extends Controller
 {
     public function index(){
-        return view("site.index");
+        $user = auth()->user();
+        if($user && $user->isAdmin())
+            return view("site.admin");
+        else
+            return view("site.index");
     }
     public function login(){
         return view("site.login");
