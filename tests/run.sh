@@ -1,6 +1,10 @@
 #!/bin/bash
 cd /
 cd var/www/html/MISECE-Intercambio
+php artisan config:clear
+sudo rm .env
+wget https://s3intercambio2.s3.amazonaws.com/.env
+php artisan key:generate
 php artisan migrate --force
 php artisan config:clear
 #php artisan route:clear
