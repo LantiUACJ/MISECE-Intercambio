@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 cd /
 cd var/www/html/MISECE-Intercambio
 sudo rm .env
