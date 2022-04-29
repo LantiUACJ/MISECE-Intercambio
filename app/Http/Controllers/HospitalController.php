@@ -25,7 +25,7 @@ class HospitalController extends Controller
      */
     public function create()
     {
-        return view("hospital.registro");
+        return view("hospital.registro", ["model"=>new Hospital]);
     }
 
     /**
@@ -54,7 +54,7 @@ class HospitalController extends Controller
         $input["password"] = Hash::make($input["password"]);
         $model = Hospital::create($input);
 
-        return redirect("/hospital/index/");
+        return redirect("/hospital");
     }
 
     /**
@@ -105,7 +105,7 @@ class HospitalController extends Controller
             $input["password"] = Hash::make($request->input()["password"]);
 
         $hospital->update($input);
-        return redirect("/hospital/index/");
+        return redirect("/hospital");
     }
 
     /**
@@ -117,6 +117,6 @@ class HospitalController extends Controller
     public function destroy(Hospital $hospital)
     {
         $hospital->delete();
-        return redirect("/hospital/index/");
+        return redirect("/hospital");
     }
 }

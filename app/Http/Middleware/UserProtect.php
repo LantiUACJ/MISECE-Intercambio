@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Medico
+class UserProtect
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class Medico
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->isMedico() || auth()->user()->isParamedico())
+        if(auth()->user()->rol_id == 1 || ($request->route()->parameters()["user"]->hospital_id == auth()->user()->hospital_id)){
             return $next($request);
-        else
-            return response('No cuenta con los permisos para realizar la consulta', 401);
+        }
+        return response('No cuenta con los permisos para realizar la consulta', 401);
     }
 }

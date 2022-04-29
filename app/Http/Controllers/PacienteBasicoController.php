@@ -19,7 +19,7 @@ class PacienteBasicoController extends Controller
 
         //$codigo = isset($input["codigo"])?$input["codigo"]:"";
         
-        $data = $apiController->expedientesBasico(auth()->user()->hospital->user, $input["curp"], auth()->user()->name, $codigo);
+        $data = $apiController->expedientesBasico(auth()->user()->hospital->user, $input["curp"], auth()->user()->name);
         if($data && $data instanceof \Illuminate\View\View){
             return view("paciente.formulario", ["codigo"=>false, "curp"=>$input["curp"], "data"=>$data]);
         }
