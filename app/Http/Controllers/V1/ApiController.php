@@ -22,7 +22,6 @@ class ApiController extends \App\Http\Controllers\Controller{
             "consultor"=>"required",
             "codigo"=>"nullable"
         ]);
-        set_time_limit(180);
 
         if ($validator->fails()) {
             return $validator->errors();
@@ -30,9 +29,10 @@ class ApiController extends \App\Http\Controllers\Controller{
         $input = $validator->validated();
         $hospital_user = $request->headers->get("php-auth-user");
 
-        return $this->expedientes($hospital_user, $curp, $input['consultor'], $input['codigo']);
+        return $this->expedientes($hospital_user, $curp, $input['consultor'], isset($input['codigo'])?$input['codigo']:""/*$input['codigo']*/);
     }
     public function expedientes($hospital_user, $curp, $consultor, $codigo){
+        set_time_limit(180);
         /* adquirir hospital */
         $hospital = Hospital::where("user",$hospital_user)->first();
         /* Verifica si existe el paciente */
@@ -46,7 +46,8 @@ class ApiController extends \App\Http\Controllers\Controller{
         $log = "Hospital: ".$hospital_user. " Consultor: " . $consultor.  " paciente: ".$curp. " fecha: " . (new \Carbon\Carbon())->format("Y-m-d H-i-s") . " Respuestas: ";
         /* Verifica el código */
         
-        if( !isset($codigo) || (isset($codigo) && $indice->codigo !== $codigo) || $indice->updated_at->diffInSeconds(\Carbon\Carbon::now()) > env("TIEMPO_VALIDACION")){
+        if( (!isset($codigo) || (isset($codigo) && $indice->codigo !== $codigo) || $indice->updated_at->diffInSeconds(\Carbon\Carbon::now()) > env("TIEMPO_VALIDACION")) && $codigo !="SKIP"){
+            //dd($codigo);
             return $this->sendCode($indice);
         }
         foreach($hospitalesIndices as $hospitalIndice){
@@ -54,10 +55,14 @@ class ApiController extends \App\Http\Controllers\Controller{
             $bundle = $tool->get();
             if($bundle){
                 //$log .= " (".$hospitalIndice->hospital->user.")";
-                $modulo_procesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
-                $procesado = $modulo_procesamiento->postJson();
-                $data[] = ["bundle"=>$procesado?$procesado:$bundle,"hospital"=>$hospitalIndice->hospital];
-                //$data[] = ["bundle"=>$bundle,"hospital"=>$hospitalIndice->hospital];
+                if(env("MODULO_PROCESAMIENTO", "ignore") != "ignore"){
+                    $modulo_procesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
+                    $procesado = $modulo_procesamiento->postJson();
+                    $data[] = ["bundle"=>$procesado?$procesado:$bundle,"hospital"=>$hospitalIndice->hospital];
+                }
+                else{
+                    $data[] = ["bundle"=>$bundle,"hospital"=>$hospitalIndice->hospital];
+                }
             }
         }
         //$registroEventos = new \App\Tools\CurlHelper(env("MODULO_REGISTRO_EVENTOS"), ["msg"=>$log]);
