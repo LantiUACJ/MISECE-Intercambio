@@ -1,6 +1,6 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===DATAREQUIREMENT===</b>
         </div>
     </div>
@@ -37,7 +37,7 @@
 }
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-DATAREQUIREMENT===</b>
         </div>
     </div>

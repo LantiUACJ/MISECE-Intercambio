@@ -3,52 +3,50 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tools\PetitionHelper;
 
 class PacienteController extends Controller
 {
     public function formulario(){
-        return view("paciente.formulario", ["codigo"=>false, "curp"=>""]);
+        return view("paciente.normal_curp", ["codigo"=>false, "curp"=>""]);
     }
     public function consulta(Request $request){
         $input = $request->validate([
             "curp"=>"required",
             "codigo"=>"nullable",
         ]);
-        $_GET["mode"] = "HTML";
-        $apiController = new V1\ApiController();
 
-        $codigo = isset($input["codigo"])?$input["codigo"]:"";
+        $ph = new PetitionHelper($input['curp'], auth()->user()->hospital, auth()->user()->name, 1);
         
-        $data = $apiController->expedientes(auth()->user()->hospital->user, $input["curp"], auth()->user()->name, $codigo);
-        
-        if($data && $data instanceof \Illuminate\View\View){
-            return view("paciente.formulario", ["codigo"=>isset($input["codigo"])?$input["codigo"]:true, "curp"=>$input["curp"], "data"=>$data]);
+        if(!$ph->searchPatient()){
+            return view("paciente.resultado", ["data"=>$data, "nombre"=>"", $data => "no se encontró el paciente"]);
         }
-        elseif ($data && $data instanceof \Illuminate\Http\Response && $data->status() == 200){
-            return view("paciente.formulario", ["codigo"=>isset($input["codigo"])?$input["codigo"]:true, "curp"=>$input["curp"], "data"=>$data]);
+        $nombre = $ph->indice->nombre;
+        if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
+            $ph->sendCode();
+            return view("paciente.normal_codigo", ["nombre"=>$nombre, "curp"=>$input["curp"]]);
         }
-        else
-            return view("paciente.formulario", ["codigo"=>isset($input["codigo"])?$input["codigo"]:true, "curp"=>$input["curp"]]);
+
+        $ph->getData();
+
+        return view("paciente.resultado", ["nombre"=>$nombre, "data"=>$ph->renderPartialHtml()]);
     }
 
     public function consultaPropia(Request $request){
-        $input = [
-            "curp"=>"VIRV19930327MOCLQG93X",
-        ];
-        $_GET["mode"] = "HTML";
-        $apiController = new V1\ApiController();
 
-        $codigo = isset($input["codigo"])?$input["codigo"]:"SKIP";
+        $ph = new PetitionHelper("test", auth()->user()->hospital, auth()->user()->name, 1);
         
-        $data = $apiController->expedientes(auth()->user()->hospital->user, $input["curp"], auth()->user()->name, $codigo);
-        
-        if($data && $data instanceof \Illuminate\View\View){
-            return view("paciente.formulario", ["codigo"=>isset($input["codigo"])?$input["codigo"]:false, "curp"=>$input["curp"], "data"=>$data]);
+        if(!$ph->searchPatient()){
+            return view("paciente.resultado", ["data"=>$data, "nombre"=>"", $data => "no se encontró el paciente"]);
         }
-        elseif ($data && $data instanceof \Illuminate\Http\Response && $data->status() == 200){
-            return view("paciente.formulario", ["codigo"=>isset($input["codigo"])?$input["codigo"]:false, "curp"=>$input["curp"], "data"=>$data]);
+        $nombre = $ph->indice->nombre;
+        if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
+            $ph->sendCode();
+            return view("paciente.normal_codigo", ["nombre"=>$nombre, "curp"=>$input["curp"]]);
         }
-        else
-            return view("paciente.formulario", ["codigo"=>isset($input["codigo"])?$input["codigo"]:false, "curp"=>$input["curp"]]);
+
+        $ph->getData();
+
+        return view("paciente.resultado", ["nombre"=>$nombre, "data"=>$ph->renderPartialHtml()]);
     }
 }

@@ -1,6 +1,6 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===TIMING===</b>
         </div>
     </div>
@@ -34,7 +34,7 @@
 }
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-TIMING===</b>
         </div>
     </div>

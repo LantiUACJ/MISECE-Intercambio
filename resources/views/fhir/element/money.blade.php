@@ -1,6 +1,6 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===MONEY===</b>
         </div>
     </div>
@@ -14,7 +14,7 @@
 }
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-MONEY===</b>
         </div>
     </div>

@@ -10,7 +10,15 @@ class SiteController extends Controller
     public function index(){
         $user = auth()->user();
         if($user && $user->isAdmin())
-            return view("site.admin");
+            return view("dashboard.admin");
+        else if($user && $user->isHospital())
+            return view("dashboard.hospital");
+        else if($user && $user->isMedico())
+            return view("dashboard.medico");
+        else if($user && $user->isParamedico())
+            return view("dashboard.paramedico");
+        else if($user && $user->isPaciente())
+            return view("dashboard.paciente");
         else
             return view("site.index");
     }

@@ -3,8 +3,14 @@
 @section('title',"Registrar usuario")
 
 @section('content')
-    <h1>Registrar usuario</h1>
-    
-    @include('components.form',["action"=>url("/users/create"), "method"=>"post", "inputs"=>$inputs])
+<div class="actions">
+    <!-- <p class="subtitle">Menú</p> -->
+    <a href="{{url('users')}}" class="waves-effect waves-light red darken-1 btn"><i class="material-icons left">arrow_back</i>Cancelar registro</a>
+</div>
+<hr style="opacity: 0.2;">
+<div class="data-content">
+    <p class="subtitle">Registro</p>
+    @include('user._form')
+</div>
 
 @endsection

@@ -1,6 +1,6 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===OBSERVATION===</b>
         </div>
     </div>
@@ -9,11 +9,11 @@
 
 @if (isset($obj->identifier))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Identificador:
         </div>
         @foreach ($obj->identifier as $identifier)
-            <div class="col-6 bloque">
+            <div class="col s6 bloque">
                 @include('fhir.element.identifier',["obj"=>$identifier])
             </div>
         @endforeach
@@ -22,21 +22,21 @@
 
 <div class="row">
     @if (isset($obj->status))
-        <div class="col-12">
+        <div class="col s12">
             Estado {{ str_replace(["registered", "preliminary", "final", "amended"], ["Registrado", "Preliminar", "Final", "Corregida"], $obj->status) }}
         </div>
     @endif
     @if (isset($obj->issued))
-        <div class="col-12">
+        <div class="col s12">
             Emitida: {{$obj->issued}}
         </div>
     @endif
 </div>
 @if (isset($obj->basedOn))
     <div class="row">
-        <div class="col-12">Basado en:</div>
+        <div class="col s12">Basado en:</div>
         @foreach ($obj->basedOn as $basedOn)
-            <div class="col-6 bloque">
+            <div class="col s6 bloque">
                 @include('fhir.element.reference',["obj"=>$basedOn])
             </div>
         @endforeach
@@ -44,23 +44,23 @@
 @endif
 @if (isset($obj->partOf))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Parte de
         </div>
     </div>
     @foreach ($obj->partOf as $partOf)
-        <div class="col-6 bloque">
+        <div class="col s6 bloque">
             @include('fhir.element.reference',["obj"=>$partOf])
         </div>
     @endforeach
 @endif
 @if (isset($obj->category))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Categoría
         </div>
         @foreach ($obj->category as $category)
-            <div class="col-6">
+            <div class="col s6">
                 @include('fhir.element.codeableConcept',["obj"=>$category])
             </div>
         @endforeach
@@ -68,30 +68,30 @@
 @endif
 @if (isset($obj->code))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Código
         </div>
-        <div class="col-12">
+        <div class="col s12">
             @include('fhir.element.codeableConcept',["obj"=>$obj->code])
         </div>
     </div>
 @endif
 @if (isset($obj->subject))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Sujeto
         </div>
-        <div class="col-12">
+        <div class="col s12">
             @include('fhir.element.reference',["obj"=>$obj->subject])
         </div>
     </div>
 @endif
 @if (isset($obj->focus))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Enfoque
         </div>
-        <div class="col-6">
+        <div class="col s6">
             @foreach ($obj->focus as $focus)
                 @include('fhir.element.reference',["obj"=>$focus])
             @endforeach
@@ -101,20 +101,20 @@
 @endif
 @if (isset($obj->encounter))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Visita
         </div>
-        <div class="col-12">
+        <div class="col s12">
             @include('fhir.element.reference',["obj"=>$obj->encounter])
         </div>
     </div>
 @endif
 @if (isset($obj->effectiveDateTime) || isset($obj->effectivePeriod) || isset($obj->effectiveTiming) || isset($obj->effectiveInstant))
     <div class="row">
-        <div class="col-2">
+        <div class="col s2">
             Vigencia:
         </div>
-        <div class="col-8">
+        <div class="col s8">
             @if (isset($obj->effectiveDateTime))
                 {{$obj->effectiveDateTime}}
             @endif
@@ -132,11 +132,11 @@
 @endif
 @if (isset($obj->performer))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Ejecutor:
         </div>
         @foreach ($obj->performer as $performer)
-            <div class="col-6">
+            <div class="col s6">
                 @include('fhir.element.reference',["obj"=>$performer])
             </div>
         @endforeach
@@ -144,10 +144,10 @@
 @endif
 @if ( isset($obj->valueQuantity) || isset($obj->valueCodeableConcept) || isset($obj->valueString) || isset($obj->valueBoolean) || isset($obj->valueInteger) || isset($obj->valueRange) || isset($obj->valueRatio) || isset($obj->valueSampledData) || isset($obj->valueTime) || isset($obj->valueDateTime) || isset($obj->valuePeriod) )
     <div class="row">
-        <div class="col-2">
+        <div class="col s2">
             Valor:
         </div>
-        <div class="col-10">
+        <div class="col s10">
             @if (isset($obj->valueQuantity))
                 @include('fhir.element.quantity',["obj"=>$obj->valueQuantity])
             @endif
@@ -186,21 +186,21 @@
 @endif
 @if (isset($obj->dataAbsentReason))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Razón de ausencia de datos
         </div>
-        <div class="col-6">
+        <div class="col s6">
             @include('fhir.element.codeableConcept',["obj"=>$obj->dataAbsentReason])
         </div>
     </div>
 @endif
 @if (isset($obj->interpretation))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Interpretación
         </div>
         @foreach ($obj->interpretation as $interpretation)
-            <div class="col-6">
+            <div class="col s6">
                 @include('fhir.element.codeableConcept',["obj"=>$interpretation])
             </div>
         @endforeach
@@ -208,11 +208,11 @@
 @endif
 @if (isset($obj->note))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Nota
         </div>
         @foreach ($obj->note as $note)
-            <div class="col-6">
+            <div class="col s6">
                 @include('fhir.element.annotation',["obj"=>$note])
             </div>
         @endforeach
@@ -220,40 +220,40 @@
 @endif
 @if (isset($obj->bodySite))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Sitio del cuerpo
         </div>
-        <div class="col-12">
+        <div class="col s12">
             @include('fhir.element.codeableConcept',["obj"=>$obj->bodySite])
         </div>
     </div>
 @endif
 @if (isset($obj->method))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Método
         </div>
-        <div class="col-12">
+        <div class="col s12">
             @include('fhir.element.codeableConcept',["obj"=>$obj->method])
         </div>
     </div>
 @endif
 @if (isset($obj->specimen))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Especimen
         </div>
-        <div class="col-12">
+        <div class="col s12">
             @include('fhir.element.reference',["obj"=>$obj->specimen])
         </div>
     </div>
 @endif
 @if (isset($obj->device))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Dispositivo
         </div>
-        <div class="col-12">
+        <div class="col s12">
             @include('fhir.element.reference',["obj"=>$obj->device])
         </div>
     </div>
@@ -261,60 +261,60 @@
 @if (isset($obj->referenceRange))
     @if (isset($obj->referenceRange->low))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Bajo
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 @include('fhir.element.quantity',["obj"=>$obj->referenceRange->low])
             </div>
         </div>
     @endif
     @if (isset($obj->referenceRange->high))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
             Alto
             </div>
-            <div class="col-12">
+            <div class="col s12">
             @include('fhir.element.quantity',["obj"=>$obj->referenceRange->high])
             </div>
         </div>
     @endif
     @if (isset($obj->referenceRange->type))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
             Tipo
             </div>
-            <div class="col-12">
+            <div class="col s12">
             @include('fhir.element.codeableConcept',["obj"=>$obj->referenceRange->type])
             </div>
         </div>
     @endif
     @if (isset($obj->referenceRange->appliesTo))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
             Aplica a
             </div>
-            <div class="col-12">
+            <div class="col s12">
             @include('fhir.element.codeableConcept',["obj"=>$obj->referenceRange->appliesTo])
             </div>
         </div>
     @endif
     @if (isset($obj->referenceRange->age))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
             Edad
             </div>
-            <div class="col-12">
+            <div class="col s12">
             @include('fhir.element.range',["obj"=>$obj->referenceRange->age])
             </div>
         </div>
     @endif
     @if (isset($obj->referenceRange->text))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
             Texto
             </div>
-            <div class="col-12">
+            <div class="col s12">
             {{$obj->referenceRange->text}}
             </div>
         </div>
@@ -322,11 +322,11 @@
 @endif
 @if (isset($obj->hasMember))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Miembro
         </div>
         @foreach ($obj->hasMember as $hasMember)
-            <div class="col-6">
+            <div class="col s6">
                 @include('fhir.element.reference',["obj"=>$hasMember])
             </div>
         @endforeach
@@ -334,11 +334,11 @@
 @endif
 @if (isset($obj->derivedFrom))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             Dervidado de
         </div>
         @foreach ($obj->derivedFrom as $derivedFrom)
-            <div class="col-6">
+            <div class="col s6">
                 @include('fhir.element.reference',["obj"=>$derivedFrom])
             </div>
         @endforeach
@@ -347,141 +347,141 @@
 @if (isset($obj->component))
     @if (isset($obj->component->code))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Código
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 @include('fhir.element.codeableConcept',["obj"=>$obj->component->code])
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueQuantity))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 @include('fhir.element.quantity',["obj"=>$obj->component->valueQuantity])
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueCodeableConcept))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 @include('fhir.element.codeableConcept',["obj"=>$obj->component->valueCodeableConcept])
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueString))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 {{$obj->component->valueString}}
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueBoolean))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 {{$obj->component->valueBoolean?"true":"false"}}
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueInteger))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 {{$obj->component->valueInteger}}
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueRange))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 @include('fhir.element.range',["obj"=>$obj->component->valueRange])
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueRatio))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 @include('fhir.element.ratio',["obj"=>$obj->component->valueRatio])
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueSampledData))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 @include('fhir.element.sampleData',["obj"=>$obj->component->valueSampledData])
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueTime))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 {{$obj->component->valueTime}}
             </div>
         </div>
     @endif
     @if (isset($obj->component->valueDateTime))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Valor
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 {{$obj->component->valueDateTime}}
             </div>
         </div>
     @endif
     @if (isset($obj->component->period))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Periodo
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 @include('fhir.element.period',["obj"=>$obj->component->period])
             </div>
         </div>
     @endif
     @if (isset($obj->component->dataAbsentReason))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Razón de ausencia de datos
             </div>
-            <div class="col-12">
+            <div class="col s12">
                 @include('fhir.element.codeableConcept',["obj"=>$obj->component->dataAbsentReason])
             </div>
         </div>
     @endif
     @if (isset($obj->interpretation))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Interpretación
             </div>
             @foreach ($obj->interpretation as $interpretation)
-                <div class="col-6">
+                <div class="col s6">
                     @include('fhir.element.codeableConcept',["obj"=>$interpretation])
                 </div>
             @endforeach
@@ -489,11 +489,11 @@
     @endif
     @if (isset($obj->referenceRange))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 Rango de referencia
             </div>
             @foreach ($obj->referenceRange as $referenceRange)
-                <div class="col-6">
+                <div class="col s6">
                     @include('fhir.element.codeableConcept',["obj"=>$referenceRange])
                 </div>
             @endforeach
@@ -503,7 +503,7 @@
 
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-OBSERVATION===</b>
         </div>
     </div>
