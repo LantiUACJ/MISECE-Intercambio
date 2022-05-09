@@ -1,13 +1,13 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===CONTACTPOINT===</b>
         </div>
     </div>
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 <div class="row">
-    <div class="col-12">    
+    <div class="col s12">    
         @if (isset($obj->system))
             {{ str_replace(["phone","fax","email","pager","url","sms","other"],["Teléfono","Fax","Correo Electrónico","Beeper","URL","SMS","Otro"],strtolower($obj->system)) }}
         @endif
@@ -27,7 +27,7 @@
 </div>
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-CONTACTPOINT===</b>
         </div>
     </div>

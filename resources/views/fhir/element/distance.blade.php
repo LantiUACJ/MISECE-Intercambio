@@ -1,6 +1,6 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===DISTANCE===</b>
         </div>
     </div>
@@ -11,7 +11,7 @@
 
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-DISTANCE===</b>
         </div>
     </div>

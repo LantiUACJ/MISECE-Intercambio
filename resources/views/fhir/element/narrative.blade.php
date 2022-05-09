@@ -1,6 +1,6 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===NARRATIVE===</b>
         </div>
     </div>
@@ -21,7 +21,7 @@
 @endif
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-NARRATIVE===</b>
         </div>
     </div>

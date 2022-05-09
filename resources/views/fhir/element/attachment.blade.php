@@ -1,6 +1,6 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===ATTACHMENT===</b>
         </div>
     </div>
@@ -40,7 +40,7 @@
 @endif
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-ATTACHMENT===</b>
         </div>
     </div>
