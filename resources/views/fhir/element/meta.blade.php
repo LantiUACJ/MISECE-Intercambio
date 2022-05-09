@@ -1,6 +1,6 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===META===</b>
         </div>
     </div>
@@ -22,8 +22,8 @@
 @if ( isset($obj->profile) )
     <div class="row">
         @foreach ($obj->profile as $profile)
-            <div class="col-4">Perfil</div>
-            <div class="col-8">{{$profile}}</div>
+            <div class="col s4">Perfil</div>
+            <div class="col s8">{{$profile}}</div>
         @endforeach
     </div>
 @endif
@@ -41,7 +41,7 @@
 @endif
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-META===</b>
         </div>
     </div>

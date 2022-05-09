@@ -1,7 +1,7 @@
 @if (isset($obj->id) && isset($obj->extension))
     @if (env("TEST", false))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 <b>===ELEMENT===</b>
             </div>
         </div>
@@ -9,13 +9,13 @@
 @endif
 @if (isset($obj->id))
     <!--<div class="row">
-        <div class="col-12">ID: {{$obj->id}}</div>
+        <div class="col s12">ID: {{$obj->id}}</div>
     </div>-->
 @endif
 @if (isset($obj->extension))
     <div class="row">
     @foreach ($obj->extension as $extension)
-        <div class="col-12">
+        <div class="col s12">
             @include('fhir.element.extension',["obj"=>$extension])
         </div>
     @endforeach
@@ -24,7 +24,7 @@
 @if (isset($obj->id) && isset($obj->extension))
     @if (env("TEST", false))
         <div class="row">
-            <div class="col-12">
+            <div class="col s12">
                 <b>===END-ELEMENT===</b>
             </div>
         </div>

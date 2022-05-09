@@ -3,29 +3,62 @@
 @section('title',"Usuario Detalle")
 
 @section('content')
-    <p><a href="{{url("/users/update/".$model->id)}}" class="btn btn-success">Editar Usuario</a></p>
+<div class="actions">
+    <!-- <p class="subtitle">Menú</p> -->
+    <a href="{{url('users')}}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Regresar</a>
 
-    <table class="table table-bordered">
-        <tr>
-            <th>Nombre:</th>
-            <td>{{$model->name}}</td>
-        </tr>
-        <tr>
-            <th>Correo Electrónico:</th>
-            <td>{{$model->email}}</td>
-        </tr>
-        <tr>
-            <th>Nivel de acceso:</th>
-            <td>{{$model->nombreRol()}}</td>
-        </tr>
-        <tr>
-            <th>Fecha de registro:</th>
-            <td>{{$model->created_at}}</td>
-        </tr>
-        <tr>
-            <th>Última actualización:</th>
-            <td>{{$model->updated_at}}</td>
-        </tr>
-    </table>
+    <a href="{{url("/users/update/".$model->id)}}" class="waves-effect waves-light btn" style="margin-left: 1rem;"><i class="material-icons left">edit</i>editar</a>
+</div>
+<hr style="opacity: 0.2;">
+<div class="data-content">
+    <p class="subtitle" style="display: flex; align-items: center;"> <i class="material-icons" style="margin-right: 1rem;">assignment_ind</i> Detalle de usuario</p>
+    <div class="card user-card">
+
+        <!-- User Data  -->
+        <div class="row">
+            <div class="col s12 m3 user-field-name">
+                Nombre
+            </div>
+            <div class="col s12 m6">
+                {{$model->name}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 user-field-name">
+                Correo
+            </div>
+            <div class="col s12 m6">
+                {{$model->email}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 user-field-name">
+                Nivel de acceso
+            </div>
+            <div class="col s12 m6">
+                {{$model->nombreRol()}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 user-field-name">
+                Fecha de registro
+            </div>
+            <div class="col s12 m6">
+                {{$model->created_at}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 user-field-name">
+                Última actualización
+            </div>
+            <div class="col s12 m6">
+                {{$model->updated_at}}
+            </div>
+        </div>
+    </div>
+
+    <!-- Ends user data -->
+
+</div>
 
 @endsection

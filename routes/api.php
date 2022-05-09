@@ -15,5 +15,9 @@ use App\Http\Controllers\V1\ApiController as ApiControllerV1;
 |
 */
 Route::prefix('/v1')->name('admin.')->middleware(["auth.api"])->group(function(){
-    Route::post('/expediente/{curp}', [ApiControllerV1::class, "consultarExpedientes"])->name("pacientes");
+    Route::post('/expediente/{curp}', [ApiControllerV1::class, "consultarExpedientes"]);
+});
+
+Route::prefix('/v1')->name('admin.')->middleware(["auth.api"])->group(function(){
+    Route::post('/expediente/basico/{curp}', [ApiControllerV1::class, "consultarExpedientesBasico"]);
 });

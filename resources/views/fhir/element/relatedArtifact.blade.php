@@ -1,6 +1,6 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===RELATEDARTIFACT===</b>
         </div>
     </div>
@@ -19,7 +19,7 @@
 }
 @if (env("TEST", false))
     <div class="row">
-        <div class="col-12">
+        <div class="col s12">
             <b>===END-RELATEDARTIFACT===</b>
         </div>
     </div>
