@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sudo yum update -y
 cd /
 cd var/www/html/MISECE-Intercambio
 sudo rm .env
@@ -11,5 +11,5 @@ php artisan config:clear
 #php artisan route:cache
 #php artisan optimize
 sudo -u ec2-user composer install
-sudo -u ec2-user composer dumpautoload -o
-sudo yum update -y
+#sudo -u ec2-user composer dumpautoload -o
+
