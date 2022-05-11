@@ -11,5 +11,4 @@ php artisan config:clear
 #php artisan route:cache
 #php artisan optimize
 sudo -u ec2-user composer install
-#sudo -u ec2-user composer dumpautoload -o
-
+sudo -u ec2-user composer dumpautoload -o
