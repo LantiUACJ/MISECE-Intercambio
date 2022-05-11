@@ -19,7 +19,7 @@ class UserController extends Controller{
     }
 
     public function create(){
-        return view("user.create",["inputs"=>User::formColumns()]);
+        return view("user.create",["model"=>new User()]);
     }
 
     public function store(Request $request){
