@@ -39,7 +39,7 @@
 
                                     @if (auth()->user()->isAdmin())
                                         <a href="{{url('/hospital')}}" class="{{ request()->is('hospital/*')||request()->is('hospital') ? 'active' : null }}">
-                                            Sistemas EC
+                                            Sistemas ECEs
                                         </a>
                                     @endif
                                     
