@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('styles.css')}}?v=1.0.0.2">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="landing-bg">
     <div class="">
@@ -19,14 +19,14 @@
                 <div class="nav">
                     <div class="nav-content">
                         <div class="nav-logo">
-                            <img src="{{asset('logomisece.jpg')}}">
+                            <img src="logomisece.jpg">
                         </div>
                         <div class="nav-list">
                             <a href="#inicio">Inicio </a>
                             <a href="#beneficios">Beneficios </a>
                             <a href="#nosotros">Nosotros </a>
                             <a href="#contacto">Contacto </a>
-                            <a href="{{url('login')}}">Iniciar sesión </a>
+                            <a href="#">Iniciar sesión </a>
                         </div>
                     </div>
                 </div>
@@ -42,34 +42,34 @@
                             <div class="login-btns">
                                 <div class="login-btn">
                                     <div class="login-btn-con">
-                                        <img src="{{asset('icon-medic.png')}}">
+                                        <img src="icon-medic.png">
                                     </div>
                                     <p class="login-btn-text">Soy Médico</p>
-                                    <a href="{{url('login')}}" class="white-btn nomargin">Iniciar sesión</a>
+                                    <button class="white-btn nomargin">Iniciar sesión</button>
                                 </div>
 
                                 <div class="login-btn">
                                     <div class="login-btn-con">
-                                        <img src="{{asset('icon-patient.png')}}">
+                                        <img src="icon-patient.png">
                                     </div>
                                     <p class="login-btn-text">Soy Paciente</p>
-                                    <a href="{{url('login')}}" class="white-btn nomargin">Iniciar sesión</a>
+                                    <button class="white-btn nomargin">Iniciar sesión</button>
                                 </div>
 
                                 <div class="login-btn">
                                     <div class="login-btn-con">
-                                        <img src="{{asset('icon-hospital.png')}}">
+                                        <img src="icon-hospital.png">
                                     </div>
                                     <p class="login-btn-text">Soy Institución de salud</p>
-                                    <a href="{{url('login')}}" class="white-btn nomargin">Iniciar sesión</a>
+                                    <button class="white-btn nomargin">Iniciar sesión</button>
                                 </div>
 
                                 <div class="login-btn">
                                     <div class="login-btn-con">
-                                        <img src="{{asset('icon-paramedic.png')}}">
+                                        <img src="icon-paramedic.png">
                                     </div>
                                     <p class="login-btn-text">Soy Paramédico</p>
-                                    <a href="{{url('login')}}" class="white-btn nomargin">Iniciar sesión</a>
+                                    <button class="white-btn nomargin">Iniciar sesión</button>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +192,7 @@
                                     </div>
                                     <!-- <p>contacto@misalud.com</p> -->
                                     <div class="footer-logo">
-                                        <img src="{{asset('logomisece.jpg')}}">
+                                        <img src="logomisece.jpg">
                                     </div>
                                 </div>
                                 <div class="col s12 m4 footer-col">

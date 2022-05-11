@@ -8,7 +8,7 @@
 <hr style="opacity: 0.2;">
 <div class="data-content">
     <p style="display: flex; align-items: center;" class="subtitle"><i class="material-icons" style="margin-right: 1rem;">account_circle
-    </i>  Consulta de información básica de pacientes</p>
+    </i>  Consulta de información de pacientes</p>
     <div class="row simple-form">
         <div class="col s12">
             <p>Solicita al paciente <b>{{$nombre}}</b> el código de verificación </p>
