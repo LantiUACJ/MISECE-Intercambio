@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(247, 248, 250) !important;
+}
+
+nav {
+    box-shadow: 0px 0px 5px rgb(234, 234, 234);
+}
+
+.titulo {
+    color: rgb(53, 124, 255);
+}
+
+.subtitulo {
+    color: rgb(38, 54, 86);
+}
+
+.gris {
+    color: rgb(167, 181, 208);
+}
