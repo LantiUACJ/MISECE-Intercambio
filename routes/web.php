@@ -5,6 +5,7 @@ use \App\Http\Controllers\HospitalController;
 use \App\Http\Controllers\PacienteController;
 use \App\Http\Controllers\PacienteBasicoController;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\BlockchainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,14 +38,18 @@ Route::get('/login', [\App\Http\Controllers\SiteController::class, "login"])->na
 Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"]);
 Route::get('/logout', [\App\Http\Controllers\SiteController::class, "logout"]);
 
-Route::prefix('/hospital')->middleware(["auth", "admin"])->group(function(){
-    Route::get('', [HospitalController::class, "index"]);
-    Route::get('/view/{hospital}', [HospitalController::class, "show"]);
-    Route::get('/create', [HospitalController::class, "create"]);
-    Route::post('/create', [HospitalController::class, "store"]);
-    Route::get('/update/{hospital}', [HospitalController::class, "edit"]);
-    Route::post('/update/{hospital}', [HospitalController::class, "update"]);
-    Route::post('/delete/{hospital}', [HospitalController::class, "destroy"]);
+Route::middleware(["auth", "admin"])->group(function (){
+    Route::get("blockchain", [BlockchainController::class, "index"]);
+    Route::get("blockchain/details", [BlockchainController::class, "details"]);
+    Route::prefix('/hospital')->group(function(){
+        Route::get('', [HospitalController::class, "index"]);
+        Route::get('/view/{hospital}', [HospitalController::class, "show"]);
+        Route::get('/create', [HospitalController::class, "create"]);
+        Route::post('/create', [HospitalController::class, "store"]);
+        Route::get('/update/{hospital}', [HospitalController::class, "edit"]);
+        Route::post('/update/{hospital}', [HospitalController::class, "update"]);
+        Route::post('/delete/{hospital}', [HospitalController::class, "destroy"]);
+    });
 });
 Route::prefix("/indice")->middleware(["auth", "admin"])->group(function (){
     Route::get('/index', [\App\Http\Controllers\IndiceController::class, "index"]);
@@ -76,17 +81,3 @@ Route::middleware(["auth","hospital"])->group(function (){
     Route::post('/users/delete/{user}', [UserController::class, "delete"])->middleware(["userProtect"]);
 });
 
-Route::get("test/{view}", function ($view){
-    return view("pantallas.".str_replace('.html', '', $view));
-});
-
-Route::get("hex", function (){
-    $hex = "0x308631e10000000000000000000000000000000000000000000000000000000000000040323032322d30352d35352031303a31303a33343300000000000000000000000000000000000000000000000000000000000000000000000000000000000000e37b226665636861223a22323032322d30352d35352031303a31303a333433222c2270616369656e7465223a224d454a44483348383337343731222c22686f73706974616c223a22484f53504954414c2044452050525545424120233330333834222c22636f6e73756c746f72223a2244522e204a55414e49544f20504552455a20504f5441544f222c2272657370756573746173223a22484f53504954414c204445205052554542412023322c20484f53504954414c204445205052554542412023312c20484f53504954414c2044452050525545424120233437383136333834227d0000000000000000000000000000000000000000000000000000000000";
-    $string='';
-    for ($i=0; $i < strlen($hex)-1; $i+=2){
-        $string .= chr(hexdec($hex[$i].$hex[$i+1]));
-    }
-
-    
-    echo $hex . "<br>" . $string;
-});
