@@ -5,6 +5,9 @@ use \App\Models\Hospital;
 use \App\Models\Indice;
 use \App\Models\HospitalIndice;
 
+use Aws\Sns\SnsClient; 
+use Aws\Exception\AwsException;
+
 use Illuminate\Support\Facades\Mail;
 
 class PetitionHelper{
@@ -51,6 +54,31 @@ class PetitionHelper{
         $this->indice->codigo = $codigo;
         $this->indice->save();
         Mail::to($this->indice->email)->send(new \App\Mail\Codigo($codigo));
+        return true;
+        $credentials = new \Aws\Credentials\Credentials(env("AWS_ACCESS_KEY_ID"),env("AWS_SECRET_ACCESS_KEY"));
+        $credentialsProv = \Aws\Credentials\CredentialProvider::fromCredentials($credentials);
+
+        $SnSclient = new SnsClient([
+            'version'     => 'latest',
+            'region'      => 'us-east-1',
+            'credentials' => $credentialsProv,
+        ]);
+        
+        try {
+            $result = $SnSclient->publish([
+                'Message' => "Código para autorizar el acceso a su expediente clínico electrónico: " . $codigo,
+                'PhoneNumber' => $this->indice->telefono,
+                "MessageAttributes" => [
+                    'AWS.SNS.SMS.SMSType' => [
+                        'DataType' => 'String',
+                        'StringValue' => 'Transactional'
+                    ]
+                ],
+            ]);
+        } 
+        catch (AwsException $e) {
+            error_log($e->getMessage());
+        }
     }
 
     public function renderPdf(){
