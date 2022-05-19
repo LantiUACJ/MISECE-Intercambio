@@ -8,7 +8,32 @@
     @if (isset($obj->resourceType))
         <div class="col s12">
             <h2>
-                {{ str_replace(["observation", "medicationadministration","patient","encounter"], ["Observación","Administración de medicamento", "Datos del paciente", "Visita"], strtolower($obj->resourceType))}}
+                {{ str_replace(
+                    [
+                        "observation", 
+                        "medicationadministration",
+                        "patient",
+                        "encounter",
+                        "location",
+                        "composition",
+                        "allergyintolerance",
+                        "careplan",
+                        "practitionerrole",
+                        "practitioner",
+                        "medication",
+                    ], [
+                        "Observación",
+                        "Administración de medicamento", 
+                        "Datos del paciente", 
+                        "Visita",
+                        "Lugar",
+                        "Composición",
+                        "Alergias",
+                        "Plan de cuidado",
+                        "Rol de Practicante",
+                        "Practicante",
+                        "Medicación",
+                    ], strtolower($obj->resourceType))}}
             </h2>
         </div>
     @endif
