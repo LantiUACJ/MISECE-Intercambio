@@ -8,9 +8,10 @@
     @endif
     @if (isset($obj->contained) && true)
         @foreach ($obj->contained as $contained)
-            <div class="col s4">
+            <div class="col s12">
                 Contenido
-                @include('fhir.resource.resource',["obj"=>$contained])
+                <!--@ include('fhir.resource.resource',["obj"=>$contained])-->
+                @include('fhir._factory',["obj"=>$contained])
             </div>
         @endforeach
     @endif

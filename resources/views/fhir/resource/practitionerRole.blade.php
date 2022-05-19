@@ -31,15 +31,33 @@
 @if (isset($obj->period))
     <div class="row">
         <div class="col s12">
-            Período
+            Período:
         </div>
         <div class="col s12">
             @include('fhir.element.period',["obj"=>$obj->period])
         </div>
     </div>
 @endif
-"practitioner" : { Reference(Practitioner) }, // Practitioner that is able to provide the defined services for the organization
-"organization" : { Reference(Organization) }, // Organization where the roles are available
+@if (isset($obj->practitioner))
+    <div class="row">
+        <div class="col s12">
+            Practicante:
+        </div>
+        <div class="col s12">
+            @include('fhir.element.reference',["obj"=>$obj->practitioner])
+        </div>
+    </div>
+@endif
+@if (isset($obj->organization))
+    <div class="row">
+        <div class="col s12">
+            Organización:
+        </div>
+        <div class="col s12">
+            @include('fhir.element.reference',["obj"=>$obj->organization])
+        </div>
+    </div>
+@endif
 @if (isset($obj->code))
     <div class="row">
         <div class="col s12">
@@ -100,18 +118,108 @@
         @endforeach
     </div>    
 @endif
-"availableTime" : [{ // Times the Service Site is available
-    "daysOfWeek" : ["<code>"], // mon | tue | wed | thu | fri | sat | sun
-    "allDay" : <boolean>, // Always available? e.g. 24 hour service
-    "availableStartTime" : "<time>", // Opening time of day (ignored if allDay = true)
-    "availableEndTime" : "<time>" // Closing time of day (ignored if allDay = true)
-}],
-"notAvailable" : [{ // Not available during this time due to provided reason
-    "description" : "<string>", // R!  Reason presented to the user explaining why time not available
-    "during" : { Period } // Service not available from this date
-}],
-"availabilityExceptions" : "<string>", // Description of availability exceptions
-"endpoint" : [{ Reference(Endpoint) }] // Technical endpoints providing access to services operated for the practitioner with this role
+@if (isset($obj->availableTime))
+    <div class="row">
+        <div class="col s12">
+            Tiempo disponible:
+        </div>
+        @foreach ($obj->availableTime as $availableTime)
+            @if (isset($availableTime->daysOfWeek))
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12">
+                            Días de la semana:
+                        </div>
+                        @foreach ($availableTime->daysOfWeek as $daysOfWeek)
+                            <div class="col s12">
+                                {{$daysOfWeek}} <!-- mon | tue | wed | thu | fri | sat | sun -->
+                            </div>
+                        @endforeach
+                    </div>    
+                </div>
+            @endif
+            @if (isset($availableTime->allDay))
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12">
+                            Disponible siempre: {{$availableTime->allDay?"SI":"NO"}}
+                        </div>
+                    </div>    
+                </div>
+            @endif
+            @if (isset($availableTime->availableStartTime))
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12">
+                            Fecha de inicio de disponibilidad: {{$availableTime->availableStartTime}}
+                        </div>
+                    </div>    
+                </div>
+            @endif
+            @if (isset($availableTime->availableEndTime))
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12">
+                            Fecha de fin de disponibilidad: {{$availableTime->availableEndTime}}
+                        </div>
+                    </div>    
+                </div>
+            @endif
+        @endforeach
+    </div>    
+@endif
+@if (isset($obj->notAvailable))
+    <div class="row">
+        <div class="col s12">
+            Tiempo disponible:
+        </div>
+        @foreach ($obj->notAvailable as $notAvailable)
+            @if (isset($notAvailable->description))
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12">
+                            Descrición: {{$notAvailable->description}}
+                        </div>
+                    </div>    
+                </div>
+            @endif
+            @if (isset($notAvailable->during))
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12">
+                            Fecha de inicio de disponibilidad: 
+                        </div>
+                        <div class="col s12">
+                            @include('fhir.element.period',["obj"=>$notAvailable->during])
+                        </div>
+                    </div>    
+                </div>
+            @endif
+        @endforeach
+    </div>    
+@endif
+@if (isset($obj->availabilityExceptions))
+    <div class="row">
+        <div class="col s12">
+            Practicante:
+        </div>
+        <div class="col s12">
+            {{$obj->availabilityExceptions}}
+        </div>
+    </div>
+@endif
+@if (isset($obj->endpoint))
+    <div class="row">
+        <div class="col s12">
+            Punto final:
+        </div>
+        @foreach ($obj->endpoint as $endpoint)
+            <div class="col s6">
+                @include('fhir.element.reference',["obj"=>$endpoint])
+            </div>
+        @endforeach
+    </div>    
+@endif
 @if (env("TEST", false))
     <div class="row">
         <div class="col s12">

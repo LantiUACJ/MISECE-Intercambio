@@ -10,56 +10,8 @@
         
         <link rel="stylesheet" href="{{asset('styles.css')}}?v=1.0.0.1">
 
-        <style>
-            .bloque{
-                margin-bottom: 10px;
-                /*background-color: rgba(0,0,0,0.2);*/
-            }
-            div{
-                word-wrap: break-word;
-            }
-            div.row{
-                border: 1px solid black;
-                width: 100%;
-            }
-            table{
-                border: 1px solid black;
-            }
-            td{
-                border: 1px solid black;
-            }
+        @include('_pdfCss')
 
-            .patient{
-                background-color: rgb(255, 236, 236) !important;
-            }
-            .encounter{
-                background-color: rgb(202, 202, 202) !important;
-            }
-            .observation{
-                background-color: rgb(209, 247, 165) !important;
-            }
-            .medicationAdmin{
-                background-color: #68d4d8 !important;
-            }
-            .diagnosticReport{
-                background-color: #abddab !important;
-            }
-            .imagingStudy{
-                background-color: #caaef7 !important;
-            }
-            .medication{
-                background-color: #dbee87 !important;
-            }
-            .organization{
-                background-color: #57aeff !important;
-            }
-            .practitioner{
-                background-color: #80a389 !important;
-            }
-            .procedure{
-                background-color: #d3bfda !important;
-            }
-        </style>
         <title>Document</title>
     </head>
     <body>
