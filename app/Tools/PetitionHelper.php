@@ -53,14 +53,14 @@ class PetitionHelper{
         $codigo = rand(100000,999999);
         $this->indice->codigo = $codigo;
         $this->indice->save();
-        Mail::to($this->indice->email)->send(new \App\Mail\Codigo($codigo));
-        return true;
+        //Mail::to($this->indice->email)->send(new \App\Mail\Codigo($codigo));
+        //return true;
         $credentials = new \Aws\Credentials\Credentials(env("AWS_ACCESS_KEY_ID"),env("AWS_SECRET_ACCESS_KEY"));
         $credentialsProv = \Aws\Credentials\CredentialProvider::fromCredentials($credentials);
 
         $SnSclient = new SnsClient([
             'version'     => 'latest',
-            'region'      => 'us-east-1',
+            'region'      => env("AWS_DEFAULT_REGION"),
             'credentials' => $credentialsProv,
         ]);
         
