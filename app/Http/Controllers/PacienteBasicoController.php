@@ -19,7 +19,7 @@ class PacienteBasicoController extends Controller
         $ph = new PetitionHelper($input['curp'], auth()->user()->hospital, auth()->user()->name, 2);
         
         if(!$ph->searchPatient()){
-            return view("paciente.resultado", ["data"=>$data, "nombre"=>"", $data => "no se encontró el paciente"]);
+            return view("paciente.resultado", ["nombre"=>"ERROR", "data" => "no se encontró el paciente"]);
         }
         $nombre = $ph->indice->nombre;
 
