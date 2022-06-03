@@ -15,7 +15,7 @@
             <div class="col s6">
                 @include('fhir.element.identifier',["obj"=>$identifier])
             </div>
-        @endforeach>
+        @endforeach
     </div>
 @endif
 @if (isset($obj->active))

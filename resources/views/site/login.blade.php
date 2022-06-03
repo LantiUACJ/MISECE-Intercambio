@@ -44,7 +44,7 @@
                             </div>
                             <div class="row">
                                 <div class="submit center">
-                                    <a class="waves-effect waves-light btn" onclick="$('#login').submit();">Iniciar sesión</a>
+                                    <button type="submit" class="waves-effect waves-light btn">Iniciar sesión</button>
                                 </div>
                             </div>
                         </form>

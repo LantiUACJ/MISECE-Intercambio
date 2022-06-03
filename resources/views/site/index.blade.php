@@ -217,7 +217,7 @@
                         </div>
                     </div>
                     <div class="section-six">
-                        <p>© Copyright 2022</p>
+                        <p>© Copyright 2022: {{ gethostname() }} @version('compact')</p>
                     </div>
 
                 </div>
