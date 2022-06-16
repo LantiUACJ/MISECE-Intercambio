@@ -8,7 +8,7 @@ phases:
     commands:
     - echo Logging in to Amazon ECR....
     - aws --version
-    # login to Elastic container registrys
+    # login to Elastic container registryss
     - eval $(aws ecr get-login --region us-east-1 --no-include-email | sed 's|https://||')
     - REPOSITORY_URI=240066087291.dkr.ecr.us-east-1.amazonaws.com/intercambiokbt
     - IMAGE_TAG=${COMMIT_HASH:=latest}
