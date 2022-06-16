@@ -1,27 +1,30 @@
 version: 0.2
-    
+
 phases:
-  install:
+  install: 
     runtime-versions:
-      nodejs: latest
+      php: 7.3
+  pre_build: # commands to be run before build
     commands:
-      - echo Installing app dependencies...
-      - echo Run "yarn install"...
-      - yarn install
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 7) 
-  pre_build:
-    commands:
-      - echo Entered the pre_build phase...
-      - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - echo Build files...
+    - echo Logging in to Amazon ECR....
+    - aws --version
+    # login to Elastic container registry
+    - eval $(aws ecr get-login --region us-east-1 --no-include-email | sed 's|https://||')
+    - REPOSITORY_URI=240066087291.dkr.ecr.us-east-1.amazonaws.com/intercambiokbt
+    - IMAGE_TAG=100
   build:
     commands:
-      - echo Entered the build phase...
-      - echo Building the Docker image...
-      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$ENV -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH .
+    - echo Build started on `date`
+    - echo installing composer..
+    - composer install
+    - echo creating .env file..
+    - php artisan key:generate
+    - echo Building the Docker image...
+    - docker build -t $REPOSITORY_URI:latest .
+    - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
-      - echo Entered the post_build phase...
+      - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      - docker image ls -a
+      - docker push $REPOSITORY_URI:$IMAGE_TAG 
