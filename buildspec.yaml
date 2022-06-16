@@ -18,7 +18,6 @@ phases:
     - echo installing composer..
     - composer install
     - echo creating .env file..
-    - php artisan key:generate
     - echo Building the Docker image...
     - docker build -t $REPOSITORY_URI:latest .
     - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
