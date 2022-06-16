@@ -19,8 +19,8 @@ phases:
     - composer install
     - echo creating .env file..
     - echo Building the Docker image...
-    - docker build -t $REPOSITORY_URI:latest .
-    - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+    - docker build
+ 
   post_build:
     commands:
       - echo Build completed on `date`
