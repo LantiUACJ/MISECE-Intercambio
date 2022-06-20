@@ -1,4 +1,4 @@
-FROM  $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+FROM 240066087291.dkr.ecr.us-east-1.amazonaws.com/intercambiokbt:latest
       
 
 # 1. Install development packages and clean up apt cache.
