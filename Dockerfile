@@ -1,4 +1,5 @@
-FROM php:7.4-apache
+FROM  $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      
 
 # 1. Install development packages and clean up apt cache.
 RUN apt-get update && apt-get install -y \
