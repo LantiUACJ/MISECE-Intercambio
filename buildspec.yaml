@@ -25,4 +25,4 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $REPOSITORY_URI:$IMAGE_TAG 
+      - docker push 240066087291.dkr.ecr.us-east-1.amazonaws.com/intercambiokbt:latest
