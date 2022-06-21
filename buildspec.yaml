@@ -10,7 +10,7 @@ phases:
     #- aws --version
     # login to Elastic container registryssd
     #- eval $(aws ecr get-login --region us-east-1 --no-include-email | sed 's|https://||')f
-    #- aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   
   build:
     commands:
