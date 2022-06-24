@@ -3,14 +3,14 @@ version: 0.2
 phases:
   install: 
     runtime-versions:
-      php: 7.3
+      php: 7.4
   pre_build: # commands to be run before build
     commands:
     - echo Logging in to Amazon ECR....
     #- aws --version
     # login to Elastic container registryssd
-    #- eval $(aws ecr get-login --region us-east-1 --no-include-email | sed 's|https://||')f
-    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+    - eval $(aws ecr get-login --region us-east-1 --no-include-email | sed 's|https://||')f
+    #- aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   
   build:
     commands:
