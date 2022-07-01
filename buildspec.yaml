@@ -4,7 +4,7 @@ phases:
   install: 
     runtime-versions:
       php: 7.4
-  pre_build: # commands to be run before build xx
+  pre_build: # commands to be run before build xxa
     commands:
     - echo Logging in to Amazon ECR....
     #- aws --version
