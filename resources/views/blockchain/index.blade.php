@@ -28,12 +28,28 @@
             </tbody>
         </table>
     </div>
+    <ul class="pagination" id="pages">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li><a href="{{url('blockchain')}}?page=1">First</a></li>
+    </ul>
+    <div id="template_page" class="hide">
+        <li class="waves-effect __ACTIVE__"><a href="__URL__">__NUMBER__</a></li>
+    </div>
+    <div id="template_next" class="hide">
+        <li class="waves-effect __ACTIVE__"><a href="__URL__"><i class="material-icons">chevron_right</i></a></li>
+    </div>
+    <div id="template_last" class="hide">
+        <li class="waves-effect"><a href="__URL__">__NUMBER__</a></li>
+    </div>
 @endsection
+
 
 @section('scripts')
     <script>
         url_template = "{{url('blockchain/details')}}";
+        const url = "{{url('blockchain')}}";
         const rpc = "{{env('URL_BLOCKCHAIN')}}";
+        const page = {{$page}};
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>    
