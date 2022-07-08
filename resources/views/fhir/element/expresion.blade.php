@@ -7,14 +7,22 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 
-{doco
-    // from Element: extension
-    "description" : "<string>", // Natural language description of the condition
-    "name" : "<id>", // Short name assigned to expression for reuse
-    "language" : "<code>", // R!  text/cql | text/fhirpath | application/x-fhir-query | etc.
-    "expression" : "<string>", // Expression in specified language
-    "reference" : "<uri>" // Where the expression is found
-}
+@if (isset($obj->description))
+	{{$obj->description}}
+@endif
+@if (isset($obj->name))
+	{{$obj->name}}
+@endif
+@if (isset($obj->language))
+	{{$obj->language}}
+@endif
+@if (isset($obj->expression))
+	{{$obj->expression}}
+@endif
+@if (isset($obj->reference))
+	{{$obj->reference}}
+@endif
+
 @if (env("TEST", false))
     <div class="row">
         <div class="col s12">

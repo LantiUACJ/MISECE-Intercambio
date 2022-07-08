@@ -1,7 +1,15 @@
 <style>
+    @import url("Smooch-Regular.ttf");
+
     .bloque{
         margin-bottom: 10px;
         /*background-color: rgba(255,255,255);*/
+    }
+    .element{
+        margin-left: 10px;
+        @if (env("TEST", false))
+        background-color: rgba(0,0,0,0.1);
+        @endif
     }
     div{
         word-wrap: break-word;
@@ -16,6 +24,8 @@
     }
     .resource{
         border: 1px solid black;
+        padding: 10px;
+        /*background-color: rgb(201, 201, 201) !important;*/
     }
     .patient{
         background-color: rgba(243, 157, 201,0.5) !important;
@@ -39,7 +49,7 @@
         background-color: rgba(0, 153, 255, 0.5) !important;
     }
     .organization{
-        background-color: rgba(98, 0, 255, 0.5) !important;
+        background-color: rgba(207, 190, 233, 0.774) !important;
     }
     .practitioner{
         background-color: rgba(255, 166, 0, 0.5) !important;
@@ -63,7 +73,10 @@
         background-color: rgba(255, 0, 0, 0.5) !important;
     }
     .composition{
-        background-color: rgba(187, 18, 18, 0.5) !important;
+        background-color: rgba(216, 141, 141, 0.5) !important;
+    }
+    .bundle{
+        background-color: rgb(0, 255, 170) !important;
     }
     .undefined{
         background-color: rgba(100,100,100,0.5) !important;

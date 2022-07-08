@@ -16,7 +16,7 @@
         <div class="row fh">
             <div class="col s12 m6 fh center left-panel">
                 <div class="login-logo">
-                    <img src="{{asset('logobm.png')}}">
+                    <img src="logomisece.svg">
                 </div>
             </div>
             <div class="col s12 m6 fh card-padding ">

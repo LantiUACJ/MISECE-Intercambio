@@ -7,11 +7,16 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 
-{
-    // from Element: extension
-    "low" : { Quantity(SimpleQuantity) }, // Low limit
-    "high" : { Quantity(SimpleQuantity) } // High limit
-}
+@if ($obj->low)
+    <p><b>Mínimo: </b>
+        @include('fhir.element.quantity', ["obj"=>$obj->low])
+    </p>
+@endif
+@if ($obj->high)
+    <p><b>Máximo: </b>
+        @include('fhir.element.quantity', ["obj"=>$obj->high])
+    </p>
+@endif
 @if (env("TEST", false))
     <div class="row">
         <div class="col s12">

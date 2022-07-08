@@ -6,134 +6,93 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
+
+@if (isset($obj->name))
+    <p>Nombre: <b>{{$obj->name}}</b></p>
+@endif
 @if (isset($obj->identifier))
-    <div class="row">
-        <div class="col s12">
-            Identificador
-        </div>
+    <p><b>Identificador:</b></p>
+    <div class="element">
         @foreach ($obj->identifier as $identifier)
-            <div class="col s6">
-                @include('fhir.element.identifier',["obj"=>$identifier])
-            </div>
+            <hr>
+            @include('fhir.element.identifier',["obj"=>$identifier])
         @endforeach
     </div>
 @endif
-@if (isset($obj->active))
-    <div class="row">
-        <div class="col s12">
-            Activo
-            {{$obj->active?"SI":"NO"}}
-        </div>
-    </div>
+@if (isset($obj->active) && env("test", false))
+    Activo {{$obj->active?"SI":"NO"}}
 @endif
 @if (isset($obj->type))
-    <div class="row">
-        <div class="col s12">
-            Tipo
-        </div>
+    <p><b>Tipo:</b></p>
+    <div class="element">
         @foreach ($obj->type as $type)
-            <div class="col s6">
-                @include('fhir.element.codableconcept',["obj"=>$type])
-            </div>
+            @include('fhir.element.codeableConcept',["obj"=>$type]) <br>
         @endforeach
-    </div>
-@endif
-@if (isset($obj->name))
-    <div class="row">
-        <div class="col s12">
-            Nombre
-            {{$obj->name}}
-        </div>
     </div>
 @endif
 @if (isset($obj->alias))
-    <div class="row">
-        <div class="col s12">
-            Alias
-        </div>
+    <p><b>Alias:</b></p>
+    <div class="element">
         @foreach ($obj->alias as $alias)
-            <div class="col s6">
-                {{$alias}}
-            </div>
+            {{$alias}} <br>
         @endforeach
     </div>
 @endif
 @if (isset($obj->telecom))
-    <div class="row">
-        <div class="col s12">
-            Tipo
-        </div>
+    <p><b>Comunicación:</b></p>
+    <div class="element">
         @foreach ($obj->telecom as $telecom)
-            <div class="col s6">
-                @include('fhir.element.contactPoint',["obj"=>$telecom])
-            </div>
+            @include('fhir.element.contactPoint',["obj"=>$telecom]) <br>
         @endforeach
     </div>
 @endif
 @if (isset($obj->address))
-    <div class="row">
-        <div class="col s12">
-            Dirección
-        </div>
+    <p><b>Dirección:</b></p>
+    <div class="element">
         @foreach ($obj->address as $address)
-            <div class="col s6">
-                @include('fhir.element.address',["obj"=>$address])
-            </div>
+            <hr>
+            @include('fhir.element.address',["obj"=>$address]) <br>
         @endforeach
     </div>
 @endif
 @if (isset($obj->partOf))
-    <div class="row">
-        <div class="col s12">
-            Parte de
-            @include('fhir.element.reference',["obj"=>$obj->partOf])
-        </div>
+    <p><b>Parte de:</b></p>
+    <div class="element">
+        @include('fhir.element.reference',["obj"=>$obj->partOf])
     </div>
 @endif
 @if (isset($obj->contact))
-    <div class="row">
-        <div class="col s12">
-            Contacto:
-        </div>
-    </div>
+    <p><b>Contacto:</b></p>
     @foreach ($obj->contact as $contact)
-        <div class="row">
+        <div class="element">
             @if (isset($contact->purpose))
-                <div class="col s6">
-                    Proposito: <br>
-                    @include('fhir.element.codeableConcept',["obj"=>$contact->purpose])
-                </div>
+                <p><b>Tipo de contacto: </b> @include('fhir.element.codeableConcept',["obj"=>$contact->purpose]) </p>
             @endif
             @if (isset($contact->name))
-                <div class="col s6">
-                    Nombre: <br>
-                    @include('fhir.element.humanName',["obj"=>$contact->name])
-                </div>
+                <p><b>Nombre: </b> @include('fhir.element.humanName',["obj"=>$contact->name])</p>
             @endif
             @if (isset($contact->telecom))
-                <div class="col s6">
-                    Datos de contacto: <br>
-                    @include('fhir.element.contactPoint',["obj"=>$contact->telecom])
+                <p><b>Datos de contacto: </b></p>
+                <div class="element">
+                    @foreach ($contact->telecom as $telecom)
+                        * @include('fhir.element.contactPoint',["obj"=>$telecom]) <br>
+                    @endforeach
                 </div>
             @endif
             @if (isset($contact->address))
-                <div class="col s6">
-                    Dirección: <br>
-                    @include('fhir.element.codeableConcept',["obj"=>$contact->address])
+                <p><b>Dirección: </b></p>
+                <div class="element">
+                    @include('fhir.element.address',["obj"=>$contact->address])
                 </div>
             @endif
         </div>
     @endforeach
 @endif
 @if (isset($obj->endpoint))
-    <div class="row">
-        <div class="col s12">
-            Punto final
-        </div>
+    <p><b>Punto final:</b></p>
+    <div class="element">
         @foreach ($obj->endpoint as $endpoint)
-            <div class="col s6">
-                @include('fhir.element.reference',["obj"=>$endpoint])
-            </div>
+            @include('fhir.element.reference',["obj"=>$endpoint])
         @endforeach
     </div>
 @endif

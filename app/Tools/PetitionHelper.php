@@ -1,7 +1,6 @@
 <?php 
 namespace App\Tools;
 
-use \App\Models\Hospital;
 use \App\Models\Indice;
 use \App\Models\HospitalIndice;
 
@@ -53,8 +52,8 @@ class PetitionHelper{
         $codigo = rand(100000,999999);
         $this->indice->codigo = $codigo;
         $this->indice->save();
-        //Mail::to($this->indice->email)->send(new \App\Mail\Codigo($codigo));
-        //return true;
+        Mail::to($this->indice->email)->send(new \App\Mail\Codigo($codigo));
+        return true;
         $credentials = new \Aws\Credentials\Credentials(env("AWS_ACCESS_KEY_ID"),env("AWS_SECRET_ACCESS_KEY"));
         $credentialsProv = \Aws\Credentials\CredentialProvider::fromCredentials($credentials);
 
@@ -86,8 +85,8 @@ class PetitionHelper{
         $txt = $this->renderHtml();
         $name = "exptemp".$start;
         $myfile = fopen($name.".html", "w");
-        $path = public_path()."\\".$name;
-        fwrite($myfile, $txt);
+        //$path = public_path()."\\".$name;
+        fwrite($myfile, $txt->render());
         fclose($myfile);
         //--disable-internal-links
         $command = "wkhtmltopdf toc --toc-header-text Índice -n  $name.html $name.pdf";
@@ -118,6 +117,8 @@ class PetitionHelper{
                 }
             }
         }
+        $data = new \App\Tools\JsonProcessHelper($this->data);
+        $this->data = $data->sortDesc();
     }
     
     public function renderPartialHtml(){
@@ -126,31 +127,6 @@ class PetitionHelper{
 
     public function renderHtml(){
         return view("pdf",["data"=>$this->data]);
-    }
-
-    public function mostActual(){
-        $index = 0;
-        $actual = "";
-        $info = $this->data;
-        foreach($info as $key => $data){
-            foreach($data["bundle"]->entry as $entry){
-                if($entry->resource->resourceType == "Encounter"){
-                    $end = new \Carbon\Carbon($entry->resource->period->end);
-                    if(!$actual){
-                        $actual = $end;
-                        $index = $key;
-                    }
-                    elseif($actual->lt($end)){
-                        $actual = $end;
-                        $index = $key;
-                    }
-                }
-            }
-        }
-        $first = $info[0];
-        $info[0] = $info[$index];
-        $info[$index] = $first;
-        return $info;
     }
 
     //$registroEventos = new \App\Tools\CurlHelper(env("MODULO_REGISTRO_EVENTOS"), ["msg"=>$log]);

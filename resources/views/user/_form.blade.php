@@ -1,12 +1,18 @@
 
 
 <div class="row">
-    <form class="col s12">
+    <form class="col s12" method="POST">
         <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s12 m6">
                 <input id="name" type="text" class="validate" name="name" value="{{old('name', $model->name)}}">
                 <label for="name">Nombre completo</label>
             </div>
+            <div class="input-field col s12 m6">
+                <input id="curp" type="text" class="validate" name="curp">
+                <label for="curp">CURP</label>
+            </div>
+        </div>
+        <div class="row">
             <div class="input-field col s12 m6">
                 <input id="email" type="email" class="validate" name="email" value="{{old('email', $model->email)}}">
                 <label for="email">Correo electrónico</label>

@@ -7,11 +7,16 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 
-{doco
-    // from Element: extension
-    "name" : "<string>", // Name of an individual to contact
-    "telecom" : [{ ContactPoint }] // Contact details for individual or organization
-}
+@if (isset($obj->name))
+    <p><b>Nombre:</b>
+        {{$obj->name}}
+    </p>
+@endif
+@if (isset($obj->telecom))
+    <p><b>Contacto:</b>
+        @include('fhir.element.contactPoint', ["obj"=>$obj->telecom])
+    </p>
+@endif
 
 @if (env("TEST", false))
     <div class="row">

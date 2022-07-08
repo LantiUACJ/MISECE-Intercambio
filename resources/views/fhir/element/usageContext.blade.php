@@ -6,17 +6,31 @@
     </div>
 @endif
 @include('fhir.element.element',["obj"=>$obj])
-
-{doco
-    // from Element: extension
-    "code" : { Coding }, // R!  Type of context being specified
-    // value[x]: Value that defines the context. One of these 4:
-    "valueCodeableConcept" : { CodeableConcept }
-    "valueQuantity" : { Quantity }
-    "valueRange" : { Range }
-    "valueReference" : { Reference(PlanDefinition|ResearchStudy|InsurancePlan|
-     HealthcareService|Group|Location|Organization) }
-}
+@if ($obj->code)
+    <p><b>Código: </b>
+        @include('fhir.element.coding', ["obj"=>$obj->code])
+    </p>
+@endif
+@if ($obj->valueCodeableConcept)
+    <p><b>Valor: </b>
+        @include('fhir.element.codeableConcept', ["obj"=>$obj->code])
+    </p>
+@endif
+@if ($obj->valueQuantity)
+    <p><b>Valor: </b>
+        @include('fhir.element.quantity', ["obj"=>$obj->valueQuantity])
+    </p>
+@endif
+@if ($obj->valueRange)
+    <p><b>Valor: </b>
+        @include('fhir.element.range', ["obj"=>$obj->valueRange])
+    </p>
+@endif
+@if ($obj->valueReference)
+    <p><b>Valor: </b>
+        @include('fhir.element.reference', ["obj"=>$obj->valueReference])
+    </p>
+@endif
 @if (env("TEST", false))
     <div class="row">
         <div class="col s12">

@@ -4,7 +4,7 @@
     @endif
     @foreach ($data as $bundle)
         @if ($bundle["bundle"] && gettype($bundle["bundle"])!="array")
-            <h1>Hospital: {{$bundle["hospital"]->user}}</h1>
+            <h1>Institución: {{$bundle["hospital"]->user}}</h1>
             @foreach ($bundle["bundle"]->entry as $entry)
                 @include('fhir._factory', ["obj"=>$entry->resource])
                 @if (!isset($entry->resource->resourceType))

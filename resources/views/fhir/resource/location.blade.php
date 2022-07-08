@@ -7,247 +7,166 @@
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
 @if (isset($obj->identifier))
-    <div class="row">
-        <div class="col s12">
-            Identificador
+    <p><b>Identificador:</b></p>
+    @foreach ($obj->identifier as $identifier)
+        <div class="element">
+            @include('fhir.element.identifier',["obj"=>$identifier])
         </div>
-        @foreach ($obj->identifier as $identifier)
-            <div class="col s6">
-                @include('fhir.element.identifier',["obj"=>$identifier])
-            </div>
-        @endforeach
-    </div>    
+    @endforeach
 @endif
 @if (isset($obj->status))
-    <div class="row">
-        <div class="col s12">
-            Estado: {{ str_replace(["active", "suspended","inactive"],
-                                   ["active", "suspended","inactive"], strtolower($obj->status))}}
-        </div>
-    </div>
+    <p><b>Estado:</b>
+            {{ str_replace(
+            ["active", "suspended","inactive"],
+            ["active", "suspended","inactive"], strtolower($obj->status))}}
+    </p>
 @endif
 @if (isset($obj->operationalStatus))
-    <div class="row">
-        <div class="col s12">
-            Estado operacional:
-        </div>
-        <div class="col s6">
-            @include('fhir.element.coding',["obj"=>$obj->operationalStatus])
-        </div>
-    </div>    
+    <p><b>Estado operacional:</b></p>
+    <div class="element">
+        @include('fhir.element.coding',["obj"=>$obj->operationalStatus])
+    </div>
 @endif
 @if (isset($obj->name))
-    <div class="row">
-        <div class="col s12">
-            Nombre: {{ $obj->name }}
-        </div>
-    </div>
+    <p><b>Nombre: </b>
+        {{ $obj->name }}
+    </p>
 @endif
 @if (isset($obj->alias))
-    <div class="row">
-        <div class="col s12">
-            Alias:
+    <p><b>Alias:</b></p>
+    @foreach ($obj->alias as $alias)
+        <div class="element">
+            {{ $alias }}
         </div>
-        <div class="col s12">
-            @foreach ($obj->alias as $alias)
-                {{ $alias }}
-            @endforeach
-        </div>
-    </div>
+    @endforeach
 @endif
 @if (isset($obj->description))
-    <div class="row">
-        <div class="col s12">
-            Descripcion: {{ $obj->description }}
-        </div>
-    </div>
+    <p><b>Descripcion: </b>
+        {{ $obj->description }}
+    </p>
+            
 @endif
 @if (isset($obj->mode))
-    <div class="row">
-        <div class="col s12">
-            Estado: {{ str_replace(["instance", "kind"],
-                                   ["instance", "kind"], strtolower($obj->mode))}}
-        </div>
-    </div>
+    <p><b>Estado:</b>
+        {{ str_replace(
+            ["instance", "kind"],
+            ["instance", "kind"], strtolower($obj->mode))}}
+    </p>
 @endif
 @if (isset($obj->type))
-    <div class="row">
-        <div class="col s12">
-            Tipo:
+    <p><b>Tipo:</b></p>
+    @foreach ($obj->type as $type)
+        <div class="element">
+            @include('fhir.element.codeableConcept',["obj"=>$type])
         </div>
-        @foreach ($obj->type as $type)
-            <div class="col s6">
-                @include('fhir.element.codeableConcept',["obj"=>$type])
-            </div>
-        @endforeach
-    </div>    
+    @endforeach
 @endif
 @if (isset($obj->telecom))
-    <div class="row">
-        <div class="col s12">
-            Contacto:
+    <p><b>Contacto:</b></p>
+    @foreach ($obj->telecom as $telecom)
+        <div class="element">
+            @include('fhir.element.contactPoint',["obj"=>$telecom])
         </div>
-        @foreach ($obj->telecom as $telecom)
-            <div class="col s6">
-                @include('fhir.element.contactPoint',["obj"=>$telecom])
-            </div>
-        @endforeach
-    </div>    
+    @endforeach
 @endif
 @if (isset($obj->address))
-    <div class="row">
-        <div class="col s12">
-            Direccion
-        </div>
-        <div class="col s6">
-            @include('fhir.element.address',["obj"=>$obj->address])
-        </div>
+    <p><b>Direccion:</b></p>
+    <div class="element">
+        @include('fhir.element.address',["obj"=>$obj->address])
     </div>    
 @endif
 @if (isset($obj->physicalType))
-    <div class="row">
-        <div class="col s12">
-            Tipo física:
-        </div>
-        <div class="col s6">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->physicalType])
-        </div>
+    <p><b>Tipo física:</b></p>
+    <div class="element">
+        @include('fhir.element.codeableConcept',["obj"=>$obj->physicalType])
     </div>    
 @endif
 @if (isset($obj->position))
-    <div class="row">
-        <div class="col s12">
-            houras de operación:
-        </div>
-        <div class="col s12">
-            @if (isset($obj->position->longitude))
-                <div class="row">
-                    <div class="col s12">
-                        Longitud:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->position->longitude}}
-                    </div>
-                </div>    
-            @endif
-        </div>
-        <div class="col s12">
-            @if (isset($obj->position->latitude))
-                <div class="row">
-                    <div class="col s12">
-                        Latitud:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->position->latitude}}
-                    </div>
-                </div>    
-            @endif
-        </div>
-        <div class="col s12">
-            @if (isset($obj->position->altitude))
-                <div class="row">
-                    <div class="col s12">
-                        Altitud:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->position->altitude}}
-                    </div>
-                </div>    
-            @endif
-        </div>
-    </div>    
+    <p><b>houras de operación:</b></p>
+    <div class="element">
+        @if (isset($obj->position->longitude))
+            <p><b>Longitud:</b></p>
+            <div class="element">
+                {{$obj->position->longitude}}
+            </div>
+        @endif
+    </div>
+    <div class="element">
+        @if (isset($obj->position->latitude))
+            <p><b>Latitud:</b></p>
+            <div class="element">
+                {{$obj->position->latitude}}
+            </div>
+        @endif
+    </div>
+    <div class="element">
+        @if (isset($obj->position->altitude))
+            <p><b>Altitud:</b></p>
+            <div class="element">
+                {{$obj->position->altitude}}
+            </div>    
+        @endif
+    </div>
 @endif
 @if (isset($obj->managingOrganization))
-    <div class="row">
-        <div class="col s12">
-            Tipo física:
-        </div>
-        <div class="col s6">
-            @include('fhir.element.reference',["obj"=>$obj->managingOrganization])
-        </div>
+    <p><b>Tipo física:</b></p>
+    <div class="element">
+        @include('fhir.element.reference',["obj"=>$obj->managingOrganization])
     </div>    
 @endif
 @if (isset($obj->partOf))
-    <div class="row">
-        <div class="col s12">
-            Tipo física:
-        </div>
-        <div class="col s6">
-            @include('fhir.element.reference',["obj"=>$obj->partOf])
-        </div>
+    <p><b>Tipo física:</b></p>
+    <div class="element">
+        @include('fhir.element.reference',["obj"=>$obj->partOf])
     </div>    
 @endif
 @if (isset($obj->hoursOfOperation))
-    <div class="row">
-        <div class="col s12">
-            houras de operación:
+    <p><b>houras de operación:</b></p>
+    @foreach ($obj->hoursOfOperation as $hoursOfOperation)
+        <div class="element">
+            @if (isset($hoursOfOperation->daysOfWeek))
+                <p><b>Días de la semana:</b></p>
+                @foreach ($hoursOfOperation->daysOfWeek as $daysOfWeek)
+                    <div class="element">
+                        {{str_replace(
+                            ["mon","tue","wed","thu","fri","sat","sun"],
+                            ["mon","tue","wed","thu","fri","sat","sun"],$daysOfWeek)}}
+                    </div>
+                @endforeach
+            @endif
+            @if (isset($hoursOfOperation->allDay))
+                <p><b>Todo el día:</b></p>
+                <div class="element">
+                    {{$hoursOfOperation->allDay?"SI":"NO"}}
+                </div>    
+            @endif
+            @if (isset($hoursOfOperation->openingTime))
+                <p><b>Fecha de Apertura:</b></p>
+                <div class="element">
+                    {{$hoursOfOperation->openingTime}}
+                </div>    
+            @endif
+            @if (isset($hoursOfOperation->closingTime))
+                <p><b>Fecha de cierre:</b></p>
+                <div class="element">
+                    {{$hoursOfOperation->closingTime}}
+                </div>    
+            @endif
         </div>
-        @foreach ($obj->hoursOfOperation as $hoursOfOperation)
-            <div class="col s12">
-                @if (isset($hoursOfOperation->daysOfWeek))
-                    <div class="row">
-                        <div class="col s12">
-                            Días de la semana:
-                        </div>
-                        @foreach ($hoursOfOperation->daysOfWeek as $daysOfWeek)
-                            <div class="col s6">
-                                {{$daysOfWeek}} <!-- mon | tue | wed | thu | fri | sat | sun -->
-                            </div>
-                        @endforeach
-                    </div>    
-                @endif
-                @if (isset($hoursOfOperation->allDay))
-                    <div class="row">
-                        <div class="col s12">
-                            Todo el día:
-                        </div>
-                        <div class="col s6">
-                            {{$hoursOfOperation->allDay?"SI":"NO"}}
-                        </div>
-                    </div>    
-                @endif
-                @if (isset($hoursOfOperation->openingTime))
-                    <div class="row">
-                        <div class="col s12">
-                            Fecha de Apertura:
-                        </div>
-                        <div class="col s6">
-                            {{$hoursOfOperation->openingTime}}
-                        </div>
-                    </div>    
-                @endif
-                @if (isset($hoursOfOperation->closingTime))
-                    <div class="row">
-                        <div class="col s12">
-                            Fecha de cierre:
-                        </div>
-                        <div class="col s6">
-                            {{$hoursOfOperation->closingTime}}
-                        </div>
-                    </div>    
-                @endif
-            </div>
-        @endforeach
-    </div>    
+    @endforeach
 @endif
 @if (isset($obj->availabilityExceptions))
-    <div class="row">
-        <div class="col s12">
-            Descripción de excepciones disponibles: {{ $obj->availabilityExceptions }}
-        </div>
-    </div>
+    <p><b>Descripción de excepciones disponibles:</b>
+        {{ $obj->availabilityExceptions }}
+    </p>
 @endif
 @if (isset($obj->endpoint))
-    <div class="row">
-        <div class="col s12">
-            Tipo
+    <p><b>Tipo:</b></p>
+    @foreach ($obj->endpoint as $endpoint)
+        <div class="element">
+            @include('fhir.element.reference',["obj"=>$endpoint])
         </div>
-        @foreach ($obj->endpoint as $endpoint)
-            <div class="col s6">
-                @include('fhir.element.reference',["obj"=>$endpoint])
-            </div>
-        @endforeach
-    </div>    
+    @endforeach
 @endif
 @if (env("TEST", false))
     <div class="row">

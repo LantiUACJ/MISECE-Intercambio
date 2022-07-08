@@ -33,9 +33,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //Route::post('/logout', [App\Http\Controllers\V1\AuthController::class, 'logout']);
 });
 
-Route::get('/', [\App\Http\Controllers\SiteController::class, "index"]);
+Route::get('/', [\App\Http\Controllers\SiteController::class, "index"])->name("home");
 Route::get('/login', [\App\Http\Controllers\SiteController::class, "login"])->name('login');
-Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"]);
+//Route::get('/login', [\App\Http\Controllers\SiteController::class, "loginCognito"])->name('login');
+Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginCognito"]);
 Route::get('/logout', [\App\Http\Controllers\SiteController::class, "logout"]);
 
 Route::middleware(["auth", "admin"])->group(function (){
@@ -58,6 +59,7 @@ Route::prefix("/indice")->middleware(["auth", "admin"])->group(function (){
 
 Route::prefix('/paciente/self')->middleware(["auth"])->group(function(){
     Route::get('/', [PacienteController::class, "consultaPropia"]);
+    Route::post('/', [PacienteController::class, "consultaPropia"]);
 });
 
 Route::prefix('/paciente')->middleware(["auth", "para_medico"])->group(function(){

@@ -13,7 +13,7 @@
 
     @yield('head')
 
-    <link rel="stylesheet" href="{{asset('styles.css')}}?v=1.0.0.1">
+    <link rel="stylesheet" href="{{asset('styles.css')}}?v=1.0.0.2">
 </head>
 <body class="bg-dashboard">
     <div class="menu-mobile-toggle" onclick="toggleMenu()">
@@ -29,7 +29,7 @@
                         <div class="parent">
                             <div class="top">
                                 <div class="menu-logo">
-                                    <img class="menu-logo" src="{{asset('logo_mod.png')}}" alt="">
+                                    <img class="menu-logo" src="{{asset('logomisece.svg')}}" alt="">
                                 </div>
                                 <div class="menu-items">
                                     
@@ -49,6 +49,12 @@
                                     @if(auth()->user()->isHospital())
                                         <a href="{{url('/users')}}" class="{{ request()->is('users/*')||request()->is('users') ? 'active' : null }}">
                                             Usuarios
+                                        </a>
+                                    @endif
+
+                                    @if(auth()->user()->isPaciente())
+                                        <a href="{{url('/paciente/self')}}" class="{{ request()->is('paciente/self') ? 'active' : null }}">
+                                            Consultar expediente
                                         </a>
                                     @endif
 

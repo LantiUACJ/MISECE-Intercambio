@@ -4,7 +4,7 @@
     
     <div class="actions">
         <p class="subtitle">Menú</p>
-        <a href="{{url('/hospital/create/')}}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Registrar Nuevo Hospital</a>
+        <a href="{{url('/hospital/create/')}}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Registrar nueva institución</a>
     </div>
     <hr style="opacity: 0.2;">
     <div class="data-content">
