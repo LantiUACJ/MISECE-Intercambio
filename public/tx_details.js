@@ -14,18 +14,19 @@ provider = new ethers.providers.JsonRpcProvider(rpc);
     if(bloque.transactions.length != 0){
         for(var i=0; i<bloque.transactions.length;i++){
             $("#blockNumber").text(bloque.number);
-            var obj = JSON.parse(hex2a(hexRemoveChars(bloque.transactions[i].data)));                
-            $("#txData").html(
-                $("#txData").html()+
-                $("#template").html()
-                    .replace("__transaction__", bloque.transactions.indexOf(bloque.transactions[i])+1 )
-                    .replace("__t_hash__", bloque.transactions[i].hash )
-                    .replace("__consultor__", obj.consultor)
-                    .replace("__fecha__", obj.fecha)
-                    .replace("__hospital__", obj.hospital)
-                    .replace("__paciente__", obj.paciente)
-                    .replace("__respuesta__", obj.respuestas)
-            );
+            var obj = JSON.parse(hex2a(hexRemoveChars(bloque.transactions[i].data)));
+
+            console.log(bloque.transactions[i]);
+
+            $("#txData").append($("#template").html()
+                .replace("__transaction__", bloque.transactions.indexOf(bloque.transactions[i])+1 )
+                .replace("__t_hash__", bloque.transactions[i].hash )
+                .replace("__consultor__", obj.consultor)
+                .replace("__fecha__", obj.fecha)
+                .replace("__hospital__", obj.hospital)
+                .replace("__paciente__", obj.paciente)
+                .replace('__color__', bloque.transactions[i].value.toNumber() > 100000?'blue lighten-3':'red lighten-4')
+                .replace("__respuesta__", obj.respuestas));
         }
     }
     else{

@@ -7,11 +7,17 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 
-{
-    // from Element: extension
-    "value" : <decimal>, // Numerical value (with implicit precision)
-    "currency" : "<code>" // ISO 4217 Currency Code
-}
+@if ($obj->value)
+    <p><b> Valor: </b>
+        {{$obj->value}}
+    </p>
+@endif
+@if ($obj->value)
+    <p><b> Divisa: </b>
+        {{$obj->value}}
+    </p>
+@endif
+
 @if (env("TEST", false))
     <div class="row">
         <div class="col s12">

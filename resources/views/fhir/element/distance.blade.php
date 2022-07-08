@@ -7,7 +7,7 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 
-    {{dd($obj)}}
+@include('fhir.element.quantity',["obj"=>$obj])
 
 @if (env("TEST", false))
     <div class="row">

@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\V1;
 
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF;
 use \App\Models\Hospital;
-use \App\Models\Indice;
-use \App\Models\HospitalIndice;
 use \App\Tools\PetitionHelper;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class ApiController extends \App\Http\Controllers\Controller{
@@ -31,11 +27,11 @@ class ApiController extends \App\Http\Controllers\Controller{
         
         if(!$ph->searchPatient()){
             return ["Error"=>"no se encontró el paciente"];
-        }
+        }/*
         if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
             $ph->sendCode();
             return ["Error"=>"Código inválido"];
-        }
+        }*/
 
         $ph->getData();
 

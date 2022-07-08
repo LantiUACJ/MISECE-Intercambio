@@ -10,23 +10,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('styles.css')}}">
+    <link rel="stylesheet" href="{{asset('styles.css')}}?v=1.0.0.1">
 </head>
 <body class="landing-bg">
-    <div class="">
+    <div class="container-big">
+        <div class="mm-spacer"></div>
+        <div class="mobile-menu" id="toggle">
+            <div class="mm-logo">
+                <img class="mm-img" src="{{asset('logomisece.jpg')}}">
+            </div>
+            <div class="menu-icon" id="menuicon">
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+            </div>
+        </div>
         <div class="row nomargin">
             <div class="col s12 m12 center">
-                <div class="nav opened-menu">
+                
+                <div class="nav" id="menu">
                     <div class="nav-content">
                         <div class="nav-logo">
                             <img src="{{asset('logomisece.jpg')}}">
                         </div>
                         <div class="nav-list">
-                            <a href="#inicio">Inicio </a>
-                            <a href="#beneficios">Beneficios </a>
-                            <a href="#nosotros">Nosotros </a>
-                            <a href="#contacto">Contacto </a>
-                            <a id="login" href="{{url('login')}}">Iniciar sesión </a>
+                            <a class="link-menu" href="#inicio">Inicio </a>
+                            <a class="link-menu" href="#beneficios">Beneficios </a>
+                            <a class="link-menu" href="#nosotros">Nosotros </a>
+                            <a class="link-menu" href="#contacto">Contacto </a>
+                            <a class="link-menu" href="{{url('login')}}">Iniciar sesión </a>
                         </div>
                         <div class="nav-icons">
                             <img src="{{asset('concayt.png')}}" alt="">
@@ -34,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="backshadow opened-menu">
+                <div class="backshadow" id="drop">
 
                 </div>
             </div>
@@ -49,7 +61,7 @@
                             <div class="login-btns">
                                 <div class="login-btn">
                                     <div class="login-btn-con login-btn-1">
-                                        <img src="{{asset('icon-medic.png')}}">
+                                        <img src="icon-medic.png">
                                     </div>
                                     <p class="login-btn-text">Soy Médico</p>
                                     <a href="{{url('login')}}" class="white-btn nomargin">Iniciar sesión</a>
@@ -57,7 +69,7 @@
 
                                 <div class="login-btn">
                                     <div class="login-btn-con login-btn-2">
-                                        <img src="{{asset('icon-paramedic.png')}}">
+                                        <img src="icon-paramedic.png">
                                     </div>
                                     <p class="login-btn-text">Soy Paramédico</p>
                                     <a href="{{url('login')}}" class="white-btn nomargin">Iniciar sesión</a>
@@ -65,7 +77,7 @@
 
                                 <div class="login-btn">
                                     <div class="login-btn-con login-btn-3">
-                                        <img src="{{asset('icon-patient.png')}}">
+                                        <img src="icon-patient.png">
                                     </div>
                                     <p class="login-btn-text">Soy Paciente</p>
                                     <a href="{{url('login')}}" class="white-btn nomargin">Iniciar sesión</a>
@@ -73,7 +85,7 @@
 
                                 <div class="login-btn">
                                     <div class="login-btn-con login-btn-4">
-                                        <img src="{{asset('icon-hospital.png')}}">
+                                        <img src="icon-hospital.png">
                                     </div>
                                     <p class="login-btn-text">Soy Institución de salud</p>
                                     <a href="{{url('login')}}" class="white-btn nomargin">Iniciar sesión</a>
@@ -97,10 +109,10 @@
                             <span class="line-two"></span>
                         </div>
                         <p class="subtitle-two">
-                            MISECE es la plataforma que permite a personal de salud y pacientes, consultar el expediente clínico electrónico sin importar en donde se encuentre almacenado, utilizando tecnológias que permiten la inter-operabilidad entre los diversos sistemas de información en salud que se utilizan a nivel nacional por instituciones públicas y privadas. 
+                            MISECE es la plataforma que permite a personal de salud y pacientes, consultar el expediente clínico electrónico sin importar en donde se encuentre almacenado, utilizando tecnológias que permiten la interoperabilidad entre los diversos sistemas de información en salud que se utilizan a nivel nacional por instituciones públicas y privadas. 
                         </p>
                         <div class="screenshot-container">
-                            <img src="{{asset('ss1.png')}}" alt="">
+                            <img src="ss1.png" alt="">
                         </div>
                         <!-- <div class="tabs-section">
                             <ul id="tabs-swipe-demo" class="tabs">
@@ -211,14 +223,14 @@
                         <div class=" image-text-white">
                             <div class="row nomargin">
                                 <div class="col s12 m4 footer-col">
-                                    <p class="footer-title">Mi Salud </p>
+                                    <p class="footer-title">MISECE </p>
                                     <div class="title-element small-element">
                                         <span class="line-one"></span>
                                         <span class="line-two"></span>
                                     </div>
                                     <!-- <p>contacto@misalud.com</p> -->
                                     <div class="footer-logo">
-                                        <img src="logomisece.jpg">
+                                        <img src="{{asset('logomisece.jpg')}}">
                                     </div>
                                 </div>
                                 <div class="col s12 m4 footer-col">
@@ -227,8 +239,8 @@
                                         <span class="line-one"></span>
                                         <span class="line-two"></span>
                                     </div>
-                                    <p>contacto@misalud.com</p>
-                                    <p>Ciudad de México</p>
+                                    <p>victor.morales@uacj.mx</p>
+                                    <!--<p>Ciudad de México</p>-->
                                 </div>
                                 <div class="col s12 m4 footer-col">
                                     <p class="footer-title">Acerca De </p>
@@ -236,7 +248,7 @@
                                         <span class="line-one"></span>
                                         <span class="line-two"></span>
                                     </div>
-                                    <p>Plataforma Mi Salud, una plataforma única en México para integrar los expedientes clínicos entre hospitales, médicos y pacientes.</p>
+                                    <p>Plataforma basada en modelo de interoperabilidad desarrollado por investigadores de la Universidad Autónoma de Ciudad Juárez con fondos del Consejo Nacional de Ciencia y Tecnología.</p>
                                 </div>
                                 
                             </div>
@@ -279,6 +291,28 @@
             swipeable : true,
             responsiveThreshold : 1920
             });
+        });
+        $(document).ready(function(){
+            $("#toggle").click(function(){
+                $("#menu").toggleClass("opened-menu");
+                $("#drop").toggleClass("opened-menu");
+                $("#menuicon").toggleClass("activebtn");
+                
+            });
+            $(".link-menu").click(function(){
+                if ($(window).width() < 1140) {
+                $("#menu").removeClass("opened-menu");
+                $("#drop").removeClass("opened-menu");
+                $("#menuicon").removeClass("activebtn");
+
+                }
+            })
+            $("#drop").click(function(){
+                $("#menu").removeClass("opened-menu");
+                $("#drop").removeClass("opened-menu");
+                $("#menuicon").removeClass("activebtn");
+
+            })
         });
     </script>
 

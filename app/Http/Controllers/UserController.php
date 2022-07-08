@@ -42,6 +42,9 @@ class UserController extends Controller{
         if(isset($data["password"]) && $data["password"]){
             $data["password"] = Hash::make($data["password"]);
         }
+        else{
+            unset($data["password"]);
+        }
         if($user->update($data)){
             return redirect("users/view/".$user->id);
         }

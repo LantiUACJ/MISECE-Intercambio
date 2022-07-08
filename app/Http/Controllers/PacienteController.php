@@ -33,16 +33,19 @@ class PacienteController extends Controller
     }
 
     public function consultaPropia(Request $request){
-
-        $ph = new PetitionHelper("test", auth()->user()->hospital, auth()->user()->name, 1);
+        $ph = new PetitionHelper(auth()->user()->curp, auth()->user()->hospital, auth()->user()->name, 1);
+        
+        $input = $request->validate([
+            "codigo"=>"nullable",
+        ]);
         
         if(!$ph->searchPatient()){
-            return view("paciente.resultado", ["data"=>$data, "nombre"=>"", $data => "no se encontró el paciente"]);
+            return view("paciente.resultado", ["nombre"=>"", "data"=>"no se encontró el paciente"]);
         }
         $nombre = $ph->indice->nombre;
         if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
             $ph->sendCode();
-            return view("paciente.normal_codigo", ["nombre"=>$nombre, "curp"=>$input["curp"]]);
+            return view("paciente.normal_codigo", ["nombre"=>$nombre, "curp"=>auth()->user()->curp]);
         }
 
         $ph->getData();

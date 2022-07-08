@@ -22,7 +22,7 @@
     <div class="hide" id="template">
         <div class="row">
             <div class="col s12">
-              <div class="card blue lighten-4">
+              <div class="card __color__">
                     <div class="card-content white-text blue">
                         <span class="card-title">Transacción #__transaction__</span>
                         <div>Hash de transacción: __t_hash__</div>

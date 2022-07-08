@@ -6,212 +6,129 @@
     </div>
 @endif
 @include('fhir.element.element',["obj"=>$obj])
-
 @if (isset($obj->event))
     <div class="row">
         <div class="col s12">
-            Identificador
+            Evento:
         </div>
         @foreach ($obj->event as $event)
-            <div class="col s6">
+            <div class="element">
                 {{$event}}
             </div>
         @endforeach
     </div>
 @endif
 @if (isset($obj->repeat))
-    <div class="row">
-        <div class="col s12">
-            Repetir
+    <b>Repetir:</b>
+    @if (isset($obj->repeat->boundsDuration) || isset($obj->repeat->boundsRange) || isset($obj->repeat->boundsPeriod))
+        @if (isset($obj->repeat->boundsDuration))
+            <div class="element">
+                @include('fhir.element.duration',["obj"=>$obj->repeat->boundsDuration])
+            </div>
+        @endif
+        @if (isset($obj->repeat->boundsRange))
+            <div class="element">
+                @include('fhir.element.range',["obj"=>$obj->repeat->boundsRange])
+            </div>
+        @endif
+        @if (isset($obj->repeat->boundsPeriod))
+            en las fechas: @include('fhir.element.period',["obj"=>$obj->repeat->boundsPeriod])
+        @endif
+    @endif
+    @if (isset($obj->repeat->count))
+        <p><b>Cantidad:</b></p>
+        <div class="element">
+            {{$obj->repeat->count}}
         </div>
-        <div class="col s12">
-            @if (isset($obj->repeat->boundsDuration))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        @include('fhir.element.duration',["obj"=>$obj->repeat->boundsDuration])
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->boundsRange))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        @include('fhir.element.range',["obj"=>$obj->repeat->boundsRange])
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->boundsPeriod))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        @include('fhir.element.period',["obj"=>$obj->repeat->boundsPeriod])
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->count))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->count}}
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->countMax))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->countMax}}
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->duration))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->duration}}
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->durationMax))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->durationMax}}
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->durationUnit))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->durationUnit}} <!-- // s | min | h | d | wk | mo | a - unit of time (UCUM) -->
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->frequency))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->frequency}}
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->frequencyMax))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->frequencyMax}}
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->period))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->period}}
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->periodMax))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->periodMax}} 
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->periodUnit))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->periodUnit}} <!-- // s | min | h | d | wk | mo | a - unit of time (UCUM) -->
-                    </div>
-                </div>
-            @endif
-            @if (isset($obj->repeat->dayOfWeek))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    @foreach ($obj->repeat->dayOfWeek as $dayOfWeek)
-                        <div class="col s6">
-                            {{$dayOfWeek}} <!-- // mon | tue | wed | thu | fri | sat | sun -->
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-            @if (isset($obj->repeat->timeOfDay))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    @foreach ($obj->repeat->timeOfDay as $timeOfDay)
-                        <div class="col s6">
-                            {{$timeOfDay}}
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-            @if (isset($obj->repeat->when))
-                <div class="row">
-                    <div class="col s12">
-                        Cuando:
-                    </div>
-                    @foreach ($obj->repeat->when as $when)
-                        <div class="col s6">
-                            {{$when}}
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-            @if (isset($obj->repeat->offset))
-                <div class="row">
-                    <div class="col s12">
-                        Tiempo del día:
-                    </div>
-                    <div class="col s6">
-                        {{$obj->repeat->offset}}
-                    </div>
-                </div>
-            @endif
+    @endif
+    @if (isset($obj->repeat->countMax))
+        <p><b>Con un máximo de:</b></p>
+        <div class="element">
+            {{$obj->repeat->countMax}}
         </div>
-    </div>
+    @endif
+    @if (isset($obj->repeat->duration))
+        <p><b>Duración:</b></p>
+        <div class="element">
+            {{$obj->repeat->duration}}
+        </div>
+    @endif
+    @if (isset($obj->repeat->durationMax))
+        <p><b>Duración máxima:</b></p>
+        <div class="element">
+            {{$obj->repeat->durationMax}}
+        </div>
+    @endif
+    @if (isset($obj->repeat->durationUnit))
+        <p><b>Unidad:</b></p>
+        <div class="element">
+            {{$obj->repeat->durationUnit}} <!-- // s | min | h | d | wk | mo | a - unit of time (UCUM) -->
+        </div>
+    @endif
+    @if (isset($obj->repeat->frequency))
+        {{$obj->repeat->frequency}} {{$obj->repeat->frequency > 1?"veces":"vez"}}
+    @endif
+    @if (isset($obj->repeat->frequencyMax))
+        <div class="element">
+            hasta un máximo de {{$obj->repeat->frequencyMax}} {{$obj->repeat->frequencyMax>1?"veces":"vez"}}
+        </div>
+    @endif
+    @if (isset($obj->repeat->period))
+        cada {{$obj->repeat->period}}
+    @endif
+    @if (isset($obj->repeat->periodMax))
+        hasta un máximo de {{$obj->repeat->periodMax}}
+    @endif
+    @if (isset($obj->repeat->periodUnit))
+        {{\App\Tools\Replace::change(
+            ['s', 'a', 'h', 'd', 'min', 'wk', 'mo'],
+            ['segundo(s)', 'año(s)', 'hora(s)', 'día(s)', 'minuto(s)', 'semana(s)', 'mes(es)'], 
+            $obj->repeat->periodUnit)}}
+        <!-- 
+            s	second	second
+            min	minute	minute
+            h	hour	hour
+            d	day	day
+            wk	week	week
+            mo	month	month
+            a	year	year
+        -->
+    @endif
+    @if (isset($obj->repeat->dayOfWeek))
+        <p><b>Día de la semana:</b></p>
+        <div class="element">
+            @foreach ($obj->repeat->dayOfWeek as $dayOfWeek)
+                {{$dayOfWeek}} <!-- // mon | tue | wed | thu | fri | sat | sun -->
+            @endforeach
+        </div>
+    @endif
+    @if (isset($obj->repeat->timeOfDay))
+        <p><b>Tiempo del día:</b></p>
+        <div class="element">
+            @foreach ($obj->repeat->timeOfDay as $timeOfDay)
+                {{$timeOfDay}}
+            @endforeach
+        </div>
+    @endif
+    @if (isset($obj->repeat->when))
+        <p><b>Cuando:</b></p>
+        <div class="element">
+            @foreach ($obj->repeat->when as $when)
+                {{$when}}
+            @endforeach
+        </div>
+    @endif
+    @if (isset($obj->repeat->offset))
+        <p><b>Minutos del evento:</b></p>
+        <div class="element">
+            {{$obj->repeat->offset}}
+        </div>
+    @endif
 @endif
 @if (isset($obj->code))
-    <div class="row">
-        <div class="col s12">
-            Código
-        </div>
-        <div class="col s6">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->code])
-        </div>
+    <p><b>Código:</b></p>
+    <div class="element">
+        @include('fhir.element.codeableConcept',["obj"=>$obj->code])
     </div>
 @endif
 @if (env("TEST", false))

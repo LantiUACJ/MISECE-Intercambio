@@ -13,13 +13,9 @@
     </div>-->
 @endif
 @if (isset($obj->extension))
-    <div class="row">
     @foreach ($obj->extension as $extension)
-        <div class="col s12">
-            @include('fhir.element.extension',["obj"=>$extension])
-        </div>
+        @include('fhir.element.extension',["obj"=>$extension]) <br>
     @endforeach
-    </div>
 @endif
 @if (isset($obj->id) && isset($obj->extension))
     @if (env("TEST", false))

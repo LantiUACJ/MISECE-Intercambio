@@ -1,330 +1,200 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col s12">
+        <div class="element">
             <b>===condition===</b>
         </div>
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
-    <div class="row">
-        <div class="col s12">
-            Identificador
-        </div>
-        @foreach ($obj->identifier as $identifier)
-            <div class="col s6">
-                @include('fhir.element.identifier',["obj"=>$identifier])
-            </div>
-        @endforeach
-    </div>    
-@endif
 @if (isset($obj->clinicalStatus))
-    <div class="row">
-        <div class="col s12">
-            Estado clínico:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->clinicalStatus])
-        </div>
-    </div>
+    <p><b>Estado clínico:</b>
+        @include('fhir.element.codeableConcept',["obj"=>$obj->clinicalStatus])
+    </p>
 @endif
 @if (isset($obj->verificationStatus))
-    <div class="row">
-        <div class="col s12">
-            Estado de verificación:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->verificationStatus])
-        </div>
-    </div>
+    <p><b>Estado de verificación:</b> @include('fhir.element.codeableConcept',["obj"=>$obj->verificationStatus])</p>
 @endif
 @if (isset($obj->category))
-    <div class="row">
-        <div class="col s12">
-            Categoría
-        </div>
+    <p><b>Categoría:</b></p>
+    <div class="element">
         @foreach ($obj->category as $category)
-            <div class="col s6">
-                @include('fhir.element.codeableConcept',["obj"=>$category])
-            </div>
+            * @include('fhir.element.codeableConcept',["obj"=>$category])
         @endforeach
-    </div>    
+    </div>
 @endif
 @if (isset($obj->serverity))
-    <div class="row">
-        <div class="col s12">
-            Severidad:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->serverity])
-        </div>
-    </div>
+    <p><b>Severidad:</b>
+        @include('fhir.element.codeableConcept',["obj"=>$obj->serverity])
+    </p>
 @endif
 @if (isset($obj->code))
-    <div class="row">
-        <div class="col s12">
-            Código
-        </div>
-        <div class="col s12">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->code])
-        </div>
-    </div>
+    <p><b>Código:</b>
+        @include('fhir.element.codeableConcept',["obj"=>$obj->code])
+    </p>
 @endif
 @if (isset($obj->bodySite))
-    <div class="row">
-        <div class="col s12">
-            Categoría
-        </div>
+    <p><b>Categoría:</b></p>
+    <div class="element">
         @foreach ($obj->bodySite as $bodySite)
-            <div class="col s6">
-                @include('fhir.element.codeableConcept',["obj"=>$bodySite])
-            </div>
+            * @include('fhir.element.codeableConcept',["obj"=>$bodySite])
         @endforeach
-    </div>    
-@endif
-@if (isset($obj->subject))
-    <div class="row">
-        <div class="col s12">
-            Sujeto
-        </div>
-        <div class="col s12">
-            @include('fhir.element.reference',["obj"=>$obj->subject])
-        </div>
     </div>
 @endif
+@if (isset($obj->subject))
+    <p><b>Sujeto:</b> @include('fhir.element.reference',["obj"=>$obj->subject])</p>
+@endif
 @if (isset($obj->encounter))
-    <div class="row">
-        <div class="col s12">
-            Encuentro:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.reference',["obj"=>$obj->encounter])
-        </div>
+    <p><b>Encuentro:</b></p>
+    <div class="element">
+        @include('fhir.element.reference',["obj"=>$obj->encounter])
     </div>
 @endif
 @if (isset($obj->onsetDateTime))
-    <div class="row">
-        <div class="col s12">
-            Fecha:
-        </div>
-        <div class="col s12">
-            {{$obj->onsetDateTime}}
-        </div>
-    </div>
+    <p><b>Fecha:</b>
+        {{$obj->onsetDateTime}}
+    </p>
 @endif
 @if (isset($obj->onsetAge))
-    <div class="row">
-        <div class="col s12">
-            Fecha:
-        </div>
-        <div class="col s12">
-            {{$obj->onsetAge}}
-        </div>
+    <p><b>Fecha:</b></p>
+    <div class="element">
+        @include('fhir.element.quantity', ["obj"=>$obj->onsetAge])
     </div>
 @endif
 @if (isset($obj->onsetPeriod))
-    <div class="row">
-        <div class="col s12">
-            Fecha:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.period',["obj"=>$obj->onsetPeriod])
-        </div>
+    <p><b>Fecha:</b></p>
+    <div class="element">
+        @include('fhir.element.period',["obj"=>$obj->onsetPeriod])
     </div>
 @endif
 @if (isset($obj->onsetRange))
-    <div class="row">
-        <div class="col s12">
-            Fecha:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.range',["obj"=>$obj->onsetRange])
-        </div>
+    <p><b>Fecha:</b></p>
+    <div class="element">
+        @include('fhir.element.range',["obj"=>$obj->onsetRange])
     </div>
 @endif
 @if (isset($obj->onsetString))
-    <div class="row">
-        <div class="col s12">
-            Fecha:
-        </div>
-        <div class="col s12">
-            {{$obj->onsetString}}
-        </div>
+    <p><b>Fecha:</b></p>
+    <div class="element">
+        {{$obj->onsetString}}
     </div>
 @endif
 @if (isset($obj->abatementDateTime))
-    <div class="row">
-        <div class="col s12">
-            Fecha de resolución:
-        </div>
-        <div class="col s12">
-            {{$obj->abatementDateTime}}
-        </div>
+    <p><b>Fecha de resolución:</b></p>
+    <div class="element">
+        {{$obj->abatementDateTime}}
     </div>
 @endif
 @if (isset($obj->abatementAge))
-    <div class="row">
-        <div class="col s12">
-            Fecha de resolución:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.age',["obj"=>$obj->abatementAge])
-        </div>
+    <p><b>Fecha de resolución:</b></p>
+    <div class="element">
+        @include('fhir.element.quantity',["obj"=>$obj->abatementAge])
     </div>
 @endif
 @if (isset($obj->abatementPeriod))
-    <div class="row">
-        <div class="col s12">
-            Fecha de resolución:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.period',["obj"=>$obj->abatementPeriod])
-        </div>
+    <p><b>Fecha de resolución:</b></p>
+    <div class="element">
+        @include('fhir.element.period',["obj"=>$obj->abatementPeriod])
     </div>
 @endif
 @if (isset($obj->abatementRange))
-    <div class="row">
-        <div class="col s12">
-            Fecha de resolución:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.range',["obj"=>$obj->abatementRange])
-        </div>
+    <p><b>Fecha de resolución:</b></p>
+    <div class="element">
+        @include('fhir.element.range',["obj"=>$obj->abatementRange])
     </div>
 @endif
 @if (isset($obj->abatementString))
-    <div class="row">
-        <div class="col s12">
-            Fecha de resolución:
-        </div>
-        <div class="col s12">
-            {{$obj->abatementString}}
-        </div>
+    <p><b>Fecha de resolución:</b></p>
+    <div class="element">
+        {{$obj->abatementString}}
     </div>
 @endif
 @if (isset($obj->recordedDate))
-    <div class="row">
-        <div class="col s12">
-            Fecha de registro:
-        </div>
-        <div class="col s12">
-            {{$obj->recordedDate}}
-        </div>
+    <p><b>Fecha de registro:</b></p>
+    <div class="element">
+        {{$obj->recordedDate}}
     </div>
 @endif
 @if (isset($obj->recorder))
-    <div class="row">
-        <div class="col s12">
-            Registrador:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.reference',["obj"=>$obj->recorder])
-        </div>
+    <p><b>Registrador:</b></p>
+    <div class="element">
+        @include('fhir.element.reference',["obj"=>$obj->recorder])
     </div>
 @endif
 @if (isset($obj->asserter))
-    <div class="row">
-        <div class="col s12">
-            Afirmador:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.reference',["obj"=>$obj->asserter])
-        </div>
+    <p><b>Afirmador:</b></p>
+    <div class="element">
+        @include('fhir.element.reference',["obj"=>$obj->asserter])
     </div>
 @endif
 @if (isset($obj->stage))
-    <div class="row">
-        <div class="col s12">
-            Etapa:
-        </div>
-        <div class="col s12">
-            @foreach ($obj->stage as $stage)
-                @if (isset($stage->summary))
-                    <div class="row">
-                        <div class="col s12">
-                            Resumen:
-                        </div>
-                        <div class="col s12">
-                            @include('fhir.element.codebaleConcept',["obj"=>$stage->summary])
-                        </div>
-                    </div>
-                @endif
-                @if (isset($stage->assessment))
-                    <div class="row">
-                        <div class="col s12">
-                            Evaluación:
-                        </div>
-                        @foreach ($stage->assessment as $assessment)
-                            <div class="col s12">
-                                @include('fhir.element.reference',["obj"=>$assessment])
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-                @if (isset($stage->type))
-                    <div class="row">
-                        <div class="col s12">
-                            Tipo:
-                        </div>
-                        <div class="col s12">
-                            @include('fhir.element.codebaleConcept',["obj"=>$stage->type])
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-        </div>
+    <p><b>Etapa:</b></p>
+    <div class="element">
+        @foreach ($obj->stage as $stage)
+            @if (isset($stage->summary))
+                <p><b>Resumen:</b></p>
+                <div class="element">
+                    @include('fhir.element.codeableConcept',["obj"=>$stage->summary])
+                </div>
+            @endif
+            @if (isset($stage->assessment))
+                <p><b>Evaluación:</b></p>
+                <div class="element">
+                    @foreach ($stage->assessment as $assessment)
+                        @include('fhir.element.reference',["obj"=>$assessment])
+                    @endforeach
+                </div>
+            @endif
+            @if (isset($stage->type))
+                <p><b>Tipo:</b></p>
+                <div class="element">
+                    @include('fhir.element.codeableConcept',["obj"=>$stage->type])
+                </div>
+            @endif
+        @endforeach
     </div>
 @endif
 @if (isset($obj->evidence))
-    <div class="row">
-        <div class="col s12">
-            Etapa:
-        </div>
-        <div class="col s12">
-            @foreach ($obj->evidence as $evidence)
-                @if (isset($evidence->code))
-                    <div class="row">
-                        <div class="col s12">
-                            Evaluación:
-                        </div>
-                        @foreach ($evidence->code as $code)
-                            <div class="col s12">
-                                @include('fhir.element.codebaleConcept',["obj"=>$code])
-                            </div>
-                        @endforeach
+    <p><b>Etapa:</b></p>
+    <div class="element">
+        @foreach ($obj->evidence as $evidence)
+            @if (isset($evidence->code))
+                <p><b>Evaluación:</b></p>
+                @foreach ($evidence->code as $code)
+                    <div class="element">
+                        @include('fhir.element.codeableConcept',["obj"=>$code])
                     </div>
-                @endif
-                @if (isset($evidence->detail))
-                    <div class="row">
-                        <div class="col s12">
-                            Detalle:
-                        </div>
-                        @foreach ($evidence->detail as $detail)
-                            <div class="col s12">
-                                @include('fhir.element.reference',["obj"=>$detail])
-                            </div>
-                        @endforeach
+                @endforeach
+            @endif
+            @if (isset($evidence->detail))
+                <p><b>Detalle:</b></p>
+                @foreach ($evidence->detail as $detail)
+                    <div class="element">
+                        @include('fhir.element.reference',["obj"=>$detail])
                     </div>
-                @endif
-            @endforeach
-        </div>
+                @endforeach
+            @endif
+        @endforeach
     </div>
 @endif
 @if (isset($obj->note))
-    <div class="row">
-        <div class="col s12">
-            Nota:
+    <p><b>Nota:</b></p>
+    @foreach ($obj->note as $note)
+        <div class="element">
+            @include('fhir.element.annotation',["obj"=>$note])
         </div>
-        @foreach ($obj->note as $note)
-            <div class="col s6">
-                @include('fhir.element.annotation',["obj"=>$note])
-            </div>
+    @endforeach
+@endif
+@if (isset($obj->identifier))
+    <p><b>Identificador:</b></p>
+    <div class="element">
+        @foreach ($obj->identifier as $identifier)
+            @include('fhir.element.identifier',["obj"=>$identifier])
         @endforeach
-    </div>    
+    </div>
 @endif
 @if (env("TEST", false))
     <div class="row">
-        <div class="col s12">
+        <div class="element">
             <b>===condition===</b>
         </div>
     </div>

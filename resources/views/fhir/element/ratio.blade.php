@@ -7,18 +7,14 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 
-<div class="row">
-    @if (isset($obj->numerator))
-        <div class="col s6">
-            @include('fhir.element.quantity',["obj"=>$obj->numerator])
-        </div>
-    @endif
-    @if (isset($obj->denominator))
-        <div class="col s6">
-            @include('fhir.element.quantity',["obj"=>$obj->denominator])
-        </div>
-    @endif
-</div>
+
+@if (isset($obj->numerator))
+    @include('fhir.element.quantity',["obj"=>$obj->numerator])
+@endif
+@if (isset($obj->denominator))
+    de @include('fhir.element.quantity',["obj"=>$obj->denominator])
+@endif
+
 @if (env("TEST", false))
     <div class="row">
         <div class="col s12">

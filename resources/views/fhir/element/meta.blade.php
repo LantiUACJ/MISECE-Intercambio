@@ -8,34 +8,35 @@
 @include('fhir.element.element',["obj"=>$obj])
 
 @if ( isset($obj->versionId) )
-    ID de versión
-    {{$obj->versionId}}
-@endif
-@if ( isset($obj->lastUpdated) )
-    Última actualización
-    {{$obj->lastUpdated}}
-@endif
-@if ( isset($obj->source) )
-    Fuente
-    {{$obj->source}}
-@endif
-@if ( isset($obj->profile) )
-    <div class="row">
-        @foreach ($obj->profile as $profile)
-            <div class="col s4">Perfil</div>
-            <div class="col s8">{{$profile}}</div>
-        @endforeach
+    <p><b>ID de versión</b></p>
+    <div class="element">
+        {{$obj->versionId}}
     </div>
 @endif
+@if ( isset($obj->lastUpdated) )
+    <p><b>Última actualización: </b>{{$obj->lastUpdated}}</p>
+@endif
+@if ( isset($obj->source) )
+    <p><b>Fuente</b></p>
+    <div class="element">
+        {{$obj->source}}
+    </div>
+@endif
+@if ( isset($obj->profile) )
+    <p><b>Perfil:</b></p>
+    @foreach ($obj->profile as $profile)
+        <div class="element">{{$profile}}</div>
+    @endforeach
+@endif
 @if ( isset($obj->security) )
+    <p><b>Seguridad:</b></p>
     @foreach ($obj->security as $security)
-        Seguridad
         @include('fhir.element.coding',["obj"=>$security])
     @endforeach
 @endif
 @if ( isset($obj->tag) )
+    <p><b>Etiqueta:</b></p>
     @foreach ($obj->tag as $tag)
-        Etiqueta
         @include('fhir.element.coding',["obj"=>$tag])
     @endforeach
 @endif
