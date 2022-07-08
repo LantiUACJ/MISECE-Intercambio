@@ -27,11 +27,11 @@ class ApiController extends \App\Http\Controllers\Controller{
         
         if(!$ph->searchPatient()){
             return ["Error"=>"no se encontró el paciente"];
-        }/*
+        }
         if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
             $ph->sendCode();
             return ["Error"=>"Código inválido"];
-        }*/
+        }
 
         $ph->getData();
 
