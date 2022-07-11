@@ -50,6 +50,9 @@
                                         <a href="{{url('/users')}}" class="{{ request()->is('users/*')||request()->is('users') ? 'active' : null }}">
                                             Usuarios
                                         </a>
+                                        <a href="{{url('/test/indice')}}" class="{{ request()->is('users/*')||request()->is('users') ? 'active' : null }}">
+                                            Test Api (indice)
+                                        </a>
                                     @endif
 
                                     @if(auth()->user()->isPaciente())

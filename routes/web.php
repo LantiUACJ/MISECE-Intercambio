@@ -6,6 +6,7 @@ use \App\Http\Controllers\PacienteController;
 use \App\Http\Controllers\PacienteBasicoController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\BlockchainController;
+use \App\Http\Controllers\TestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +26,7 @@ use \App\Http\Controllers\BlockchainController;
 
 //Protecting Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profile', function(Request $request) {
+    Route::get('/profile', function(/*Request $request*/) {
         return auth()->user();
     });
 
@@ -81,5 +82,6 @@ Route::middleware(["auth","hospital"])->group(function (){
     Route::post('/users/update/{user}', [UserController::class, "update"])->middleware(["userProtect"]);
     Route::get('/users/view/{user}', [UserController::class, "show"])->middleware(["userProtect"]);
     Route::post('/users/delete/{user}', [UserController::class, "delete"])->middleware(["userProtect"]);
+    Route::get("test/indice", [TestController::class, "testIndice"]);
 });
 

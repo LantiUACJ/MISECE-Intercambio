@@ -1,6 +1,7 @@
 <?php 
 namespace App\Tools;
 
+use App\Models\Hospital;
 use \App\Models\Indice;
 use \App\Models\HospitalIndice;
 
@@ -52,8 +53,8 @@ class PetitionHelper{
         $codigo = rand(100000,999999);
         $this->indice->codigo = $codigo;
         $this->indice->save();
-        Mail::to($this->indice->email)->send(new \App\Mail\Codigo($codigo));
-        return true;
+        /*Mail::to($this->indice->email)->send(new \App\Mail\Codigo($codigo));
+        return true;*/
         $credentials = new \Aws\Credentials\Credentials(env("AWS_ACCESS_KEY_ID"),env("AWS_SECRET_ACCESS_KEY"));
         $credentialsProv = \Aws\Credentials\CredentialProvider::fromCredentials($credentials);
 
@@ -127,6 +128,58 @@ class PetitionHelper{
 
     public function renderHtml(){
         return view("pdf",["data"=>$this->data]);
+    }
+
+    /* Para pruebas */
+    public function fakePatient($number){
+        if($this->curp == "error"){
+            return false;
+        }
+        $this->indice = new Indice();
+        $this->indice->curp = $this->curp;
+        $this->indice->telefono = $number;
+        return $this->indice?true:false;
+    }
+    public function fakeData(){
+        $archivoJson = fopen("json_pruebas/bundle.json", "r");
+        $jsonTxt = fread($archivoJson,filesize("json_pruebas/bundle.json"));
+        $json = json_decode($jsonTxt);
+        $hospital = new Hospital(["nombre"=>"instituto/hospital de prueba"]);
+        $this->data[] = ["bundle"=>$json,"hospital"=>$hospital];
+        $data = new \App\Tools\JsonProcessHelper($this->data);
+        $this->data = $data->sortDesc();
+    }
+    public function fakeCode(){
+        $codigo = rand(100000,999999);
+        $credentials = new \Aws\Credentials\Credentials(env("AWS_ACCESS_KEY_ID"),env("AWS_SECRET_ACCESS_KEY"));
+        $credentialsProv = \Aws\Credentials\CredentialProvider::fromCredentials($credentials);
+        $SnSclient = new SnsClient([
+            'version'     => 'latest',
+            'region'      => env("AWS_DEFAULT_REGION"),
+            'credentials' => $credentialsProv,
+        ]);
+        
+        try {
+            $result = $SnSclient->publish([
+                'Message' => "Código para autorizar el acceso a su expediente clínico electrónico: " . $codigo,
+                'PhoneNumber' => $this->indice->telefono,
+                "MessageAttributes" => [
+                    'AWS.SNS.SMS.SMSType' => [
+                        'DataType' => 'String',
+                        'StringValue' => 'Transactional'
+                    ]
+                ],
+            ]);
+        } 
+        catch (AwsException $e) {
+            error_log($e->getMessage());
+        }
+    }
+    public function fakeValidate($codigo){
+        if($codigo)
+            return true;
+        else
+            return false;
     }
 
     //$registroEventos = new \App\Tools\CurlHelper(env("MODULO_REGISTRO_EVENTOS"), ["msg"=>$log]);
