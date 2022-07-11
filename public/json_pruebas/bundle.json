@@ -1,0 +1,325 @@
+{
+    "resourceType": "Bundle",
+    "entry": [
+        {
+            "fullUrl": "Patient/P001",
+            "resource": {
+                "resourceType": "Patient",
+                "identifier": [
+                    {
+                        "use": "oficial",
+                        "value": "P001"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "oficial",
+                        "text": "Carlos Rojas Morales",
+                        "family": "Rojas Morales",
+                        "given": [
+                            "Carlos"
+                        ]
+                    }
+                ],
+                "gender": "masculino",
+                "birthDate": "1992-10-21",
+                "address": [
+                    {
+                        "type": "ambas",
+                        "text": "calle juarez #202 col. Maestranza, Cd Juarez, Chihuahua",
+                        "city": "Juárez",
+                        "district": "Juárez",
+                        "state": "Chihuahua"
+                    }
+                ],
+                "extension": [
+                    {
+                        "url": "edoNac",
+                        "text": "Estado de México"
+                    },
+                    {
+                        "url": "Nacionalidad",
+                        "text": "Mexicana"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "Encounter/E001",
+            "resource": {
+                "resourceType": "Encounter",
+                "identifier": [
+                    {
+                        "use": "oficial",
+                        "value": "<string>"
+                    }
+                ],
+                "status": "terminado",
+                "subject": {
+                    "reference": "Patient/P001"
+                },
+                "participant": [
+                    {
+                        "period": {
+                            "start": "2021-10-20",
+                            "end": "2021-10-20"
+                        },
+                        "individual": {
+                            "reference": "Practitioner/PRA001"
+                        }
+                    }
+                ],
+                "period": {
+                    "start": "2021-10-20",
+                    "end": "2021-10-20"
+                },
+                "diagnosis": [
+                    {
+                        "condition": {
+                            "reference": "Procedure/PRO001"
+                        }
+                    }
+                ],
+                "serviceProvider": {
+                    "reference": "Organization/OR001"
+                }
+            }
+        },
+        {
+            "fullUrl": "Practitioner/PRA001",
+            "resource": {
+                "resourceType": "Practitioner",
+                "identifier": [
+                    {
+                        "use": "oficial",
+                        "value": "PRA001"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "usual",
+                        "text": "Manuel House",
+                        "family": "House",
+                        "given": [
+                            "Manuel"
+                        ]
+                    }
+                ],
+                "qualification": [
+                    {
+                        "identifier": [
+                            {
+                                "use": "cedula",
+                                "value": "cedula001"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "Observation/OB001",
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "use": "oficial",
+                        "value": "OB004"
+                    }
+                ],
+                "status": "final",
+                "category": {
+                    "text": "Peso Corporal"
+                },
+                "code": {
+                    "coding": {
+                        "code": "text de code de coding de conclusionCode",
+                        "system": "https://acme.lab/resultcodes",
+                        "display": "display de coding de conclusionCode"
+                    },
+                    "text": "frecuencia cardiaca"
+                },
+                "subject": {
+                    "reference": "Patient/P001"
+                },
+                "encounter": {
+                    "reference": "Encounter/E001"
+                },
+                "valueQuantity": {
+                    "value": 36.0,
+                    "unit": "°C"
+                },
+                "ConceptosSNOMED": [
+                    {
+                        "url": "code",
+                        "text": "364075005"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "Procedure/PRO001",
+            "resource": {
+                "resourceType": "Procedure",
+                "identifier": [
+                    {
+                        "use": "oficial",
+                        "value": "PRO001"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/P001"
+                },
+                "code": {
+                    "coding": {
+                        "code": "text de code de coding de conclusionCode",
+                        "display": "display de coding de conclusionCode"
+                    },
+                    "text": "vendaje"
+                },
+                "note": [
+                    {
+                        "authorReference": {
+                            "reference": "Practitioner/PRA001"
+                        },
+                        "time": "2021",
+                        "text": "nota de vendaje de medico"
+                    },
+                    {
+                        "authorReference": {
+                            "reference": "Practitioner/PRA001"
+                        },
+                        "time": "2021",
+                        "text": "nota 2 de vendaje de medico"
+                    }
+                ],
+                "ConceptosSNOMED": [
+                    {
+                        "url": "code",
+                        "text": "51686005"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "Medication/M001",
+            "resource": {
+                "resourceType": "Medication",
+                "code": {
+                    "coding": {
+                        "code": "text de code de coding de conclusionCode",
+                        "system": "https://acme.lab/resultcodes",
+                        "display": "display de coding de conclusionCode"
+                    },
+                    "text": "aspirina"
+                },
+                "ConceptosSNOMED": [
+                    {
+                        "url": "code",
+                        "text": "7947003"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "MedicationAdministration/A001",
+            "resource": {
+                "resourceType": "MedicationAdministration",
+                "identifier": [
+                    {
+                        "use": "oficial",
+                        "value": "A001"
+                    }
+                ],
+                "medicationReference": {
+                    "reference": "Medication/M001"
+                },
+                "subject": {
+                    "reference": "Patient/P001"
+                },
+                "dosage": {
+                    "text": "tomar 1 tableta de 100g cada 8 horas",
+                    "method": "tomar",
+                    "route": "via oral",
+                    "dose": {
+                        "value": 100,
+                        "unit": "g"
+                    }
+                },
+                "ConceptosSNOMED": [
+                    {
+                        "url": "method",
+                        "text": "419652001"
+                    },
+                    {
+                        "url": "route",
+                        "text": "26643006"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "DiagnosticReport/D001",
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "subject": {
+                    "reference": "Patient/P001"
+                },
+                "identifier": [
+                    {
+                        "use": "oficial",
+                        "value": "D002"
+                    }
+                ],
+                "conclusion": "hemorragia →coroidea<<122003>>.",
+                "conclusionCode": [
+                    {
+                        "text": "hemorragia"
+                    }
+                ],
+                "ConceptosSNOMED": [
+                    {
+                        "url": "conclusionCode",
+                        "text": "131148009"
+                    },
+                    {
+                        "url": "conculsion 0",
+                        "id": "122003",
+                        "text": "hemorragia coroidea",
+                        "FSN": "hemorragia coroidea (trastorno)"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "Organization/OR001 ",
+            "resource": {
+                "resourceType": "Organization",
+                "identifier": [
+                    {
+                        "use": "oficial",
+                        "value": "OR001"
+                    }
+                ],
+                "type": [
+                    {
+                        "text": "pública"
+                    }
+                ],
+                "name": "IMSS 50",
+                "alias": [
+                    "Instituto Mexicano del Seguro Social"
+                ],
+                "address": [
+                    {
+                        "type": "ambas",
+                        "text": "calle prueba 123 col. colonia Ciudad juárez, Chihuaha",
+                        "city": "Cd. Juárez",
+                        "district": "Juárez",
+                        "state": "Chihuahua"
+                    }
+                ]
+            }
+        }
+    ]
+}
