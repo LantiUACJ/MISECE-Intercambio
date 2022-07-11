@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo yum update -y
+sudo yum update -y > /dev/null 2> /dev/null < /dev/null &
 cd /
 cd var/www/html/MISECE-Intercambio
 sudo rm .env

@@ -8,5 +8,6 @@ hooks:
   BeforeInstall:
   AfterAllowTraffic:
     - location: tests/run.sh
+      timeout: 120
   ApplicationStart:
   ApplicationStop:
