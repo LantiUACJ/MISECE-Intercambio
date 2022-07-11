@@ -18,26 +18,9 @@ use \App\Http\Controllers\TestController;
 |
 */
 
-
-//API route for register new user
-//Route::post('/register', [App\Http\Controllers\V1\AuthController::class, 'register']);
-//API route for login user
-//Route::post('/login', [App\Http\Controllers\V1\AuthController::class, 'login'])->name('login');
-
-//Protecting Routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profile', function(/*Request $request*/) {
-        return auth()->user();
-    });
-
-    // API route for logout user
-    //Route::post('/logout', [App\Http\Controllers\V1\AuthController::class, 'logout']);
-});
-
 Route::get('/', [\App\Http\Controllers\SiteController::class, "index"])->name("home");
 Route::get('/login', [\App\Http\Controllers\SiteController::class, "login"])->name('login');
-//Route::get('/login', [\App\Http\Controllers\SiteController::class, "loginCognito"])->name('login');
-Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginCognito"]);
+Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"])->name('login');
 Route::get('/logout', [\App\Http\Controllers\SiteController::class, "logout"]);
 
 Route::middleware(["auth", "admin"])->group(function (){
