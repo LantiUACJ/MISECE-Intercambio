@@ -22,4 +22,10 @@ class TestController extends Controller
         $execution_time = ($end_time - $start_time);
         return view("test.indice",["hospital"=>$hospital, "fecha"=>$request->input("fecha","sin fecha"), "data"=>$data, "tiempo"=>$execution_time]);
     }
+
+    public function testProcesamiento(){
+        $curl = new \App\Tools\CurlHelper( env("MODULO_PROCESAMIENTO") , []);
+
+        return view("test.procesamiento",["respuesta"=>$curl->get()]);
+    }
 }
