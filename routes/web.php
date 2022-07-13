@@ -35,6 +35,7 @@ Route::middleware(["auth", "admin"])->group(function (){
         Route::post('/update/{hospital}', [HospitalController::class, "update"]);
         Route::post('/delete/{hospital}', [HospitalController::class, "destroy"]);
     });
+    Route::get("test/procesamiento", [TestController::class, "testProcesamiento"]);
 });
 Route::prefix("/indice")->middleware(["auth", "admin"])->group(function (){
     Route::get('/index', [\App\Http\Controllers\IndiceController::class, "index"]);
@@ -68,3 +69,12 @@ Route::middleware(["auth","hospital"])->group(function (){
     Route::get("test/indice", [TestController::class, "testIndice"]);
 });
 
+use App\Fhir\Resource\Bundle;
+
+Route::get("test", function (){
+    $archivoJson = fopen("json_pruebas/big.json", "r");
+    $jsonTxt = fread($archivoJson,filesize("json_pruebas/big.json"));
+    $json = json_decode($jsonTxt);
+    $bundle = new Bundle($json);
+    return $bundle->toArray();
+});
