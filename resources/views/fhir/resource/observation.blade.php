@@ -7,7 +7,7 @@
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
 
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -25,7 +25,7 @@
         {{$obj->issued}}
     </p>
 @endif
-@if (isset($obj->basedOn))
+@if (isset($obj->basedOn) && $obj->basedOn)
     <p><b>Basado en:</b></p>
     @foreach ($obj->basedOn as $basedOn)
         <div class="element">
@@ -33,7 +33,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->partOf))
+@if (isset($obj->partOf) && $obj->partOf)
     <p><b>Parte de:</b></p>
     @foreach ($obj->partOf as $partOf)
         <div class="element">
@@ -41,7 +41,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->category))
+@if (isset($obj->category) && $obj->category)
     <p><b>Categoría:</b></p>
     @foreach ($obj->category as $category)
         <div class="element">
@@ -59,7 +59,7 @@
         @include('fhir.element.reference',["obj"=>$obj->subject])
     </p>
 @endif
-@if (isset($obj->focus))
+@if (isset($obj->focus) && $obj->focus)
     <p><b>Enfoque:</b></p>
     <div class="element">
         @foreach ($obj->focus as $focus)
@@ -92,7 +92,7 @@
         {{$obj->effectiveInstant}}
     </p>
 @endif
-@if (isset($obj->performer))
+@if (isset($obj->performer) && $obj->performer)
     <p><b>Ejecutor:</b></p>
     @foreach ($obj->performer as $performer)
         <div class="element">
@@ -160,7 +160,7 @@
         @include('fhir.element.codeableConcept',["obj"=>$obj->dataAbsentReason])
     </p>
 @endif
-@if (isset($obj->interpretation))
+@if (isset($obj->interpretation) && $obj->interpretation)
     <p><b>Interpretación:</b></p>
     @foreach ($obj->interpretation as $interpretation)
         <div class="element">
@@ -168,7 +168,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->note))
+@if (isset($obj->note) && $obj->note)
     <p><b>Nota:</b></p>
     <div class="element">
         @foreach ($obj->note as $note)
@@ -228,7 +228,7 @@
         </p>
     @endif
 @endif
-@if (isset($obj->hasMember))
+@if (isset($obj->hasMember) && $obj->hasMember)
     <p><b>Miembro:</b></p>
     <div class="element">
         @foreach ($obj->hasMember as $hasMember)
@@ -236,7 +236,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->derivedFrom))
+@if (isset($obj->derivedFrom) && $obj->derivedFrom)
     <p><b>Dervidado de:</b></p>
     <div class="element">
         @foreach ($obj->derivedFrom as $derivedFrom)
@@ -310,7 +310,7 @@
             @include('fhir.element.codeableConcept',["obj"=>$obj->component->dataAbsentReason])
         </p>
     @endif
-    @if (isset($obj->interpretation))
+    @if (isset($obj->interpretation) && $obj->interpretation)
         <p><b>Interpretación</b></p>
         <div class="element">
             @foreach ($obj->interpretation as $interpretation)
@@ -318,7 +318,7 @@
             @endforeach
         </div>
     @endif
-    @if (isset($obj->referenceRange))
+    @if (isset($obj->referenceRange) && $obj->referenceRange)
         <p><b>Rango de referencia:</b></p>
         <div class="element">
             @foreach ($obj->referenceRange as $referenceRange)

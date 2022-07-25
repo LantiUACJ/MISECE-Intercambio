@@ -14,7 +14,7 @@
 @if (isset($obj->verificationStatus))
     <p><b>Estado de verificación:</b> @include('fhir.element.codeableConcept',["obj"=>$obj->verificationStatus])</p>
 @endif
-@if (isset($obj->category))
+@if (isset($obj->category) && $obj->category)
     <p><b>Categoría:</b></p>
     <div class="element">
         @foreach ($obj->category as $category)
@@ -32,7 +32,7 @@
         @include('fhir.element.codeableConcept',["obj"=>$obj->code])
     </p>
 @endif
-@if (isset($obj->bodySite))
+@if (isset($obj->bodySite) && $obj->bodySite)
     <p><b>Categoría:</b></p>
     <div class="element">
         @foreach ($obj->bodySite as $bodySite)
@@ -126,7 +126,7 @@
         @include('fhir.element.reference',["obj"=>$obj->asserter])
     </div>
 @endif
-@if (isset($obj->stage))
+@if (isset($obj->stage) && $obj->stage)
     <p><b>Etapa:</b></p>
     <div class="element">
         @foreach ($obj->stage as $stage)
@@ -136,7 +136,7 @@
                     @include('fhir.element.codeableConcept',["obj"=>$stage->summary])
                 </div>
             @endif
-            @if (isset($stage->assessment))
+            @if (isset($stage->assessment) && $stage->assessment)
                 <p><b>Evaluación:</b></p>
                 <div class="element">
                     @foreach ($stage->assessment as $assessment)
@@ -153,11 +153,11 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->evidence))
+@if (isset($obj->evidence) && $obj->evidence)
     <p><b>Etapa:</b></p>
     <div class="element">
         @foreach ($obj->evidence as $evidence)
-            @if (isset($evidence->code))
+            @if (isset($evidence->code) && $evidence->code)
                 <p><b>Evaluación:</b></p>
                 @foreach ($evidence->code as $code)
                     <div class="element">
@@ -165,7 +165,7 @@
                     </div>
                 @endforeach
             @endif
-            @if (isset($evidence->detail))
+            @if (isset($evidence->detail) && $evidence->detail)
                 <p><b>Detalle:</b></p>
                 @foreach ($evidence->detail as $detail)
                     <div class="element">
@@ -176,7 +176,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->note))
+@if (isset($obj->note) && $obj->note)
     <p><b>Nota:</b></p>
     @foreach ($obj->note as $note)
         <div class="element">
@@ -184,7 +184,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     <div class="element">
         @foreach ($obj->identifier as $identifier)

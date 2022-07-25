@@ -8,8 +8,6 @@ use \App\Models\HospitalIndice;
 use Aws\Sns\SnsClient; 
 use Aws\Exception\AwsException;
 
-use Illuminate\Support\Facades\Mail;
-
 class PetitionHelper{
 
     public function __construct($curp, $hospital, $consultor, $type){
@@ -54,7 +52,8 @@ class PetitionHelper{
         $this->indice->codigo = $codigo;
         $this->indice->save();
         /*Mail::to($this->indice->email)->send(new \App\Mail\Codigo($codigo));
-        return true;*/
+        return true;
+        */
         $credentials = new \Aws\Credentials\Credentials(env("AWS_ACCESS_KEY_ID"),env("AWS_SECRET_ACCESS_KEY"));
         $credentialsProv = \Aws\Credentials\CredentialProvider::fromCredentials($credentials);
 
@@ -107,19 +106,20 @@ class PetitionHelper{
             $tool = new \App\Tools\CurlHelper($hospitalIndice->hospital->url . $this->url, ["curp"=>$this->curp]);
             $bundle = $tool->get();
             if($bundle){
+                $data = new \App\Fhir\Resource\Bundle($tool->response);
                 $this->log["respuestas"] .= $hospitalIndice->hospital->user;
                 if(env("MODULO_PROCESAMIENTO", "ignore") != "ignore"){
                     $modulo_procesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
                     $procesado = $modulo_procesamiento->postJson();
-                    $this->data[] = ["bundle"=>$procesado?$procesado:$bundle,"hospital"=>$hospitalIndice->hospital];
+                    if($procesado){
+                        $data = new \App\Fhir\Resource\Bundle($modulo_procesamiento->response);
+                    }
                 }
-                else{
-                    $this->data[] = ["bundle"=>$bundle,"hospital"=>$hospitalIndice->hospital];
-                }
+                $this->data[] = ["bundle"=>$data,"hospital"=>$hospitalIndice->hospital];
             }
         }
-        $data = new \App\Tools\JsonProcessHelper($this->data);
-        $this->data = $data->sortDesc();
+        /*$data = new \App\Tools\JsonProcessHelper($this->data);
+        $this->data = $data->sortDesc();*/
     }
     
     public function renderPartialHtml(){

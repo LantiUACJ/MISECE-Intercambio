@@ -9,14 +9,14 @@
 @if (isset($obj->reference))
     <a href="#{{$obj->reference}}">(ver)
 @endif
-@if (isset($obj->type))
+<!-- @if (isset($obj->type))
     Tipo: {{ str_replace(["observation", "medicationadministration","patient","encounter"], ["Observación","Administración de medicamento", "Paciente", "Visita"], strtolower($obj->type))}}
-@endif
+@endif -->
 @if (isset($obj->identifier))
     Identificador:
     @include('fhir.element.identifier',["obj"=>$obj->identifier])
 @endif
-@if (isset($obj->display))
+@if (isset($obj->display) && $obj->display)
     {{$obj->display}}
 @else
     @if (isset($obj->reference))

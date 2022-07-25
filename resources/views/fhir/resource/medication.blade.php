@@ -6,7 +6,7 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -48,7 +48,7 @@
 @if (isset($obj->ingredient))
     <p><b>Ingrediente:</b></p>
     <div class="element">
-        @if (isset($obj->ingredient))
+        @if (isset($obj->ingredient) && $obj->ingredient)
             @foreach ($obj->ingredient as $ingredient)
                 @if (isset($ingredient->itemCodeableConcept)) 
                     <p><b>Objeto:</b></p>

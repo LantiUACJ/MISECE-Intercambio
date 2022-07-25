@@ -103,8 +103,8 @@
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <div id="modal1" class="modal small-modal">
         <div class="modal-content">
@@ -120,12 +120,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        var sele = document.querySelectorAll('select');
-        var instance = M.FormSelect.init(sele);
+            var sele = document.querySelectorAll('select');
+            var instance = M.FormSelect.init(sele);
         });
         document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.modal');
-        var instances = M.Modal.init(elems);
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems);
         });
         function toggleMenu() {
             var element = document.getElementById("menusidebar");
@@ -133,6 +133,12 @@
             var elementtwo = document.getElementById("menubg");
             elementtwo.classList.toggle("showbg");
         }
+        $(document).ready(function(){
+            $('.tooltipped').tooltip();
+        });
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
     </script>
 
     @yield('scripts')

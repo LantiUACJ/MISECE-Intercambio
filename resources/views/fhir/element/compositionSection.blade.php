@@ -6,7 +6,7 @@
         @include('fhir.element.codeableConcept',["obj"=>$obj->code])
     </p>
 @endif
-@if (isset($obj->author))
+@if (isset($obj->author) && $obj->author)
     <p><b>Autor:</b></p>
     <div class="element">
         @foreach ($obj->author as $author)
@@ -34,7 +34,7 @@
         @include('fhir.element.codeableConcept',["obj"=>$obj->orderedBy])
     </p>
 @endif
-@if (isset($obj->entry))
+@if (isset($obj->entry) && $obj->entry)
     <p><b>Entrada:</b></p>
     <div class="element">
         @foreach ($obj->entry as $entry)
@@ -47,7 +47,7 @@
         @include('fhir.element.codeableConcept',["obj"=>$obj->emptyReason])
     </p>
 @endif
-@if (isset($obj->section))
+@if (isset($obj->section) && $obj->section)
     <p><b>Sección:</b></p>
     <div class="element">
         @foreach ($obj->section as $subSection)

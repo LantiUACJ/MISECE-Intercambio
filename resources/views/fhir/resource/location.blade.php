@@ -6,7 +6,7 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -32,7 +32,7 @@
         {{ $obj->name }}
     </p>
 @endif
-@if (isset($obj->alias))
+@if (isset($obj->alias) && $obj->alias)
     <p><b>Alias:</b></p>
     @foreach ($obj->alias as $alias)
         <div class="element">
@@ -53,7 +53,7 @@
             ["instance", "kind"], strtolower($obj->mode))}}
     </p>
 @endif
-@if (isset($obj->type))
+@if (isset($obj->type) && $obj->type)
     <p><b>Tipo:</b></p>
     @foreach ($obj->type as $type)
         <div class="element">
@@ -61,7 +61,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->telecom))
+@if (isset($obj->telecom) && $obj->telecom)
     <p><b>Contacto:</b></p>
     @foreach ($obj->telecom as $telecom)
         <div class="element">
@@ -120,11 +120,11 @@
         @include('fhir.element.reference',["obj"=>$obj->partOf])
     </div>    
 @endif
-@if (isset($obj->hoursOfOperation))
+@if (isset($obj->hoursOfOperation) && $obj->hoursOfOperation)
     <p><b>houras de operación:</b></p>
     @foreach ($obj->hoursOfOperation as $hoursOfOperation)
         <div class="element">
-            @if (isset($hoursOfOperation->daysOfWeek))
+            @if (isset($hoursOfOperation->daysOfWeek) && $hoursOfOperation->daysOfWeek)
                 <p><b>Días de la semana:</b></p>
                 @foreach ($hoursOfOperation->daysOfWeek as $daysOfWeek)
                     <div class="element">
@@ -160,7 +160,7 @@
         {{ $obj->availabilityExceptions }}
     </p>
 @endif
-@if (isset($obj->endpoint))
+@if (isset($obj->endpoint) && $obj->endpoint)
     <p><b>Tipo:</b></p>
     @foreach ($obj->endpoint as $endpoint)
         <div class="element">

@@ -3,7 +3,7 @@
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
 
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -17,27 +17,27 @@
             ["Planeada", "Llegado", "Triaje", "En progreso", "En salida", "Terminada", "Cancelada"],$obj->status)}}
     </p>
 @endif
-@if (isset($obj->statusHistory))
+@if (isset($obj->statusHistory) && $obj->statusHistory)
     <p><b>Historial de estados:</b></p>
     <div class="element">
         @foreach ($obj->statusHistory as $statusHistory)
             <hr>
-            @if (isset($statusHistory->status))
+            @if (isset($statusHistory["status"]))
                 <p><b>Estado:</b>
                     {{str_replace(
                         ["planned", "arrived", "triaged", "in-progress", "onleave", "finished", "cancelled"], 
-                        ["Planeada", "Llegado", "Triaje", "En progreso", "En salida", "Terminada", "Cancelada",], $statusHistory->status)}}
+                        ["Planeada", "Llegado", "Triaje", "En progreso", "En salida", "Terminada", "Cancelada",], $statusHistory["status"])}}
                 </p>
             @endif
-            @if ($statusHistory->period)
+            @if (isset($statusHistory["period"]))
                 <p><b>Período:</b>
-                    @include('fhir.element.period',["obj"=>$statusHistory->period])
+                    @include('fhir.element.period',["obj"=>$statusHistory["period"]])
                 </p>
             @endif
         @endforeach
     </div>
 @endif
-@if (isset($obj->classHistory))
+@if (isset($obj->classHistory) && $obj->classHistory)
     <p><b>Clase de historial:</b></p>
     <div class="element">
         @foreach ($obj->classHistory as $classHistory)
@@ -60,7 +60,7 @@
         @include('fhir.element.coding',["obj"=>$obj->class])
     </p>
 @endif
-@if (isset($obj->type))
+@if (isset($obj->type) && $obj->type)
     <p><b>Tipo:</b></p>
     @foreach ($obj->type as $type)
         <div class="element">
@@ -83,7 +83,7 @@
         @include('fhir.element.reference',["obj"=>$obj->subject])
     </p>
 @endif
-@if (isset($obj->episodeOfCare))
+@if (isset($obj->episodeOfCare) && $obj->episodeOfCare)
     <p><b>Episodio de cuidado:</b></p>
     <div class="element">
         @foreach ($obj->episodeOfCare as $episodeOfCare)
@@ -91,7 +91,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->basedOn))
+@if (isset($obj->basedOn) && $obj->basedOn)
     <p><b>Basado en:</b></p>
     <div class="element">
         @foreach ($obj->basedOn as $basedOn)
@@ -99,11 +99,11 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->participant))
+@if (isset($obj->participant) && $obj->participant)
     <p><b>Participantes:</b></p>
     <div class="element">
         @foreach ($obj->participant as $participant)
-            @if (isset($participant->type))
+            @if (isset($participant->type) && $participant->type)
                 <p><b>Tipo:</b></p>
                 <div class="element">
                     @foreach ($participant->type as $type)
@@ -124,7 +124,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->appointment))
+@if (isset($obj->appointment) && $obj->appointment)
     <p><b>Cita:</b></p>
     <div class="element">
         @foreach ($obj->appointment as $appointment)
@@ -142,7 +142,7 @@
         @include('fhir.element.duration',["obj"=>$obj->length])
     </p>
 @endif
-@if (isset($obj->reasonCode))
+@if (isset($obj->reasonCode) && $obj->reasonCode)
     <p><b>Código de motivo:</b></p>
     <div class="element">
         @foreach ($obj->reasonCode as $reasonCode)
@@ -150,7 +150,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->reasonReference))
+@if (isset($obj->reasonReference) && $obj->reasonReference)
     <p><b>Referencia a motivo:</b></p>
     <div class="element">
         @foreach ($obj->reasonReference as $reasonReference)
@@ -158,7 +158,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->diagnosis))
+@if (isset($obj->diagnosis) && $obj->diagnosis)
     <p><b>Diagnósticos:</b></p>
     <div class="element">
         @foreach ($obj->diagnosis as $diagnosis)
@@ -181,7 +181,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->account))
+@if (isset($obj->account) && $obj->account)
     <p><b>Cuenta:</b></p>
     <div class="element">
         @foreach ($obj->account as $account)
@@ -236,7 +236,7 @@
         </p>
     @endif
 @endif
-@if (isset($obj->location))
+@if (isset($obj->location) && $obj->location)
     <p>Lugar:</p>
     <div class="element">
         @foreach ($obj->location as $location)

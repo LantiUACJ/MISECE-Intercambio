@@ -6,7 +6,7 @@
 	</div>
 @endif
 @include('fhir.element.element',["obj"=>$obj])
-@if (isset($obj->use))
+@if (isset($obj->use) && $obj->use)
 	El identificador es <b>{{str_replace(["usual","official","temp","secondary","old"], ["Usual","Oficial","Temporal","Secundario","Viejo"], strtolower($obj->use)) }}</b>.
 @endif
 @if (isset($obj->system))

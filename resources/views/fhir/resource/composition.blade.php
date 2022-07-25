@@ -14,7 +14,7 @@
         @include('fhir.element.codeableConcept',["obj"=>$obj->type])
     </p>
 @endif
-@if (isset($obj->category))
+@if (isset($obj->category) && $obj->category)
     <p><b>Categoría(s):</b></p>
     <div class="element">
         @foreach ($obj->category as $category)
@@ -35,7 +35,7 @@
 @if (isset($obj->date))
     <p><b>Estado:</b> {{ $obj->date }}</p>
 @endif
-@if (isset($obj->author))
+@if (isset($obj->author) && $obj->author)
     <p><b>Autor(es):</b></p>
     <div class="element">
         @foreach ($obj->author as $author)
@@ -49,7 +49,7 @@
 @if (isset($obj->confidentiality))
     <p><b>Confidencialidad:</b> {{ $obj->confidentiality }}</p>
 @endif
-@if (isset($obj->attester))
+@if (isset($obj->attester) && $obj->attester)
     <p><b>Atestiguaron:</b></p>
     <div class="element">
         @foreach ($obj->attester as $attester)
@@ -70,7 +70,7 @@
 @if (isset($obj->custodian))
     <p><b>Custodio:</b> @include('fhir.element.reference',["obj"=>$obj->custodian])</p>
 @endif
-@if (isset($obj->relatesTo))
+@if (isset($obj->relatesTo) && $obj->relatesTo)
     <p><b>Relacionado a:</b></p>
     <div class="element">
         @foreach ($obj->relatesTo as $relatesTo)
@@ -92,11 +92,11 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->event))
+@if (isset($obj->event) && $obj->event)
     <p><b>Evento:</b></p>
     <div class="element">
         @foreach ($obj->event as $event)
-            @if (isset($event->code))
+            @if (isset($event->code) && $event->code)
                 <p><b>Código:</b></p>
                 <div class="element">
                     @foreach ($event->code as $code)
@@ -107,7 +107,7 @@
             @if (isset($event->period))
                 <p><b>Período: </b>@include('fhir.element.period',["obj"=>$event->period])</p>
             @endif
-            @if (isset($event->detail))
+            @if (isset($event->detail) && $event->detail)
                 <p><b>Detalle:</b></p>
                 <div class="element">
                     @foreach ($event->detail as $detail)
@@ -118,11 +118,12 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->section))
+@if (isset($obj->section) && $obj->section)
     <p><b>Sección:</b></p>
     <div class="element">
         @foreach ($obj->section as $section)
             @include('fhir.element.compositionSection', ["obj"=>$section, "key"=>0])
+            <hr>
         @endforeach
     </div>
 @endif

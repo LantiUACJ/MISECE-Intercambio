@@ -29,7 +29,8 @@ class CurlHelper{
         curl_setopt($ch, CURLOPT_HTTPHEADER, ["content-type: application/json", "accept: application/json"]);
         curl_setopt($ch, CURLOPT_TIMEOUT, 300);
         set_time_limit(180);
-        return json_decode(curl_exec($ch));
+        $this->response = curl_exec($ch);
+        return json_decode($this->response);
     }
 
     public function noWaitPost(){ // modulo de registro de eventos
@@ -60,7 +61,7 @@ class CurlHelper{
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         //curl_setopt($ch, CURLOPT_HTTPHEADER, ["content-type: application/json", "accept: application/json"]);
-        $data = curl_exec($ch);
-        return json_decode($data);
+        $this->response = curl_exec($ch);
+        return json_decode($this->response);
     }
 }

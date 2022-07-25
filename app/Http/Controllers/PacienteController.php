@@ -22,10 +22,11 @@ class PacienteController extends Controller
             return view("paciente.resultado", ["nombre"=>"ERROR", "data" => "no se encontró el paciente"]);
         }
         $nombre = $ph->indice->nombre;
-        /*if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
+        
+        if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
             $ph->sendCode();
             return view("paciente.normal_codigo", ["nombre"=>$nombre, "curp"=>$input["curp"]]);
-        }*/
+        }
 
         $ph->getData();
 

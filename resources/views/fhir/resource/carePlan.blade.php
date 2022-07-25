@@ -6,7 +6,7 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->instantiatesCanonical))
+@if (isset($obj->instantiatesCanonical) && $obj->instantiatesCanonical)
     <p><b>Instancia</b></p>
     <div class="element">
         @foreach ($obj->instantiatesCanonical as $instantiatesCanonical)
@@ -14,7 +14,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->instantiatesUri))
+@if (isset($obj->instantiatesUri) && $obj->instantiatesUri)
     <p><b>Instancia</b></p>
     <div class="element">
         @foreach ($obj->instantiatesUri as $instantiatesUri)
@@ -22,7 +22,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->basedOn))
+@if (isset($obj->basedOn) && $obj->basedOn)
     <p><b>Basado en</b></p>
     <div class="element">
         @foreach ($obj->basedOn as $basedOn)
@@ -30,7 +30,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->replaces))
+@if (isset($obj->replaces) && $obj->replaces)
     <p><b>Remplaza:</b></p>
     <div class="element">
         @foreach ($obj->replaces as $replaces)
@@ -38,7 +38,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->partOf))
+@if (isset($obj->partOf) && $obj->partOf)
     <p><b>Parte de:</b></p>
     <div class="element">
         @foreach ($obj->partOf as $partOf)
@@ -54,7 +54,7 @@
     <p><b>Propósito: {{ str_replace(["proposal", "plan","order","option"],
         ["proposal", "plan","order","option"], strtolower($obj->intent))}}</b></p>
 @endif
-@if (isset($obj->category))
+@if (isset($obj->category) && $obj->category)
     <p><b>Categoría:</b></p>
     <div class="element">
         @foreach ($obj->category as $category)
@@ -71,7 +71,7 @@
 @if (isset($obj->subject))
     <p><b>Paciente:</b> @include('fhir.element.reference',["obj"=>$obj->subject])</p>
 @endif
-@if (isset($obj->encounter))
+@if (isset($obj->encounter) && $obj->encounter)
     <p><b>Visita</b></p>
     <div class="element">
         @include('fhir.element.reference',["obj"=>$obj->encounter])
@@ -84,13 +84,13 @@
 @if (isset($obj->created))
     <p><b>Creado en: {{ $obj->created }}</b></p>
 @endif
-@if (isset($obj->author))
+@if (isset($obj->author) && $obj->author)
     <p><b>Autor:</b></p>
     <div class="element">
         @include('fhir.element.reference',["obj"=>$obj->author])
     </div>
 @endif
-@if (isset($obj->contributor))
+@if (isset($obj->contributor) && $obj->contributor)
     <p><b>Colaboradores:</b></p>
     <div class="element">
         @foreach ($obj->contributor as $contributor)
@@ -98,7 +98,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->careTeam))
+@if (isset($obj->careTeam) && $obj->careTeam)
     <p><b>Equipo:</b></p>
     <div class="element">
         @foreach ($obj->careTeam as $careTeam)
@@ -106,7 +106,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->addresses))
+@if (isset($obj->addresses) && $obj->addresses)
     <p><b>Problemas a tratar:</b></p>
     <div class="element">
         @foreach ($obj->addresses as $addresses)
@@ -114,7 +114,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->supportingInfo))
+@if (isset($obj->supportingInfo) && $obj->supportingInfo)
     <p><b>Información de soporte:</b></p>
     <div class="element">
         @foreach ($obj->supportingInfo as $supportingInfo)
@@ -122,7 +122,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->goal))
+@if (isset($obj->goal) && $obj->goal)
     <p><b>Meta(s):</b></p>
     <div class="element">
         @foreach ($obj->goal as $goal)
@@ -130,12 +130,12 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->activity))
+@if (isset($obj->activity) && $obj->activity)
     <p><b>Actividad(es):</b></p>
     <div class="element">
         @foreach ($obj->activity as $activity)
             <hr>
-            @if (isset($activity->outcomeCodeableConcept))
+            @if (isset($activity->outcomeCodeableConcept) && $activity->outcomeCodeableConcept)
                 <p><b>Resultado de la actividad:</b></p>
                 <div class="element">
                     @foreach ($activity->outcomeCodeableConcept as $outcomeCodeableConcept)
@@ -143,7 +143,7 @@
                     @endforeach
                 </div>
             @endif
-            @if (isset($activity->outcomeReference))
+            @if (isset($activity->outcomeReference) && $activity->outcomeReference)
                 <p><b>Referencia del resultado de la actividad:</b></p>
                 <div class="element">
                     @foreach ($activity->outcomeReference as $outcomeReference)
@@ -151,7 +151,7 @@
                     @endforeach
                 </div>
             @endif
-            @if (isset($activity->progress))
+            @if (isset($activity->progress) && $activity->progress)
                 <p><b>Proceso:</b></p>
                 <div class="element">
                     @foreach ($activity->progress as $progress)
@@ -179,7 +179,7 @@
                     @endif
                 </div>
                 <div class="element">
-                    @if (isset($activity->detail->instantiatesCanonical))
+                    @if (isset($activity->detail->instantiatesCanonical) && $activity->detail->instantiatesCanonical)
                         <p><b>Instancia:</b></p>
                         <div class="element">
                             @foreach ($activity->detail->instantiatesCanonical as $instantiatesCanonical)
@@ -189,7 +189,7 @@
                     @endif
                 </div>
                 <div class="element">
-                    @if (isset($activity->detail->instantiatesUri))
+                    @if (isset($activity->detail->instantiatesUri) && $activity->detail->instantiatesUri)
                         <p><b>Instancian:</b></p>
                         <div class="element">
                             @foreach ($activity->detail->instantiatesUri as $instantiatesUri)
@@ -204,7 +204,7 @@
                     @endif
                 </div>
                 <div class="element">
-                    @if (isset($activity->detail->reasonCode))
+                    @if (isset($activity->detail->reasonCode) && $activity->detail->reasonCode)
                         <p><b>Código de Razón:</b></p>
                         <div class="element">
                             @foreach ($activity->detail->reasonCode as $reasonCode)
@@ -214,7 +214,7 @@
                     @endif
                 </div>
                 <div class="element">
-                    @if (isset($activity->detail->reasonReference))
+                    @if (isset($activity->detail->reasonReference) && $activity->detail->reasonReference)
                         <p><b>Referencia de la razón:</b></p>
                         <div class="element">
                             @foreach ($activity->detail->reasonReference as $reasonReference)
@@ -224,7 +224,7 @@
                     @endif
                 </div>
                 <div class="element">
-                    @if (isset($activity->detail->goal))
+                    @if (isset($activity->detail->goal) && $activity->detail->goal)
                         <p><b>Referencia de la meta:</b></p>
                         <div class="element">
                             @foreach ($activity->detail->goal as $goal)
@@ -288,7 +288,7 @@
                     @endif
                 </div>
                 <div class="element">
-                    @if (isset($activity->detail->performer))
+                    @if (isset($activity->detail->performer) && $activity->detail->performer)
                         <p><b>Ejecutor:</b></p>
                         <div class="element">
                             @foreach ($activity->detail->performer as $performer)
@@ -341,13 +341,13 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->note))
+@if (isset($obj->note) && $obj->note)
     <p><b>Nota:</b></p>
     @foreach ($obj->note as $note)
         * @include('fhir.element.annotation',["obj"=>$note])
     @endforeach
 @endif
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador</b></p>
     <div class="element">
         @foreach ($obj->identifier as $identifier)

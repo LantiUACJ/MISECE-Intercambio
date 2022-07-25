@@ -6,7 +6,7 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -14,7 +14,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->basedOn))
+@if (isset($obj->basedOn) && $obj->basedOn)
     <p><b>Basado en</b></p>
     @foreach ($obj->basedOn as $basedOn)
         <div class="element">
@@ -27,7 +27,7 @@
         {{ str_replace(["registered", "partial","preliminary","final"],["Registrado","Parcial", "Preliminar", "Final"], strtolower($obj->status))}}
     </p>
 @endif
-@if (isset($obj->category))
+@if (isset($obj->category) && $obj->category)
     <p><b>Categoría:</b></p>
     @foreach ($obj->category as $category)
         <div class="element">
@@ -71,7 +71,7 @@
         {{$obj->issued}}
     </div>
 @endif
-@if (isset($obj->performer))
+@if (isset($obj->performer) && $obj->performer)
     <p><b>Ejecutor:</b></p>
     @foreach ($obj->performer as $performer)
         <div class="element">
@@ -79,7 +79,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->resultsInterpreter))
+@if (isset($obj->resultsInterpreter) && $obj->resultsInterpreter)
     <p><b>Interprete de resultado:</b></p>
     @foreach ($obj->resultsInterpreter as $resultsInterpreter)
         <div class="element">
@@ -87,7 +87,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->specimen))
+@if (isset($obj->specimen) && $obj->specimen)
     <p><b>Especimen:</b></p>
     @foreach ($obj->specimen as $specimen)
         <div class="element">
@@ -95,7 +95,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->result))
+@if (isset($obj->result) && $obj->result)
     <p><b>Resultado:</b></p>
     @foreach ($obj->result as $result)
         <div class="element">
@@ -103,7 +103,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->imagingStudy))
+@if (isset($obj->imagingStudy) && $obj->imagingStudy)
     <p><b>Estudio de imagen:</b></p>
     @foreach ($obj->imagingStudy as $imagingStudy)
         <div class="element">
@@ -111,7 +111,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->media))
+@if (isset($obj->media) && $obj->media)
     <p><b>Media:</b></p>
     @foreach ($obj->media as $media)
         @if ($media->comment)
@@ -144,7 +144,7 @@
         @endif
     </div>
 @endif
-@if (isset($obj->conclusionCode))
+@if (isset($obj->conclusionCode) && $obj->conclusionCode)
     <p><b>Código de conclusión:</b></p>
     @foreach ($obj->conclusionCode as $conclusionCode)
         <div class="element">
@@ -152,7 +152,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->presentedForm))
+@if (isset($obj->presentedForm) && $obj->presentedForm)
     <p><b>Formulario presentado</b></p>
     @foreach ($obj->presentedForm as $presentedForm)
         <div class="element">

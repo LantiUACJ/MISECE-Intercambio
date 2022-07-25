@@ -40,7 +40,6 @@ class TestApiController extends \App\Http\Controllers\Controller{
     public function consultarExpedientesBasico($curp, Request $request){
         $validator = Validator::make($request->all(), [
             "consultor"=>"required",
-            "numero"=>"required",
             "codigo"=>"nullable",
         ]);
         if ($validator->fails()) {
@@ -50,7 +49,7 @@ class TestApiController extends \App\Http\Controllers\Controller{
         
         $ph = new PetitionHelper($curp, null, $input["consultor"], 1);
         
-        if(!$ph->fakePatient($input["numero"])){
+        if(!$ph->fakePatient("meh")){
             return ["Error"=>"no se encontró el paciente"];
         }
 
