@@ -19,7 +19,7 @@
         El paciente esta {{$obj->active?"activo":"inactivo"}} en el sistema.
     @endif
     @if (isset($obj->gender))
-        Tiene el género de <b><a href="#" data-toggle="tooltip" title="Snomed:1384173/female">{{str_replace(["female", "male", "unknown", "other"],["femenino", "masculino", "desconocido", "otro"],strtolower($obj->gender))}}</a></b>.
+        Tiene el género de <b><a class="tooltipped" data-position="top" href="#" data-toggle="tooltip" data-tooltip="Snomed:1384173/female">{{str_replace(["female", "male", "unknown", "other"],["femenino", "masculino", "desconocido", "otro"],strtolower($obj->gender))}}</a></b>.
     @endif
     @if (isset($obj->birthDate))
         La fecha de nacimiento es <b>{{$obj->birthDate}}</b>.
@@ -38,7 +38,7 @@
         @endif
     @endif
 
-    @if (isset($obj->telecom))
+    @if (isset($obj->telecom) && $obj->telecom)
         <p><b>Datos de contacto:</b></p>    
         @foreach ($obj->telecom as $telecom)
             <div class="element">
@@ -62,7 +62,7 @@
         <p>Foto</p>
         @include('fhir.element.attachment',["obj"=>$obj->photo])
     @endif
-    @if (isset($obj->contact))
+    @if (isset($obj->contact) && $obj->contact)
         <p><b>Contactos del paciente:</b></p>
         <div class="element">
             @foreach ($obj->contact as $contact)
@@ -112,7 +112,7 @@
             @endforeach
         </div>
     @endif
-    @if (isset($obj->communication))
+    @if (isset($obj->communication) && $obj->communication)
         <p><b>Comunicación:</b></p>
         @foreach ($obj->communication as $communication)
             @if (isset($communication->language))

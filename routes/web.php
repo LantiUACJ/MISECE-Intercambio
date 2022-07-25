@@ -76,5 +76,18 @@ Route::get("test", function (){
     $jsonTxt = fread($archivoJson,filesize("json_pruebas/big.json"));
     $json = json_decode($jsonTxt);
     $bundle = new Bundle($json);
-    return $bundle->toArray();
+
+    //return $bundle->findResource("9f618326-b4b7-443b-ac68-e0d85226aba3")->toArray();
+    /*
+    $resources = $bundle->findCompositions();
+    foreach($resources as $resource){
+        if($resource->esHistoriaClinica())
+            return $resource->getReferences();
+        if($resource->esNotaEvolucion())
+            return $resource->getReferences();
+    }*/
+
+    return view("fhir.test",["bundle"=>$bundle]);
+    /*
+    */
 });

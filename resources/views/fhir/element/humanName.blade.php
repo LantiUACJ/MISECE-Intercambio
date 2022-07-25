@@ -7,27 +7,32 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 
+
 @if (isset($obj->prefix))
     @foreach ($obj->prefix as $prefix)
         <b>{{$prefix}}</b>
     @endforeach
 @endif
-@if (isset($obj->given))
-    @foreach ($obj->given as $given)
-        <b>{{$given}}</b>
-    @endforeach
-@endif
-@if (isset($obj->family))
-    <b>{{$obj->family}}</b>
-@endif
-@if (isset($obj->suffix))
-    @foreach ($obj->suffix as $suffix)
-        <b>{{$suffix}}</b>
-    @endforeach
+
+@if (!isset($obj->text))
+    @if (isset($obj->given))
+        @foreach ($obj->given as $given)
+            <b>{{$given}}</b>
+        @endforeach
+    @endif
+    @if (isset($obj->family))
+        <b>{{$obj->family}}</b>
+    @endif
 @endif
 
 @if (isset($obj->text))
     <b>{{$obj->text}}</b>.
+@endif
+
+@if (isset($obj->suffix))
+    @foreach ($obj->suffix as $suffix)
+        <b>{{$suffix}}</b>
+    @endforeach
 @endif
 @if (isset($obj->use))
     @if ($obj->use !== "official")

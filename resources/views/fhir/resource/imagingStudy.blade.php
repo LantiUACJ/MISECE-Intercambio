@@ -6,7 +6,7 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -22,7 +22,7 @@
             ["Registrado", "Disponible", "Cancelado", "Con error", "Desconocido"], strtolower($obj->status))}}
     </div>
 @endif
-@if (isset($obj->modality))
+@if (isset($obj->modality) && $obj->modality)
     <p><b>Modalidad:</b></p>
     @foreach ($obj->modality as $modality)
         <div class="element">
@@ -48,7 +48,7 @@
         {{$obj->started}}
     </div>
 @endif
-@if (isset($obj->basedOn))
+@if (isset($obj->basedOn) && $obj->basedOn)
     <p><b>Basado en:</b></p>
     @foreach ($obj->basedOn as $basedOn)
         <div class="element">
@@ -62,7 +62,7 @@
         @include('fhir.element.reference',["obj"=>$obj->referrer])
     </div>
 @endif
-@if (isset($obj->interpreter))
+@if (isset($obj->interpreter) && $obj->interpreter)
     <p><b>Interprete:</b></p>
     @foreach ($obj->interpreter as $interpreter)
         <div class="element">
@@ -70,7 +70,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->endpoint))
+@if (isset($obj->endpoint) && $obj->endpoint)
     <p><b>Punto final:</b></p>
     @foreach ($obj->endpoint as $endpoint)
         <div class="element">
@@ -102,7 +102,7 @@
         @include('fhir.element.reference',["obj"=>$obj->location])
     </div>
 @endif
-@if (isset($obj->reasonCode))
+@if (isset($obj->reasonCode) && $obj->reasonCode)
     <p><b>Código de motivo:</b></p>
     @foreach ($obj->reasonCode as $reasonCode)
         <div class="element">
@@ -110,7 +110,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->reasonReference))
+@if (isset($obj->reasonReference) && $obj->reasonReference)
     <p><b>Referencia al motivo:</b></p>
     @foreach ($obj->reasonReference as $reasonReference)
         <div class="element">
@@ -118,7 +118,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->note))
+@if (isset($obj->note) && $obj->note)
     <p><b>Nota:</b></p>
     @foreach ($obj->note as $note)
         <div class="element">
@@ -132,7 +132,7 @@
         {{$obj->description}}
     </div>
 @endif
-@if (isset($obj->series))
+@if (isset($obj->series) && $obj->series)
     <p><b>Series:</b></p>
     @foreach ($obj->series as $series)
         @if (isset($series->uid))
@@ -165,7 +165,7 @@
                 @include('fhir.element.codeableConcept',["obj"=>$series->numberOfInstances])
             </div>
         @endif
-        @if (isset($series->endpoint))
+        @if (isset($series->endpoint) && $series->endpoint)
             <p><b>Punto final:</b></p>
             @foreach ($series->endpoint as $endpoint)
                 <div class="element">
@@ -185,7 +185,7 @@
                 @include('fhir.element.coding',["obj"=>$series->laterality])
             </div>
         @endif
-        @if (isset($series->specimen))
+        @if (isset($series->specimen) && $series->specimen)
             <p><b>Especimen:</b></p>
             @foreach ($series->specimen as $specimen)
                 <div class="element">
@@ -199,7 +199,7 @@
                 {{$series->started}}
             </div>
         @endif
-        @if (isset($series->performer))
+        @if (isset($series->performer) && $series->performer)
             <p><b>Ejecutores:</b></p>
             @foreach ($series->performer as $performer)
                 @if (isset($performer->function))
@@ -220,32 +220,32 @@
                 @endif
             @endforeach
         @endif
-        @if (isset($series->instance))
+        @if (isset($series->instance) && $series->instance)
             <p><b>Instancia:</b></p>
             <div class="element">
                 @foreach ($series->instance as $instance)
-                    @if (isset($instance->uid))
+                    @if (isset($instance["uid"]))
                         <p><b>uid:</b></p>
                         <div class="element">
-                            {{$instance->uid}}
+                            {{$instance["uid"]}}
                         </div>
                     @endif
-                    @if (isset($instance->number))
+                    @if (isset($instance["number"]))
                         <p><b>Número:</b></p>
                         <div class="element">
-                            {{$instance->number}}
+                            {{$instance["number"]}}
                         </div>
                     @endif
-                    @if (isset($instance->title))
+                    @if (isset($instance["title"]))
                         <p><b>Título:</b></p>
                         <div class="element">
-                            {{$instance->title}}
+                            {{$instance["title"]}}
                         </div>
                     @endif
-                    @if (isset($instance->sopClass))
+                    @if (isset($instance["sopClass"]))
                         <p><b>clase DICOM:</b></p>
                         <div class="element">
-                            @include('fhir.element.coding',["obj"=>$instance->sopClass])
+                            @include('fhir.element.coding',["obj"=>$instance["sopClass"]])
                         </div>
                     @endif
                 @endforeach

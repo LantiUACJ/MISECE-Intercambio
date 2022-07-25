@@ -4,7 +4,7 @@
         <p>Resumen:</p>
         @include('fhir.element.narrative',["obj"=>$obj->text])
     @endif
-    @if (isset($obj->contained))
+    @if (isset($obj->contained) && $obj->contained)
         <p><b>Contenido adicional:</b></p>
         @foreach ($obj->contained as $contained)
             @include('fhir._factory',["obj"=>$contained])
@@ -13,7 +13,7 @@
     @if (isset($obj->modifierExtension))
         <p>Modificador de extensión: {{$obj->modifierExtension}}</p>
     @endif
-    @if (isset($obj->extension))
+    @if (isset($obj->extension) && $obj->extension)
         <p>Extensiones:</p>
         <div class="element">
             @foreach ($obj->extension as $extension)

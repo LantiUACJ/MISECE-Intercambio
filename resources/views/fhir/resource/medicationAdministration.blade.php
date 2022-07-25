@@ -7,7 +7,7 @@
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
 
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -15,7 +15,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->instantiates))
+@if (isset($obj->instantiates) && $obj->instantiates)
     <p><b>Instancia:</b></p>
     @foreach ($obj->instantiates as $instantiates)
         <div class="element">
@@ -23,7 +23,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->partOf))
+@if (isset($obj->partOf) && $obj->partOf)
     <p><b>Parte de:</b></p>
     @foreach ($obj->partOf as $partOf)
         <div class="element">
@@ -38,7 +38,7 @@
             ["En progreso", "Sin completar", "En espera", "Completado", "Ingresado en error", "Detenida", "Desconocido"], $obj->status)}}
     </p>
 @endif
-@if (isset($obj->statusReason))
+@if (isset($obj->statusReason) && $obj->statusReason)
     <p><b>Razón del estado:</b></p>
     @foreach ($obj->statusReason as $statusReason)
         <div class="element">
@@ -94,7 +94,7 @@
         @include('fhir.element.period',["obj"=>$obj->effectivePeriod])
     </div>
 @endif
-@if (isset($obj->performer))
+@if (isset($obj->performer) && $obj->performer)
     <p><b>Ejecutor:</b></p>
     @foreach ($obj->performer as $performer)
         <div class="element">
@@ -113,7 +113,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->reasonCode))
+@if (isset($obj->reasonCode) && $obj->reasonCode)
     <p><b>Código de Motivo:</b></p>
     @foreach ($obj->reasonCode as $reasonCode)
         <div class="element">
@@ -121,7 +121,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->reasonReference))
+@if (isset($obj->reasonReference) && $obj->reasonReference)
     <p><b>Referencia al motivo:</b></p>
     @foreach ($obj->reasonReference as $reasonReference)
         <div class="element">
@@ -135,7 +135,7 @@
         @include('fhir.element.reference',["obj"=>$obj->request])
     </div>
 @endif
-@if (isset($obj->device))
+@if (isset($obj->device) && $obj->device)
     <p><b>Dispositivo:</b></p>
     @foreach ($obj->device as $device)
         <div class="element">
@@ -143,7 +143,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->note))
+@if (isset($obj->note) && $obj->note)
     <p><b>Nota:</b></p>
     @foreach ($obj->note as $note)
         <div class="element">
@@ -196,7 +196,7 @@
         </div>
     @endif
 @endif
-@if (isset($obj->eventHistory))
+@if (isset($obj->eventHistory) && $obj->eventHistory)
     <p><b>Historia de eventos:</b></p>
     @foreach ($obj->eventHistory as $eventHistory)
         <div class="element">

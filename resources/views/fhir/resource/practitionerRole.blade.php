@@ -6,7 +6,7 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -38,7 +38,7 @@
         @include('fhir.element.reference',["obj"=>$obj->organization])
     </div>
 @endif
-@if (isset($obj->code))
+@if (isset($obj->code) && $obj->code)
     <p><b>Código</b></p>
     @foreach ($obj->code as $code)
         <div class="element">
@@ -46,7 +46,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->specialty))
+@if (isset($obj->specialty) && $obj->specialty)
     <p><b>Especialidad:</b></p>
     @foreach ($obj->specialty as $specialty)
         <div class="element">
@@ -54,7 +54,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->location))
+@if (isset($obj->location) && $obj->location)
     <p><b>Lugar</b></p>
     @foreach ($obj->location as $location)
         <div class="element">
@@ -62,7 +62,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->healthcareService))
+@if (isset($obj->healthcareService) && $obj->healthcareService)
     <p><b>Servicio medico:</b></p>
     @foreach ($obj->healthcareService as $healthcareService)
         <div class="element">
@@ -70,7 +70,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->telecom))
+@if (isset($obj->telecom) && $obj->telecom)
     <p><b>Contacto:</b></p>
     @foreach ($obj->telecom as $telecom)
         <div class="element">
@@ -78,11 +78,11 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->availableTime))
+@if (isset($obj->availableTime) && $obj->availableTime)
     <p><b>Tiempo disponible:</b></p>
     @foreach ($obj->availableTime as $availableTime)
         <div class="element">
-            @if (isset($availableTime->daysOfWeek))
+            @if (isset($availableTime->daysOfWeek) && $availableTime->daysOfWeek)
                 <p><b>Días de la semana:</b></p>
                 @foreach ($availableTime->daysOfWeek as $daysOfWeek)
                     <div class="element">
@@ -102,7 +102,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->notAvailable))
+@if (isset($obj->notAvailable) && $obj->notAvailable)
     <p><b>Tiempo disponible:</b></p>
     @foreach ($obj->notAvailable as $notAvailable)
         @if (isset($notAvailable->description))
@@ -122,7 +122,7 @@
         {{$obj->availabilityExceptions}}
     </div>
 @endif
-@if (isset($obj->endpoint))
+@if (isset($obj->endpoint) && $obj->endpoint)
     <p><b>Punto final:</b></p>
     @foreach ($obj->endpoint as $endpoint)
         <div class="element">

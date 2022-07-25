@@ -6,7 +6,7 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -20,7 +20,7 @@
         {{$obj->active?"SI":"NO"}}
     </div>
 @endif
-@if (isset($obj->name))
+@if (isset($obj->name) && $obj->name)
     <p><b>Nombre</b></p>
     @foreach ($obj->name as $name)
         <div class="element">
@@ -28,7 +28,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->telecom))
+@if (isset($obj->telecom) && $obj->telecom)
     <p><b>Datos de contacto:</b></p>
     @foreach ($obj->telecom as $telecom)
         <div class="element">
@@ -36,7 +36,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->address))
+@if (isset($obj->address) && $obj->address)
     <p><b>Dirección:</b></p>
     @foreach ($obj->address as $address)
         <div class="element">
@@ -56,7 +56,7 @@
         {{$obj->birthDate}}
     </div>
 @endif
-@if (isset($obj->photo))
+@if (isset($obj->photo) && $obj->photo)
     <p><b>Foto:</b></p>
     <div class="element">
         @foreach ($obj->photo as $photo)
@@ -64,38 +64,40 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->qualification))
+@if (isset($obj->qualification) && $obj->qualification)
     <p><b>Títulos:</b></p>
-    @foreach ($obj->qualification as $qualification)
-        @if (isset($qualification->identifier))
-            <p><b>Identificador:</b></p>
-            @foreach ($qualification->identifier as $identifier)
+    <div class="element">
+        @foreach ($obj->qualification as $qualification)
+            @if (isset($qualification["identifier"]) && $qualification["identifier"])
+                <p><b>Identificador:</b></p>
+                @foreach ($qualification["identifier"] as $identifier)
+                    <div class="element">
+                        @include('fhir.element.identifier',["obj"=>$identifier])
+                    </div>
+                @endforeach
+            @endif
+            @if (isset($qualification["code"]))
+                <p><b>Código</b></p>
                 <div class="element">
-                    @include('fhir.element.identifier',["obj"=>$identifier])
+                    @include('fhir.element.codeableConcept',["obj"=>$qualification["code"]])
                 </div>
-            @endforeach
-        @endif
-        @if (isset($qualification->code))
-            <p><b>Código</b></p>
-            <div class="element">
-                @include('fhir.element.codeableConcept',["obj"=>$qualification->code])
-            </div>
-        @endif
-        @if (isset($qualification->period))
-            <p><b>Periodo</b></p>
-            <div class="element">
-                @include('fhir.element.period',["obj"=>$qualification->period])
-            </div>
-        @endif
-        @if (isset($qualification->issuer))
-            <p><b>Certificadora</b></p>
-            <div class="element">
-                @include('fhir.element.reference',["obj"=>$qualification->issuer])
-            </div>
-        @endif
-    @endforeach
+            @endif
+            @if (isset($qualification["period"]))
+                <p><b>Periodo</b></p>
+                <div class="element">
+                    @include('fhir.element.period',["obj"=>$qualification["period"]])
+                </div>
+            @endif
+            @if (isset($qualification["issuer"]))
+                <p><b>Certificadora</b></p>
+                <div class="element">
+                    @include('fhir.element.reference',["obj"=>$qualification["issuer"]])
+                </div>
+            @endif
+        @endforeach
+    </div>
 @endif
-@if (isset($obj->communication))
+@if (isset($obj->communication) && $obj->communication)
     <p><b>Comunicación</b></p>
     <div class="element">
         @foreach ($obj->communication as $communication)

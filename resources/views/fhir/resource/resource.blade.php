@@ -21,10 +21,6 @@
                 "diagnosticreport",
                 "procedure",
                 "imagingstudy",
-                "",
-                "",
-                "",
-                "",
             ], [
                 "Observación",
                 "Administración de medicamento", 
@@ -42,17 +38,13 @@
                 "Reporte de diagnóstico",
                 "Procedimiento",
                 "Estudio de imagen",
-                "",
-                "",
-                "",
-                "",
             ], strtolower($obj->resourceType))}}
     </h3>
 @endif
 <div class="element">
-    @if (isset($obj->id))
+    {{-- @if (isset($obj->id))
         <p id="{{$obj->resourceType.'/'.$obj->id}}">Identificador: {{$obj->id}}</p>
-    @endif
+    @endif --}}
     @if (isset($obj->meta))
         <p>Metadatos:</p>
         <div class="element">

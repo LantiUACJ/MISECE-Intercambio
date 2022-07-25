@@ -6,7 +6,7 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     @foreach ($obj->identifier as $identifier)
         <div class="element">
@@ -14,7 +14,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->instantiatesCanonical))
+@if (isset($obj->instantiatesCanonical) && $obj->instantiatesCanonical)
     <p><b>Instancia:</b></p>
     @foreach ($obj->instantiatesCanonical as $instantiatesCanonical)
         <div class="element">
@@ -22,7 +22,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->instantiatesUri))
+@if (isset($obj->instantiatesUri) && $obj->instantiatesUri)
     <p><b>Instancia:</b></p>
     @foreach ($obj->instantiatesUri as $instantiatesUri)
         <div class="element">
@@ -30,7 +30,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->basedOn))
+@if (isset($obj->basedOn) && $obj->basedOn)
     <p><b>Basado en:</b></p>
     @foreach ($obj->basedOn as $basedOn)
         <div class="element">
@@ -38,7 +38,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->partOf))
+@if (isset($obj->partOf) && $obj->partOf)
     <p><b>Parte de:</b></p>
     @foreach ($obj->partOf as $partOf)
         <div class="element">
@@ -125,7 +125,7 @@
         @include('fhir.element.reference',["obj"=>$obj->asserter])
     </div>
 @endif
-@if (isset($obj->performer))
+@if (isset($obj->performer) && $obj->performer)
     <p><b>Ejecutores:</b></p>
     @foreach ($obj->performer as $performer)
         <div class="element">
@@ -156,7 +156,7 @@
         @include('fhir.element.reference',["obj"=>$obj->location])
     </div>
 @endif
-@if (isset($obj->reasonCode))
+@if (isset($obj->reasonCode) && $obj->reasonCode)
     <p><b>Código de motivo:</b></p>
     @foreach ($obj->reasonCode as $reasonCode)
         <div class="element">
@@ -164,7 +164,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->reasonReference))
+@if (isset($obj->reasonReference) && $obj->reasonReference)
     <p><b>Referencia de la motivo:</b></p>
     @foreach ($obj->reasonReference as $reasonReference)
         <div class="element">
@@ -172,7 +172,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->bodySite))
+@if (isset($obj->bodySite) && $obj->bodySite)
     <p><b>Sitio del cuerpo:</b></p>
     @foreach ($obj->bodySite as $bodySite)
         <div class="element">
@@ -186,7 +186,7 @@
         @include('fhir.element.codeableConcept',["obj"=>$obj->outcome])
     </div>
 @endif
-@if (isset($obj->report))
+@if (isset($obj->report) && $obj->report)
     <p><b>Reporte:</b></p>
     @foreach ($obj->report as $report)
         <div class="element">
@@ -194,7 +194,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->complication))
+@if (isset($obj->complication) && $obj->complication)
     <p><b>Complicación:</b></p>
     @foreach ($obj->complication as $complication)
         <div class="element">
@@ -202,7 +202,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->complicationDetail))
+@if (isset($obj->complicationDetail) && $obj->complicationDetail)
     <p><b>Detalle de complicación:</b></p>
     @foreach ($obj->complicationDetail as $complicationDetail)
         <div class="element">
@@ -210,7 +210,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->followUp))
+@if (isset($obj->followUp) && $obj->followUp)
     <p><b>Seguimiento:</b></p>
     @foreach ($obj->followUp as $followUp)
         <div class="element">
@@ -218,7 +218,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->note))
+@if (isset($obj->note) && $obj->note)
     <p><b>Nota:</b></p>
     @foreach ($obj->note as $note)
         <div class="element">
@@ -226,7 +226,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->focalDevice))
+@if (isset($obj->focalDevice) && $obj->focalDevice)
     <p><b>Dispositivos Focales:</b></p>
     <div class="element">
         @foreach ($obj->focalDevice as $focalDevice)
@@ -245,7 +245,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->usedReference))
+@if (isset($obj->usedReference) && $obj->usedReference)
     <p><b>Referencia usada:</b></p>
     @foreach ($obj->usedReference as $usedReference)
         <div class="element">
@@ -253,7 +253,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->usedCode))
+@if (isset($obj->usedCode) && $obj->usedCode)
     <p><b>Código usado:</b></p>
     @foreach ($obj->usedCode as $usedCode)
         <div class="element">

@@ -10,7 +10,7 @@
 @if (isset($obj->name))
     <p>Nombre: <b>{{$obj->name}}</b></p>
 @endif
-@if (isset($obj->identifier))
+@if (isset($obj->identifier) && $obj->identifier)
     <p><b>Identificador:</b></p>
     <div class="element">
         @foreach ($obj->identifier as $identifier)
@@ -22,7 +22,7 @@
 @if (isset($obj->active) && env("test", false))
     Activo {{$obj->active?"SI":"NO"}}
 @endif
-@if (isset($obj->type))
+@if (isset($obj->type) && $obj->type)
     <p><b>Tipo:</b></p>
     <div class="element">
         @foreach ($obj->type as $type)
@@ -30,7 +30,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->alias))
+@if (isset($obj->alias) && $obj->alias)
     <p><b>Alias:</b></p>
     <div class="element">
         @foreach ($obj->alias as $alias)
@@ -38,7 +38,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->telecom))
+@if (isset($obj->telecom) && $obj->telecom)
     <p><b>Comunicación:</b></p>
     <div class="element">
         @foreach ($obj->telecom as $telecom)
@@ -46,7 +46,7 @@
         @endforeach
     </div>
 @endif
-@if (isset($obj->address))
+@if (isset($obj->address) && $obj->address)
     <p><b>Dirección:</b></p>
     <div class="element">
         @foreach ($obj->address as $address)
@@ -61,7 +61,7 @@
         @include('fhir.element.reference',["obj"=>$obj->partOf])
     </div>
 @endif
-@if (isset($obj->contact))
+@if (isset($obj->contact) && $obj->contact)
     <p><b>Contacto:</b></p>
     @foreach ($obj->contact as $contact)
         <div class="element">
@@ -71,7 +71,7 @@
             @if (isset($contact->name))
                 <p><b>Nombre: </b> @include('fhir.element.humanName',["obj"=>$contact->name])</p>
             @endif
-            @if (isset($contact->telecom))
+            @if (isset($contact->telecom) && $contact->telecom)
                 <p><b>Datos de contacto: </b></p>
                 <div class="element">
                     @foreach ($contact->telecom as $telecom)
@@ -88,7 +88,7 @@
         </div>
     @endforeach
 @endif
-@if (isset($obj->endpoint))
+@if (isset($obj->endpoint) && $obj->endpoint)
     <p><b>Punto final:</b></p>
     <div class="element">
         @foreach ($obj->endpoint as $endpoint)
