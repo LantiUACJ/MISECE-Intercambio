@@ -84,37 +84,37 @@
         <div class="element">
             @foreach ($obj->reaction as $reaction)
                 <hr>
-                @if (isset($reaction->substance) && $reaction->substance)
+                @if (isset($reaction["substance"]) && $reaction["substance"])
                     <p><b>Substancia:</b>
-                        @include('fhir.element.codeableConcept',["obj"=>$reaction->substance])
+                        @include('fhir.element.codeableConcept',["obj"=>$reaction["substance"]])
                     </p>
                 @endif
-                @if (isset($reaction->manifestation) && $reaction->manifestation)
+                @if (isset($reaction["manifestation"]) && $reaction["manifestation"])
                     <p><b>Síntomas/signos clínicos:</b></p>
                     <div class="element">
-                        @foreach ($reaction->manifestation as $manifestation)
+                        @foreach ($reaction["manifestation"] as $manifestation)
                             * @include('fhir.element.codeableConcept',["obj"=>$manifestation])
                         @endforeach
                     </div>
                 @endif
-                @if (isset($reaction->description))
-                    <p><b>Descripción:</b> {{$reaction->description}}</p>
+                @if (isset($reaction["description"]))
+                    <p><b>Descripción:</b> {{$reaction["description"]}}</p>
                 @endif
-                @if (isset($reaction->onset))
-                    <p><b>Fecha en que se manifestó:</b> {{$reaction->onset}}</p>
+                @if (isset($reaction["onset"]))
+                    <p><b>Fecha en que se manifestó:</b> {{$reaction["onset"]}}</p>
                 @endif
-                @if (isset($reaction->severity))
-                    <p><b>Criticidad: </b>{{str_replace(["mild", "moderate", "severe"], ["Leve", "moderada", "severa"], $reaction->severity)}}</p>
+                @if (isset($reaction["severity"]))
+                    <p><b>Criticidad: </b>{{str_replace(["mild", "moderate", "severe"], ["Leve", "moderada", "severa"], $reaction["severity"])}}</p>
                 @endif
-                @if (isset($reaction->exposureRoute))
+                @if (isset($reaction["exposureRoute"]))
                     <p><b>Ruta de exposición:</b>
-                        @include('fhir.element.codeableConcept',["obj"=>$reaction->exposureRoute])
+                        @include('fhir.element.codeableConcept',["obj"=>$reaction["exposureRoute"]])
                     </p>
                 @endif
-                @if (isset($reaction->note) && $reaction->note)
+                @if (isset($reaction["note"]) && $reaction["note"])
                     <p><b>Nota:</b></p>
                     <div class="element">
-                        @foreach ($reaction->note as $note)
+                        @foreach ($reaction["note"] as $note)
                             @include('fhir.element.annotation',["obj"=>$note])
                         @endforeach
                     </div>

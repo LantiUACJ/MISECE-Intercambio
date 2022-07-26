@@ -54,6 +54,8 @@ class Bundle extends DomainResource{
     }
     /**
      * @param string $id
+     * @param integer $skip
+     * @param integer $mark
      * @return \App\Fhir\Resource\Resource
     */
     public function findResource($id, $skip = -1, $mark=0){
@@ -82,6 +84,16 @@ class Bundle extends DomainResource{
                 return $entry;
             }
         }
+    }
+    public function findAllergy($skip = -1, $mark = 0){
+        $data = [];
+        foreach($this->entry as $key => $entry){
+            if($skip != $entry->mark && $entry->resourceType == "AllergyIntolerance"){
+                $entry->mark = $mark;
+                $data [] = $entry;
+            }
+        }
+        return $data;
     }
 
     public function toArray(){

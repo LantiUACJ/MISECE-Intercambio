@@ -7,7 +7,7 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 @if (isset($obj->reference))
-    <a href="#{{$obj->reference}}">(ver)
+    <a href="#{{$obj->reference}}" onclick="$('#{{str_replace("/","\\\\/", $obj->reference)}}').click()">(ver)
 @endif
 <!-- @if (isset($obj->type))
     Tipo: {{ str_replace(["observation", "medicationadministration","patient","encounter"], ["Observación","Administración de medicamento", "Paciente", "Visita"], strtolower($obj->type))}}

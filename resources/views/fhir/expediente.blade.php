@@ -6,6 +6,9 @@
 
 <h3>Paciente...</h3>
 @include('fhir._factory', ["obj"=>$bundle->findPatient(2,2)])
+@foreach ($bundle->findAllergy(2,2) as $allergy)
+    @include('fhir._factory', ["obj"=>$allergy])
+@endforeach
 
 <h3>Compositions...</h3>
 @foreach ($bundle->findCompositions(2,2) as $composition)

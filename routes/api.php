@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\ApiController as ApiControllerV1;
 use App\Http\Controllers\V1\TestApiController as TestApiControllerV1;
