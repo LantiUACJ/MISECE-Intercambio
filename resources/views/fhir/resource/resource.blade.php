@@ -2,7 +2,7 @@
     <div class="row"><div class="col s12"><b>===RESOURCE===</b></div></div>
 @endif
 @if (isset($obj->resourceType))
-    <h3>
+    <h5>
         {{ str_replace(
             [
                 "observation", 
@@ -39,7 +39,7 @@
                 "Procedimiento",
                 "Estudio de imagen",
             ], strtolower($obj->resourceType))}}
-    </h3>
+    </h5>
 @endif
 <div class="element">
     {{-- @if (isset($obj->id))

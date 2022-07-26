@@ -143,11 +143,10 @@ class PetitionHelper{
     public function fakeData(){
         $archivoJson = fopen("json_pruebas/bundle.json", "r");
         $jsonTxt = fread($archivoJson,filesize("json_pruebas/bundle.json"));
-        $json = json_decode($jsonTxt);
         $hospital = new Hospital(["nombre"=>"instituto/hospital de prueba"]);
-        $this->data[] = ["bundle"=>$json,"hospital"=>$hospital];
-        $data = new \App\Tools\JsonProcessHelper($this->data);
-        $this->data = $data->sortDesc();
+        $this->data[] = ["bundle"=>new \App\Fhir\Resource\Bundle($jsonTxt),"hospital"=>$hospital];
+        //$data = new \App\Tools\JsonProcessHelper($this->data);
+        //$this->data = $data->sortDesc();
     }
     public function fakeCode(){
         $codigo = rand(100000,999999);
