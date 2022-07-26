@@ -64,7 +64,7 @@ class TestApiController extends \App\Http\Controllers\Controller{
         $jsontxt = $request->input("json", false);
         $data = [];
         if($jsontxt)
-            $data[] = ["bundle"=>json_decode($jsontxt),"hospital"=>$hospital];
+            $data[] = ["bundle"=>new \App\Fhir\Resource\Bundle($jsontxt),"hospital"=>$hospital];
         return view("pdf",["data"=>$data]);
     }
 }

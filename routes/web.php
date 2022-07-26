@@ -87,7 +87,7 @@ Route::get("test", function (){
             return $resource->getReferences();
     }*/
 
-    return view("fhir.test",["bundle"=>$bundle]);
+    return view("fhir.expediente",["bundle"=>$bundle]);
     /*
     */
 });
