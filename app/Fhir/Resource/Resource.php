@@ -9,7 +9,7 @@ use App\Fhir\Exception\TextNotDefinedException;
 class Resource{
     public function __construct($json = null){
         $this->mark = 0;
-        $this->setId(hash("MD5", microtime(true)));
+        $this->setId(hash("MD5", microtime(true) . " " . rand(0, 10000000)));
         if($json) $this->loadData($json);
     }
     private function loadData($json){

@@ -14,7 +14,9 @@
 @foreach ($bundle->findCompositions(2,2) as $composition)
     @include('fhir._factory', ["obj"=>$composition])
     @foreach ($composition->getReferences() as $reference)
-        @include('fhir._factory', ["obj"=>$bundle->findResource($reference->getReferenceId(), 2, 2)])
+        <div class="element">
+            @include('fhir._factory', ["obj"=>$bundle->findResource($reference->getReferenceId(), 2, 2)])
+        </div>
     @endforeach
 @endforeach
 

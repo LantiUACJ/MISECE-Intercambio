@@ -7,7 +7,7 @@
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj, "excludeResource"=>true])
 <div class="element">
-    @if (isset($obj->name))
+    @if (isset($obj->name) && $obj->name)
         <p><b>Nombre(s):</b></p>
         <div class="element">
             @foreach ($obj->name as $name)
@@ -143,7 +143,7 @@
             Tipo {{$link}}
         @endforeach
     @endif
-    @if (isset($obj->identifier))
+    @if (isset($obj->identifier) && $obj->identifier)
         <p><b>Identificadores:</b></p>
         <div class="element">
             @foreach ($obj->identifier as $identifier)
