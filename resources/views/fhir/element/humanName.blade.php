@@ -7,14 +7,13 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 
-
 @if (isset($obj->prefix))
     @foreach ($obj->prefix as $prefix)
         <b>{{$prefix}}</b>
     @endforeach
 @endif
 
-@if (!isset($obj->text))
+@if ((isset($obj->text) && !$obj->text) || (!isset($obj->text)))
     @if (isset($obj->given))
         @foreach ($obj->given as $given)
             <b>{{$given}}</b>
@@ -25,7 +24,7 @@
     @endif
 @endif
 
-@if (isset($obj->text))
+@if (isset($obj->text) && $obj->text)
     <b>{{$obj->text}}</b>.
 @endif
 

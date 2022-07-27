@@ -74,6 +74,7 @@
                             <div class="bottom">
                                 <div class="menu-footer">
                                     <a href="{{url('logout')}}">Cerrar sesión</a>
+                                    <p style="font-size: 0.9rem; color: #84a8a2;"><?php echo gethostname(); ?> @version('compact')</p>
                                 </div>
                             </div>
                         </div>
