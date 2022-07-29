@@ -18,6 +18,14 @@
         <div class="pdf">
             @include("_pdf",["data"=>$data])
         </div>
+
+
+        @if (isset($extra))
+            Cargar datos: {{ number_format($extra["datos"] - $extra["inicio"],4)*1000 }} ms <br>
+            Procesamiento: {{ number_format(microtime(true) - $extra["datos"],4)*1000 }} ms <br>
+            Total: {{ number_format(microtime(true) - $extra["inicio"],4)*1000 }} ms <br>
+        @endif
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

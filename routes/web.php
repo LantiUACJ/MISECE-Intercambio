@@ -70,24 +70,28 @@ Route::middleware(["auth","hospital"])->group(function (){
 });
 
 use App\Fhir\Resource\Bundle;
+use Illuminate\Support\Facades\Storage;
 
 Route::get("test", function (){
+    /*
     $archivoJson = fopen("json_pruebas/big.json", "r");
     $jsonTxt = fread($archivoJson,filesize("json_pruebas/big.json"));
     $json = json_decode($jsonTxt);
     $bundle = new Bundle($json);
-
-    //return $bundle->findResource("9f618326-b4b7-443b-ac68-e0d85226aba3")->toArray();
-    /*
-    $resources = $bundle->findCompositions();
-    foreach($resources as $resource){
-        if($resource->esHistoriaClinica())
-            return $resource->getReferences();
-        if($resource->esNotaEvolucion())
-            return $resource->getReferences();
-    }*/
-
-    return view("fhir.expediente",["bundle"=>$bundle]);
-    /*
+    $dogs = ["data"=>[["bundle"=>$bundle, "hospital"=>\App\Models\Hospital::where("id", ">", "0")->first()]]];
+    return view("pdf",$dogs);
     */
+    $inicio = microtime(true);
+
+    //$input["curp"] = "GADE19830329MTLRMA83Q";
+    $input["curp"] = "LUSA19800813HOCELI80Y";
+    $ph = new \App\Tools\PetitionHelper($input['curp'], \App\Models\Hospital::where("id", "4")->first(), "Juanito perez", 1);
+    if(!$ph->searchPatient()){
+        return view("paciente.resultado", ["nombre"=>"ERROR", "data" => "no se encontró el paciente"]);
+    }
+    $ph->getData();
+    $datos = microtime(true);
+    //Storage::disk('s3')->put('input/test2.json', json_encode($ph->data[0]));
+    //return $ph->renderHtml();
+    return view("pdf",["data"=>$ph->data, "extra"=>["inicio"=>$inicio, "datos"=>$datos]]);
 });

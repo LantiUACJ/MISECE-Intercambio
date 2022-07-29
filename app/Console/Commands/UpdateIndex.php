@@ -49,7 +49,7 @@ class UpdateIndex extends Command
             }
             echo $hospital->url . "update\n";
             $curl = new \App\Tools\CurlHelper($hospital->url . "update/",$post_params);
-            $data = $curl->get();
+            $data = json_decode($curl->get());
             echo "datos adquiridos\n";
             if($data){
                 print_r(["data"=>$data]);
