@@ -37,50 +37,50 @@ class JsonProcessHelper{
     }
 
     public function getFecha($resource){
-        if(isset($resource->resource) && $resource->resource)
+        if(isset($resource) && $resource)
             return false;
-        switch($resource->resource->resourceType){
+        switch($resource->resourceType){
             case "AllergyIntolerance":
-                return $this->getFechaAllergyIntolerance($resource->resource);
+                return $this->getFechaAllergyIntolerance($resource);
             break;
             case "CarePlan":
-                return $this->getFechaCarePlan($resource->resource);
+                return $this->getFechaCarePlan($resource);
             break;
             case "Composition":
-                return $this->getFechaComposition($resource->resource);
+                return $this->getFechaComposition($resource);
             break;
             case "Condition":
-                return $this->getFechaCondition($resource->resource);
+                return $this->getFechaCondition($resource);
             break;
             case "DiagnosticReport":
-                return $this->getFechaDiagnosticReport($resource->resource);
+                return $this->getFechaDiagnosticReport($resource);
             break;
             case "ImageStudy":
-                return $this->getFechaImageStudy($resource->resource);
+                return $this->getFechaImageStudy($resource);
             break;
             case "Location":
-                return $this->getFechaLocation($resource->resource);
+                return $this->getFechaLocation($resource);
             break;
             case "Medication":
-                return $this->getFechaMedication($resource->resource);
+                return $this->getFechaMedication($resource);
             break;
             case "MedicationAdministration":
-                return $this->getFechaMedicationAdministration($resource->resource);
+                return $this->getFechaMedicationAdministration($resource);
             break;
             case "Observation":
-                return $this->getFechaObservation($resource->resource);
+                return $this->getFechaObservation($resource);
             break;
             case "Organization":
-                return $this->getFechaOrganization($resource->resource);
+                return $this->getFechaOrganization($resource);
             break;
             case "Patient":
                 return Carbon::now();
             break;
             case "Practitioner":
-                return $this->getFechaPractitioner($resource->resource);
+                return $this->getFechaPractitioner($resource);
             break;
             case "Procedure":
-                return $this->getFechaProcedure($resource->resource);
+                return $this->getFechaProcedure($resource);
             break;
         }
     }

@@ -153,46 +153,46 @@
 @endif
 @if (isset($obj->dosage))
     <p><b>Dosis:</b></p>
-    @if (isset($obj->dosage->text))
+    @if (isset($obj->dosage["text"]))
         <p><b>Texto:</b></p>
         <div class="element">
-            {{$obj->dosage->text}}
+            {{$obj->dosage["text"]}}
         </div>
     @endif
-    @if (isset($obj->dosage->site))
+    @if (isset($obj->dosage["site"]))
         <p><b>Sitio:</b></p>
         <div class="element">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->dosage->site])
+            @include('fhir.element.codeableConcept',["obj"=>$obj->dosage["site"]])
         </div>    
     @endif
-    @if (isset($obj->dosage->route))
+    @if (isset($obj->dosage["route"]))
         <p><b>Ruta:</b></p>
         <div class="element">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->dosage->route])
+            @include('fhir.element.codeableConcept',["obj"=>$obj->dosage["route"]])
         </div>    
     @endif
-    @if (isset($obj->dosage->method))
+    @if (isset($obj->dosage["method"]))
         <p><b>Método:</b></p>
         <div class="element">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->dosage->method])
+            @include('fhir.element.codeableConcept',["obj"=>$obj->dosage["method"]])
         </div>    
     @endif
-    @if (isset($obj->dosage->dose))
+    @if (isset($obj->dosage["dose"]))
         <p><b>Dosis:</b></p>
         <div class="element">
-            @include('fhir.element.quantity',["obj"=>$obj->dosage->dose])
+            @include('fhir.element.quantity',["obj"=>$obj->dosage["dose"]])
         </div>    
     @endif
-    @if (isset($obj->dosage->rateRatio))
+    @if (isset($obj->dosage["rateRatio"]))
         <p><b>Razón de tasas:</b></p>
         <div class="element">
-            @include('fhir.element.ratio',["obj"=>$obj->dosage->rateRatio])
+            @include('fhir.element.ratio',["obj"=>$obj->dosage["rateRatio"]])
         </div>    
     @endif
-    @if (isset($obj->dosage->rateQuantity))
+    @if (isset($obj->dosage["rateQuantity"]))
         <p><b>Cantidad:</b></p>
         <div class="element">
-            @include('fhir.element.quantity',["obj"=>$obj->dosage->rateQuantity])
+            @include('fhir.element.quantity',["obj"=>$obj->dosage["rateQuantity"]])
         </div>
     @endif
 @endif

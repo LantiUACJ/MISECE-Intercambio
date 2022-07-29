@@ -117,7 +117,7 @@
 @endif
 @if (isset($obj->valueBoolean))
     <p><b>Valor:</b>
-        {{$obj->valueBoolean}}
+        {{$obj->valueBoolean?"SI":"NO"}}
     </p>
 @endif
 @if (isset($obj->valueInteger))

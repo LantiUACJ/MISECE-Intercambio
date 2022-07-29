@@ -103,23 +103,22 @@ class PetitionHelper{
 
     public function getData(){
         foreach($this->getHospitalIndice() as $hospitalIndice){
-            $tool = new \App\Tools\CurlHelper($hospitalIndice->hospital->url . $this->url, ["curp"=>$this->curp]);
-            $bundle = $tool->get();
-            if($bundle){
-                $data = new \App\Fhir\Resource\Bundle($tool->response);
+            $curlConsulta = new \App\Tools\CurlHelper($hospitalIndice->hospital->url . $this->url, ["curp"=>$this->curp]);
+            $bundle = $curlConsulta->get();
+            if($curlConsulta->success() == 200){
+                $data = [];
                 $this->log["respuestas"] .= $hospitalIndice->hospital->user;
                 if(env("MODULO_PROCESAMIENTO", "ignore") != "ignore"){
-                    $modulo_procesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
-                    $procesado = $modulo_procesamiento->postJson();
-                    if($procesado){
-                        $data = new \App\Fhir\Resource\Bundle($modulo_procesamiento->response);
-                    }
+                    $curlProcesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
+                    $procesado = $curlProcesamiento->postJson();
+                    if($curlProcesamiento->success() == 200) $data = new \App\Fhir\Resource\Bundle($procesado);
                 }
+                if(!$data) $data = new \App\Fhir\Resource\Bundle($bundle);
                 $this->data[] = ["bundle"=>$data,"hospital"=>$hospitalIndice->hospital];
             }
         }
-        /*$data = new \App\Tools\JsonProcessHelper($this->data);
-        $this->data = $data->sortDesc();*/
+        $data = new \App\Tools\JsonProcessHelper($this->data);
+        $this->data = $data->sortDesc();
     }
     
     public function renderPartialHtml(){
@@ -180,7 +179,4 @@ class PetitionHelper{
         else
             return false;
     }
-
-    //$registroEventos = new \App\Tools\CurlHelper(env("MODULO_REGISTRO_EVENTOS"), ["msg"=>$log]);
-    //$response = $registroEventos->noWaitPost();
 }
