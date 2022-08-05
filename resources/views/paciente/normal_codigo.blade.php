@@ -3,7 +3,7 @@
 @section('content')
 <div class="actions">
     <!-- <p class="subtitle">Menú</p> -->
-    <a href="dashboard-medic-fullfile.html" class="waves-effect waves-light red darken-1 btn"><i class="material-icons left">arrow_back</i>Cancelar consulta</a>
+    <a href="{{url('/')}}" class="waves-effect waves-light red darken-1 btn"><i class="material-icons left">arrow_back</i>Cancelar consulta</a>
 </div>
 <hr style="opacity: 0.2;">
 <div class="data-content">
