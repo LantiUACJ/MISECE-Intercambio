@@ -115,10 +115,10 @@
     @if (isset($obj->communication) && $obj->communication)
         <p><b>Comunicación:</b></p>
         @foreach ($obj->communication as $communication)
-            @if (isset($communication->language))
-                El paciente habla @include('fhir.element.codeableConcept',["obj"=>$communication->language])
+            @if (isset($communication["language"]))
+                El paciente habla @include('fhir.element.codeableConcept',["obj"=>$communication["language"]])
             @endif
-            @if (isset($communication->preferred) && $communication->preferred)
+            @if (isset($communication["preferred"]) && $communication["preferred"])
                 , el cual es su lenguaje preferido.
             @else
                 .
