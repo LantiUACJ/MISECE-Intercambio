@@ -5,10 +5,10 @@ current:
   label: V
   major: 1
   minor: 0
-  patch: 1
-  prerelease: 2-ga2c3fff
+  patch: 2
+  prerelease: 2-gd47dd09
   buildmetadata: ''
-  commit: a2c3ff
+  commit: d47dd0
   timestamp:
     year: 2021
     month: 11
