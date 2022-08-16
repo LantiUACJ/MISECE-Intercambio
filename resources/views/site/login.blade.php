@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECE</title>
+    <title>MISECE</title>
 
     <!-- Material -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -16,7 +16,9 @@
         <div class="row fh">
             <div class="col s12 m6 fh center left-panel">
                 <div class="login-logo">
-                    <img src="logomisece.svg">
+                    <a href="{{url("/")}}">
+                        <img src="logomisece.svg">
+                    </a>
                 </div>
             </div>
             <div class="col s12 m6 fh card-padding ">
