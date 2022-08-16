@@ -24,6 +24,7 @@ class PetitionHelper{
         elseif($type === 2){
             $this->url =  "patient/basic";
         }
+        $this->filtraHospital = true;
     }
 
     public function searchPatient(){
@@ -32,7 +33,14 @@ class PetitionHelper{
     }
 
     public function getHospitalIndice(){
-        return HospitalIndice::where("indice_id",$this->indice->id)->where("hospital_id","<>",$this->hospital->id)->get();
+        $query = HospitalIndice::where("indice_id",$this->indice->id);
+        if($this->filtraHospital)
+            $query->where("hospital_id","<>",$this->hospital->id)->get();
+        return $query->get();
+    }
+
+    public function filtrarHospital($filtrar){
+        $this->filtraHospital = $filtrar;
     }
 
     public function validateCode($codigo){

@@ -7,6 +7,8 @@ use \App\Http\Controllers\PacienteBasicoController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\BlockchainController;
 use \App\Http\Controllers\TestController;
+use App\Http\Controllers\UserHospitalController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +36,14 @@ Route::middleware(["auth", "admin"])->group(function (){
         Route::get('/update/{hospital}', [HospitalController::class, "edit"]);
         Route::post('/update/{hospital}', [HospitalController::class, "update"]);
         Route::post('/delete/{hospital}', [HospitalController::class, "destroy"]);
+    });
+    Route::prefix('/hos')->group(function(){
+        Route::get('/usuario', [UserHospitalController::class, "index"]);
+        Route::get('/usuario/registrar', [UserHospitalController::class, "create"]);
+        Route::post('/usuario/registrar', [UserHospitalController::class, "store"]);
+        Route::get('/usuario/edit/{user}', [UserHospitalController::class, "edit"]);
+        Route::post('/usuario/edit/{user}', [UserHospitalController::class, "update"]);
+        Route::get('/usuario/{user}', [UserHospitalController::class, "show"]);
     });
     Route::get("test/procesamiento", [TestController::class, "testProcesamiento"]);
 });

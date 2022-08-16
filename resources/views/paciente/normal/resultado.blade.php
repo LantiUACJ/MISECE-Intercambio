@@ -7,7 +7,7 @@
 @section('content')
     <div class="actions">
         <!-- <p class="subtitle">Menú</p> -->
-        <a href="{{url('/')}}" class="waves-effect waves-light red darken-1 btn"><i class="material-icons left">exit_to_app
+        <a href="{{url('/paciente')}}" class="waves-effect waves-light red darken-1 btn"><i class="material-icons left">exit_to_app
         </i>Cerrar consulta</a>
     </div>
     <hr style="opacity: 0.2;">
