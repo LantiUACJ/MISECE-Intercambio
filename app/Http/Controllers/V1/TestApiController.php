@@ -58,6 +58,7 @@ class TestApiController extends \App\Http\Controllers\Controller{
         return $ph->renderHtml();
     }
     public function testJson(Request $request){
+        $inicio = microtime(true);
         $hospital_user = $request->headers->get("php-auth-user");
         $hospital = Hospital::where("user",$hospital_user)->first();
 

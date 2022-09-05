@@ -178,7 +178,7 @@
         </div>
     @endif
     @if (isset($obj->note) && $obj->note)
-        <p><b>Anotacion(es)</b></p>
+        <p><b>Anotación(es): </b></p>
         <div class="element">
             @foreach ($obj->note as $note)
                 @include('fhir.element.annotation',["obj"=>$note])
@@ -186,7 +186,7 @@
         </div>
     @endif
     @if (isset($obj->dosageInstruction) && $obj->dosageInstruction)
-        <p><b>Anotacion(es)</b></p>
+        <p><b>Instrucciones: </b></p>
         <div class="element">
             @foreach ($obj->dosageInstruction as $dosageInstruction)
                 @include('fhir.element.dosage',["obj"=>$dosageInstruction])
@@ -247,25 +247,25 @@
     @endif
     @if (isset($obj->substitution))
         <div class="element">
-            <p>Substituto</p>
-            @if (isset($obj->substitution->allowedBoolean))
-                <p><b>Permitido:</b></p>
-                <div class="element">
-                    {{$obj->substitution->allowedBoolean}}
-                </div>
-            @endif
-            @if (isset($obj->substitution->allowedCodeableConcept))
-                <p><b>Permitido:</b></p>
-                <div class="element">
-                    @include('fhir.element.codeableConcept',["obj"=>$obj->substitution->allowedCodeableConcept])
-                </div>
-            @endif
-            @if (isset($obj->substitution->reason))
-                <p><b>Razón:</b></p>
-                <div class="element">
-                    @include('fhir.element.codeableConcept',["obj"=>$obj->substitution->reason])
-                </div>
-            @endif
+            <p><b>Substituto:</b></p>
+            <div class="element">
+                @if (isset($obj->substitution["allowedBoolean"]))
+                    <p><b>Permitido:</b> {{$obj->substitution["allowedBoolean"]?"SI":"NO"}} </p>
+                        
+                @endif
+                @if (isset($obj->substitution["allowedCodeableConcept"]))
+                    <p><b>Permitido:</b></p>
+                    <div class="element">
+                        @include('fhir.element.codeableConcept',["obj"=>$obj->substitution["allowedCodeableConcept"]])
+                    </div>
+                @endif
+                @if (isset($obj->substitution["reason"]))
+                    <p><b>Razón:</b></p>
+                    <div class="element">
+                        @include('fhir.element.codeableConcept',["obj"=>$obj->substitution["reason"]])
+                    </div>
+                @endif
+            </div>
         </div>    
     @endif
     @if (isset($obj->priorPrescription))

@@ -45,7 +45,7 @@
         @include('fhir.element.ratio',["obj"=>$obj->amount])
     </div>
 @endif
-@if (isset($obj->ingredient))
+@if (isset($obj->ingredient) && $obj->ingredient)
     <p><b>Ingrediente:</b></p>
     <div class="element">
         @if (isset($obj->ingredient) && $obj->ingredient)

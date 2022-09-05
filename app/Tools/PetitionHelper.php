@@ -115,7 +115,7 @@ class PetitionHelper{
             $bundle = $curlConsulta->get();
             if($curlConsulta->success() == 200){
                 $data = [];
-                $this->log["respuestas"] .= $hospitalIndice->hospital->user;
+                $this->log["respuestas"] .= $hospitalIndice->hospital->user . ",";
                 if(env("MODULO_PROCESAMIENTO", "ignore") != "ignore"){
                     $curlProcesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
                     $procesado = $curlProcesamiento->postJson();
@@ -125,16 +125,32 @@ class PetitionHelper{
                 $this->data[] = ["bundle"=>$data,"hospital"=>$hospitalIndice->hospital];
             }
         }
+        $this->log["fecha"] = \Carbon\Carbon::now()->format("Y-m-d H:i:s");
+        $this->log["paciente"] = $this->curp;
+        $this->log["consultor"] = $this->consultor;
+        $this->log["hospital"] = $this->hospital->nombre;
+        $this->log["respuestas"] = substr($this->log["respuestas"],0,strlen($this->log["respuestas"])-1);
         $data = new \App\Tools\JsonProcessHelper($this->data);
         $this->data = $data->sortDesc();
     }
     
     public function renderPartialHtml(){
+        $this->blockChain();
         return view("_pdf",["data"=>$this->data]);
     }
 
     public function renderHtml(){
+        $this->blockChain();
         return view("pdf",["data"=>$this->data]);
+    }
+
+    private function blockChain(){
+        if(!env("DISABLE_CHAIN", true)){
+            $log = new \App\Models\Log($this->log);
+            $log->save();
+            $logChain = new LogChain();
+            $logChain->store($log);
+        }
     }
 
     /* Para pruebas */

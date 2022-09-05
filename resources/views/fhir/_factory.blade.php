@@ -9,7 +9,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource patient">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.patient',["obj"=>$obj])
                     </div>
                 </li>
@@ -37,7 +37,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}"> {{$obj->toString()}} </div>
-                    <div class="collapsible-body resource medicationAdmin">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.medicationAdministration',["obj"=>$obj])
                     </div>
                 </li>
@@ -51,7 +51,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}"> {{$obj->toString()}} </div>
-                    <div class="collapsible-body resource encounter">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.encounter',["obj"=>$obj])
                     </div>
                 </li>
@@ -65,7 +65,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource diagnosticReport">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.diagnosticReport',["obj"=>$obj])
                     </div>
                 </li>
@@ -79,7 +79,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource imagingStudy">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.imagingStudy',["obj"=>$obj])
                     </div>
                 </li>
@@ -93,7 +93,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource medication">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.medication',["obj"=>$obj])
                     </div>
                 </li>
@@ -107,7 +107,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource organization">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.organization',["obj"=>$obj])
                     </div>
                 </li>
@@ -121,7 +121,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource practitioner">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.practitioner',["obj"=>$obj])
                     </div>
                 </li>
@@ -135,7 +135,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource procedure">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.procedure',["obj"=>$obj])
                     </div>
                 </li>
@@ -149,7 +149,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource composition">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.composition',["obj"=>$obj])
                     </div>
                 </li>
@@ -163,7 +163,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource allergy">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.allergyIntolerance',["obj"=>$obj])
                     </div>
                 </li>
@@ -177,7 +177,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource carePlan">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.carePlan',["obj"=>$obj])
                     </div>
                 </li>
@@ -191,7 +191,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource location">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.location',["obj"=>$obj])
                     </div>
                 </li>
@@ -205,7 +205,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource condition">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.condition',["obj"=>$obj])
                     </div>
                 </li>
@@ -219,7 +219,7 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource practitionerrole">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.resource.practitionerrole',["obj"=>$obj])
                     </div>
                 </li>
@@ -233,8 +233,36 @@
             @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource bundle">
+                    <div class="collapsible-body resource observation">
                         @include('fhir.expediente',["bundle"=>$obj])
+                    </div>
+                </li>
+            @endif
+        @break
+        @case("FamilyMemberHistory")
+            @if(isset($not) && $not)
+                <div class="resource observation">
+                    @include('fhir.resource.familyMemberHistory',["obj"=>$obj])
+                </div>
+            @else
+                <li>
+                    <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
+                    <div class="collapsible-body resource observation">
+                        @include('fhir.resource.familyMemberHistory',["obj"=>$obj])
+                    </div>
+                </li>
+            @endif
+        @break
+        @case("MedicationRequest")
+            @if(isset($not) && $not)
+                <div class="resource observation">
+                    @include('fhir.resource.medicationRequest',["obj"=>$obj])
+                </div>
+            @else
+                <li>
+                    <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
+                    <div class="collapsible-body resource observation">
+                        @include('fhir.resource.medicationRequest',["obj"=>$obj])
                     </div>
                 </li>
             @endif
@@ -242,13 +270,13 @@
         @default
             @if(isset($not) && $not)
                 <div class="resource observation">
-                    <div class="collapsible-body resource undefined">
+                    <div class="collapsible-body resource observation">
                 </div>
                 @else
                 <li>
                     <div class="collapsible-header" id="{{$obj->resourceType.'/'.$obj->id}}">{{$obj->toString()}}</div>
-                    <div class="collapsible-body resource bundle">
-                        <div class="collapsible-body resource undefined">
+                    <div class="collapsible-body resource observation">
+                        <div class="collapsible-body resource observation">
                             @include('fhir.resource.undefined',["obj"=>$obj])
                         </div>
                     @endif

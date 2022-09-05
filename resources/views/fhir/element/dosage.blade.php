@@ -8,19 +8,13 @@
 @include('fhir.element.element',["obj"=>$obj])
 <div class="element">
     @if (isset($obj->sequence))
-        <p><b>sequence:</b></p>
-        <div class="element">
-            {{$obj->sequence}}
-        </div>
+        <p><b>Secuencia:</b> {{$obj->sequence}}</p>
     @endif
     @if (isset($obj->text))
-        <p><b>Estado:</b></p>
-        <div class="element">
-            {{$obj->text}}
-        </div>
+        <p><b>Texto:</b> {{$obj->text}}</p>
     @endif
     @if (isset($obj->additionalInstruction) && $obj->additionalInstruction)
-        <p><b>additionalInstruction:</b></p>
+        <p><b>Instrucciones adicionales:</b></p>
         <div class="element">
             @foreach ($obj->additionalInstruction as $additionalInstruction)
                 <p>@include('fhir.element.codeableConcept',["obj"=>$additionalInstruction])</p>
@@ -34,37 +28,37 @@
         </div>
     @endif
     @if (isset($obj->timing))
-        <p><b>motivo del estado:</b></p>
+        <p><b>Administrar:</b></p>
         <div class="element">
             @include('fhir.element.timing',["obj"=>$obj->timing])
         </div>
     @endif
     @if (isset($obj->asNeededBoolean))
-        <p><b>Estado:</b></p>
+        <p><b>Según sea necesario:</b></p>
         <div class="element">
             {{$obj->asNeededBoolean}}
         </div>
     @endif
     @if (isset($obj->asNeededCodeableConcept))
-        <p><b>motivo del estado:</b></p>
+        <p><b>Según sea necesario:</b></p>
         <div class="element">
             @include('fhir.element.codeableConcept',["obj"=>$obj->asNeededCodeableConcept])
         </div>
     @endif
     @if (isset($obj->site))
-        <p><b>motivo del estado:</b></p>
+        <p><b>Lugar de administración:</b></p>
         <div class="element">
             @include('fhir.element.codeableConcept',["obj"=>$obj->site])
         </div>
     @endif
     @if (isset($obj->route))
-        <p><b>motivo del estado:</b></p>
+        <p><b>Ruta de administración:</b></p>
         <div class="element">
             @include('fhir.element.codeableConcept',["obj"=>$obj->route])
         </div>
     @endif
     @if (isset($obj->method))
-        <p><b>motivo del estado:</b></p>
+        <p><b>Método de administración:</b></p>
         <div class="element">
             @include('fhir.element.codeableConcept',["obj"=>$obj->method])
         </div>

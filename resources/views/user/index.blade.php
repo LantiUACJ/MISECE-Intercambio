@@ -45,7 +45,7 @@
           
         </tbody>
     </table>
-    {{$model->links()}}
+    {{$model->links('components.paginatorMaterialize')}}
 </div>
 @endsection
 @section('modal')
