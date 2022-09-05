@@ -7,6 +7,7 @@
             [
                 "observation", 
                 "medicationadministration",
+                "medicationrequest",
                 "patient",
                 "encounter",
                 "location",
@@ -24,6 +25,7 @@
             ], [
                 "Observación",
                 "Administración de medicamento", 
+                "Requisito de medicamento", 
                 "Datos del paciente", 
                 "Visita",
                 "Lugar",
