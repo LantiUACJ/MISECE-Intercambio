@@ -19,7 +19,6 @@ class Bundle extends DomainResource{
         if(gettype($json) === "string"){
             $json = json_decode($json);
         }
-        dd($json);
         if(isset($json->entry)){
             foreach($json->entry as $entry){
                 if(isset($entry->resource) && isset($entry->resource->resourceType)){
