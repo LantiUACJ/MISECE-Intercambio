@@ -361,6 +361,7 @@ class AllergyIntolerance extends DomainResource{
         $display = "";
         if(isset($this->type) && $this->type == "allergy") $display .= "Alergia";
         elseif(isset($this->type) && $this->type == "intolerance") $display .= "Intolerancia";
+        else $display .= "Alergia/Intolerancia";
         if(isset($this->code) && isset($this->code->display)) $display .= $this->code->display;
         return $display;
     }

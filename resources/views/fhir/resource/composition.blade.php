@@ -5,7 +5,9 @@
         </div>
     </div>
 @endif
+
 @include('fhir.resource.domainResource',["obj"=>$obj])
+
 @if (isset($obj->status))
     <p><b>Estado:</b>{{ str_replace(["preliminary", "final","amended","entered-in-error"],["preliminary", "final","amended","entered-in-error"], strtolower($obj->status))}}</p>
 @endif

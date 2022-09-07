@@ -122,6 +122,7 @@ class PetitionHelper{
                     if($curlProcesamiento->success() == 200) $data = new \App\Fhir\Resource\Bundle($procesado);
                 }
                 if(!$data) $data = new \App\Fhir\Resource\Bundle($bundle);
+
                 $this->data[] = ["bundle"=>$data,"hospital"=>$hospitalIndice->hospital];
             }
         }

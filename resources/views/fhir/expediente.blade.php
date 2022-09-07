@@ -2,28 +2,30 @@
 <div id="top-expediente{{$bundle->id}}"></div>
 
 <h3>Índice</h3>
+
 @include('fhir.indice', ["obj"=>$bundle])
 
+<?php $paciente = $bundle->findPatient(2); ?>
+@if ($paciente)
+    <ul class="collapsible expandable">
+        <li>
+            <div class="collapsible-header" id="<?= $paciente->resourceType.'/'. $paciente->id ?>"><?= $paciente->toString() ?></div>
+            <div class="collapsible-body resource observation">
+                @include('fhir._factory', ["obj"=>$paciente, "not"=>true])
+                @foreach ($bundle->findAllergy(2) as $allergy)
+                    @include('fhir._factory', ["obj"=>$allergy, "not"=>true])
+                @endforeach
+            </div>
+        </li>
+    </ul>
+@endif
 
-@include('fhir._factory', ["obj"=>$bundle->findPatient(2,2)])
-@foreach ($bundle->findAllergy(2,2) as $allergy)
-    @include('fhir._factory', ["obj"=>$allergy])
-@endforeach
-
-@foreach ($bundle->findCompositions(2,2,0) as $key => $composition)
+@foreach ($bundle->findNotaEvolucion(2) as $key => $composition)
     <div id="{{$composition->resourceType.'/'.$composition->id}}"></div>
     <div class="element">
-        @if ($composition->esNotaEvolucion())
-            <h4>#{{$key+1}} Nota de evolución</h4>
-        @endif
-        @if ($composition->esHistoriaClinica())
-            <h4>#{{$key+1}} Historia Clínica</h4>
-        @endif
-        @if (!$composition->esHistoriaClinica() && !$composition->esNotaEvolucion())
-            <h4>#{{$key+1}} Composición</h4>
-        @endif
+        <h4>#{{$key+1}} Nota de evolución</h4>
         @if (isset($composition->encounter))
-            @include('fhir._factory', ["obj"=>$bundle->findResource($composition->encounter->getReferenceId(), 2, 2)])
+            @include('fhir._factory', ["obj"=>$bundle->findResource($composition->encounter->getReferenceId(), 2)])
         @endif
 
         @foreach ($composition->section as $key => $section)
@@ -36,7 +38,7 @@
                     @endif
                     <div class="collapsible-body">
                         @foreach ($section->getReferences() as $reference)
-                            @include('fhir._factory', ["obj"=>$bundle->findResource($reference->getReferenceId(), 2, 2), "not"=>true])
+                            @include('fhir._factory', ["obj"=>$bundle->findResource($reference->getReferenceId(), 2), "not"=>true])
                         @endforeach
                     </div>
                 </li>
@@ -45,20 +47,12 @@
     </div>
 @endforeach
 
-@foreach ($bundle->findCompositions(2,2,1) as $key => $composition)
+@foreach ($bundle->findHistoriaClinica(2,1) as $key => $composition)
     <div id="{{$composition->resourceType.'/'.$composition->id}}"></div>
     <div class="element">
-        @if ($composition->esNotaEvolucion())
-            <h4>#{{$key+1}} Nota de evolución</h4>
-        @endif
-        @if ($composition->esHistoriaClinica())
-            <h4>#{{$key+1}} Historia Clínica</h4>
-        @endif
-        @if (!$composition->esHistoriaClinica() && !$composition->esNotaEvolucion())
-            <h4>#{{$key+1}} Composición</h4>
-        @endif
+        <h4>#{{$key+1}} Historia clínica</h4>
         @if (isset($composition->encounter))
-            @include('fhir._factory', ["obj"=>$bundle->findResource($composition->encounter->getReferenceId(), 2, 2)])
+            @include('fhir._factory', ["obj"=>$bundle->findResource($composition->encounter->getReferenceId(), 2)])
         @endif
 
         @foreach ($composition->section as $key => $section)
@@ -71,7 +65,7 @@
                     @endif
                     <div class="collapsible-body">
                         @foreach ($section->getReferences() as $reference)
-                            @include('fhir._factory', ["obj"=>$bundle->findResource($reference->getReferenceId(), 2, 2), "not"=>true])
+                            @include('fhir._factory', ["obj"=>$bundle->findResource($reference->getReferenceId(), 2), "not"=>true])
                         @endforeach
                     </div>
                 </li>
