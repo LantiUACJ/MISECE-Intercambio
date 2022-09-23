@@ -15,5 +15,6 @@ class Log extends Model
         "hospital",
         "consultor",
         "respuestas",
+        "txhash",
     ];
 }

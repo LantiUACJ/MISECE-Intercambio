@@ -131,6 +131,7 @@ class PetitionHelper{
         $this->log["consultor"] = $this->consultor;
         $this->log["hospital"] = $this->hospital->nombre;
         $this->log["respuestas"] = substr($this->log["respuestas"],0,strlen($this->log["respuestas"])-1);
+        $this->log["txhash"] = "";
         $data = new \App\Tools\JsonProcessHelper($this->data);
         $this->data = $data->sortDesc();
     }
@@ -146,7 +147,7 @@ class PetitionHelper{
     }
 
     private function blockChain(){
-        if(!env("DISABLE_CHAIN", true)){
+        if(!env("DISABLE_CHAIN", false)){
             $log = new \App\Models\Log($this->log);
             $log->save();
             $logChain = new LogChain();

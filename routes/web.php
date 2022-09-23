@@ -1,14 +1,16 @@
 <?php
 
-use App\Fhir\Resource\Bundle;
 use Illuminate\Support\Facades\Route;
+use \App\Fhir\Resource\Bundle;
 use \App\Http\Controllers\HospitalController;
 use \App\Http\Controllers\PacienteController;
 use \App\Http\Controllers\PacienteBasicoController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\BlockchainController;
 use \App\Http\Controllers\TestController;
-use App\Http\Controllers\UserHospitalController;
+use \App\Http\Controllers\UserHospitalController;
+use \App\Models\Log;
+use \App\Tools\LogChain;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,7 @@ use App\Http\Controllers\UserHospitalController;
 
 Route::get('/', [\App\Http\Controllers\SiteController::class, "index"])->name("home");
 Route::get('login', [\App\Http\Controllers\SiteController::class, "login"])->name('login');
-Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"])->name('login');
+Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"])/*->middleware("throttle:3,15")*/->name('login');
 Route::get('/logout', [\App\Http\Controllers\SiteController::class, "logout"]);
 
 Route::middleware(["auth", "admin"])->group(function (){
@@ -79,12 +81,6 @@ Route::middleware(["auth","hospital"])->group(function (){
     Route::post('/users/delete/{user}', [UserController::class, "delete"])->middleware(["userProtect"]);
     Route::get("test/indice", [TestController::class, "testIndice"]);
 });
-
-use App\Fhir\Resource\MedicationRequest;
-use App\Models\Log;
-use App\Tools\CurlHelper;
-use App\Tools\LogChain;
-use Illuminate\Support\Facades\Storage;
 
 Route::get("test", function (){
     set_time_limit(-1);
