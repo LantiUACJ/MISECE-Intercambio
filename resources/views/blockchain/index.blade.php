@@ -24,7 +24,7 @@
                 <label for="curp">Respuestas</label>
             </div>
         </div>
-        <button type="submit" class="waves-effect waves-light btn modal-trigger"><i class="material-icons left">save</i>Guardar</button>
+        <button type="submit" class="waves-effect waves-light btn modal-trigger"><i class="material-icons left">search</i>Buscar</button>
     </form>
 
     <p class="subtitle">Datos</p>
@@ -53,12 +53,12 @@
                     <th>{{$item->hospital}}</th>
                     <th>{{$item->consultor}}</th>
                     <th>{{$item->respuestas}}</th>
-
                     
                 <!-- DATA -->
 
                     <td class="action-users">
-                        <a href="{{url("/blockchain/details/".$item->id)}}" class="waves-effect waves-light btn"><i class="material-icons left">assignment_ind</i>Detalle</a>
+                        <a data-position="top" class="tooltipped waves-effect waves-light btn" data-tooltip="{{$item->txhash}}"><i class="material-icons left">verified_user</i>TxHash</a>
+                        <a data-position="top" href="{{"http://34.231.12.123:8080/tx/".$item->txhash}}" class="tooltipped waves-effect waves-light btn" data-tooltip="consultar en blockchain"><i class="material-icons left">insert_link</i>Blockchain</a>
                     </td>
                 </tr>
             @endforeach
