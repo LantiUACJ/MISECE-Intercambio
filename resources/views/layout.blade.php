@@ -41,6 +41,9 @@
                                         <a href="{{url('/hospital')}}" class="{{ request()->is('hospital/*')||request()->is('hospital') ? 'active' : null }}">
                                             Sistemas ECEs
                                         </a>
+                                        <a href="{{url('/hos/usuario')}}" class="{{ request()->is('hos/usuario/*')||request()->is('hos/usuario') ? 'active' : null }}">
+                                            Registrar Usuario
+                                        </a>
                                         <a href="{{url('/blockchain')}}" class="{{ request()->is('blockchain/*')||request()->is('blockchain') ? 'active' : null }}">
                                             Logs
                                         </a>

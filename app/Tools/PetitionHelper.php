@@ -24,6 +24,7 @@ class PetitionHelper{
         elseif($type === 2){
             $this->url =  "patient/basic";
         }
+        $this->filtraHospital = true;
     }
 
     public function searchPatient(){
@@ -32,7 +33,14 @@ class PetitionHelper{
     }
 
     public function getHospitalIndice(){
-        return HospitalIndice::where("indice_id",$this->indice->id)->where("hospital_id","<>",$this->hospital->id)->get();
+        $query = HospitalIndice::where("indice_id",$this->indice->id);
+        if($this->filtraHospital)
+            $query->where("hospital_id","<>",$this->hospital->id)->get();
+        return $query->get();
+    }
+
+    public function filtrarHospital($filtrar){
+        $this->filtraHospital = $filtrar;
     }
 
     public function validateCode($codigo){
@@ -107,26 +115,44 @@ class PetitionHelper{
             $bundle = $curlConsulta->get();
             if($curlConsulta->success() == 200){
                 $data = [];
-                $this->log["respuestas"] .= $hospitalIndice->hospital->user;
+                $this->log["respuestas"] .= $hospitalIndice->hospital->user . ",";
                 if(env("MODULO_PROCESAMIENTO", "ignore") != "ignore"){
                     $curlProcesamiento = new \App\Tools\CurlHelper(env("MODULO_PROCESAMIENTO") . "procesarSNOMED/Bundle",$bundle);
                     $procesado = $curlProcesamiento->postJson();
                     if($curlProcesamiento->success() == 200) $data = new \App\Fhir\Resource\Bundle($procesado);
                 }
                 if(!$data) $data = new \App\Fhir\Resource\Bundle($bundle);
+
                 $this->data[] = ["bundle"=>$data,"hospital"=>$hospitalIndice->hospital];
             }
         }
+        $this->log["fecha"] = \Carbon\Carbon::now()->format("Y-m-d H:i:s");
+        $this->log["paciente"] = $this->curp;
+        $this->log["consultor"] = $this->consultor;
+        $this->log["hospital"] = $this->hospital->nombre;
+        $this->log["respuestas"] = substr($this->log["respuestas"],0,strlen($this->log["respuestas"])-1);
+        $this->log["txhash"] = "";
         $data = new \App\Tools\JsonProcessHelper($this->data);
         $this->data = $data->sortDesc();
     }
     
     public function renderPartialHtml(){
+        $this->blockChain();
         return view("_pdf",["data"=>$this->data]);
     }
 
     public function renderHtml(){
+        $this->blockChain();
         return view("pdf",["data"=>$this->data]);
+    }
+
+    private function blockChain(){
+        if(!env("DISABLE_CHAIN", false)){
+            $log = new \App\Models\Log($this->log);
+            $log->save();
+            $logChain = new LogChain();
+            $logChain->store($log);
+        }
     }
 
     /* Para pruebas */

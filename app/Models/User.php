@@ -154,4 +154,10 @@ class User extends Authenticatable
     public function isPaciente(){
         return $this->rol_id == 5;
     }
+
+    /* utilidades */
+
+    public function hospitales(){
+        return Hospital::all();
+    }
 }

@@ -1,11 +1,11 @@
 <ol>
-    @if ($paciente = $bundle->findPatient(1,1))
+    @if ($paciente = $bundle->findPatient(1))
         <li>@include('fhir.element.reference',["obj"=>$paciente->toReference()])</li>
     @endif
-    @foreach ($bundle->findCompositions(1,1,0) as $entry)
+    @foreach ($bundle->findNotaEvolucion(1) as $entry)
         <li>@include('fhir.element.reference',["obj"=>$entry->toReference()])</li>
         @foreach ($entry->getReferences() as $ref)
-            <?php  $bundle->findResource($ref->getReferenceId(), 1, 1); ?>
+            <?php  $bundle->findResource($ref->getReferenceId(), 1); ?>
         @endforeach
         <ol>
             @foreach ($entry->section as $key => $ref)
@@ -15,10 +15,10 @@
             @endforeach
         </ol>
     @endforeach
-    @foreach ($bundle->findCompositions(1,1,1) as $entry)
+    @foreach ($bundle->findHistoriaClinica(1) as $entry)
         <li>@include('fhir.element.reference',["obj"=>$entry->toReference()])</li>
         @foreach ($entry->getReferences() as $ref)
-            <?php  $bundle->findResource($ref->getReferenceId(), 1, 1); ?>
+            <?php  $bundle->findResource($ref->getReferenceId(), 1); ?>
         @endforeach
         <ol>
             @foreach ($entry->section as $key => $ref)

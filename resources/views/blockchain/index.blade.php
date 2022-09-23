@@ -1,59 +1,70 @@
 @extends('layout')
 
-@section('head')
-    <link rel="stylesheet" href="{{asset('style.css')}}">
-@endsection
-
 @section('content')
-    <div class="container text-center mt-5">
-        <h1 class="titulo">
-            <img src="{{asset('Logo_Lanti_Plain.svg')}}" alt="LaNTI_Logo" style="height:80px;" class="pb-2"></a> Block Explorer
-        </h1>
-        <h4 class="subtitulo">
-            Explorador de bloques Ethereum. <span style="color: rgb(43, 90, 177);">Laboratorio Nacional de Tecnologías de Información</span>
-        </h4>
-        <div class="gris mt-5 mb-3">
-            <b>ÚLTIMOS 20 BLOQUES </b>
+    <form action="" method="get">
+        <div class="row">
+            <div class="input-field col s4 m6">
+                <input id="name" type="text" class="validate" name="fecha" value="{{$filtros->input('fecha','')}}">
+                <label for="name">Fecha</label>
+            </div>
+            <div class="input-field col s4 m6">
+                <input id="curp" type="text" class="validate" name="paciente" value="{{$filtros->input('paciente','')}}">
+                <label for="curp">Paciente</label>
+            </div>
+            <div class="input-field col s4 m6">
+                <input id="curp" type="text" class="validate" name="hospital" value="{{$filtros->input('hospital','')}}">
+                <label for="curp">Hospital</label>
+            </div>
+            <div class="input-field col s4 m6">
+                <input id="curp" type="text" class="validate" name="consultor" value="{{$filtros->input('consultor','')}}">
+                <label for="curp">Consultor</label>
+            </div>
+            <div class="input-field col s4 m6">
+                <input id="curp" type="text" class="validate" name="respuestas" value="{{$filtros->input('respuestas','')}}">
+                <label for="curp">Respuestas</label>
+            </div>
         </div>
-        <table class="table">
-            <thead>
+        <button type="submit" class="waves-effect waves-light btn modal-trigger"><i class="material-icons left">search</i>Buscar</button>
+    </form>
+
+    <p class="subtitle">Datos</p>
+
+    <table class="striped responsive-table dashboard-table">
+        <thead class="main-row">
+          <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Paciente</th>
+              <th>Hospital</th>
+              <th>Consultor</th>
+              <th>Respuestas</th>
+              <th class="action-users">Opciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            @foreach ($model->items() as $item)
                 <tr>
-                    <th scope="col">TxHash</th>
-                    <th scope="col">Block #</th>
-                    <th scope="col">Timestamp</th>
-                    <th scope="col">Gas Used</th>
+                <!-- DATA -->
+                    
+                    <th>{{$item->id}}</th>
+                    <th>{{$item->fecha}}</th>
+                    <th>{{$item->paciente}}</th>
+                    <th>{{$item->hospital}}</th>
+                    <th>{{$item->consultor}}</th>
+                    <th>{{$item->respuestas}}</th>
+                    
+                <!-- DATA -->
+
+                    <td class="action-users">
+                        <a data-position="top" class="tooltipped waves-effect waves-light btn" data-tooltip="{{$item->txhash}}"><i class="material-icons left">verified_user</i>TxHash</a>
+                        <a data-position="top" href="{{"http://34.231.12.123:8080/tx/".$item->txhash}}" class="tooltipped waves-effect waves-light btn" data-tooltip="consultar en blockchain"><i class="material-icons left">insert_link</i>Blockchain</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-    <ul class="pagination" id="pages">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li><a href="{{url('blockchain')}}?page=1">First</a></li>
-    </ul>
-    <div id="template_page" class="hide">
-        <li class="waves-effect __ACTIVE__"><a href="__URL__">__NUMBER__</a></li>
-    </div>
-    <div id="template_next" class="hide">
-        <li class="waves-effect __ACTIVE__"><a href="__URL__"><i class="material-icons">chevron_right</i></a></li>
-    </div>
-    <div id="template_last" class="hide">
-        <li class="waves-effect"><a href="__URL__">__NUMBER__</a></li>
-    </div>
-@endsection
+            @endforeach
+          
+        </tbody>
+    </table>
 
-
-@section('scripts')
-    <script>
-        url_template = "{{url('blockchain/details')}}";
-        const url = "{{url('blockchain')}}";
-        const rpc = "{{env('URL_BLOCKCHAIN')}}";
-        const page = {{$page}};
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>    
-    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-    <script src="{{asset('formatters.js')}}"></script>
-    <script src="{{asset('bloques.js')}}"></script>
+    {{$model->links('components.paginatorMaterialize')}}
 @endsection

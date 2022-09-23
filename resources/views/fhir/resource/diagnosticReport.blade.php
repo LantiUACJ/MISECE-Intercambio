@@ -131,14 +131,8 @@
 @if (isset($obj->conclusion))
     <p><b>Conclusión:</b></p>
     <div class="element">
-        @if (strpos($obj->conclusion, "→")!== false)
-        {!! str_replace("→","<a href=''>", explode("<<", $obj->conclusion)[0]) !!}
-            @foreach ($obj->ConceptosSNOMED as $item)
-                    @if (isset($item->id) && $item->id == str_replace(">>", "", explode("<<", $obj->conclusion)[1]))
-                        {{$item->id}}
-                    @endif
-                @endforeach
-            </a>
+        @if (strpos($obj->conclusion, "→") !== false)
+            @include('fhir.element.snomed', ["texto"=>$obj->conclusion, "snomed"=>$obj->ConceptosSNOMED])
         @else
             {{$obj->conclusion}}
         @endif
