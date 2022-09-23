@@ -39,10 +39,15 @@
                                             <input type="password" placeholder="Contraseña" name="password">
                                         </div>
                                     </div>
-                                    <div class="bottom-form">
+                                    <!--<div class="bottom-form">
                                         <a href="#modal1" class="forgot-text right modal-trigger">Olvidé mi contraseña</a>
-                                    </div>
+                                    </div>-->
                                 </div>
+                                @error('error')
+                                    <div class="col s12">
+                                        <p class="error-text">{{$message}}</p>
+                                    </div>
+                                @enderror
                             </div>
                             <div class="row">
                                 <div class="submit center">
