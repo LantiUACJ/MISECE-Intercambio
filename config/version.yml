@@ -4,11 +4,11 @@ version_source: git
 current:
   label: V
   major: 1
-  minor: 0
-  patch: 1
-  prerelease: 2-ga2c3fff
+  minor: 1
+  patch: 0
+  prerelease: 3-gdf61c86
   buildmetadata: ''
-  commit: a2c3ff
+  commit: df61c8
   timestamp:
     year: 2021
     month: 11
