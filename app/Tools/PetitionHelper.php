@@ -137,12 +137,16 @@ class PetitionHelper{
     }
     
     public function renderPartialHtml(){
-        $this->blockChain();
+        try{
+            $this->blockChain();
+        } catch(\Exception $ex){}
         return view("_pdf",["data"=>$this->data]);
     }
 
     public function renderHtml(){
-        $this->blockChain();
+        try{
+            $this->blockChain();
+        } catch(\Exception $ex){}
         return view("pdf",["data"=>$this->data]);
     }
 

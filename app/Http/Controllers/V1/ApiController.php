@@ -18,7 +18,8 @@ class ApiController extends \App\Http\Controllers\Controller{
             "codigo"=>"nullable"
         ]);
         if ($validator->fails()) {
-            return $validator->errors();
+            return redirect()->back()->withErrors($validator->errors());
+            //return $validator->errors();
         }
         $input = $validator->validated();
         $hospital_user = $request->headers->get("php-auth-user");
