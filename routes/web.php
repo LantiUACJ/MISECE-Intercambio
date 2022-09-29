@@ -81,7 +81,7 @@ Route::middleware(["auth","hospital"])->group(function (){
     Route::post('/users/delete/{user}', [UserController::class, "delete"])->middleware(["userProtect"]);
     Route::get("test/indice", [TestController::class, "testIndice"]);
 });
-
+/*
 Route::get("test", function (){
     set_time_limit(-1);
     $start = microtime(true);
@@ -156,16 +156,10 @@ Route::get("look/{start}/{end}", function ($start, $end){
 Route::get("json", function (){
     return view("form");
 });
-
 Route::get("find/{id}", function ($id){
     $log = Log::where("id", $id)->first();
     $logChain = new LogChain();
     return $logChain->find($log->id);
-});
-
-Route::get("deploy", function (){
-    $logChain = new LogChain();
-    return $logChain->deploy();
 });
 
 Route::get("errorFree", function (){
@@ -181,7 +175,7 @@ Route::get("errorFree", function (){
 
     echo (number_format(microtime(true) - $start,4)*1000) . " Milisegundos";
 });
-
+*/
 Route::get("json", function (){
     $myfile = fopen("json_pruebas/med.json", "r") or die("Unable to open file!");
     $json = fread($myfile,filesize("json_pruebas/med.json"));
