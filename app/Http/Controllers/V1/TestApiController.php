@@ -16,7 +16,7 @@ class TestApiController extends \App\Http\Controllers\Controller{
             "codigo"=>"nullable",
         ]);
         if ($validator->fails()) {
-            return $validator->errors();
+            return response($validator->errors(),400);
         }
         $input = $validator->validated();
         //$hospital_user = $request->headers->get("php-auth-user");
@@ -25,12 +25,12 @@ class TestApiController extends \App\Http\Controllers\Controller{
         $ph = new PetitionHelper($curp, null, $input["consultor"], 1);
         
         if(!$ph->fakePatient($input["numero"])){
-            return ["Error"=>"no se encontró el paciente"];
+            return response(["Error"=>"no se encontró el paciente"], 404);
         }
         
         if(!$ph->fakeValidate(isset($input["codigo"])?$input["codigo"]:"")){
             $ph->fakeCode();
-            return ["Error"=>"Código inválido"];
+            return response(["Error"=>"El código de verificación no es correcto o expiro"], 400);
         }
 
         $ph->fakeData();
@@ -49,8 +49,8 @@ class TestApiController extends \App\Http\Controllers\Controller{
         
         $ph = new PetitionHelper($curp, null, $input["consultor"], 1);
         
-        if(!$ph->fakePatient("meh")){
-            return ["Error"=>"no se encontró el paciente"];
+        if(!$ph->fakePatient("")){
+            return response(["Error"=>"no se encontró el paciente"], 404);
         }
 
         $ph->fakeData();

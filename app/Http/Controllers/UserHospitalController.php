@@ -15,7 +15,13 @@ class UserHospitalController extends Controller{
         return view("userHospital.create",["model"=>new User()]);
     }
     public function store(Request $request){
-        $data = $request->validate(User::validateArray());
+        $data = $request->validate([
+            "name"=>"required",
+            "password"=>"required",
+            "email"=>"required|email|unique:users",
+            "rol_id"=>"required",
+            "hospital_id"=>"required",
+        ]);
         $data["password"] = Hash::make($data["password"]);
         $model = User::create($data);
         if($model){
@@ -28,7 +34,13 @@ class UserHospitalController extends Controller{
     }
     
     public function update(Request $request, User $user){
-        $data = $request->validate(User::updateValidateArray($user->id));
+        $data = $request->validate([
+            "name"=>"required",
+            "password"=>"nullable",
+            "email"=>"required|email|unique:users",
+            "rol_id"=>"required",
+            "hospital_id"=>"required",
+        ]);
         if(isset($data["password"]) && $data["password"]){
             $data["password"] = Hash::make($data["password"]);
         }
