@@ -12,7 +12,7 @@ class DateFormatFhir{
 
     public function validate(){
         if($this->date){
-            return preg_match($this->regex,$this->date);
+            return preg_match($this->regex, $this->date);
         }
     }
 

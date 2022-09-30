@@ -6,20 +6,32 @@
             <div class="input-field col s12 m6">
                 <input id="name" type="text" class="validate" name="name" value="{{old('name', $model->name)}}">
                 <label for="name">Nombre completo</label>
+                @error('name')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
             </div>
             <div class="input-field col s12 m6">
                 <input id="curp" type="text" class="validate" name="curp">
                 <label for="curp">CURP</label>
+                @error('curp')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12 m6">
                 <input id="email" type="email" class="validate" name="email" value="{{old('email', $model->email)}}">
                 <label for="email">Correo electrónico</label>
+                @error('email')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
             </div>
             <div class="input-field col s12 m6">
                 <input id="password" type="password" class="validate" name="password">
                 <label for="password">Contraseña</label>
+                @error('password')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <div class="row">
@@ -29,17 +41,23 @@
                     <option value="2" {{$model->rol_id==2?"selected":""}}>Hospital</option>
                 </select>
                 <label>Nivel de acceso</label>
+                @error('rol_id')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <select name="rol_id">
+                <select name="hospital_id">
                     <option value="" disabled selected>Hospital</option>
                     @foreach ($model->hospitales() as $item)
                         <option value="{{$item->id}}">{{$item->nombre}}</option>
                     @endforeach
                 </select>
                 <label>Hospital</label>
+                @error('hospital_id')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
             </div>
         </div>
 
