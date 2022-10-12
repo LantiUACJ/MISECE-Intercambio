@@ -6,33 +6,20 @@
     </div>
 @endif
 @include('fhir.element.element',["obj"=>$obj])
-@if (isset($obj->system))
-    <!--<div class="col s8">
-        Sistema: {{$obj->system}}
-    </div>-->
+@if (isset($obj->system) && env("TEST", false))
+    Sistema: {{$obj->system}}
 @endif
-@if (isset($obj->version))
-    <div class="col s4">
-        Versión:
-    </div>
-    <div class="col s8">
-        {{$obj->version}}
-    </div>
+@if (isset($obj->version) && env("TEST", false))
+    Versión: {{$obj->version}}
 @endif
-@if (isset($obj->code) || isset($obj->display))
-    <div class="col s8">
-        @if (isset($obj->code))
-            {{$obj->code}} 
-        @endif
-        @if (isset($obj->display))
-            <b>{{$obj->display}}</b>
-        @endif
-    </div>
+@if (isset($obj->code))
+    {{$obj->code}}
+@endif
+@if (isset($obj->display))
+    <b>{{$obj->display}}</b>
 @endif
 @if (isset($obj->userSelected))
-    <div class="col s12">
-        {{$obj->userSelected?"Fue":"NO fue"}} seleccionado por el usuario.
-    </div>
+    {{$obj->userSelected?"Fue":"NO fue"}} seleccionado por el usuario.
 @endif
 @if (env("TEST", false))
     <div class="row">

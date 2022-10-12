@@ -6,18 +6,11 @@
     </div>
 @endif
 @include('fhir.element.element',["obj"=>$obj])
-
 @if (isset($obj->status))
-    
-    Estado
-    {{ str_replace(["generated","extensions","additional","empty"],["Generado","Extensiones","Adicional","Vacío"],strtolower($obj->status))}}
-
+    Estado del resumen: <b>{{ str_replace(["generated","extensions","additional","empty"],["Generado","Extensiones","Adicional","Vacío"],strtolower($obj->status))}}</b>
 @endif
 @if (isset($obj->div))
-    
-    Texto
-    {{ $obj->div }}
-	
+    {!! $obj->div !!}
 @endif
 @if (env("TEST", false))
     <div class="row">

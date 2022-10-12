@@ -1,126 +1,95 @@
 @if (env("TEST", false))
     <div class="row">
-        <div class="col s12">
+        <div class="element">
             <b>===MEDICATION===</b>
         </div>
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
-    <div class="row">
-        <div class="col s12">
-            Identificador
+@if (isset($obj->identifier) && $obj->identifier)
+    <p><b>Identificador:</b></p>
+    @foreach ($obj->identifier as $identifier)
+        <div class="element">
+            @include('fhir.element.identifier',["obj"=>$identifier])
         </div>
-        @foreach ($obj->identifier as $identifier)
-            <div class="col s6">
-                @include('fhir.element.identifier',["obj"=>$identifier])
-            </div>
-        @endforeach
-    </div>
+    @endforeach
 @endif
 @if (isset($obj->code))
-    <div class="row">
-        <div class="col s12">
-            Código
-        </div>
-        <div class="col s12">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->code])
-        </div>
+    <p><b>Código:</b></p>
+    <div class="element">
+        @include('fhir.element.codeableConcept',["obj"=>$obj->code])
     </div>
 @endif
 @if (isset($obj->status))
-    <div class="row">
-        <div class="col s12">
-            Estado {{ str_replace(["registered", "inactive", "entered-in-error"], ["Activo", "Inactivo", "Con error"], strtolower($obj->status))}}
-        </div>
-        <div class="col s12">
-            
-        </div>
-    </div>
+    <p><b>Estado:</b>
+        {{ str_replace(
+            ["registered", "inactive", "entered-in-error"], 
+            ["Activo", "Inactivo", "Con error"], strtolower($obj->status))}}
+    </p>
 @endif
 @if (isset($obj->manufacturer))
-    <div class="row">
-        <div class="col s12">
-            Manufacturador
-        </div>
-        <div class="col s12">
-            @include('fhir.element.reference',["obj"=>$obj->manufacturer])
-        </div>
+    <p><b>Manufacturador:</b></p>
+    <div class="element">
+        @include('fhir.element.reference',["obj"=>$obj->manufacturer])
     </div>
 @endif
 @if (isset($obj->form))
-    <div class="row">
-        <div class="col s12">
-            Forma
-        </div>
-        <div class="col s12">
-            @include('fhir.element.codeableConcept',["obj"=>$obj->form])
-        </div>
+    <p><b>Forma:</b></p>
+    <div class="element">
+        @include('fhir.element.codeableConcept',["obj"=>$obj->form])
     </div>
 @endif
 @if (isset($obj->amount))
-    <div class="row">
-        <div class="col s12">
-            Cantidad
-        </div>
-        <div class="col s12">
-            @include('fhir.element.ratio',["obj"=>$obj->amount])
-        </div>
+    <p><b>Cantidad:</b></p>
+    <div class="element">
+        @include('fhir.element.ratio',["obj"=>$obj->amount])
     </div>
 @endif
-@if (isset($obj->ingredient))
-    <div class="row">
-        <div class="col s12">
-            Ingrediente
-        </div>
-        <div class="col s12">
-            @if (isset($obj->ingredient))
-                <div class="row">
-                    @foreach ($obj->ingredient as $ingredient)
-                        @if (isset($ingredient->itemCodeableConcept)) 
-                            <div class="col s6">
-                                Objeto <br>
-                                @include('fhir.element.codeableConcept',["obj"=>$ingredient->itemCodeableConcept])
-                            </div>
-                        @endif
-                        @if (isset($ingredient->itemReference))
-                            <div class="col s6">
-                                Objeto <br>
-                                @include('fhir.element.reference',["obj"=>$ingredient->itemReference])
-                            </div>
-                        @endif
-                        @if (isset($ingredient->isActive)) 
-                            <div class="col s6">
-                                Activo <br>
-                                {{$ingredient->isActive?"SI":"NO"}}
-                            </div>
-                        @endif
-                        @if (isset($ingredient->strength)) 
-                            <div class="col s6">
-                                Fuerza <br>
-                                @include('fhir.element.ratio',["obj"=>$ingredient->strength])
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-            @endif
-        </div>
+@if (isset($obj->ingredient) && $obj->ingredient)
+    <p><b>Ingrediente:</b></p>
+    <div class="element">
+        @if (isset($obj->ingredient) && $obj->ingredient)
+            @foreach ($obj->ingredient as $ingredient)
+                @if (isset($ingredient->itemCodeableConcept)) 
+                    <p><b>Objeto:</b></p>
+                    <div class="element">
+                        @include('fhir.element.codeableConcept',["obj"=>$ingredient->itemCodeableConcept])
+                    </div>
+                @endif
+                @if (isset($ingredient->itemReference))
+                    <p><b>Objeto:</b></p>
+                    <div class="element">
+                        @include('fhir.element.reference',["obj"=>$ingredient->itemReference])
+                    </div>
+                @endif
+                @if (isset($ingredient->isActive)) 
+                    <p><b>Activo:</b></p>
+                    <div class="element">
+                        {{$ingredient->isActive?"SI":"NO"}}
+                    </div>
+                @endif
+                @if (isset($ingredient->strength)) 
+                    <p><b>Fuerza:</b></p>
+                    <div class="element">
+                        @include('fhir.element.ratio',["obj"=>$ingredient->strength])
+                    </div>
+                @endif
+            @endforeach
+        @endif
     </div>
 @endif
 @if (isset($obj->batch))
-    <div class="row">
-        <div class="col s2">
-            Lote:
-        </div>
+    <p><b>Lote:</b></p>
+    <div class="element">
         @if (isset($obj->batch->lotNumber))
-            <div class="col s4">
-                <b>Número de lote:</b>
+            <p><b>Número de lote:</b></p>
+            <div class="element">
                 {{$obj->batch->lotNumber}}
             </div>
         @endif
         @if (isset($obj->batch->expirationDate))
-            <div class="col s4">
-                <b>Fecha de expiración:</b>
+            <p><b>Fecha de expiración:</b></p>
+            <div class="element">
                 {{$obj->batch->expirationDate}}
             </div>
         @endif
@@ -128,7 +97,7 @@
 @endif
 @if (env("TEST", false))
     <div class="row">
-        <div class="col s12">
+        <div class="element">
             <b>===END-MEDICATION===</b>
         </div>
     </div>

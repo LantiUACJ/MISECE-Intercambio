@@ -1,37 +1,24 @@
 @include('fhir.resource.resource',["obj"=>$obj])
-<div class="row">
-    @if (isset($obj->text) && false)
-        <div class="col s4">Resumen:</div>
-        <div class="col s8">
-            @include('fhir.element.narrative',["obj"=>$obj->text])
-        </div>
+<div class="element">
+    @if (isset($obj->text) && env("TEST", false))
+        <p>Resumen:</p>
+        @include('fhir.element.narrative',["obj"=>$obj->text])
     @endif
-    @if (isset($obj->contained) && true)
+    @if (isset($obj->contained) && $obj->contained)
+        <p><b>Contenido adicional:</b></p>
         @foreach ($obj->contained as $contained)
-            <div class="col s4">
-                Contenido
-                @include('fhir.resource.resource',["obj"=>$contained])
-            </div>
+            @include('fhir._factory',["obj"=>$contained])
         @endforeach
     @endif
-    @if (isset($obj->modifierExtension) && false)
-        <div class="col s4">
-            Modificador de extensión
-            {{$obj->modifierExtension}}
+    @if (isset($obj->modifierExtension))
+        <p>Modificador de extensión: {{$obj->modifierExtension}}</p>
+    @endif
+    @if (isset($obj->extension) && $obj->extension)
+        <p>Extensiones:</p>
+        <div class="element">
+            @foreach ($obj->extension as $extension)
+                @include('fhir.element.extension',["obj"=>$extension]) <br>
+            @endforeach
         </div>
     @endif
 </div>
-@if (isset($obj->extension))
-    <div class="row">
-        <!--<div class="col s12">Extensión:</div>-->
-        @foreach ($obj->extension as $extension)
-            @if (isset($extension->uri))
-                {{$extension->uri}}
-            @endif
-
-            <div class="col s6 bloque">
-                @include('fhir.element.extension',["obj"=>$extension])
-            </div>
-        @endforeach
-    </div>
-@endif

@@ -6,32 +6,28 @@
     </div>
 @endif
 @include('fhir.element.element',["obj"=>$obj])
-<div class="row">
+@if (isset($obj->reference))
+    <a href="#{{$obj->reference}}" onclick="$('#{{str_replace("/","\\\\/", $obj->reference)}}').click()">(ver)
+@endif
+<!-- @if (isset($obj->type))
+    Tipo: {{ str_replace(["observation", "medicationadministration","patient","encounter"], ["Observación","Administración de medicamento", "Paciente", "Visita"], strtolower($obj->type))}}
+@endif -->
+@if (isset($obj->identifier))
+    Identificador:
+    @include('fhir.element.identifier',["obj"=>$obj->identifier])
+@endif
+@if (isset($obj->display) && $obj->display)
+    {{$obj->display}}
+@else
     @if (isset($obj->reference))
-        <div class="col s4">
-            Referencia: <br> 
-            {{$obj->reference}}
-        </div>
+        {{$obj->reference}}
     @endif
-    @if (isset($obj->type))
-        <div class="col s4">
-            Tipo: <br> 
-            {{ str_replace(["observation", "medicationadministration","patient","encounter"], ["Observación","Administración de medicamento", "Paciente", "Visita"], strtolower($obj->type))}}
-        </div>
-    @endif
-    @if (isset($obj->identifier))
-        <div class="col s4">
-            Identificador: <br> 
-            @include('fhir.element.identifier',["obj"=>$obj->reference])
-        </div>
-    @endif
-    @if (isset($obj->display))
-        <div class="col s4">
-            Mostrar: <br> 
-            {{$obj->display}}
-        </div>
-    @endif
-</div>
+@endif
+
+@if (isset($obj->reference))
+    </a>
+@endif
+
 @if (env("TEST", false))
     <div class="row">
         <div class="col s12">

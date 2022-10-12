@@ -7,7 +7,7 @@
 @endif
 @include('fhir.element.element',["obj"=>$obj])
 @if ( isset($obj->contentType))
-    Tipo de contenido
+    <p><b>Tipo de contenido:</b></p>
     {{$obj->contentType}}
 @endif
 @if ( isset($obj->language))
@@ -15,8 +15,16 @@
     {{$obj->language}}
 @endif
 @if ( isset($obj->data))
-    Datos
-    <p style="white-space: pre-wrap;">{{base64_decode($obj->data)}}</p>
+    <p><b>Datos:</b></p>
+    @if (isset($obj->contentType) && $obj->contentType == "image/jpeg")
+        <img src="data:image/jpeg;base64,{{$obj->data}}" alt="">
+    @else
+        @if (isset($obj->contentType) && $obj->contentType == "application/pdf")
+            <embed src="data:application/pdf;base64,{{$obj->data}}" type="application/pdf" width="100%" height="500px"/>
+        @else
+            <p style="white-space: pre-wrap;">{{base64_decode($obj->data)}}</p>
+        @endif
+    @endif
 @endif
 @if ( isset($obj->url))
     URL

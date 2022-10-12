@@ -6,59 +6,42 @@
     </div>
 @endif
 @include('fhir.element.element',["obj"=>$obj])
-<div class="row">
-    @if (isset($obj->text))
-        <div class="col s3">Nombre Completo: {{$obj->text}} </div>
-    @endif
-    @if (isset($obj->use))
-        <div class="col s3">Tipo de uso {{ str_replace(["usual","official","temp","nickname","anonymous","old","maiden"],["Usual","Oficial","Temporal","Apodo","Anónimo","Nombre viejo","Nombre de Soltera"], strtolower($obj->use))}}</div>
-    @endif
-    @if (isset($obj->period))
-        <div class="col s3">Período @include('fhir.element.period',["obj"=>$obj->period])</div>
-    @endif
-</div>
-<div class="row">
-    @if (isset($obj->prefix))
-        <div class="col s3"> Prefijo</div>
-    @endif
+
+@if (isset($obj->prefix))
+    @foreach ($obj->prefix as $prefix)
+        <b>{{$prefix}}</b>
+    @endforeach
+@endif
+
+@if ((isset($obj->text) && !$obj->text) || (!isset($obj->text)))
     @if (isset($obj->given))
-        <div class="col s3"> Nombre(s)</div>
+        @foreach ($obj->given as $given)
+            <b>{{$given}}</b>
+        @endforeach
     @endif
     @if (isset($obj->family))
-        <div class="col s3"> Apellido</div>
+        <b>{{$obj->family}}</b>
     @endif
-    @if (isset($obj->suffix))
-        <div class="col s3"> Sufijo</div>
+@endif
+
+@if (isset($obj->text) && $obj->text)
+    <b>{{$obj->text}}</b>.
+@endif
+
+@if (isset($obj->suffix))
+    @foreach ($obj->suffix as $suffix)
+        <b>{{$suffix}}</b>
+    @endforeach
+@endif
+@if (isset($obj->use))
+    @if ($obj->use !== "official")
+        Este nombre es de tipo <b>{{ str_replace(["usual","official","temp","nickname","anonymous","old","maiden"],["Usual","Oficial","Temporal","Apodo","Anónimo","Nombre viejo","Nombre de Soltera"], strtolower($obj->use))}}</b>.
     @endif
-</div>
-<div class="row">
-    @if (isset($obj->prefix))
-        <div class="col s3">
-            @foreach ($obj->prefix as $prefix)
-                {{$prefix}}
-            @endforeach
-        </div>
-    @endif
-    @if (isset($obj->given))
-        <div class="col s3">
-            @foreach ($obj->given as $given)
-                {{$given}}
-            @endforeach
-        </div>
-    @endif
-    @if (isset($obj->family))
-        <div class="col s3">
-            {{$obj->family}}
-        </div>
-    @endif
-    @if (isset($obj->suffix))
-        <div class="col s3">
-            @foreach ($obj->suffix as $suffix)
-                {{$suffix}}
-            @endforeach
-        </div>
-    @endif
-</div>
+@endif
+@if (isset($obj->period))
+    Durante el período de @include('fhir.element.period',["obj"=>$obj->period]).
+@endif
+
 @if (env("TEST", false))
     <div class="row">
         <div class="col s12">

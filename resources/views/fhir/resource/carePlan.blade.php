@@ -6,160 +6,355 @@
     </div>
 @endif
 @include('fhir.resource.domainResource',["obj"=>$obj])
-@if (isset($obj->identifier))
-    <div class="row">
-        <div class="col s12">
-            Identificador
-        </div>
-        @foreach ($obj->identifier as $identifier)
-            <div class="col s6">
-                @include('fhir.element.identifier',["obj"=>$identifier])
-            </div>
+@if (isset($obj->instantiatesCanonical) && $obj->instantiatesCanonical)
+    <p><b>Instancia</b></p>
+    <div class="element">
+        @foreach ($obj->instantiatesCanonical as $instantiatesCanonical)
+            {{$instantiatesCanonical}}
         @endforeach
     </div>
 @endif
-"instantiatesCanonical" : [{ canonical(PlanDefinition|Questionnaire|Measure|ActivityDefinition|OperationDefinition) }], // Instantiates FHIR protocol or definition
-@if (isset($obj->instantiatesUri))
-    <div class="row">
-        <div class="col s12">
-            Uri de la instancia
-        </div>
+@if (isset($obj->instantiatesUri) && $obj->instantiatesUri)
+    <p><b>Instancia</b></p>
+    <div class="element">
         @foreach ($obj->instantiatesUri as $instantiatesUri)
-            <div class="col s6">
-                {{$instantiatesUri}}
-            </div>
+            {{$instantiatesUri}}
         @endforeach
     </div>
 @endif
-@if (isset($obj->basedOn))
-    <div class="row">
-        <div class="col s12">
-            Basado en
-        </div>
+@if (isset($obj->basedOn) && $obj->basedOn)
+    <p><b>Basado en</b></p>
+    <div class="element">
         @foreach ($obj->basedOn as $basedOn)
-            <div class="col s6">
-                @include('fhir.element.reference',["obj"=>$basedOn])
-            </div>
+            @include('fhir.element.reference',["obj"=>$basedOn])
         @endforeach
-    </div>    
-@endif
-"replaces" : [{ Reference(CarePlan) }], // CarePlan replaced by this CarePlan
-"partOf" : [{ Reference(CarePlan) }], // Part of referenced CarePlan
-@if (isset($obj->status))
-    <div class="row">
-        <div class="col s12">
-            Estado: {{ str_replace(["draft", "active","on-hold","revoked","completed","entered-in-error","unknown"],
-                                   ["draft", "active","on-hold","revoked","completed","entered-in-error","unknown"], strtolower($obj->status))}}
-        </div>
     </div>
+@endif
+@if (isset($obj->replaces) && $obj->replaces)
+    <p><b>Remplaza:</b></p>
+    <div class="element">
+        @foreach ($obj->replaces as $replaces)
+            @include('fhir.element.reference',["obj"=>$replaces])
+        @endforeach
+    </div>
+@endif
+@if (isset($obj->partOf) && $obj->partOf)
+    <p><b>Parte de:</b></p>
+    <div class="element">
+        @foreach ($obj->partOf as $partOf)
+            @include('fhir.element.reference',["obj"=>$partOf])
+        @endforeach
+    </div>
+@endif
+@if (isset($obj->status))
+    <p><b>Estado: {{ str_replace(["draft", "active","on-hold","revoked","completed","entered-in-error","unknown"],
+        ["draft", "active","on-hold","revoked","completed","entered-in-error","unknown"], strtolower($obj->status))}}</b></p>
 @endif
 @if (isset($obj->intent))
-    <div class="row">
-        <div class="col s12">
-            Intención: {{ str_replace(["proposal", "plan","order","option"],
-                                      ["proposal", "plan","order","option"], strtolower($obj->intent))}}
-        </div>
+    <p><b>Propósito: {{ str_replace(["proposal", "plan","order","option"],
+        ["proposal", "plan","order","option"], strtolower($obj->intent))}}</b></p>
+@endif
+@if (isset($obj->category) && $obj->category)
+    <p><b>Categoría:</b></p>
+    <div class="element">
+        @foreach ($obj->category as $category)
+            @include('fhir.element.codeableConcept',["obj"=>$category])
+        @endforeach
     </div>
 @endif
-"category" : [{ CodeableConcept }], // Type of plan
 @if (isset($obj->title))
-    <div class="row">
-        <div class="col s12">
-            Título: {{ $obj->title }}
-        </div>
-    </div>
+    <p><b>Título: {{ $obj->title }}</b></p>
 @endif
 @if (isset($obj->description))
-    <div class="row">
-        <div class="col s12">
-            Descripción: {{ $obj->description }}
-        </div>
-    </div>
+    <p><b>Descripción: {{ $obj->description }}</b></p>
 @endif
 @if (isset($obj->subject))
-    <div class="row">
-        <div class="col s12">
-            Paciente:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.reference',["obj"=>$obj->subject])
-        </div>
+    <p><b>Paciente:</b> @include('fhir.element.reference',["obj"=>$obj->subject])</p>
+@endif
+@if (isset($obj->encounter) && $obj->encounter)
+    <p><b>Visita</b></p>
+    <div class="element">
+        @include('fhir.element.reference',["obj"=>$obj->encounter])
     </div>
 @endif
-@if (isset($obj->encounter))
-    <div class="row">
-        <div class="col s12">
-            Visita
-        </div>
-        <div class="col s12">
-            @include('fhir.element.reference',["obj"=>$obj->encounter])
-        </div>
-    </div>
-@endif
+<!-- IDENTIFICADORES DE TIEMPO -->
 @if (isset($obj->period))
-    <div class="row">
-        <div class="col s12">
-            Período
-        </div>
-        <div class="col s12">
-            @include('fhir.element.period',["obj"=>$obj->period])
-        </div>
-    </div>
+    <p><b>Período:</b> @include('fhir.element.period',["obj"=>$obj->period])</p>
 @endif
 @if (isset($obj->created))
-    <div class="row">
-        <div class="col s12">
-            Creado en: {{ $obj->created }}
-        </div>
+    <p><b>Creado en: {{ $obj->created }}</b></p>
+@endif
+@if (isset($obj->author) && $obj->author)
+    <p><b>Autor:</b></p>
+    <div class="element">
+        @include('fhir.element.reference',["obj"=>$obj->author])
     </div>
 @endif
-"author" : { Reference(Patient|Practitioner|PractitionerRole|Device|RelatedPerson|Organization|CareTeam) }, // Who is the designated responsible party
-@if (isset($obj->author))
-    <div class="row">
-        <div class="col s12">
-            Autor:
-        </div>
-        <div class="col s12">
-            @include('fhir.element.reference',["obj"=>$obj->author])
-        </div>
+@if (isset($obj->contributor) && $obj->contributor)
+    <p><b>Colaboradores:</b></p>
+    <div class="element">
+        @foreach ($obj->contributor as $contributor)
+            @include('fhir.element.reference',["obj"=>$contributor])
+        @endforeach
     </div>
 @endif
-"contributor" : [{ Reference(Patient|Practitioner|PractitionerRole|Device|RelatedPerson|Organization|CareTeam) }], // Who provided the content of the care plan
-"careTeam" : [{ Reference(CareTeam) }], // Who's involved in plan?
-"addresses" : [{ Reference(Condition) }], // Health issues this plan addresses
-"supportingInfo" : [{ Reference(Any) }], // Information considered as part of plan
-"goal" : [{ Reference(Goal) }], // Desired outcome of plan
-"activity" : [{ // Action to occur as part of plan
-    "outcomeCodeableConcept" : [{ CodeableConcept }], // Results of the activity
-    "outcomeReference" : [{ Reference(Any) }], // Appointment, Encounter, Procedure, etc.
-    "progress" : [{ Annotation }], // Comments about the activity status/progress
-    "reference" : { Reference(Appointment|CommunicationRequest|DeviceRequest|MedicationRequest|NutritionOrder|Task|ServiceRequest|VisionPrescription|RequestGroup) }, // C? Activity details defined in specific resource
-    "detail" : { // C? In-line definition of activity
-        "kind" : "<code>", // Appointment | CommunicationRequest | DeviceRequest | MedicationRequest | NutritionOrder | Task | ServiceRequest | VisionPrescription
-        "instantiatesCanonical" : [{ canonical(PlanDefinition|ActivityDefinition|Questionnaire|Measure|OperationDefinition) }], // Instantiates FHIR protocol or definition
-        "instantiatesUri" : ["<uri>"], // Instantiates external protocol or definition
-        "code" : { CodeableConcept }, // Detail type of activity
-        "reasonCode" : [{ CodeableConcept }], // Why activity should be done or why activity was prohibited
-        "reasonReference" : [{ Reference(Condition|Observation|DiagnosticReport|DocumentReference) }], // Why activity is needed
-        "goal" : [{ Reference(Goal) }], // Goals this activity relates to
-        "status" : "<code>", // R!  not-started | scheduled | in-progress | on-hold | completed | cancelled | stopped | unknown | entered-in-error
-        "statusReason" : { CodeableConcept }, // Reason for current status
-        "doNotPerform" : <boolean>, // If true, activity is prohibiting action
-        // scheduled[x]: When activity is to occur. One of these 3:
-        "scheduledTiming" : { Timing },
-        "scheduledPeriod" : { Period },
-        "scheduledString" : "<string>",
-        "location" : { Reference(Location) }, // Where it should happen
-        "performer" : [{ Reference(Practitioner|PractitionerRole|Organization|RelatedPerson|Patient|CareTeam|HealthcareService|Device) }], // Who will be responsible?
-        // product[x]: What is to be administered/supplied. One of these 2:
-        "productCodeableConcept" : { CodeableConcept },
-        "productReference" : { Reference(Medication|Substance) },
-        "dailyAmount" : { Quantity(SimpleQuantity) }, // How to consume/day?
-        "quantity" : { Quantity(SimpleQuantity) }, // How much to administer/supply/consume
-        "description" : "<string>" // Extra info describing activity to perform
-    }
-}],
-"note" : [{ Annotation }] // Comments about the plan
+@if (isset($obj->careTeam) && $obj->careTeam)
+    <p><b>Equipo:</b></p>
+    <div class="element">
+        @foreach ($obj->careTeam as $careTeam)
+            * @include('fhir.element.reference',["obj"=>$careTeam]) <br>
+        @endforeach
+    </div>
+@endif
+@if (isset($obj->addresses) && $obj->addresses)
+    <p><b>Problemas a tratar:</b></p>
+    <div class="element">
+        @foreach ($obj->addresses as $addresses)
+            * @include('fhir.element.reference',["obj"=>$addresses]) <br>
+        @endforeach
+    </div>
+@endif
+@if (isset($obj->supportingInfo) && $obj->supportingInfo)
+    <p><b>Información de soporte:</b></p>
+    <div class="element">
+        @foreach ($obj->supportingInfo as $supportingInfo)
+            @include('fhir.element.reference',["obj"=>$supportingInfo])
+        @endforeach
+    </div>
+@endif
+@if (isset($obj->goal) && $obj->goal)
+    <p><b>Meta(s):</b></p>
+    <div class="element">
+        @foreach ($obj->goal as $goal)
+            * @include('fhir.element.reference',["obj"=>$goal]) <br>
+        @endforeach
+    </div>
+@endif
+@if (isset($obj->activity) && $obj->activity)
+    <p><b>Actividad(es):</b></p>
+    <div class="element">
+        @foreach ($obj->activity as $activity)
+            <hr>
+            @if (isset($activity->outcomeCodeableConcept) && $activity->outcomeCodeableConcept)
+                <p><b>Resultado de la actividad:</b></p>
+                <div class="element">
+                    @foreach ($activity->outcomeCodeableConcept as $outcomeCodeableConcept)
+                        * @include('fhir.element.codeableConcept',["obj"=>$outcomeCodeableConcept]) <br>
+                    @endforeach
+                </div>
+            @endif
+            @if (isset($activity->outcomeReference) && $activity->outcomeReference)
+                <p><b>Referencia del resultado de la actividad:</b></p>
+                <div class="element">
+                    @foreach ($activity->outcomeReference as $outcomeReference)
+                        @include('fhir.element.reference',["obj"=>$outcomeReference])
+                    @endforeach
+                </div>
+            @endif
+            @if (isset($activity->progress) && $activity->progress)
+                <p><b>Proceso:</b></p>
+                <div class="element">
+                    @foreach ($activity->progress as $progress)
+                        * @include('fhir.element.annotation',["obj"=>$progress]) <br>
+                    @endforeach
+                </div>
+            @endif
+            @if (isset($activity->reference))
+                <p><b>Referencia:</b></p>
+                <div class="element">
+                    @include('fhir.element.reference',["obj"=>$activity->reference])
+                </div>
+            @endif
+            @if (isset($activity->detail))
+                <p><b>Detalle de la actividad:</b></p>
+                <div class="element">
+                    @if (isset($activity->detail->kind))
+                        <p><b>Tipo:</b>
+                            {{ str_replace(
+                                ["Appointment","CommunicationRequest","DeviceRequest","MedicationRequest","NutritionOrder","Task","ServiceRequest","VisionPrescription"],
+                                ["Appointment","CommunicationRequest","DeviceRequest","MedicationRequest","NutritionOrder","Task","ServiceRequest","VisionPrescription"],
+                                $activity->detail->kind
+                            ) }}
+                        </p>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->instantiatesCanonical) && $activity->detail->instantiatesCanonical)
+                        <p><b>Instancia:</b></p>
+                        <div class="element">
+                            @foreach ($activity->detail->instantiatesCanonical as $instantiatesCanonical)
+                                * {{$instantiatesCanonical}} <br>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->instantiatesUri) && $activity->detail->instantiatesUri)
+                        <p><b>Instancian:</b></p>
+                        <div class="element">
+                            @foreach ($activity->detail->instantiatesUri as $instantiatesUri)
+                                * {{$instantiatesUri}} <br>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->code))
+                        <p><b>Código:</b> @include('fhir.element.codeableConcept',["obj"=>$activity->detail->code])</p>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->reasonCode) && $activity->detail->reasonCode)
+                        <p><b>Código de Razón:</b></p>
+                        <div class="element">
+                            @foreach ($activity->detail->reasonCode as $reasonCode)
+                                @include('fhir.element.codeableConcept',["obj"=>$reasonCode])
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->reasonReference) && $activity->detail->reasonReference)
+                        <p><b>Referencia de la razón:</b></p>
+                        <div class="element">
+                            @foreach ($activity->detail->reasonReference as $reasonReference)
+                                @include('fhir.element.codeableConcept',["obj"=>$reasonReference])
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->goal) && $activity->detail->goal)
+                        <p><b>Referencia de la meta:</b></p>
+                        <div class="element">
+                            @foreach ($activity->detail->goal as $goal)
+                                * @include('fhir.element.reference',["obj"=>$goal]) <br>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->status))
+                        <p><b>Estado:</b>
+                            {{ str_replace(
+                                ["not-started","scheduled","in-progress","on-hold","completed","cancelled","stopped","unknown","entered-in-error"],
+                                ["not-started","scheduled","in-progress","on-hold","completed","cancelled","stopped","unknown","entered-in-error"],
+                                $activity->detail->status
+                            ) }}
+                        </p>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->statusReason))
+                        <p><b>Razón del estado:</b></p>
+                        <div class="element">
+                            @include('fhir.element.codeableConcept',["obj"=>$activity->detail->statusReason])
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->doNotPerform))
+                        <p><b>Prohibido realizar:</b>
+                            {{$activity->detail->doNotPerform?"SI":"NO"}}
+                        </p>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->scheduledTiming))
+                        <p><b>Programado:</b>
+                            @include('fhir.element.timing',["obj"=>$activity->detail->scheduledTiming])
+                        </p>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->scheduledPeriod))
+                        <p><b>Programado:</b>
+                            @include('fhir.element.period',["obj"=>$activity->detail->scheduledPeriod])
+                        </p>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->scheduledString))
+                        <p><b>Programado:</b>
+                            {{$activity->detail->scheduledString}}
+                        </p>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->location))
+                        <p><b>Lugar:</b>
+                            @include('fhir.element.reference',["obj"=>$activity->detail->location])
+                        </p>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->performer) && $activity->detail->performer)
+                        <p><b>Ejecutor:</b></p>
+                        <div class="element">
+                            @foreach ($activity->detail->performer as $performer)
+                                * @include('fhir.element.reference',["obj"=>$performer])
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->productCodeableConcept))
+                        <p><b>Producto:</b></p>
+                        <div class="element">
+                            @include('fhir.element.codeableConcept',["obj"=>$activity->detail->productCodeableConcept])
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->productReference))
+                        <p><b>Producto:</b></p>
+                        <div class="element">
+                            @include('fhir.element.reference',["obj"=>$activity->detail->productReference])
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->dailyAmount))
+                        <p><b>Cantidad:</b></p>
+                        <div class="element">
+                            @include('fhir.element.quantity',["obj"=>$activity->detail->dailyAmount])
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->quantity))
+                        <p><b>Cantidad:</b></p>
+                        <div class="element">
+                            @include('fhir.element.quantity',["obj"=>$activity->detail->quantity])
+                        </div>
+                    @endif
+                </div>
+                <div class="element">
+                    @if (isset($activity->detail->description))
+                        <p><b>Descripción:</b></p>
+                        <div class="element">
+                            {{$activity->detail->description}}
+                        </div>
+                    @endif
+                </div>
+            @endif
+        @endforeach
+    </div>
+@endif
+@if (isset($obj->note) && $obj->note)
+    <p><b>Nota:</b></p>
+    @foreach ($obj->note as $note)
+        * @include('fhir.element.annotation',["obj"=>$note])
+    @endforeach
+@endif
+@if (isset($obj->identifier) && $obj->identifier)
+    <p><b>Identificador</b></p>
+    <div class="element">
+        @foreach ($obj->identifier as $identifier)
+            @include('fhir.element.identifier',["obj"=>$identifier])
+        @endforeach
+    </div>
+@endif
 @if (env("TEST", false))
     <div class="row">
         <div class="col s12">

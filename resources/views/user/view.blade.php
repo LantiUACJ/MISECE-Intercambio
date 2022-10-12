@@ -25,6 +25,14 @@
         </div>
         <div class="row">
             <div class="col s12 m3 user-field-name">
+                Curp
+            </div>
+            <div class="col s12 m6">
+                {{$model->curp}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 user-field-name">
                 Correo
             </div>
             <div class="col s12 m6">

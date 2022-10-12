@@ -13,7 +13,7 @@
 
     @yield('head')
 
-    <link rel="stylesheet" href="{{asset('styles.css')}}?v=1.0.0.1">
+    <link rel="stylesheet" href="{{asset('styles.css')}}?v=1.0.0.2">
 </head>
 <body class="bg-dashboard">
     <div class="menu-mobile-toggle" onclick="toggleMenu()">
@@ -29,7 +29,7 @@
                         <div class="parent">
                             <div class="top">
                                 <div class="menu-logo">
-                                    <img class="menu-logo" src="{{asset('logo_mod.png')}}" alt="">
+                                    <img class="menu-logo" src="{{asset('logomisece.svg')}}" alt="">
                                 </div>
                                 <div class="menu-items">
                                     
@@ -41,11 +41,26 @@
                                         <a href="{{url('/hospital')}}" class="{{ request()->is('hospital/*')||request()->is('hospital') ? 'active' : null }}">
                                             Sistemas ECEs
                                         </a>
+                                        <a href="{{url('/hos/usuario')}}" class="{{ request()->is('hos/usuario/*')||request()->is('hos/usuario') ? 'active' : null }}">
+                                            Registrar Usuario
+                                        </a>
+                                        <a href="{{url('/blockchain')}}" class="{{ request()->is('blockchain/*')||request()->is('blockchain') ? 'active' : null }}">
+                                            Logs
+                                        </a>
                                     @endif
                                     
                                     @if(auth()->user()->isHospital())
                                         <a href="{{url('/users')}}" class="{{ request()->is('users/*')||request()->is('users') ? 'active' : null }}">
                                             Usuarios
+                                        </a>
+                                        <a href="{{url('/test/indice')}}" class="{{ request()->is('users/*')||request()->is('users') ? 'active' : null }}">
+                                            Test Api (indice)
+                                        </a>
+                                    @endif
+
+                                    @if(auth()->user()->isPaciente())
+                                        <a href="{{url('/paciente/self')}}" class="{{ request()->is('paciente/self') ? 'active' : null }}">
+                                            Consultar expediente
                                         </a>
                                     @endif
 
@@ -62,6 +77,7 @@
                             <div class="bottom">
                                 <div class="menu-footer">
                                     <a href="{{url('logout')}}">Cerrar sesión</a>
+                                    <p style="font-size: 0.9rem; color: #84a8a2;"><?php echo gethostname(); ?> @version('compact')</p>
                                 </div>
                             </div>
                         </div>
@@ -91,8 +107,8 @@
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <div id="modal1" class="modal small-modal">
         <div class="modal-content">
@@ -108,12 +124,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        var sele = document.querySelectorAll('select');
-        var instance = M.FormSelect.init(sele);
+            var sele = document.querySelectorAll('select');
+            var instance = M.FormSelect.init(sele);
         });
         document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.modal');
-        var instances = M.Modal.init(elems);
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems);
         });
         function toggleMenu() {
             var element = document.getElementById("menusidebar");
@@ -121,6 +137,14 @@
             var elementtwo = document.getElementById("menubg");
             elementtwo.classList.toggle("showbg");
         }
+        $(document).ready(function(){
+            $('.tooltipped').tooltip();
+        });
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
     </script>
+
+    @yield('scripts')
 </body>
 </html>

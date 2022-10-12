@@ -9,7 +9,7 @@ use App\Tools\PetitionHelper;
 class PacienteBasicoController extends Controller
 {
     public function formulario(){
-        return view("paciente.basico");
+        return view("paciente.basica.form");
     }
     public function consulta(Request $request){
         $input = $request->validate([
@@ -19,12 +19,12 @@ class PacienteBasicoController extends Controller
         $ph = new PetitionHelper($input['curp'], auth()->user()->hospital, auth()->user()->name, 2);
         
         if(!$ph->searchPatient()){
-            return view("paciente.resultado", ["data"=>$data, "nombre"=>"", $data => "no se encontró el paciente"]);
+            return view("paciente.basica.resultado", ["nombre"=>"ERROR", "data" => "no se encontró el paciente"]);
         }
         $nombre = $ph->indice->nombre;
 
         $ph->getData();
 
-        return view("paciente.resultado", ["nombre"=>$nombre, "data"=>$ph->renderPartialHtml()]);
+        return view("paciente.basica.resultado", ["nombre"=>$nombre, "data"=>$ph->renderPartialHtml()]);
     }
 }

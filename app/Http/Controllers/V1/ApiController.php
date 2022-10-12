@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\V1;
 
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF;
 use \App\Models\Hospital;
-use \App\Models\Indice;
-use \App\Models\HospitalIndice;
 use \App\Tools\PetitionHelper;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class ApiController extends \App\Http\Controllers\Controller{
@@ -20,7 +16,7 @@ class ApiController extends \App\Http\Controllers\Controller{
             "codigo"=>"nullable"
         ]);
         if ($validator->fails()) {
-            return $validator->errors();
+            return response($validator->errors(),400);
         }
         $input = $validator->validated();
         $hospital_user = $request->headers->get("php-auth-user");
@@ -30,11 +26,11 @@ class ApiController extends \App\Http\Controllers\Controller{
         $ph = new PetitionHelper($curp, $hospital, $input["consultor"], 1);
         
         if(!$ph->searchPatient()){
-            return ["Error"=>"no se encontró el paciente"];
+            return response(["Error"=>"no se encontró el paciente"], 404);
         }
         if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
             $ph->sendCode();
-            return ["Error"=>"Código inválido"];
+            return response(["Error"=>"El código de verificación no es correcto o expiro"], 400);
         }
 
         $ph->getData();
@@ -48,7 +44,7 @@ class ApiController extends \App\Http\Controllers\Controller{
             "consultor"=>"required"
         ]);
         if ($validator->fails()) {
-            return $validator->errors();
+            return response($validator->errors(),400);
         }
         $input = $validator->validated();
         $hospital_user = $request->headers->get("php-auth-user");
@@ -58,7 +54,7 @@ class ApiController extends \App\Http\Controllers\Controller{
         $ph = new PetitionHelper($curp, $hospital, $input["consultor"], 2);
         
         if(!$ph->searchPatient()){
-            return ["Error"=>"no se encontró el paciente"];
+            return response(["Error"=>"no se encontró el paciente"], 404);
         }
 
         $ph->getData();
