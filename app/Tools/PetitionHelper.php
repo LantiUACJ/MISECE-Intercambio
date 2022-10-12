@@ -17,7 +17,7 @@ class PetitionHelper{
         $this->consultor = $consultor;
         $this->data = [];
         $this->log = ["respuestas"=>""];
-        $this->skip = false;
+        $this->skip = true;
         if($type === 1){
             $this->url =  "patient/";
         }
