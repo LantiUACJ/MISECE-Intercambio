@@ -13,6 +13,10 @@ class HospitalSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $count = 0;
+        \App\Models\Hospital::factory(5000)->make()->each(function ($user) use(&$count){
+            $user->user = "apiuser" .($count++);
+            $user->save();
+        });
     }
 }
