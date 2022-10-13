@@ -22,7 +22,17 @@ class HospitalFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "url"=>"test",
+            "password"=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            "nombre"=>"test",
+            "telefono"=>"test",
+            "email"=>"test",
+            "calle"=>"test",
+            "numero"=>"test",
+            "colonia"=>"test",
+            "codigo_postal"=>"test",
+            "ciudad"=>"test",
+            "estado"=>"test",
         ];
     }
 }
