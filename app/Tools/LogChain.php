@@ -32,7 +32,7 @@ class LogChain{
             "paciente"=>$log->paciente,
             "hospital"=>$log->hospital,
             "consultor"=>$log->consultor,
-            "respuestas"=>auth()->user()->id
+            "respuestas"=>$log->respuestas
         ];
         $data = json_encode($data);
         $rawTransactionData = '0x' . $contract->getData('addRecord', $data, bin2hex($log->id));
