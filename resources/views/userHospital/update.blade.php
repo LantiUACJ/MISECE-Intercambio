@@ -10,7 +10,7 @@
     <hr style="opacity: 0.2;">
     <div class="data-content">
         <p class="subtitle">Actualizar usuario</p>
-        @include('user._form', ["model"=>$model])
+        @include('userHospital._form', ["model"=>$model])
     </div>
 
 @endsection
