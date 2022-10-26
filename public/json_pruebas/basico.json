@@ -1,0 +1,68 @@
+{
+    "resourceType": "Bundle",
+    "id": "20403b9dad8f56cbd409259c63164375",
+    "type": "history",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "38ae15cb2f8f8b2edfffa79312b02f43",
+                "language": "es",
+                "name": [
+                    {
+                        "text": "Luiz Salsa Alta"
+                    }
+                ],
+                "identifier": [
+                    {
+                        "use": "official",
+                        "type": {
+                            "text": "CURP"
+                        },
+                        "value": "LUSA19800813HOCELI80Y"
+                    },
+                    {
+                        "use": "official",
+                        "type": {
+                            "text": "FOLIO",
+                            "coding": [
+                                {
+                                    "display": "1.0.0.0",
+                                    "code": "1.0.0.0",
+                                    "system": "http:\/\/www.expcli.com"
+                                }
+                            ]
+                        },
+                        "value": "5230449"
+                    }
+                ],
+                "active": true,
+                "gender": "male",
+                "birthDate": "1980-08-13",
+                "address": [
+                    {
+                        "city": "juarez",
+                        "district": "juarez",
+                        "state": "CHIHUAHUA"
+                    }
+                ],
+                "communication": [
+                    {
+                        "language": {
+                            "text": "Espa\u00f1ol"
+                        },
+                        "preferred": true
+                    }
+                ]
+            },
+            "fullUrl": "Patient\/38ae15cb2f8f8b2edfffa79312b02f43",
+            "request": {
+                "method": "POST",
+                "url": "Patient"
+            },
+            "response": {
+                "status": "200 ok"
+            }
+        }
+    ]
+}

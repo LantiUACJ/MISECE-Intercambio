@@ -1,16 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Fhir\Resource\Bundle;
 use \App\Http\Controllers\HospitalController;
 use \App\Http\Controllers\PacienteController;
 use \App\Http\Controllers\PacienteBasicoController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\BlockchainController;
+use App\Http\Controllers\SistemaController;
 use \App\Http\Controllers\TestController;
 use \App\Http\Controllers\UserHospitalController;
-use \App\Models\Log;
-use \App\Tools\LogChain;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,180 +23,77 @@ use \App\Tools\LogChain;
 
 Route::get('/', [\App\Http\Controllers\SiteController::class, "index"])->name("home");
 Route::get('login', [\App\Http\Controllers\SiteController::class, "login"])->name('login');
-Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"])/*->middleware("throttle:3,15")*/->name('login');
+Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"])->name('login');
 Route::get('/logout', [\App\Http\Controllers\SiteController::class, "logout"]);
 
+/* Rutas de admin */
 Route::middleware(["auth", "admin"])->group(function (){
-    Route::get("blockchain", [BlockchainController::class, "index"]);
-    Route::get("blockchain/details/{log}", [BlockchainController::class, "details"]);
+    Route::get("blockchain", [BlockchainController::class, "index"])->name("admin.blockchain.index");
     Route::prefix('/hospital')->group(function(){
-        Route::get('', [HospitalController::class, "index"]);
-        Route::get('/view/{hospital}', [HospitalController::class, "show"]);
-        Route::get('/create', [HospitalController::class, "create"]);
-        Route::post('/create', [HospitalController::class, "store"]);
-        Route::get('/update/{hospital}', [HospitalController::class, "edit"]);
-        Route::post('/update/{hospital}', [HospitalController::class, "update"]);
-        Route::post('/delete/{hospital}', [HospitalController::class, "destroy"]);
+        Route::get('', [HospitalController::class, "index"])->name("admin.hospital.index");
+        Route::get('/registrar', [HospitalController::class, "create"])->name("admin.hospital.create");
+        Route::post('/registrar', [HospitalController::class, "store"]);
+        Route::get('/actualizar/{hospital}', [HospitalController::class, "edit"])->name("admin.hospital.edit");
+        Route::post('/actualizar/{hospital}', [HospitalController::class, "update"]);
+        Route::post('/borrar/{hospital}', [HospitalController::class, "destroy"])->name("admin.hospital.destroy");
+
+        Route::prefix("usuario")->group(function (){
+            Route::get('/', [UserHospitalController::class, "index"])->name("admin.usuario.index");
+            Route::get('/registrar', [UserHospitalController::class, "create"])->name("admin.usuario.create");
+            Route::post('/registrar', [UserHospitalController::class, "store"]);
+            Route::get('/actualizar/{user}', [UserHospitalController::class, "edit"])->name("admin.usuario.edit");
+            Route::post('/actualizar/{user}', [UserHospitalController::class, "update"]);
+            Route::get('/{user}', [UserHospitalController::class, "show"])->name("admin.usuario.show");
+        });
     });
-    Route::prefix('/hos')->group(function(){
-        Route::get('/usuario', [UserHospitalController::class, "index"]);
-        Route::get('/usuario/registrar', [UserHospitalController::class, "create"]);
-        Route::post('/usuario/registrar', [UserHospitalController::class, "store"]);
-        Route::get('/usuario/edit/{user}', [UserHospitalController::class, "edit"]);
-        Route::post('/usuario/edit/{user}', [UserHospitalController::class, "update"]);
-        Route::get('/usuario/{user}', [UserHospitalController::class, "show"]);
-    });
+    /* Probar módulo de procesamiento (ver si hay comunicación) */
     Route::get("test/procesamiento", [TestController::class, "testProcesamiento"]);
-});
-Route::prefix("/indice")->middleware(["auth", "admin"])->group(function (){
-    Route::get('/index', [\App\Http\Controllers\IndiceController::class, "index"]);
-    Route::post('/delete/{indice}', [\App\Http\Controllers\IndiceController::class, "destroy"]);
+    
+    Route::prefix("/indice")->group(function (){
+        Route::get('/index', [\App\Http\Controllers\IndiceController::class, "index"]);
+        Route::post('/delete/{indice}', [\App\Http\Controllers\IndiceController::class, "destroy"]);
+    });
 });
 
-Route::prefix('/paciente/self')->middleware(["auth"])->group(function(){
-    Route::get('/', [PacienteController::class, "consultaPropia"]);
+/* Rutas de paciente */
+Route::prefix('/expediente/propio')->middleware(["auth"])->group(function(){
+    Route::get('/', [PacienteController::class, "consultaPropia"])->name("paciente.expediente.propio");
     Route::post('/', [PacienteController::class, "consultaPropia"]);
 });
 
-Route::prefix('/paciente')->middleware(["auth", "para_medico"])->group(function(){
-    Route::get('/', [PacienteController::class, "formulario"]);
+Route::prefix('/expediente')->middleware(["auth", "para_medico"])->group(function(){
+    Route::get('/', [PacienteController::class, "formulario"])->name("medico.expediente.completo");
     Route::post('/', [PacienteController::class, "consulta"]);
 });
 
-Route::prefix('/paciente/basico')->middleware(["auth", "para_medico"])->group(function(){
-    Route::get('/', [PacienteBasicoController::class, "formulario"]);
+Route::prefix('/expediente/basico')->middleware(["auth", "para_medico"])->group(function(){
+    Route::get('/', [PacienteBasicoController::class, "formulario"])->name("medico.expediente.basico");
     Route::post('/', [PacienteBasicoController::class, "consulta"]);
 });
 
 Route::middleware(["auth","hospital"])->group(function (){
     /* Usuario: */
-    Route::get('/users', [UserController::class, "index"]);
-    Route::get('/users/create', [UserController::class, "create"]);
-    Route::post('/users/create', [UserController::class, "store"]);
-    Route::get('/users/update/{user}', [UserController::class, "edit"])->middleware(["userProtect"]);
-    Route::post('/users/update/{user}', [UserController::class, "update"])->middleware(["userProtect"]);
-    Route::get('/users/view/{user}', [UserController::class, "show"])->middleware(["userProtect"]);
-    Route::post('/users/delete/{user}', [UserController::class, "delete"])->middleware(["userProtect"]);
-    Route::get("test/indice", [TestController::class, "testIndice"]);
+    Route::prefix("usuario")->group(function (){
+        Route::get('', [UserController::class, "index"])->name("hospital.usuario.index");
+        Route::get('/registrar', [UserController::class, "create"])->name("hospital.usuario.create");
+        Route::post('/registrar', [UserController::class, "store"]);
+        Route::get('/actualizar/{user}', [UserController::class, "edit"])->name("hospital.usuario.edit")->middleware(["userProtect"]);
+        Route::post('/actualizar/{user}', [UserController::class, "update"])->middleware(["userProtect"]);
+        Route::get('/{user}', [UserController::class, "show"])->name("hospital.usuario.show")->middleware(["userProtect"]);
+        Route::post('/borrar/{user}', [UserController::class, "delete"])->name("hospital.usuario.delete")->middleware(["userProtect"]);
+    });
+    Route::prefix("sistema")->group(function (){
+        Route::get("", [SistemaController::class, "index"])->name("hospital.sistema.index");
+        Route::get("api", [SistemaController::class, "api"])->name("hospital.sistema.api");
+        Route::get("test/indice", [TestController::class, "testIndice"])->name("hospital.sistema.testIndice");
+    });
 });
+
 /*
+use Illuminate\Support\Facades\Storage;
 Route::get("test", function (){
-    set_time_limit(-1);
-    $start = microtime(true);
-
-    $log = Log::orderBy("id", "desc")->first();
-    if(!$log){
-        $log = new Log();
-        $log->fecha = \Carbon\Carbon::now()->format("Y-m-d H:i:s");
-        $log->paciente = "Paciente";
-        $log->hospital = "Un hospital";
-        $log->consultor = "SR patricio";
-        $log->respuestas = auth()->user()->id;
-    }
-    
-    $i = 1;
-    for($i = 0; $i<1000; $i++){
-        $stLog = Log::create([
-            "fecha"=> \Carbon\Carbon::createFromFormat("Y-m-d H:i:s",$log->fecha)->addSecond($i),
-            "paciente"=>"STD $i-",
-            "hospital"=>$log->hospital,
-            "consultor"=>$log->consultor,
-            "respuestas"=>auth()->user()->id
-        ]);
-        //$stLog = Log::where("id",15159)->first();
-        $stLog->paciente .= $stLog->id;
-        $stLog->save();
-        $logChain = new LogChain();
-        $logChain->store($stLog);
-    }
-
-    echo (number_format(microtime(true) - $start,4)*1000) . " Milisegundos";
-})->middleware(["auth"]);
-
-Route::get("one", function (){
-    set_time_limit(-1);
-    $start = microtime(true);
-
-    $log = Log::orderBy("id", "desc")->first();
-    
-    $i = 1;
-    //for($i = 0; $i<5000; $i++){
-        $stLog = Log::create([
-            "fecha"=> \Carbon\Carbon::createFromFormat("Y-m-d H:i:s",$log->fecha)->addSecond($i),
-            "paciente"=>"STD $i-",
-            "hospital"=>$log->hospital,
-            "consultor"=>$log->consultor,
-            "respuestas"=>$log->respuestas
-        ]);
-        $stLog = Log::where("id",105)->first();
-        ///$stLog->paciente .= $stLog->id;
-        //$stLog->save();
-        $logChain = new LogChain();
-        $logChain->store($stLog);
-    //}
-
-    echo (number_format(microtime(true) - $start,4)*1000) . " Milisegundos";
-});
-
-Route::get("car", function (){
-    $logChain = new LogChain();
-    return $logChain->getTransactionCountAcc();
-});
-
-Route::get("look/{start}/{end}", function ($start, $end){
-    set_time_limit(-1);
-    $logChain = new LogChain();
-    for($i = $start; $i<=$end; $i++){
-        echo $logChain->find($i) . "<br>";
-    }
-});
-
-Route::get("json", function (){
-    return view("form");
-});
-Route::get("find/{id}", function ($id){
-    $log = Log::where("id", $id)->first();
-    $logChain = new LogChain();
-    return $logChain->find($log->id);
-});
-
-Route::get("errorFree", function (){
-    set_time_limit(-1);
-    $start = microtime(true);
-    $i = 1;
-    $logChain = new LogChain();
-    //$logChain->deploy();
-
-    for($i = 0; $i<10; $i++){
-        $logChain->errorFreeTransaction();
-    }
-
-    echo (number_format(microtime(true) - $start,4)*1000) . " Milisegundos";
+    //https://s3-misece-cert-test.s3.amazonaws.com/CA.crt
+    $data = Storage::disk('s3')->get('CA.crt');
+    dd($data);
 });
 */
-Route::get("json", function (){
-    $myfile = fopen("json_pruebas/med.json", "r") or die("Unable to open file!");
-    $json = fread($myfile,filesize("json_pruebas/med.json"));
-    fclose($myfile);
-
-    $bundle = new Bundle(json_decode($json));
-
-    return view("pdf",["data"=>[
-            ["bundle"=>$bundle, "hospital"=>new \App\Models\Hospital(["nombre"=>"Hola"])]
-        ]
-    ]);
-
-    /*
-    $texto = "el paciente tiene: hemorragia →coroidea<<122003>> y hemorragia →coroidea<<122004>> otro texto sin concepto";
-    $textos = explode(">>", $texto);
-    foreach($textos as $id => $txt){
-        if(strpos($txt,"<<") !== false){
-            $textos[$id] = [
-                "pre-texto"=> explode("→", $txt)[0], 
-                "texto" => explode("<<",explode("→", $txt)[1])[0], 
-                "codigo" => explode("<<", str_replace("→","",$txt))[1]
-            ];
-        }
-    }
-    return $textos;*/
-});

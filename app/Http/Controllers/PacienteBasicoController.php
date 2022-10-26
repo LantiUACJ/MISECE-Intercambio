@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Tools\PetitionHelper;
-
 class PacienteBasicoController extends Controller
 {
     public function formulario(){
@@ -16,15 +14,23 @@ class PacienteBasicoController extends Controller
             "curp"=>"required",
         ]);
 
-        $ph = new PetitionHelper($input['curp'], auth()->user()->hospital, auth()->user()->name, 2);
-        
-        if(!$ph->searchPatient()){
+        $apiHelper = new \App\Tools\V1\ApiHelper([
+            "curp"=>$input["curp"], 
+            "hospital"=>auth()->user()->hospital, 
+            "consultor"=>auth()->user()->name,
+            "type"=>2,
+        ]);
+
+        $apiHelper->searchPatient();
+        if(!$apiHelper->isValid()){
             return view("paciente.basica.resultado", ["nombre"=>"ERROR", "data" => "no se encontró el paciente"]);
         }
-        $nombre = $ph->indice->nombre;
+        $nombre = $apiHelper->getIndice()->nombre;
 
-        $ph->getData();
-
-        return view("paciente.basica.resultado", ["nombre"=>$nombre, "data"=>$ph->renderPartialHtml()]);
+        $apiHelper->getData();
+        if(!$apiHelper->isValid()){
+            return view("paciente.basica.resultado", ["nombre"=>$nombre, "data"=>"Sin respuesta"]);
+        }
+        return view("paciente.basica.resultado", ["nombre"=>$nombre, "data"=>$apiHelper->renderPartialHtml()]);
     }
 }

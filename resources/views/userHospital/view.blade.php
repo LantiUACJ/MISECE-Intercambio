@@ -5,9 +5,9 @@
 @section('content')
 <div class="actions">
     <!-- <p class="subtitle">Menú</p> -->
-    <a href="{{url('hos/usuario')}}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Regresar</a>
+    <a href="{{route('admin.usuario.index')}}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Regresar</a>
 
-    <a href="{{url("hos/usuario/edit/".$model->id)}}" class="waves-effect waves-light btn" style="margin-left: 1rem;"><i class="material-icons left">edit</i>editar</a>
+    <a href="{{route("admin.usuario.edit",$model->id)}}" class="waves-effect waves-light btn" style="margin-left: 1rem;"><i class="material-icons left">edit</i>editar</a>
 </div>
 <hr style="opacity: 0.2;">
 <div class="data-content">
@@ -45,6 +45,14 @@
             </div>
             <div class="col s12 m6">
                 {{$model->nombreRol()}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 user-field-name">
+                Hospital
+            </div>
+            <div class="col s12 m6">
+                {{$model->hospital->nombre}}
             </div>
         </div>
         <div class="row">

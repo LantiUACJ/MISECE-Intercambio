@@ -72,7 +72,8 @@ class UpdateIndex extends Command
                         }
                         echo "\n";
                     }
-                    if(HospitalIndice::where("hospital_id", $hospital->id)->where("indice_id", $indice->id)->count() == 0){
+                    //echo "Totals: " . HospitalIndice::where("hospital_id", $hospital->id)->where("indice_id", $indice->id)->count();
+                    if($indice->id && HospitalIndice::where("hospital_id", $hospital->id)->where("indice_id", $indice->id)->count() == 0){
                         $hi = new HospitalIndice();
                         $hi->hospital_id = $hospital->id;
                         $hi->indice_id = $indice->id;

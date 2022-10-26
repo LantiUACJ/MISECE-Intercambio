@@ -24,9 +24,14 @@ class Hospital extends Authenticatable
         "codigo_postal",
         "ciudad",
         "estado",
+        "version",
     ];
 
     public function lastIndice(){
         return $this->hasOne(HospitalIndice::class, "hospital_id", "id")->orderBy("created_at", "desc");
+    }
+
+    public function versiones(){
+        return Version::get();
     }
 }

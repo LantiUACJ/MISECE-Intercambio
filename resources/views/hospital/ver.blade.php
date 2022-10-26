@@ -2,8 +2,8 @@
 
 @section('content')
     <h1>Detalle</h1>
-    <a class="btn btn-warning" href="{{url('/hospital/update/'.$model->id)}}">Editar</a>]
-    <div class="btn btn-danger" onclick="confirmModal('¿Borrar hospital?','{{url('/hospital/delete/'.$model->id)}}')">Borrar</div>
+    <a class="btn btn-warning" href="{{route('admin.hospital.edit', $model->id)}}">Editar</a>
+    <div class="btn btn-danger" onclick="confirmModal('¿Borrar hospital?','{{route('admin.hospital.destroy', $model->id)}}')">Borrar</div>
 
     <table class="table">
         <tr>

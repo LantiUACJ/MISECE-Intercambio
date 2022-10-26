@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ApiAuth
 {
@@ -17,9 +16,21 @@ class ApiAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::guard('api')->onceBasic("user")){
+        $urlParameters = $request->route()->parameters();
+        $authProcesor = null;
+        if(isset($urlParameters["version"]) && $urlParameters["version"] == "v1")
+            $authProcesor = new \App\Tools\V1\AuthMethod([]);
+        elseif(isset($urlParameters["version"]) && $urlParameters["version"] == "v2")
+            $authProcesor = new \App\Tools\V2\AuthMethod(["authorization"=>$request->header('authorization')]);
+        else
+            return response()->json(["(" . $urlParameters["version"] . ") versión incorrecta"], 400);
+        
+        $authProcesor->process();
+        $authProcesor->validate();
+        if($authProcesor->isValid())
             return $next($request);
-        }
-        return response()->json(["auth error"],401);
+        
+        $error = $authProcesor->getError();
+        return response()->json($error["message"],$error["code"]);
     }
 }

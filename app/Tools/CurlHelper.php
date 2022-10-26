@@ -1,6 +1,9 @@
 <?php 
 namespace App\Tools;
 
+use Firebase\JWT\JWT;
+use Illuminate\Support\Facades\Storage;
+
 class CurlHelper{
 
     public function __construct($url, $data){
@@ -8,6 +11,17 @@ class CurlHelper{
         $this->data = $data;
     }
 
+    public function postJWT(){
+        $this->ch = curl_init();
+        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($this->ch, CURLOPT_URL, $this->url);
+        curl_setopt($this->ch, CURLOPT_POST, true);
+        curl_setopt($this->ch, CURLOPT_POSTFIELDS, json_encode($this->data));
+        curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
+        $auth = "Authorization: Bearer " . $this->makeJWT();
+        curl_setopt($this->ch, CURLOPT_HTTPHEADER, ["content-type: application/fhir+json", "accept: application/fhir+json", $auth]);
+        return curl_exec($this->ch);
+    }
     public function post(){
         $this->ch = curl_init();
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
@@ -15,10 +29,8 @@ class CurlHelper{
         curl_setopt($this->ch, CURLOPT_POST, true);
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($this->ch, CURLOPT_HTTPHEADER, ["content-type: application/fhir+json", "accept: application/fhir+json"]);
         return curl_exec($this->ch);
     }
-
     public function postJson(){ //modulo de procesamiento
         $this->ch = curl_init();
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
@@ -31,7 +43,6 @@ class CurlHelper{
         set_time_limit(180);
         return curl_exec($this->ch);
     }
-
     public function noWaitPost(){ // modulo de registro de eventos
         $this->ch = curl_init();
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
@@ -42,7 +53,6 @@ class CurlHelper{
         curl_setopt($this->ch, CURLOPT_TIMEOUT, 1);
         return curl_exec($this->ch);
     }
-
     private function getParams(){
         $params = "";
         foreach($this->data as $key => $element){
@@ -50,7 +60,6 @@ class CurlHelper{
         }
         return substr($params, 0, strlen($params) -1);
     }
-
     public function get(){
         $params = "?" . $this->getParams();
         $url = $this->url . $params;
@@ -60,8 +69,26 @@ class CurlHelper{
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
         return curl_exec($this->ch);
     }
-
     public function success(){
         return curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
+    }
+    public function makeJWT(){
+        $publicKey = Storage::disk('s3')->get('misece.crt');
+        $privateKey = Storage::disk('s3')->get('misece.key');
+
+        /* ===== Making Header ===== */
+        $header = [
+            "cert"=>$publicKey
+        ];
+
+        /* ===== Making payload ===== */
+        $payload = [
+            'data' => "test",//$request->input("data"),
+            'iat' => time(),
+            'exp' => time()+5,
+        ];
+        //sleep(10);
+        /* ===== Making JWT ===== */
+        return JWT::encode($payload, $privateKey, 'RS512', null, $header);
     }
 }

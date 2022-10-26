@@ -16,39 +16,59 @@ class PacienteController extends Controller
             "codigo"=>"nullable",
         ]);
 
-        $ph = new PetitionHelper($input['curp'], auth()->user()->hospital, auth()->user()->name, 1);
-        
-        if(!$ph->searchPatient()){
+        $apiHelper = new \App\Tools\V1\ApiHelper([
+            "curp"=>$input["curp"], 
+            "hospital"=>auth()->user()->hospital, 
+            "consultor"=>auth()->user()->name,
+            "type"=>1,
+            "codigo"=>isset($input["codigo"])?$input["codigo"]:"",
+        ]);
+
+        $apiHelper->searchPatient();
+        if(!$apiHelper->isValid()){
             return view("paciente.normal.resultado", ["nombre"=>"ERROR", "data" => "no se encontró el paciente"]);
         }
-        $nombre = $ph->indice->nombre;
+        $nombre = $apiHelper->getIndice()->nombre;
         
-        if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
-            $ph->sendCode();
+        $apiHelper->validateCode();
+        if(!$apiHelper->isValid()){
             return view("paciente.normal.codigo", ["nombre"=>$nombre, "curp"=>$input["curp"]]);
         }
 
-        $ph->getData();
-
-        return view("paciente.normal.resultado", ["nombre"=>$nombre, "data"=>$ph->renderPartialHtml()]);
+        $apiHelper->getData();
+        if(!$apiHelper->isValid()){
+            return view("paciente.normal.resultado", ["nombre"=>$nombre, "data"=>"Sin respuesta"]);
+        }
+        return view("paciente.normal.resultado", ["nombre"=>$nombre, "data"=>$apiHelper->renderPartialHtml()]);
     }
     public function consultaPropia(Request $request){
-        $ph = new PetitionHelper(auth()->user()->curp, auth()->user()->hospital, auth()->user()->name, 1);
-        
         $input = $request->validate([
             "codigo"=>"nullable",
         ]);
+
+        $apiHelper = new \App\Tools\V1\ApiHelper([
+            "curp"=>auth()->user()->curp, 
+            "hospital"=>auth()->user()->hospital, 
+            "consultor"=>auth()->user()->name,
+            "type"=>1,
+            "codigo"=>isset($input["codigo"])?$input["codigo"]:"",
+            "filtrarHospital"=>false
+        ]);
+
+        $apiHelper->searchPatient();
+        if(!$apiHelper->isValid()){
+            return view("paciente.propia.resultado", ["nombre"=>"ERROR", "data" => "no se encontró el paciente"]);
+        }
         
-        if(!$ph->searchPatient()){
-            return view("paciente.propia.resultado", ["nombre"=>"", "data"=>"no se encontró el paciente"]);
+        $apiHelper->validateCode();
+        if(!$apiHelper->isValid()){
+            return view("paciente.propia.codigo", ["nombre"=>auth()->user()->nombre, "curp"=>auth()->user()->curp]);
         }
-        $nombre = $ph->indice->nombre;
-        if(!$ph->validateCode(isset($input["codigo"])?$input["codigo"]:"")){
-            $ph->sendCode();
-            return view("paciente.propia.codigo", ["nombre"=>$nombre, "curp"=>auth()->user()->curp]);
+
+        $apiHelper->getData();
+        if(!$apiHelper->isValid()){
+            return view("paciente.propia.resultado", ["nombre"=>auth()->user()->nombre, "data"=>"Sin respuesta"]);
         }
-        $ph->filtrarHospital(false);
-        $ph->getData();
-        return view("paciente.propia.resultado", ["nombre"=>$nombre, "data"=>$ph->renderPartialHtml()]);
+        return view("paciente.propia.resultado", ["nombre"=>auth()->user()->nombre, "data"=>$apiHelper->renderPartialHtml()]);
     }
 }

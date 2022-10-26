@@ -38,38 +38,43 @@
                                     </a>
 
                                     @if (auth()->user()->isAdmin())
-                                        <a href="{{url('/hospital')}}" class="{{ request()->is('hospital/*')||request()->is('hospital') ? 'active' : null }}">
+                                        <a href="{{route('admin.hospital.index')}}" class="{{ (request()->is('hospital/*') || request()->is('hospital')) && !(request()->is('hospital/usuario/*')||request()->is('hospital/usuario')) ? 'active' : null }}">
                                             Sistemas ECEs
                                         </a>
-                                        <a href="{{url('/hos/usuario')}}" class="{{ request()->is('hos/usuario/*')||request()->is('hos/usuario') ? 'active' : null }}">
+                                        <a href="{{route('admin.usuario.index')}}" class="{{ request()->is('hospital/usuario/*')||request()->is('hospital/usuario') ? 'active' : null }}">
                                             Registrar Usuario
                                         </a>
-                                        <a href="{{url('/blockchain')}}" class="{{ request()->is('blockchain/*')||request()->is('blockchain') ? 'active' : null }}">
+                                        <a href="{{route('admin.blockchain.index')}}" class="{{ request()->is('blockchain/*')||request()->is('blockchain') ? 'active' : null }}">
                                             Logs
                                         </a>
                                     @endif
                                     
                                     @if(auth()->user()->isHospital())
-                                        <a href="{{url('/users')}}" class="{{ request()->is('users/*')||request()->is('users') ? 'active' : null }}">
+                                        <a href="{{route('hospital.usuario.index')}}" class="{{ request()->is('usuario/*')||request()->is('usuario') ? 'active' : null }}">
                                             Usuarios
                                         </a>
-                                        <a href="{{url('/test/indice')}}" class="{{ request()->is('users/*')||request()->is('users') ? 'active' : null }}">
-                                            Test Api (indice)
+                                        <a href="{{route('hospital.sistema.index')}}" class="{{ request()->is('sistema/*')||request()->is('sistema') ? 'active' : null }}">
+                                            API
                                         </a>
                                     @endif
 
                                     @if(auth()->user()->isPaciente())
-                                        <a href="{{url('/paciente/self')}}" class="{{ request()->is('paciente/self') ? 'active' : null }}">
+                                        <a href="{{route('paciente.expediente.propio')}}" class="{{ request()->is('expediente/propio') ? 'active' : null }}">
                                             Consultar expediente
                                         </a>
                                     @endif
 
                                     @if (auth()->user()->isMedico())
-                                        <a class="vcenter {{ request()->is('paciente/basico') ? "active" : null }}" href="{{url('/paciente/basico')}}">
+                                        <a class="vcenter {{ request()->is('expediente/basico') ? "active" : null }}" href="{{route('medico.expediente.basico')}}">
                                             <i class="material-icons">search</i>Consulta básica
                                         </a>
-                                        <a class="vcenter {{ request()->is('paciente') ? "active" : null }}" href="{{url('/paciente')}}">
+                                        <a class="vcenter {{ request()->is('expediente') ? "active" : null }}" href="{{route('medico.expediente.completo')}}">
                                             <i class="material-icons">find_in_page</i> Consulta expediente
+                                        </a>
+                                    @endif
+                                    @if (auth()->user()->isParamedico())
+                                        <a class="vcenter {{ request()->is('expediente/basico') ? "active" : null }}" href="{{route('medico.expediente.basico')}}">
+                                            <i class="material-icons">search</i>Consulta básica
                                         </a>
                                     @endif
                                 </div>

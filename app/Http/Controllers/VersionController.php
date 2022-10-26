@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Log;
+use App\Models\Version;
 use Illuminate\Http\Request;
 
-class LogController extends Controller
+class VersionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +30,7 @@ class LogController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreLogRequest  $request
+     * @param  \App\Http\Requests\StoreVersionRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,10 +41,10 @@ class LogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Log  $log
+     * @param  \App\Models\Version  $version
      * @return \Illuminate\Http\Response
      */
-    public function show(Log $log)
+    public function show(Version $version)
     {
         //
     }
@@ -52,10 +52,10 @@ class LogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Log  $log
+     * @param  \App\Models\Version  $version
      * @return \Illuminate\Http\Response
      */
-    public function edit(Log $log)
+    public function edit(Version $version)
     {
         //
     }
@@ -63,11 +63,11 @@ class LogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateLogRequest  $request
-     * @param  \App\Models\Log  $log
+     * @param  \App\Http\Requests\UpdateVersionRequest  $request
+     * @param  \App\Models\Version  $version
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Log $log)
+    public function update(Request $request, Version $version)
     {
         //
     }
@@ -75,10 +75,10 @@ class LogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Log  $log
+     * @param  \App\Models\Version  $version
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Log $log)
+    public function destroy(Version $version)
     {
         //
     }
