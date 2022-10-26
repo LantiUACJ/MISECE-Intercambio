@@ -100,7 +100,7 @@ class User extends Authenticatable
             "name"=>"required",
             "password"=>"required",
             "email"=>"required|email|unique:users",
-            "rol_id"=>"required",
+            "rol_id"=>"required|in:1,2,3,4,5",
             "curp"=>"nullable",
         ];
     }
@@ -110,7 +110,7 @@ class User extends Authenticatable
             "name"=>"required",
             "password"=>"nullable",
             "email"=>"required|email|unique:users,email,".$id,
-            "rol_id"=>"required",
+            "rol_id"=>"required|in:1,2,3,4,5",
             "curp"=>"nullable",
         ];
     }

@@ -15,7 +15,7 @@ class HospitalController extends Controller
      */
     public function index()
     {
-        return view("hospital.index",["hospitales"=>Hospital::all()]);
+        return view("hospital.index",["hospitales"=>Hospital::paginate()]);
     }
 
     /**
@@ -37,18 +37,19 @@ class HospitalController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            "user"=>"required",
+            "user"=>"required|unique:hospitals,user",
             "password"=>"required",
-            "url"=>"required",
+            "url"=>"required|url",
             "nombre"=>"required",
-            "telefono"=>"required",
-            "email"=>"required",
+            "telefono"=>"required|integer|digits_between:8,11",
+            "email"=>"required|email",
             "calle"=>"required",
-            "numero"=>"required",
+            "numero"=>"required|integer|digits_between:1,5",
             "colonia"=>"required",
-            "codigo_postal"=>"required",
+            "codigo_postal"=>"required|integer|digits:5",
             "ciudad"=>"required",
             "estado"=>"required",
+            "version"=>"required|exists:versions,version",
         ]);
 
         $input["password"] = Hash::make($input["password"]);
@@ -89,17 +90,18 @@ class HospitalController extends Controller
     public function update(Request $request, Hospital $hospital)
     {
         $input = $request->validate([
-            "user"=>"required",
-            "url"=>"required",
+            "user"=>"required|unique:hospitals,user,".$hospital->id,
+            "url"=>"required|url",
             "nombre"=>"required",
-            "telefono"=>"required",
-            "email"=>"required",
+            "telefono"=>"required|integer|digits_between:8,10",
+            "email"=>"required|email",
             "calle"=>"required",
-            "numero"=>"required",
+            "numero"=>"required|integer|digits_between:1,5",
             "colonia"=>"required",
-            "codigo_postal"=>"required",
+            "codigo_postal"=>"required|integer|digits:5",
             "ciudad"=>"required",
             "estado"=>"required",
+            "version"=>"required|exists:versions,version",
         ]);
         if(isset( $request->input()["password"] ))
             $input["password"] = Hash::make($request->input()["password"]);

@@ -11,8 +11,8 @@
                 @enderror
             </div>
             <div class="input-field col s12 m6">
-                <input id="curp" type="text" class="validate" name="curp">
-                <label for="curp">CURP</label>
+                <input id="curp" type="text" class="validate" name="curp" value="{{old('curp', $model->curp)}}">
+                <label for="curp">CURP (opcinal)</label>
                 @error('curp')
                     <span class="error-text">{{ $message }}</span>
                 @enderror
@@ -28,7 +28,7 @@
             </div>
             <div class="input-field col s12 m6">
                 <input id="password" type="password" class="validate" name="password">
-                <label for="password">Contraseña</label>
+                <label for="password">Contraseña {{$model->password?"(opcinal)":""}}</label>
                 @error('password')
                     <span class="error-text">{{ $message }}</span>
                 @enderror
@@ -36,22 +36,10 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <select name="rol_id">
-                    <option value="" disabled selected>Elije nivel de acceso</option>
-                    <option value="2" {{$model->rol_id==2?"selected":""}}>Hospital</option>
-                </select>
-                <label>Nivel de acceso</label>
-                @error('rol_id')
-                    <span class="error-text">{{ $message }}</span>
-                @enderror
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
                 <select name="hospital_id">
-                    <option value="" disabled selected>Hospital</option>
+                    <option value="" disabled selected>Elije un hospital</option>
                     @foreach ($model->hospitales() as $item)
-                        <option value="{{$item->id}}">{{$item->nombre}}</option>
+                        <option value="{{$item->id}}" {{old('hospital_id', $model->hospital_id)==$item->id?"selected":""}}>{{$item->nombre}}</option>
                     @endforeach
                 </select>
                 <label>Hospital</label>

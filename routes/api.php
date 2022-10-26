@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\V1\ApiController as ApiControllerV1;
-use App\Http\Controllers\V1\TestApiController as TestApiControllerV1;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\ApiTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +14,11 @@ use App\Http\Controllers\V1\TestApiController as TestApiControllerV1;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::prefix('/v1')->middleware(["auth.api"])->group(function(){
-    Route::post('/expediente/{curp}', [ApiControllerV1::class, "consultarExpedientes"]);
-    Route::post('/expediente/basico/{curp}', [ApiControllerV1::class, "consultarExpedientesBasico"]);
+Route::prefix('/{version}')->middleware(["auth.api"])->group(function(){
+    Route::post('/expediente/{curp}', [ApiController::class, "consultarExpedientes"]);
+    Route::post('/expediente/basico/{curp}', [ApiController::class, "consultarExpedientesBasico"]);
     /* Testing routes */
-    Route::post('/test/expediente/{curp}', [TestApiControllerV1::class, "consultarExpedientes"]);
-    Route::post('/test/expediente/basico/{curp}', [TestApiControllerV1::class, "consultarExpedientesBasico"]);
-    Route::post('/test/json', [TestApiControllerV1::class, "testJson"]);
+    Route::post('/test/expediente/{curp}', [ApiTestController::class, "consultarExpedientes"]);
+    Route::post('/test/expediente/basico/{curp}', [ApiTestController::class, "consultarExpedientesBasico"]);
+    Route::post('/test/json', [ApiTestController::class, "testJson"]);
 });

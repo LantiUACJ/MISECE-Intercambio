@@ -4,36 +4,38 @@ namespace App\Http\Controllers\V1;
 
 use Illuminate\Http\Request;
 use \App\Models\Hospital;
-use \App\Tools\PetitionHelper;
+use \App\Tools\Test\ApiHelper;
 use Illuminate\Support\Facades\Validator;
 
-class TestApiController extends \App\Http\Controllers\Controller{
+class ApiTestController extends \App\Http\Controllers\Controller{
 
     public function consultarExpedientes($curp, Request $request){
         $validator = Validator::make($request->all(), [
             "consultor"=>"required",
-            "numero"=>"required",
             "codigo"=>"nullable",
         ]);
         if ($validator->fails()) {
             return response($validator->errors(),400);
         }
         $input = $validator->validated();
-        //$hospital_user = $request->headers->get("php-auth-user");
-        /* adquirir hospital */
         
-        $ph = new PetitionHelper($curp, null, $input["consultor"], 1);
+        $ph = new ApiHelper([
+            "curp"=>$curp, 
+            "codigo"=>isset($input["codigo"])?$input["codigo"]:"", 
+            "consultor"=>$input["consultor"], 
+            "type"=>1,
+            "skipBlockchain"=>true
+        ]);
         
-        if(!$ph->fakePatient($input["numero"])){
+        if(!$ph->searchPatient()){
             return response(["Error"=>"no se encontró el paciente"], 404);
         }
         
-        if(!$ph->fakeValidate(isset($input["codigo"])?$input["codigo"]:"")){
-            $ph->fakeCode();
+        if(!$ph->validateCode()){
             return response(["Error"=>"El código de verificación no es correcto o expiro"], 400);
         }
 
-        $ph->fakeData();
+        $ph->getData();
 
         return $ph->renderHtml();
     }
@@ -43,23 +45,42 @@ class TestApiController extends \App\Http\Controllers\Controller{
             "codigo"=>"nullable",
         ]);
         if ($validator->fails()) {
-            return $validator->errors();
+            return response($validator->errors(),400);
         }
         $input = $validator->validated();
         
-        $ph = new PetitionHelper($curp, null, $input["consultor"], 1);
+        $ph = new ApiHelper([
+            "curp"=>$curp, 
+            "codigo"=>isset($input["codigo"])?$input["codigo"]:"",
+            "consultor"=>$input["consultor"],
+            "type"=>1,
+            "skipBlockchain"=>true
+        ]);
         
-        if(!$ph->fakePatient("")){
+        if(!$ph->searchPatient()){
             return response(["Error"=>"no se encontró el paciente"], 404);
         }
+        
+        if(!$ph->validateCode()){
+            return response(["Error"=>"El código de verificación no es correcto o expiro"], 400);
+        }
 
-        $ph->fakeData();
+        $ph->getData();
 
         return $ph->renderHtml();
     }
-    public function testJson(Request $request){
+    public function testJson(Request $request, $version){
         $inicio = microtime(true);
-        $hospital_user = $request->headers->get("php-auth-user");
+        $hospital_user = "";
+        if($version == "v1")
+            $hospital_user = $request->headers->get("php-auth-user");
+        if($version == "v2"){
+            $jwt = str_replace("Bearer ", "", $request->header('authorization'));
+            $header = json_decode(base64_decode(explode('.',$jwt)[0]));
+            $cert = openssl_x509_read($header->cert);
+            $hospital_user = openssl_x509_parse($cert)["subject"]["CN"];
+        }
+
         $hospital = Hospital::where("user",$hospital_user)->first();
 
         $jsontxt = $request->input("json", false);

@@ -19,15 +19,12 @@ class UserHospitalController extends Controller{
             "name"=>"required",
             "password"=>"required",
             "email"=>"required|email|unique:users",
-            "rol_id"=>"required",
             "hospital_id"=>"required",
         ]);
+        $data["rol_id"] = 2;
         $data["password"] = Hash::make($data["password"]);
         $model = User::create($data);
-        if($model){
-            return redirect("hos/usuario/".$model->id);
-        }
-        return redirect("error");
+        return redirect()->route("admin.usuario.show",$model->id);
     }
     public function edit(User $user){
         return view("userHospital.update",["model"=>$user]);
@@ -37,25 +34,23 @@ class UserHospitalController extends Controller{
         $data = $request->validate([
             "name"=>"required",
             "password"=>"nullable",
-            "email"=>"required|email|unique:users",
-            "rol_id"=>"required",
+            "email"=>"required|email|unique:users,email,$user->id",
             "hospital_id"=>"required",
         ]);
+        $data["rol_id"] = 2;
         if(isset($data["password"]) && $data["password"]){
             $data["password"] = Hash::make($data["password"]);
         }
         else{
             unset($data["password"]);
         }
-        if($user->update($data)){
-            return redirect("hos/usuario/".$user->id);
-        }
-        return redirect("error");
+        $user->update($data);
+        return redirect()->route("admin.usuario.show",$user->id);
     }
 
     public function show(User $user){
         if($user->rol_id != 2)
-            return redirect("hos/usuario");
+            return route("admin.usuario.index");
         return view("userHospital.view",["model"=>$user]);
     }
 
@@ -68,6 +63,6 @@ class UserHospitalController extends Controller{
             request()->session()->flash('data_type', 'danger');
             request()->session()->flash('data_title', 'Error');
         }
-        return redirect("hos/usuario");
+        return redirect()->route("admin.usuario.index");
     }
 }

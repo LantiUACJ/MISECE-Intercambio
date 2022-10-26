@@ -9,23 +9,35 @@
         </div>
         <div class="input-field col s6">
             <input id="password" type="password" class="validate" name="password" value="">
-            <label for="password">Contraseña</label>
+            <label for="password">Contraseña {{$model->password?"(opcional)":""}}</label>
             @error('password')
                 <span class="error-text">{{ $message }}</span>
             @enderror
         </div>
-        </div>
-        <div class="row">
-        <div class="input-field col s12">
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
             <input id="acces_point" type="text" class="validate" name="url" value="{{old("url", $model->url)}}">
             <label for="acces_point">Punto de acceso (URL)</label>
             @error('url')
                 <span class="error-text">{{ $message }}</span>
             @enderror
         </div>
+        <div class="input-field col s6">
+            <select name="version">
+                <option value="" disabled selected>Elije una versión</option>
+                @foreach ($model->versiones() as $item)
+                    <option value="{{$item->version}}" {{old('version', $model->version)==$item->version?"selected":""}}>{{$item->version}}</option>
+                @endforeach
+            </select>
+            <label>Versión</label>
+            @error('version')
+                <span class="error-text">{{ $message }}</span>
+            @enderror
         </div>
+    </div>
 
-        <div class="row">
+    <div class="row">
         <div class="input-field col s6">
             <input id="hospital_name" type="text" class="validate" name="nombre" value="{{old("nombre", $model->nombre)}}">
             <label for="hospital_name">Nombre del Hospital / clínica</label>
@@ -60,7 +72,7 @@
         <div class="input-field col s2">
             <input id="adress_number" type="text" class="validate" name="numero" value="{{old("numero", $model->numero)}}">
             <label for="adress_number">Número</label>
-            @error('url')
+            @error('numero')
                 <span class="error-text">{{ $message }}</span>
             @enderror
         </div>

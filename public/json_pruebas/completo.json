@@ -1,0 +1,2369 @@
+{
+    "resourceType": "Bundle",
+    "id": "a25305deec4b7821a38c9e779b08f9be",
+    "type": "history",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "f2c13c2b40111558a94ae3a6e29801bb",
+                "language": "es",
+                "name": [
+                    {
+                        "text": "Luiz Salsa Alta"
+                    }
+                ],
+                "identifier": [
+                    {
+                        "use": "official",
+                        "type": {
+                            "text": "CURP"
+                        },
+                        "value": "LUSA19800813HOCELI80Y"
+                    },
+                    {
+                        "use": "official",
+                        "type": {
+                            "text": "FOLIO",
+                            "coding": [
+                                {
+                                    "display": "1.0.0.0",
+                                    "code": "1.0.0.0",
+                                    "system": "http:\/\/www.expcli.com"
+                                }
+                            ]
+                        },
+                        "value": "5230449"
+                    }
+                ],
+                "active": true,
+                "gender": "male",
+                "birthDate": "1980-08-13",
+                "address": [
+                    {
+                        "city": "juarez",
+                        "district": "juarez",
+                        "state": "CHIHUAHUA"
+                    }
+                ],
+                "communication": [
+                    {
+                        "language": {
+                            "text": "Espa\u00f1ol"
+                        },
+                        "preferred": true
+                    }
+                ]
+            },
+            "fullUrl": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+            "request": {
+                "method": "POST",
+                "url": "Patient"
+            },
+            "response": {
+                "status": "200 ok"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "6b4cb6cd3117765fa0a3afe2315f2065",
+                "name": [
+                    {
+                        "text": "DR. Lopez"
+                    }
+                ]
+            },
+            "fullUrl": "Practitioner\/6b4cb6cd3117765fa0a3afe2315f2065",
+            "request": {
+                "method": "POST",
+                "url": "Practitioner"
+            },
+            "response": {
+                "status": "200 ok"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Bundle",
+                "id": "96cd93d47c36a95080856f5a65ae6625",
+                "identifier": {
+                    "use": "official",
+                    "system": "urn:ietf:rfc:3986",
+                    "value": "96cd93d47c36a95080856f5a65ae6625"
+                },
+                "type": "document",
+                "timestamp": "1975-09-27T02:41:52.000000Z",
+                "entry": [
+                    {
+                        "resource": {
+                            "resourceType": "Practitioner",
+                            "id": "6b4cb6cd3117765fa0a3afe2315f2065",
+                            "name": [
+                                {
+                                    "text": "DR. Lopez"
+                                }
+                            ]
+                        },
+                        "fullUrl": "Practitioner\/6b4cb6cd3117765fa0a3afe2315f2065"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Patient",
+                            "id": "f2c13c2b40111558a94ae3a6e29801bb",
+                            "language": "es",
+                            "name": [
+                                {
+                                    "text": "Luiz Salsa Alta"
+                                }
+                            ],
+                            "identifier": [
+                                {
+                                    "use": "official",
+                                    "type": {
+                                        "text": "CURP"
+                                    },
+                                    "value": "LUSA19800813HOCELI80Y"
+                                },
+                                {
+                                    "use": "official",
+                                    "type": {
+                                        "text": "FOLIO",
+                                        "coding": [
+                                            {
+                                                "display": "1.0.0.0",
+                                                "code": "1.0.0.0",
+                                                "system": "http:\/\/www.expcli.com"
+                                            }
+                                        ]
+                                    },
+                                    "value": "5230449"
+                                }
+                            ],
+                            "active": true,
+                            "gender": "male",
+                            "birthDate": "1980-08-13",
+                            "address": [
+                                {
+                                    "city": "juarez",
+                                    "district": "juarez",
+                                    "state": "CHIHUAHUA"
+                                }
+                            ],
+                            "communication": [
+                                {
+                                    "language": {
+                                        "text": "Espa\u00f1ol"
+                                    },
+                                    "preferred": true
+                                }
+                            ]
+                        },
+                        "fullUrl": "Patient\/f2c13c2b40111558a94ae3a6e29801bb"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Composition",
+                            "id": "8e4903b5cf59bae34a9851cdb102e2aa",
+                            "status": "final",
+                            "type": {
+                                "text": "Historia Cl\u00ednica",
+                                "coding": [
+                                    {
+                                        "display": "Hisotoria Clinica",
+                                        "code": "D2",
+                                        "system": "urn:NOM-004-SSA3-2012"
+                                    }
+                                ]
+                            },
+                            "date": "1975-09-27T02:41:52.000000Z",
+                            "author": [
+                                {
+                                    "reference": "Practitioner\/6b4cb6cd3117765fa0a3afe2315f2065",
+                                    "type": "Practitioner",
+                                    "display": "Practicante: DR. Lopez"
+                                }
+                            ],
+                            "title": "Historia Cl\u00ednica",
+                            "section": [
+                                {
+                                    "title": "Antecedentes",
+                                    "entry": [
+                                        {
+                                            "reference": "Observation\/c5cbc4960b48e465e812387e512829d1",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Antecedentes (1975-09-27 02:41:52)"
+                                        },
+                                        {
+                                            "reference": "Observation\/9299dfbd3233ec7bc62941cbbc7b2f8e",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Antecedentes (1975-09-27 02:41:52)"
+                                        },
+                                        {
+                                            "reference": "Observation\/fb4aa5ce89d93f2afc33478f99a650d2",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Antecedentes (1975-09-27 02:41:52)"
+                                        },
+                                        {
+                                            "reference": "Observation\/6d31b450a39b6b678531c36e41b10474",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Antecedentes (1975-09-27 02:41:52)"
+                                        },
+                                        {
+                                            "reference": "Observation\/013cf9c0bd474722d73c74022651fdfa",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Antecedentes (1975-09-27 02:41:52)"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "title": "Exploraci\u00f3n f\u00edsica",
+                                    "entry": [
+                                        {
+                                            "reference": "Observation\/97f4f9668b0eb682836cdd7546232284",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2000-12-10 16:38:19)"
+                                        },
+                                        {
+                                            "reference": "Observation\/6577261b3e9ed25333643c56a4f8860c",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2000-12-10 16:38:19)"
+                                        },
+                                        {
+                                            "reference": "Observation\/db1ef0c11c5b168cedd51e35e6ee7175",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2000-12-10 16:38:19)"
+                                        },
+                                        {
+                                            "reference": "Observation\/d49d743415c9093e81add6106ea28ab6",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2000-12-10 16:38:19)"
+                                        },
+                                        {
+                                            "reference": "Observation\/ed3c20a55b74eca8025b115d91999e56",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2000-12-10 16:38:19)"
+                                        },
+                                        {
+                                            "reference": "Observation\/cd2ca66bf1a4a595b7fcb2713498a6d3",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2000-12-10 16:38:19)"
+                                        },
+                                        {
+                                            "reference": "Observation\/bb2524f4d010d6f65f89a729ddcd9554",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2000-12-10 16:38:19)"
+                                        },
+                                        {
+                                            "reference": "Observation\/179974ec772c475a7af2649233c20e7a",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2000-12-10 16:38:19)"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "title": "Estudios",
+                                    "entry": [
+                                        {
+                                            "reference": "Observation\/ecb1bf6a0a7a01ea54be75140ceb76f0",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Estudios (1981-11-29 08:40:08)"
+                                        },
+                                        {
+                                            "reference": "Observation\/ae6691b3db91e61879d660e52aaed9a3",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Estudios (2021-10-12 17:33:22)"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "title": "Tratamientos",
+                                    "entry": [
+                                        {
+                                            "reference": "MedicationAdministration\/d9ba9f8becb88086abeaf2bec8a0b32a",
+                                            "type": "MedicationAdministration",
+                                            "display": "MedicationAdministration"
+                                        },
+                                        {
+                                            "reference": "MedicationAdministration\/6d2b016d96a7fb992b9b9649fdaca0e3",
+                                            "type": "MedicationAdministration",
+                                            "display": "MedicationAdministration"
+                                        },
+                                        {
+                                            "reference": "MedicationAdministration\/b7942f6f95fbeb5be172c932ee5cf416",
+                                            "type": "MedicationAdministration",
+                                            "display": "MedicationAdministration"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "fullUrl": "Composition\/8e4903b5cf59bae34a9851cdb102e2aa"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "c5cbc4960b48e465e812387e512829d1",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Antecedentes Familiares",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Antecedentes"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1975-09-27T02:41:52.000000Z",
+                            "valueString": "1"
+                        },
+                        "fullUrl": "Observation\/c5cbc4960b48e465e812387e512829d1"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "9299dfbd3233ec7bc62941cbbc7b2f8e",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Antecedentes No-Patol\u00f3gicos",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Antecedentes"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1975-09-27T02:41:52.000000Z"
+                        },
+                        "fullUrl": "Observation\/9299dfbd3233ec7bc62941cbbc7b2f8e"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "fb4aa5ce89d93f2afc33478f99a650d2",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Antecedentes Patol\u00f3gicos",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Antecedentes"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1975-09-27T02:41:52.000000Z",
+                            "valueString": "tipo A"
+                        },
+                        "fullUrl": "Observation\/fb4aa5ce89d93f2afc33478f99a650d2"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "6d31b450a39b6b678531c36e41b10474",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Antecedentes Patol\u00f3gicos",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Antecedentes"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1975-09-27T02:41:52.000000Z",
+                            "valueString": "tipo B"
+                        },
+                        "fullUrl": "Observation\/6d31b450a39b6b678531c36e41b10474"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "013cf9c0bd474722d73c74022651fdfa",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Antecedentes Patol\u00f3gicos",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Antecedentes"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1975-09-27T02:41:52.000000Z",
+                            "valueString": "tipo A"
+                        },
+                        "fullUrl": "Observation\/013cf9c0bd474722d73c74022651fdfa"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "97f4f9668b0eb682836cdd7546232284",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Habitus Exterior",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2000-12-10T16:38:19.000000Z",
+                            "valueString": "color anormal"
+                        },
+                        "fullUrl": "Observation\/97f4f9668b0eb682836cdd7546232284"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "6577261b3e9ed25333643c56a4f8860c",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Temperatura",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2000-12-10T16:38:19.000000Z",
+                            "valueInteger": 31
+                        },
+                        "fullUrl": "Observation\/6577261b3e9ed25333643c56a4f8860c"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "db1ef0c11c5b168cedd51e35e6ee7175",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tension_arterial_sist\u00f3lica",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2000-12-10T16:38:19.000000Z",
+                            "valueInteger": 84
+                        },
+                        "fullUrl": "Observation\/db1ef0c11c5b168cedd51e35e6ee7175"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "d49d743415c9093e81add6106ea28ab6",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tension_arterial_diast\u00f3lica",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2000-12-10T16:38:19.000000Z",
+                            "valueInteger": 36
+                        },
+                        "fullUrl": "Observation\/d49d743415c9093e81add6106ea28ab6"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "ed3c20a55b74eca8025b115d91999e56",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "frecuencia_cardiaca",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2000-12-10T16:38:19.000000Z",
+                            "valueInteger": 72
+                        },
+                        "fullUrl": "Observation\/ed3c20a55b74eca8025b115d91999e56"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "cd2ca66bf1a4a595b7fcb2713498a6d3",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "frecuencia_respiratoria",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2000-12-10T16:38:19.000000Z",
+                            "valueInteger": 20
+                        },
+                        "fullUrl": "Observation\/cd2ca66bf1a4a595b7fcb2713498a6d3"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "bb2524f4d010d6f65f89a729ddcd9554",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "peso",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2000-12-10T16:38:19.000000Z",
+                            "valueInteger": 68
+                        },
+                        "fullUrl": "Observation\/bb2524f4d010d6f65f89a729ddcd9554"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "179974ec772c475a7af2649233c20e7a",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "talla",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2000-12-10T16:38:19.000000Z",
+                            "valueInteger": 69
+                        },
+                        "fullUrl": "Observation\/179974ec772c475a7af2649233c20e7a"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "ecb1bf6a0a7a01ea54be75140ceb76f0",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tipo A",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Estudios"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1981-11-29T08:40:08.000000Z",
+                            "valueString": "negativo"
+                        },
+                        "fullUrl": "Observation\/ecb1bf6a0a7a01ea54be75140ceb76f0"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "ae6691b3db91e61879d660e52aaed9a3",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tipo B",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Estudios"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2021-10-12T17:33:22.000000Z",
+                            "valueString": "negativo"
+                        },
+                        "fullUrl": "Observation\/ae6691b3db91e61879d660e52aaed9a3"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "MedicationAdministration",
+                            "id": "d9ba9f8becb88086abeaf2bec8a0b32a",
+                            "status": "completed",
+                            "medicationCodeableConcept": {
+                                "text": "tipo B"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2019",
+                            "dosage": {
+                                "text": "Tomar 5.7 tipo B de tipo B cada 2.1 cada tipo A",
+                                "method": {
+                                    "text": "tipo B"
+                                },
+                                "dose": {
+                                    "value": 5.7,
+                                    "unit": "tipo B"
+                                },
+                                "rateQuantity": {
+                                    "value": 2.1,
+                                    "unit": "tipo A"
+                                }
+                            }
+                        },
+                        "fullUrl": "MedicationAdministration\/d9ba9f8becb88086abeaf2bec8a0b32a"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "MedicationAdministration",
+                            "id": "6d2b016d96a7fb992b9b9649fdaca0e3",
+                            "status": "completed",
+                            "medicationCodeableConcept": {
+                                "text": "tipo B"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2019",
+                            "dosage": {
+                                "text": "Tomar 2.1 tipo B de tipo B cada 6 cada tipo A",
+                                "method": {
+                                    "text": "tipo B"
+                                },
+                                "dose": {
+                                    "value": 2.1,
+                                    "unit": "tipo B"
+                                },
+                                "rateQuantity": {
+                                    "value": 6,
+                                    "unit": "tipo A"
+                                }
+                            }
+                        },
+                        "fullUrl": "MedicationAdministration\/6d2b016d96a7fb992b9b9649fdaca0e3"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "MedicationAdministration",
+                            "id": "b7942f6f95fbeb5be172c932ee5cf416",
+                            "status": "completed",
+                            "medicationCodeableConcept": {
+                                "text": "tipo B"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2019",
+                            "dosage": {
+                                "text": "Tomar 8.6 tipo A de tipo B cada 3 cada tipo A",
+                                "method": {
+                                    "text": "tipo A"
+                                },
+                                "dose": {
+                                    "value": 8.6,
+                                    "unit": "tipo A"
+                                },
+                                "rateQuantity": {
+                                    "value": 3,
+                                    "unit": "tipo A"
+                                }
+                            }
+                        },
+                        "fullUrl": "MedicationAdministration\/b7942f6f95fbeb5be172c932ee5cf416"
+                    }
+                ]
+            },
+            "fullUrl": "Bundle\/96cd93d47c36a95080856f5a65ae6625",
+            "request": {
+                "method": "POST",
+                "url": "Bundle"
+            },
+            "response": {
+                "status": "200 ok"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Bundle",
+                "id": "036376f3c3a2b456513ea5cb2d90ef4e",
+                "identifier": {
+                    "use": "official",
+                    "system": "urn:ietf:rfc:3986",
+                    "value": "036376f3c3a2b456513ea5cb2d90ef4e"
+                },
+                "type": "document",
+                "timestamp": "2021-07-01T06:01:53.000000Z",
+                "entry": [
+                    {
+                        "resource": {
+                            "resourceType": "Composition",
+                            "id": "42e3f849e57610ae531f02b546a6c48c",
+                            "status": "final",
+                            "type": {
+                                "text": "Nota de evoluci\u00f3n",
+                                "coding": [
+                                    {
+                                        "display": "Nota de evoluci\u00f3n",
+                                        "code": "D3",
+                                        "system": "urn:NOM-004-SSA3-2012"
+                                    }
+                                ]
+                            },
+                            "encounter": {
+                                "reference": "Encounter\/b3abff13c5e0ec2a8e5cb2d5e7c6f124",
+                                "type": "Encounter",
+                                "display": "Visita 2021-07-01 06:01:53 - 2021-07-01 06:01:53"
+                            },
+                            "date": "2021-07-01T06:01:53.000000Z",
+                            "author": [
+                                {
+                                    "reference": "Practitioner\/6b4cb6cd3117765fa0a3afe2315f2065",
+                                    "type": "Practitioner",
+                                    "display": "Practicante: DR. Lopez"
+                                }
+                            ],
+                            "title": "Historia Cl\u00ednica",
+                            "section": [
+                                {
+                                    "title": "Diagn\u00f3stico",
+                                    "entry": [
+                                        {
+                                            "reference": "Observation\/873422ba769b0f2bc66ec4b822e95957",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Diagn\u00f3stico (1979-12-06 07:31:27)"
+                                        },
+                                        {
+                                            "reference": "Observation\/a041cdc4180e4be390344a9b73a4f95f",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Diagn\u00f3stico (1986-05-16 04:20:46)"
+                                        },
+                                        {
+                                            "reference": "Observation\/cfef86d51d7059a237cc89ee95a28ea0",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Diagn\u00f3stico (1994-12-18 17:57:08)"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "title": "Tratamientos",
+                                    "entry": [
+                                        {
+                                            "reference": "MedicationAdministration\/d6c352d489568f0150eae6248d041709",
+                                            "type": "MedicationAdministration",
+                                            "display": "MedicationAdministration"
+                                        },
+                                        {
+                                            "reference": "MedicationAdministration\/9a2ef1f8c7ba2b4a3d4ef6dfe2f15559",
+                                            "type": "MedicationAdministration",
+                                            "display": "MedicationAdministration"
+                                        },
+                                        {
+                                            "reference": "MedicationAdministration\/37e92b991b25165a74c0bd73d44648db",
+                                            "type": "MedicationAdministration",
+                                            "display": "MedicationAdministration"
+                                        },
+                                        {
+                                            "reference": "MedicationAdministration\/a7c3d7b601bba4e74843fc8d48b74186",
+                                            "type": "MedicationAdministration",
+                                            "display": "MedicationAdministration"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "title": "Exploraci\u00f3n F\u00edsica",
+                                    "entry": [
+                                        {
+                                            "reference": "Observation\/1bee733d5cc909ab12afab2e145dfd0e",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2001-08-20 19:11:44)"
+                                        },
+                                        {
+                                            "reference": "Observation\/9a7c2b921d49853f1013c6acf51b407e",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2001-08-20 19:11:44)"
+                                        },
+                                        {
+                                            "reference": "Observation\/e440e7ab450e4cb9626ed51776313d2b",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2001-08-20 19:11:44)"
+                                        },
+                                        {
+                                            "reference": "Observation\/d4ab54d3805acff17106f0417532a1e7",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2001-08-20 19:11:44)"
+                                        },
+                                        {
+                                            "reference": "Observation\/84b8a3fc879bd37bb799378f8f7559ef",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2001-08-20 19:11:44)"
+                                        },
+                                        {
+                                            "reference": "Observation\/7bf0e48b256c71ae7628a6cc650ad2cc",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2001-08-20 19:11:44)"
+                                        },
+                                        {
+                                            "reference": "Observation\/537acff19036c08952fe233729e6a8d2",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2001-08-20 19:11:44)"
+                                        },
+                                        {
+                                            "reference": "Observation\/5d05e8757485b980232b333354f29453",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (2001-08-20 19:11:44)"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "title": "Estudios",
+                                    "entry": [
+                                        {
+                                            "reference": "Observation\/0fa573125b9b6c535279d1a1e7a8901a",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Estudios (2015-06-07 19:00:13)"
+                                        },
+                                        {
+                                            "reference": "Observation\/c6f8745409b3d996dc1663f3a646926d",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Estudios (2017-07-14 08:30:03)"
+                                        },
+                                        {
+                                            "reference": "Observation\/d02e020294c16f0cf6e4c6c753b6af10",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Estudios (1974-03-29 10:49:23)"
+                                        },
+                                        {
+                                            "reference": "Observation\/ca6a5acc6a6b94a83b61f14b02957bcd",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Estudios (2009-05-15 00:21:36)"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "fullUrl": "Composition\/42e3f849e57610ae531f02b546a6c48c"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Practitioner",
+                            "id": "6b4cb6cd3117765fa0a3afe2315f2065",
+                            "name": [
+                                {
+                                    "text": "DR. Lopez"
+                                }
+                            ]
+                        },
+                        "fullUrl": "Practitioner\/6b4cb6cd3117765fa0a3afe2315f2065"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Patient",
+                            "id": "f2c13c2b40111558a94ae3a6e29801bb",
+                            "language": "es",
+                            "name": [
+                                {
+                                    "text": "Luiz Salsa Alta"
+                                }
+                            ],
+                            "identifier": [
+                                {
+                                    "use": "official",
+                                    "type": {
+                                        "text": "CURP"
+                                    },
+                                    "value": "LUSA19800813HOCELI80Y"
+                                },
+                                {
+                                    "use": "official",
+                                    "type": {
+                                        "text": "FOLIO",
+                                        "coding": [
+                                            {
+                                                "display": "1.0.0.0",
+                                                "code": "1.0.0.0",
+                                                "system": "http:\/\/www.expcli.com"
+                                            }
+                                        ]
+                                    },
+                                    "value": "5230449"
+                                }
+                            ],
+                            "active": true,
+                            "gender": "male",
+                            "birthDate": "1980-08-13",
+                            "address": [
+                                {
+                                    "city": "juarez",
+                                    "district": "juarez",
+                                    "state": "CHIHUAHUA"
+                                }
+                            ],
+                            "communication": [
+                                {
+                                    "language": {
+                                        "text": "Espa\u00f1ol"
+                                    },
+                                    "preferred": true
+                                }
+                            ]
+                        },
+                        "fullUrl": "Patient\/f2c13c2b40111558a94ae3a6e29801bb"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Encounter",
+                            "id": "b3abff13c5e0ec2a8e5cb2d5e7c6f124",
+                            "identifier": [
+                                {
+                                    "use": "official",
+                                    "type": {
+                                        "text": "ID",
+                                        "coding": [
+                                            {
+                                                "display": "Expcli",
+                                                "code": "1.0.0.0",
+                                                "system": "http:\/\/www.expcli.com"
+                                            }
+                                        ]
+                                    },
+                                    "value": "1"
+                                }
+                            ],
+                            "status": "finished",
+                            "class": {
+                                "display": "ambulatory",
+                                "code": "AMB",
+                                "system": "http:\/\/terminology.hl7.org\/CodeSystem\/v3-ActCode"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "period": {
+                                "start": "2021-07-01T06:01:53.000000Z",
+                                "end": "2021-07-01T06:01:53.000000Z"
+                            },
+                            "reasonCode": [
+                                {
+                                    "text": "laboriosam tempore voluptatem mollitia eligendi dolorem aliquid voluptatem occaecati"
+                                }
+                            ]
+                        },
+                        "fullUrl": "Encounter\/b3abff13c5e0ec2a8e5cb2d5e7c6f124"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "873422ba769b0f2bc66ec4b822e95957",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Diagn\u00f3stico",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Diagn\u00f3stico"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1979-12-06T07:31:27.000000Z",
+                            "valueString": "tipo B"
+                        },
+                        "fullUrl": "Observation\/873422ba769b0f2bc66ec4b822e95957"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "a041cdc4180e4be390344a9b73a4f95f",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Diagn\u00f3stico",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Diagn\u00f3stico"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1986-05-16T04:20:46.000000Z",
+                            "valueString": "tipo B"
+                        },
+                        "fullUrl": "Observation\/a041cdc4180e4be390344a9b73a4f95f"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "cfef86d51d7059a237cc89ee95a28ea0",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Diagn\u00f3stico",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Diagn\u00f3stico"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1994-12-18T17:57:08.000000Z",
+                            "valueString": "tipo A"
+                        },
+                        "fullUrl": "Observation\/cfef86d51d7059a237cc89ee95a28ea0"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "MedicationAdministration",
+                            "id": "d6c352d489568f0150eae6248d041709",
+                            "status": "completed",
+                            "medicationCodeableConcept": {
+                                "text": "tipo A"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2019",
+                            "dosage": {
+                                "text": "Tomar 8 tipo A de tipo A cada 4.9 cada tipo A",
+                                "method": {
+                                    "text": "tipo B"
+                                },
+                                "dose": {
+                                    "value": 8,
+                                    "unit": "tipo A"
+                                },
+                                "rateQuantity": {
+                                    "value": 4.9,
+                                    "unit": "tipo A"
+                                }
+                            }
+                        },
+                        "fullUrl": "MedicationAdministration\/d6c352d489568f0150eae6248d041709"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "MedicationAdministration",
+                            "id": "9a2ef1f8c7ba2b4a3d4ef6dfe2f15559",
+                            "status": "completed",
+                            "medicationCodeableConcept": {
+                                "text": "tipo B"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2019",
+                            "dosage": {
+                                "text": "Tomar 7.5 tipo A de tipo B cada 9 cada tipo B",
+                                "method": {
+                                    "text": "tipo A"
+                                },
+                                "dose": {
+                                    "value": 7.5,
+                                    "unit": "tipo A"
+                                },
+                                "rateQuantity": {
+                                    "value": 9,
+                                    "unit": "tipo B"
+                                }
+                            }
+                        },
+                        "fullUrl": "MedicationAdministration\/9a2ef1f8c7ba2b4a3d4ef6dfe2f15559"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "MedicationAdministration",
+                            "id": "37e92b991b25165a74c0bd73d44648db",
+                            "status": "completed",
+                            "medicationCodeableConcept": {
+                                "text": "tipo A"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2019",
+                            "dosage": {
+                                "text": "Tomar 3.6 tipo A de tipo A cada 6.6 cada tipo A",
+                                "method": {
+                                    "text": "tipo B"
+                                },
+                                "dose": {
+                                    "value": 3.6,
+                                    "unit": "tipo A"
+                                },
+                                "rateQuantity": {
+                                    "value": 6.6,
+                                    "unit": "tipo A"
+                                }
+                            }
+                        },
+                        "fullUrl": "MedicationAdministration\/37e92b991b25165a74c0bd73d44648db"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "MedicationAdministration",
+                            "id": "a7c3d7b601bba4e74843fc8d48b74186",
+                            "status": "completed",
+                            "medicationCodeableConcept": {
+                                "text": "tipo B"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2019",
+                            "dosage": {
+                                "text": "Tomar 5.4 tipo B de tipo B cada 9.2 cada tipo B",
+                                "method": {
+                                    "text": "tipo B"
+                                },
+                                "dose": {
+                                    "value": 5.4,
+                                    "unit": "tipo B"
+                                },
+                                "rateQuantity": {
+                                    "value": 9.2,
+                                    "unit": "tipo B"
+                                }
+                            }
+                        },
+                        "fullUrl": "MedicationAdministration\/a7c3d7b601bba4e74843fc8d48b74186"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "1bee733d5cc909ab12afab2e145dfd0e",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Habitus Exterior",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2001-08-20T19:11:44.000000Z",
+                            "valueString": "color anormal"
+                        },
+                        "fullUrl": "Observation\/1bee733d5cc909ab12afab2e145dfd0e"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "9a7c2b921d49853f1013c6acf51b407e",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Temperatura",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2001-08-20T19:11:44.000000Z",
+                            "valueInteger": 33
+                        },
+                        "fullUrl": "Observation\/9a7c2b921d49853f1013c6acf51b407e"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "e440e7ab450e4cb9626ed51776313d2b",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tension_arterial_sist\u00f3lica",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2001-08-20T19:11:44.000000Z",
+                            "valueInteger": 109
+                        },
+                        "fullUrl": "Observation\/e440e7ab450e4cb9626ed51776313d2b"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "d4ab54d3805acff17106f0417532a1e7",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tension_arterial_diast\u00f3lica",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2001-08-20T19:11:44.000000Z",
+                            "valueInteger": 39
+                        },
+                        "fullUrl": "Observation\/d4ab54d3805acff17106f0417532a1e7"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "84b8a3fc879bd37bb799378f8f7559ef",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "frecuencia_cardiaca",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2001-08-20T19:11:44.000000Z",
+                            "valueInteger": 96
+                        },
+                        "fullUrl": "Observation\/84b8a3fc879bd37bb799378f8f7559ef"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "7bf0e48b256c71ae7628a6cc650ad2cc",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "frecuencia_respiratoria",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2001-08-20T19:11:44.000000Z",
+                            "valueInteger": 26
+                        },
+                        "fullUrl": "Observation\/7bf0e48b256c71ae7628a6cc650ad2cc"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "537acff19036c08952fe233729e6a8d2",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "peso",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2001-08-20T19:11:44.000000Z",
+                            "valueInteger": 99
+                        },
+                        "fullUrl": "Observation\/537acff19036c08952fe233729e6a8d2"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "5d05e8757485b980232b333354f29453",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "talla",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2001-08-20T19:11:44.000000Z",
+                            "valueInteger": 66
+                        },
+                        "fullUrl": "Observation\/5d05e8757485b980232b333354f29453"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "0fa573125b9b6c535279d1a1e7a8901a",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tipo A",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Estudios"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2015-06-07T19:00:13.000000Z",
+                            "valueString": "positivo"
+                        },
+                        "fullUrl": "Observation\/0fa573125b9b6c535279d1a1e7a8901a"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "c6f8745409b3d996dc1663f3a646926d",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tipo B",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Estudios"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2017-07-14T08:30:03.000000Z",
+                            "valueString": "Sin resultados"
+                        },
+                        "fullUrl": "Observation\/c6f8745409b3d996dc1663f3a646926d"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "d02e020294c16f0cf6e4c6c753b6af10",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tipo B",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Estudios"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1974-03-29T10:49:23.000000Z",
+                            "valueString": "Sin resultados"
+                        },
+                        "fullUrl": "Observation\/d02e020294c16f0cf6e4c6c753b6af10"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "ca6a5acc6a6b94a83b61f14b02957bcd",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tipo B",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Estudios"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2009-05-15T00:21:36.000000Z",
+                            "valueString": "Sin resultados"
+                        },
+                        "fullUrl": "Observation\/ca6a5acc6a6b94a83b61f14b02957bcd"
+                    }
+                ]
+            },
+            "fullUrl": "Bundle\/036376f3c3a2b456513ea5cb2d90ef4e",
+            "request": {
+                "method": "POST",
+                "url": "Bundle"
+            },
+            "response": {
+                "status": "200 ok"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Bundle",
+                "id": "3a3789b71f68c6d20090f367b3d02fc1",
+                "identifier": {
+                    "use": "official",
+                    "system": "urn:ietf:rfc:3986",
+                    "value": "3a3789b71f68c6d20090f367b3d02fc1"
+                },
+                "type": "document",
+                "timestamp": "2009-06-06T22:16:12.000000Z",
+                "entry": [
+                    {
+                        "resource": {
+                            "resourceType": "Composition",
+                            "id": "8ea44856650e913f44f6039e788fa41f",
+                            "status": "final",
+                            "type": {
+                                "text": "Nota de evoluci\u00f3n",
+                                "coding": [
+                                    {
+                                        "display": "Nota de evoluci\u00f3n",
+                                        "code": "D3",
+                                        "system": "urn:NOM-004-SSA3-2012"
+                                    }
+                                ]
+                            },
+                            "encounter": {
+                                "reference": "Encounter\/bf457b1135e6996ede75990696643125",
+                                "type": "Encounter",
+                                "display": "Visita 2009-06-06 22:16:12 - 2009-06-06 22:16:12"
+                            },
+                            "date": "2009-06-06T22:16:12.000000Z",
+                            "author": [
+                                {
+                                    "reference": "Practitioner\/6b4cb6cd3117765fa0a3afe2315f2065",
+                                    "type": "Practitioner",
+                                    "display": "Practicante: DR. Lopez"
+                                }
+                            ],
+                            "title": "Historia Cl\u00ednica",
+                            "section": [
+                                {
+                                    "title": "Diagn\u00f3stico",
+                                    "entry": [
+                                        {
+                                            "reference": "Observation\/8aa3dae5c1bbcf2d282cc94b2c908467",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Diagn\u00f3stico (1982-10-13 09:18:02)"
+                                        },
+                                        {
+                                            "reference": "Observation\/7b64eb2a9d325a2ff985d1ebcef20994",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Diagn\u00f3stico (1987-07-11 21:41:40)"
+                                        },
+                                        {
+                                            "reference": "Observation\/7fb1fcb39c097b3b04e596d4e99cd584",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Diagn\u00f3stico (2011-11-28 14:52:02)"
+                                        },
+                                        {
+                                            "reference": "Observation\/c43ebcc870e8fcf228c4f4c66b2e7ead",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Diagn\u00f3stico (1974-01-07 04:30:38)"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "title": "Tratamientos",
+                                    "entry": [
+                                        {
+                                            "reference": "MedicationAdministration\/8c65df998a8ac2787f1565dc4cea5f78",
+                                            "type": "MedicationAdministration",
+                                            "display": "MedicationAdministration"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "title": "Exploraci\u00f3n F\u00edsica",
+                                    "entry": [
+                                        {
+                                            "reference": "Observation\/c45e118a423d158d8ef43c29f1f39841",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (1992-06-21 14:59:38)"
+                                        },
+                                        {
+                                            "reference": "Observation\/008e0c0f5fe40e62fbbcfae852c1182b",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (1992-06-21 14:59:38)"
+                                        },
+                                        {
+                                            "reference": "Observation\/1b49933b8dbee3757751f0c2bcea7afa",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (1992-06-21 14:59:38)"
+                                        },
+                                        {
+                                            "reference": "Observation\/730a1b21ad06d59c66fbe4f62f6424a8",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (1992-06-21 14:59:38)"
+                                        },
+                                        {
+                                            "reference": "Observation\/5053f1339b9e9d028098ea41ae731330",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (1992-06-21 14:59:38)"
+                                        },
+                                        {
+                                            "reference": "Observation\/ac968af52a40ad7537df2b127f340951",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (1992-06-21 14:59:38)"
+                                        },
+                                        {
+                                            "reference": "Observation\/cc250577a09964299bbf590cbdf0bfa3",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (1992-06-21 14:59:38)"
+                                        },
+                                        {
+                                            "reference": "Observation\/6b01199c2bdcc443b7b9a8e4557aa34f",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Exploraci\u00f3n F\u00edsica (1992-06-21 14:59:38)"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "title": "Estudios",
+                                    "entry": [
+                                        {
+                                            "reference": "Observation\/b30b2c052ffceec4f53a144dacb6818c",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Estudios (2000-07-13 03:49:00)"
+                                        },
+                                        {
+                                            "reference": "Observation\/ddc2a09c3339241920f663df803192e2",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Estudios (1975-05-28 15:28:21)"
+                                        },
+                                        {
+                                            "reference": "Observation\/71c30cedcbcf0c6ad0a6cf0b7a68f2b7",
+                                            "type": "Observation",
+                                            "display": "Observaci\u00f3n: Estudios (1991-12-12 06:04:39)"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "fullUrl": "Composition\/8ea44856650e913f44f6039e788fa41f"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Practitioner",
+                            "id": "6b4cb6cd3117765fa0a3afe2315f2065",
+                            "name": [
+                                {
+                                    "text": "DR. Lopez"
+                                }
+                            ]
+                        },
+                        "fullUrl": "Practitioner\/6b4cb6cd3117765fa0a3afe2315f2065"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Patient",
+                            "id": "f2c13c2b40111558a94ae3a6e29801bb",
+                            "language": "es",
+                            "name": [
+                                {
+                                    "text": "Luiz Salsa Alta"
+                                }
+                            ],
+                            "identifier": [
+                                {
+                                    "use": "official",
+                                    "type": {
+                                        "text": "CURP"
+                                    },
+                                    "value": "LUSA19800813HOCELI80Y"
+                                },
+                                {
+                                    "use": "official",
+                                    "type": {
+                                        "text": "FOLIO",
+                                        "coding": [
+                                            {
+                                                "display": "1.0.0.0",
+                                                "code": "1.0.0.0",
+                                                "system": "http:\/\/www.expcli.com"
+                                            }
+                                        ]
+                                    },
+                                    "value": "5230449"
+                                }
+                            ],
+                            "active": true,
+                            "gender": "male",
+                            "birthDate": "1980-08-13",
+                            "address": [
+                                {
+                                    "city": "juarez",
+                                    "district": "juarez",
+                                    "state": "CHIHUAHUA"
+                                }
+                            ],
+                            "communication": [
+                                {
+                                    "language": {
+                                        "text": "Espa\u00f1ol"
+                                    },
+                                    "preferred": true
+                                }
+                            ]
+                        },
+                        "fullUrl": "Patient\/f2c13c2b40111558a94ae3a6e29801bb"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Encounter",
+                            "id": "bf457b1135e6996ede75990696643125",
+                            "identifier": [
+                                {
+                                    "use": "official",
+                                    "type": {
+                                        "text": "ID",
+                                        "coding": [
+                                            {
+                                                "display": "Expcli",
+                                                "code": "1.0.0.0",
+                                                "system": "http:\/\/www.expcli.com"
+                                            }
+                                        ]
+                                    },
+                                    "value": "2"
+                                }
+                            ],
+                            "status": "finished",
+                            "class": {
+                                "display": "ambulatory",
+                                "code": "AMB",
+                                "system": "http:\/\/terminology.hl7.org\/CodeSystem\/v3-ActCode"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "period": {
+                                "start": "2009-06-06T22:16:12.000000Z",
+                                "end": "2009-06-06T22:16:12.000000Z"
+                            },
+                            "reasonCode": [
+                                {
+                                    "text": "neque repudiandae est animi veritatis qui fuga"
+                                }
+                            ]
+                        },
+                        "fullUrl": "Encounter\/bf457b1135e6996ede75990696643125"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "8aa3dae5c1bbcf2d282cc94b2c908467",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Diagn\u00f3stico",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Diagn\u00f3stico"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1982-10-13T09:18:02.000000Z",
+                            "valueString": "tipo B"
+                        },
+                        "fullUrl": "Observation\/8aa3dae5c1bbcf2d282cc94b2c908467"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "7b64eb2a9d325a2ff985d1ebcef20994",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Diagn\u00f3stico",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Diagn\u00f3stico"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1987-07-11T21:41:40.000000Z",
+                            "valueString": "tipo A"
+                        },
+                        "fullUrl": "Observation\/7b64eb2a9d325a2ff985d1ebcef20994"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "7fb1fcb39c097b3b04e596d4e99cd584",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Diagn\u00f3stico",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Diagn\u00f3stico"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2011-11-28T14:52:02.000000Z",
+                            "valueString": "tipo A"
+                        },
+                        "fullUrl": "Observation\/7fb1fcb39c097b3b04e596d4e99cd584"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "c43ebcc870e8fcf228c4f4c66b2e7ead",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Diagn\u00f3stico",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Diagn\u00f3stico"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1974-01-07T04:30:38.000000Z",
+                            "valueString": "tipo B"
+                        },
+                        "fullUrl": "Observation\/c43ebcc870e8fcf228c4f4c66b2e7ead"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "MedicationAdministration",
+                            "id": "8c65df998a8ac2787f1565dc4cea5f78",
+                            "status": "completed",
+                            "medicationCodeableConcept": {
+                                "text": "tipo B"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2019",
+                            "dosage": {
+                                "text": "Tomar 8.6 tipo B de tipo B cada 8.4 cada tipo B",
+                                "method": {
+                                    "text": "tipo A"
+                                },
+                                "dose": {
+                                    "value": 8.6,
+                                    "unit": "tipo B"
+                                },
+                                "rateQuantity": {
+                                    "value": 8.4,
+                                    "unit": "tipo B"
+                                }
+                            }
+                        },
+                        "fullUrl": "MedicationAdministration\/8c65df998a8ac2787f1565dc4cea5f78"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "c45e118a423d158d8ef43c29f1f39841",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Habitus Exterior",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1992-06-21T14:59:38.000000Z",
+                            "valueString": "normal"
+                        },
+                        "fullUrl": "Observation\/c45e118a423d158d8ef43c29f1f39841"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "008e0c0f5fe40e62fbbcfae852c1182b",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "Temperatura",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1992-06-21T14:59:38.000000Z",
+                            "valueInteger": 31
+                        },
+                        "fullUrl": "Observation\/008e0c0f5fe40e62fbbcfae852c1182b"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "1b49933b8dbee3757751f0c2bcea7afa",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tension_arterial_sist\u00f3lica",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1992-06-21T14:59:38.000000Z",
+                            "valueInteger": 85
+                        },
+                        "fullUrl": "Observation\/1b49933b8dbee3757751f0c2bcea7afa"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "730a1b21ad06d59c66fbe4f62f6424a8",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tension_arterial_diast\u00f3lica",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1992-06-21T14:59:38.000000Z",
+                            "valueInteger": 34
+                        },
+                        "fullUrl": "Observation\/730a1b21ad06d59c66fbe4f62f6424a8"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "5053f1339b9e9d028098ea41ae731330",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "frecuencia_cardiaca",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1992-06-21T14:59:38.000000Z",
+                            "valueInteger": 61
+                        },
+                        "fullUrl": "Observation\/5053f1339b9e9d028098ea41ae731330"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "ac968af52a40ad7537df2b127f340951",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "frecuencia_respiratoria",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1992-06-21T14:59:38.000000Z",
+                            "valueInteger": 30
+                        },
+                        "fullUrl": "Observation\/ac968af52a40ad7537df2b127f340951"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "cc250577a09964299bbf590cbdf0bfa3",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "peso",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1992-06-21T14:59:38.000000Z",
+                            "valueInteger": 128
+                        },
+                        "fullUrl": "Observation\/cc250577a09964299bbf590cbdf0bfa3"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "6b01199c2bdcc443b7b9a8e4557aa34f",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "talla",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Exploraci\u00f3n F\u00edsica"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1992-06-21T14:59:38.000000Z",
+                            "valueInteger": 98
+                        },
+                        "fullUrl": "Observation\/6b01199c2bdcc443b7b9a8e4557aa34f"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "b30b2c052ffceec4f53a144dacb6818c",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tipo B",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Estudios"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "2000-07-13T03:49:00.000000Z",
+                            "valueString": "430.24"
+                        },
+                        "fullUrl": "Observation\/b30b2c052ffceec4f53a144dacb6818c"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "ddc2a09c3339241920f663df803192e2",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tipo A",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Estudios"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1975-05-28T15:28:21.000000Z",
+                            "valueString": "Sin resultados"
+                        },
+                        "fullUrl": "Observation\/ddc2a09c3339241920f663df803192e2"
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "71c30cedcbcf0c6ad0a6cf0b7a68f2b7",
+                            "status": "final",
+                            "category": [
+                                {
+                                    "text": "tipo B",
+                                    "coding": [
+                                        {
+                                            "system": ""
+                                        }
+                                    ]
+                                }
+                            ],
+                            "code": {
+                                "text": "Estudios"
+                            },
+                            "subject": {
+                                "reference": "Patient\/f2c13c2b40111558a94ae3a6e29801bb",
+                                "type": "Patient",
+                                "display": "Datos del paciente: Luiz Salsa Alta"
+                            },
+                            "effectiveDateTime": "1991-12-12T06:04:39.000000Z",
+                            "valueString": "positivo"
+                        },
+                        "fullUrl": "Observation\/71c30cedcbcf0c6ad0a6cf0b7a68f2b7"
+                    }
+                ]
+            },
+            "fullUrl": "Bundle\/3a3789b71f68c6d20090f367b3d02fc1",
+            "request": {
+                "method": "POST",
+                "url": "Bundle"
+            },
+            "response": {
+                "status": "200 ok"
+            }
+        }
+    ]
+}

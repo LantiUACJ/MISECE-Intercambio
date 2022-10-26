@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller{
 
@@ -27,10 +26,7 @@ class UserController extends Controller{
         $data["password"] = Hash::make($data["password"]);
         $data["hospital_id"] = auth()->user()->hospital_id;
         $model = User::create($data);
-        if($model){
-            return redirect("users/view/".$model->id);
-        }
-        return redirect("error");
+        return redirect()->route("hospital.usuario.show",$model->id);
     }
 
     public function edit(User $user){
@@ -45,10 +41,7 @@ class UserController extends Controller{
         else{
             unset($data["password"]);
         }
-        if($user->update($data)){
-            return redirect("users/view/".$user->id);
-        }
-        return redirect("error");
+        return redirect()->route("hospital.usuario.show",$user->id);
     }
 
     public function show(User $user){
@@ -64,6 +57,6 @@ class UserController extends Controller{
             request()->session()->flash('data_type', 'danger');
             request()->session()->flash('data_title', 'Error');
         }
-        return redirect("users");
+        return redirect()->route("hospital.usuario.index");
     }
 }

@@ -11,7 +11,7 @@
                 @enderror
             </div>
             <div class="input-field col s12 m6">
-                <input id="curp" type="text" class="validate" name="curp">
+                <input id="curp" type="text" class="validate" name="curp" value="{{old('curp', $model->curp)}}">
                 <label for="curp">CURP</label>
                 @error('curp')
                     <span class="error-text">{{ $message }}</span>
