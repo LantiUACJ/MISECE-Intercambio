@@ -9,6 +9,6 @@ sudo chown -R ec2-user ./composer.lock
 echo composerpreview
 sudo -u ec2-user composer update > /dev/null 2> /dev/null < /dev/null &
 echo composer 
-php artisan migrate > /dev/null 2> /dev/null < /dev/null &
+php artisan migrate 
 echo artisan
 echo success!
