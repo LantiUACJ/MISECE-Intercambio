@@ -1,5 +1,5 @@
 <?php 
-namespace App\Tools\Abstract;
+namespace App\Tools\Template;
 
 use App\Models\Hospital;
 use App\Models\Indice;

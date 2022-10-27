@@ -4,7 +4,7 @@ namespace App\Tools\V1;
 use App\Models\Hospital;
 use \App\Models\HospitalIndice;
 
-class ApiHelper extends \App\Tools\Abstract\AbstractApiHelper{
+class ApiHelper extends \App\Tools\Template\AbstractApiHelper{
 
     /* Procesa request */
     public function processRequest(){

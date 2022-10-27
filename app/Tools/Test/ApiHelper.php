@@ -8,7 +8,7 @@ use \App\Models\HospitalIndice;
 use Aws\Sns\SnsClient; 
 use Aws\Exception\AwsException;
 
-class ApiHelper extends \App\Tools\Abstract\AbstractApiHelper{
+class ApiHelper extends \App\Tools\Template\AbstractApiHelper{
 
     public function getData(){
         $archivoJson = "";

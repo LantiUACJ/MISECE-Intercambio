@@ -3,7 +3,7 @@
 namespace App\Tools\V1;
 
 use Illuminate\Support\Facades\Auth;
-use App\Tools\Abstract\AbstractAuthMethod;
+use App\Tools\Template\AbstractAuthMethod;
 
 class AuthMethod extends AbstractAuthMethod{
 

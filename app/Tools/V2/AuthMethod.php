@@ -7,7 +7,7 @@ use Firebase\JWT\Key;
 
 use Illuminate\Support\Facades\Storage;
 
-class AuthMethod extends \App\Tools\Abstract\AbstractAuthMethod{
+class AuthMethod extends \App\Tools\Template\AbstractAuthMethod{
 
     public function validate(){
         $jwt = str_replace("Bearer ", "", $this->data["authorization"]);
