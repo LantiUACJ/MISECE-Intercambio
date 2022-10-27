@@ -23,7 +23,7 @@ use \App\Http\Controllers\UserHospitalController;
 
 Route::get('/', [\App\Http\Controllers\SiteController::class, "index"])->name("home");
 Route::get('login', [\App\Http\Controllers\SiteController::class, "login"])->name('login');
-Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"])->name('login');
+Route::post('/login', [\App\Http\Controllers\SiteController::class, "loginPost"]);
 Route::get('/logout', [\App\Http\Controllers\SiteController::class, "logout"]);
 
 /* Rutas de admin */
