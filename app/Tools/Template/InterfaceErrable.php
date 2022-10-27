@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tools\Abstract;
+namespace App\Tools\Template;
 
 class InterfaceErrable{
     protected $valid, $error;
