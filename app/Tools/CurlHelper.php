@@ -15,11 +15,11 @@ class CurlHelper{
         $this->ch = curl_init();
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($this->ch, CURLOPT_URL, $this->url);
-        curl_setopt($this->ch, CURLOPT_POST, true);
+        curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, 'POST',);
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
         $auth = "Authorization: Bearer " . $this->makeJWT();
-        curl_setopt($this->ch, CURLOPT_HTTPHEADER, ["content-type: application/fhir+json", "accept: application/fhir+json", $auth]);
+        curl_setopt($this->ch, CURLOPT_HTTPHEADER, [$auth]);
         return curl_exec($this->ch);
     }
     public function post(){
@@ -85,7 +85,7 @@ class CurlHelper{
         $payload = [
             'data' => "test",//$request->input("data"),
             'iat' => time(),
-            'exp' => time()+5,
+            'exp' => time()+3600,
         ];
         //sleep(10);
         /* ===== Making JWT ===== */
