@@ -13,10 +13,10 @@ class CurlHelper{
 
     public function postJWT(){
         $this->ch = curl_init();
-        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($this->ch, CURLOPT_URL, $this->url);
-        curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, 'POST',);
-        curl_setopt($this->ch, CURLOPT_POSTFIELDS, json_encode($this->data));
+        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($this->ch, CURLOPT_POSTFIELDS, $this->data);
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
         $auth = "Authorization: Bearer " . $this->makeJWT();
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, [$auth]);
