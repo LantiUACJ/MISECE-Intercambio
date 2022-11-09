@@ -38,7 +38,7 @@ class AbstractApiHelper extends InterfaceErrable{
         if(isset($data["type"])){
             $this->type = $data["type"];
             if($this->type === 1){
-                $this->url =  "patient/";
+                $this->url =  "patient";
             }
             elseif($this->type === 2){
                 $this->url =  "patient/basic";
