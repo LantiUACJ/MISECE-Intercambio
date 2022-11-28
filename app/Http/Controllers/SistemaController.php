@@ -18,7 +18,6 @@ class SistemaController extends Controller
         $out = new \stdClass;
         $days = 365 * 3;
         $certname = "certificados";
-        $passphrase = "";
         $config=array(
             'private_key_bits'  =>  4096,
             'private_key_type'  =>  OPENSSL_KEYTYPE_RSA,
@@ -41,7 +40,7 @@ class SistemaController extends Controller
         $csr = openssl_csr_new( $dn, $privkey, $config );
         $cert = openssl_csr_sign( $csr, $CAcert, $CAPK, $days, $config, 0 );
         openssl_x509_export( $cert, $out->pub );
-        openssl_pkey_export( $privkey, $out->priv, $passphrase );
+        openssl_pkey_export( $privkey, $out->priv, /*$passphrase*/ null );
         openssl_csr_export( $csr, $out->csr );
 
         $pk=$out->priv;
