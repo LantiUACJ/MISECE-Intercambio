@@ -55,10 +55,6 @@ class ApiController extends \App\Http\Controllers\Controller{
         if(!$apiHelper->isValid()){
             return response($apiHelper->getErrorMessage(),$apiHelper->getErrorCode());
         }
-        $apiHelper->validateCode();
-        if(!$apiHelper->isValid()){
-            return response($apiHelper->getErrorMessage(),$apiHelper->getErrorCode());
-        }
         $apiHelper->getData();
         if(!$apiHelper->isValid()){
             return response($apiHelper->getErrorMessage(),$apiHelper->getErrorCode());
