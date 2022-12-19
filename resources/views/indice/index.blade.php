@@ -16,10 +16,10 @@
                 <td>
                     @foreach ($indice->hospitales as $hospitalIndice)
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col s6">
                                 {{$hospitalIndice->hospital->user}}
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col s6">
                                 <div class="btn btn-danger" onclick="confirmModal('¿Borrar indice?','{{url('/indice/delete/'.$indice->id)}}')">Borrar</div>
                             </div>
                         </div>

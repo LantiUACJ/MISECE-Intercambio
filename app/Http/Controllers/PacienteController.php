@@ -34,7 +34,6 @@ class PacienteController extends Controller
         if(!$apiHelper->isValid()){
             return view("paciente.normal.codigo", ["nombre"=>$nombre, "curp"=>$input["curp"]]);
         }
-
         $apiHelper->getData();
         if(!$apiHelper->isValid()){
             return view("paciente.normal.resultado", ["nombre"=>$nombre, "data"=>"Sin respuesta"]);

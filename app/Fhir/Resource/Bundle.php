@@ -134,6 +134,10 @@ class Bundle extends DomainResource{
                 $entry->mark = $skip;
                 $data [] = $entry;
             }
+            if($entry->resourceType == "Bundle"){
+                $elements = $entry->findAllergy($skip);
+                $data = array_merge($data, $elements);
+            }
         }
         return $data;
     }

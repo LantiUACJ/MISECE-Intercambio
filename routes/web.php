@@ -5,6 +5,7 @@ use \App\Http\Controllers\HospitalController;
 use \App\Http\Controllers\PacienteController;
 use \App\Http\Controllers\PacienteBasicoController;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\PasswordRecoveryController;
 use \App\Http\Controllers\BlockchainController;
 use App\Http\Controllers\SistemaController;
 use \App\Http\Controllers\TestController;
@@ -89,11 +90,9 @@ Route::middleware(["auth","hospital"])->group(function (){
     });
 });
 
-/*
-use Illuminate\Support\Facades\Storage;
-Route::get("test", function (){
-    //https://s3-misece-cert-test.s3.amazonaws.com/CA.crt
-    $data = Storage::disk('s3')->get('CA.crt');
-    dd($data);
-});
-*/
+
+Route::get("/user/forgot/password", [PasswordRecoveryController::class, "forgotPasswordEmail"]);
+Route::post("/user/forgot/password", [PasswordRecoveryController::class, "forgotPasswordEmailSubmit"]);
+Route::get("/user/forgot/password/finish", [PasswordRecoveryController::class, "forgotPasswordEmailFinish"]);
+Route::get("/user/forgot/password/{token}", [PasswordRecoveryController::class, "forgotPasswordEmailToken"]);
+Route::post("/user/forgot/password/{token}", [PasswordRecoveryController::class, "forgotPasswordEmailTokenSubmit"]);

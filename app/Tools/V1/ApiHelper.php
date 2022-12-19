@@ -30,6 +30,7 @@ class ApiHelper extends \App\Tools\Template\AbstractApiHelper{
                 $bundle = $curlConsulta->get();
             elseif($hospitalIndice->hospital->version == "v2")
                 $bundle = $curlConsulta->postJWT();
+            //dd($bundle);
             if($curlConsulta->success() == 200){
                 $data = [];
                 $respuestas .= $hospitalIndice->hospital->user . ",";
@@ -47,5 +48,6 @@ class ApiHelper extends \App\Tools\Template\AbstractApiHelper{
         $this->logData($respuestas);
         //$data = new \App\Tools\JsonProcessHelper($this->data);
         //$this->data = $data->sortDesc();
+        //dd($this);
     }
 }
