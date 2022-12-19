@@ -17,7 +17,7 @@
             <div class="col s12 m6 fh center left-panel">
                 <div class="login-logo">
                     <a href="{{url("/")}}">
-                        <img src="logomisece.svg">
+                        <img src="{{asset("logomisece.svg")}}">
                     </a>
                 </div>
             </div>
@@ -39,9 +39,9 @@
                                             <input type="password" placeholder="Contraseña" name="password">
                                         </div>
                                     </div>
-                                    <!--<div class="bottom-form">
+                                    <div class="bottom-form">
                                         <a href="#modal1" class="forgot-text right modal-trigger">Olvidé mi contraseña</a>
-                                    </div>-->
+                                    </div>
                                 </div>
                                 @error('error')
                                     <div class="col s12">
@@ -68,12 +68,15 @@
                 <h4>Recuperar contraseña</h4>
                 <p>Ingresa el correo electrónico para recuperar tu contraseña.</p>
                 <div class="input">
-                    <input class="no-pad" type="email" placeholder="Ingresa tu correo electrónico">
+                    <form action="{{url('/user/forgot/password')}}" method="POST" id="recovery">
+                        @csrf
+                        <input class="no-pad" type="email" placeholder="Ingresa tu correo electrónico" name="email">
+                    </form>
                 </div>
             </div>
         </div>
         <div class="modal-footer center">
-        <a href="#!" class="modal-close waves-effect waves-green btn">Enviar</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn" onclick="$('#recovery').submit();">Enviar</a>
         </div>
     </div>
     

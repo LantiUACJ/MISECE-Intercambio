@@ -12,7 +12,7 @@
             <div class="collapsible-header" id="<?= $paciente->resourceType.'/'. $paciente->id ?>"><?= $paciente->toString() ?></div>
             <div class="collapsible-body resource observation">
                 @include('fhir._factory', ["obj"=>$paciente, "not"=>true])
-                @foreach ($bundle->findAllergy(2, 2) as $allergy)
+                @foreach ($bundle->findAllergy(2) as $allergy)
                     @include('fhir._factory', ["obj"=>$allergy, "not"=>true])
                 @endforeach
             </div>

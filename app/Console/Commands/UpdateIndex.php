@@ -39,50 +39,63 @@ class UpdateIndex extends Command
      * @return int
      */
     public function handle(){
-        Hospital::all()->each(function ($hospital){
-            echo "Hospital encontrado\n";
+        Hospital::cursor()->each(function ($hospital){
+            echo "Sistema: " . $hospital->nombre . "\n";
             $last = $hospital->lastIndice;
             $post_params = [];
             if($last){
                 $post_params = ["last"=>$last->created_at];
                 echo "último registro: $last->created_at \n";
             }
-            echo $hospital->url . "update\n";
             $curl = new \App\Tools\CurlHelper($hospital->url . "update/",$post_params);
-            $data = json_decode($curl->get());
-            echo "datos adquiridos\n";
+            $data = [];
+            if($hospital->version == "v1")
+                $data = $curl->get();
+            else
+                $data = $curl->postJWT();
+            $data = json_decode($data);
             if($data){
-                print_r(["data"=>$data]);
-                echo "tiene datos\n";
                 foreach($data as $elemento){
-                    echo $elemento->curp;
-                    echo "\n";
+                    echo $elemento->curp . "\n";
                     $indice = Indice::where("curp",$elemento->curp)->first();
-                    if(!$indice){
-                        $indice = new Indice();
-                        $indice->curp = $elemento->curp;
-                        if(isset($elemento->telefono) && $elemento->telefono && isset($elemento->nombre) && $elemento->nombre && isset($elemento->email) && $elemento->email){
-                            $indice->telefono = $elemento->telefono;
-                            $indice->nombre = $elemento->nombre;
-                            $indice->email = $elemento->email;
-                            echo $indice->save()?" Nuevo Indice ":" no se guardo ";
-                        }
-                        else{
-                            echo "Registro ignorado, no hay teléfono";
-                        }
-                        echo "\n";
-                    }
-                    //echo "Totals: " . HospitalIndice::where("hospital_id", $hospital->id)->where("indice_id", $indice->id)->count();
+                    if(!$indice) $indice = $this->generarIndice($elemento);
+                    else $this->actualizarIndice($elemento, $indice);
                     if($indice->id && HospitalIndice::where("hospital_id", $hospital->id)->where("indice_id", $indice->id)->count() == 0){
                         $hi = new HospitalIndice();
                         $hi->hospital_id = $hospital->id;
                         $hi->indice_id = $indice->id;
-                        echo $hi->save()? " Nuevo registro ":" No se guardo ";
+                        echo ($hi->save()? " Nuevo registro ":" No se guardo ")."\n";
                     }
-                    echo "\n";
+                    if(isset($elemento->borrar) && $elemento->borrar){
+                        echo (HospitalIndice::where("hospital_id", $hospital->id)->where("indice_id", $indice->id)->delete()?"Borrado":"Error") . "\n";
+                    }
                 }
             }
         });
         return 0;
+    }
+
+    private function generarIndice($elemento){
+        $indice = new Indice();
+        if( isset($elemento->curp) && $elemento->curp ){
+            $indice->curp = $elemento->curp;
+            if(isset($elemento->telefono) && $elemento->telefono && isset($elemento->nombre) && $elemento->nombre && isset($elemento->email) && $elemento->email){
+                $indice->telefono = $elemento->telefono;
+                $indice->nombre = $elemento->nombre;
+                $indice->email = $elemento->email;
+                echo ($indice->save()?"Nuevo Indice":"no se guardo"). "\n";
+                return $indice;
+            }
+        }
+        return false;
+    }
+
+    private function actualizarIndice($elemento, $indice){
+        if(isset($elemento->telefono) && $elemento->telefono && isset($elemento->nombre) && $elemento->nombre && isset($elemento->email) && $elemento->email){
+            $indice->telefono = $elemento->telefono;
+            $indice->nombre = $elemento->nombre;
+            $indice->email = $elemento->email;
+            echo $indice->save()?"Actualizado":"no se guardo";
+        }
     }
 }
