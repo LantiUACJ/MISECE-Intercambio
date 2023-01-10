@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Repositorio;
 use Illuminate\Http\Request;
 
 class ApiController extends \App\Http\Controllers\Controller{
@@ -61,5 +62,11 @@ class ApiController extends \App\Http\Controllers\Controller{
         }
 
         return $apiHelper->renderHtml();
+    }
+
+    public function repositorio(){
+        $repo = new Repositorio();
+        $repo->activa = true;
+        return ["status"=>$repo->save()?$repo:false];
     }
 }

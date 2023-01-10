@@ -22,6 +22,17 @@ class ApiHelper extends \App\Tools\Template\AbstractApiHelper{
         return $query->get();
     }
 
+    private function addOrganization($hospital){
+        $organization = new \App\Fhir\Resource\Organization();
+        $address = new \App\Fhir\Element\Address();
+        $address->setState($hospital->estado);
+        $address->setCity($hospital->ciudad);
+        $address->setPostalCode($hospital->codigo_postal);
+        $organization->setName($hospital->nombre);
+        $organization->addAddress($address);
+        return $organization;
+    }
+
     public function getData(){
         $respuestas = "";
         foreach($this->getHospitalIndice() as $hospitalIndice){
@@ -40,7 +51,8 @@ class ApiHelper extends \App\Tools\Template\AbstractApiHelper{
                     if($curlProcesamiento->success() == 200) $data = new \App\Fhir\Resource\Bundle($procesado);
                 }
                 if(!$data) $data = new \App\Fhir\Resource\Bundle($bundle);
-
+                //dd($data);
+                $data->addEntry($this->addOrganization($hospitalIndice->hospital));
                 $this->data[] = ["bundle"=>$data,"hospital"=>$hospitalIndice->hospital];
             }
         }
@@ -48,6 +60,6 @@ class ApiHelper extends \App\Tools\Template\AbstractApiHelper{
         $this->logData($respuestas);
         //$data = new \App\Tools\JsonProcessHelper($this->data);
         //$this->data = $data->sortDesc();
-        //dd($this);
+        //dd($this->data);
     }
 }

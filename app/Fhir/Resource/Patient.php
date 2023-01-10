@@ -82,7 +82,7 @@ class Patient extends DomainResource{
             foreach($json->communication as $communication){
                 $data = [];
                 if($communication->language)
-                    $data["language"] = $communication->language;
+                    $data["language"] = CodeableConcept::Load($communication->language);
                 if($communication->preferred)
                     $data["preferred"] = $communication->preferred;
                 $this->communication[] = $data;
