@@ -19,4 +19,7 @@ class HospitalIndice extends Model
     public function hospital(){
         return $this->hasOne(Hospital::class,"id","hospital_id");
     }
+    public function indice(){
+        return $this->hasOne(Indice::class,"id","indice_id");
+    }
 }

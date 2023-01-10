@@ -22,3 +22,5 @@ Route::prefix('/{version}')->middleware(["auth.api"])->group(function(){
     Route::post('/test/expediente/basico/{curp}', [ApiTestController::class, "consultarExpedientesBasico"]);
     Route::post('/test/json', [ApiTestController::class, "testJson"]);
 });
+
+Route::post("/repositorio", [ApiController::class, "repositorio"]);

@@ -219,4 +219,8 @@ class AbstractApiHelper extends InterfaceErrable{
     public function getIndice(){
         return $this->indice;
     }
+
+    public function retriveData(){
+        return $this->data;
+    }
 }

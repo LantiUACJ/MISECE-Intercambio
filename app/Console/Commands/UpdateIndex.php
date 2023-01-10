@@ -53,10 +53,11 @@ class UpdateIndex extends Command
                 $data = $curl->get();
             else
                 $data = $curl->postJWT();
+            $err = $data;
             $data = json_decode($data);
             if($data){
                 foreach($data as $elemento){
-                    echo $elemento->curp . "\n";
+                    echo $elemento->curp;
                     $indice = Indice::where("curp",$elemento->curp)->first();
                     if(!$indice) $indice = $this->generarIndice($elemento);
                     else $this->actualizarIndice($elemento, $indice);
@@ -95,7 +96,7 @@ class UpdateIndex extends Command
             $indice->telefono = $elemento->telefono;
             $indice->nombre = $elemento->nombre;
             $indice->email = $elemento->email;
-            echo $indice->save()?"Actualizado":"no se guardo";
+            echo $indice->save()?" Actualizado\n":" no se guardo\n";
         }
     }
 }
