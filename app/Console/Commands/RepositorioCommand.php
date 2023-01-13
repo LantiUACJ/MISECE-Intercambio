@@ -41,6 +41,8 @@ class RepositorioCommand extends Command
     public function handle(){
         $repositorio = \App\Models\Repositorio::where("activa", 1)->first();
         if($repositorio){
+            $repositorio->activa = 0;
+            $repositorio->save();
             foreach(\App\Models\Indice::cursor() as $indice){
                 $apiHelper = new \App\Tools\V1\ApiHelper([
                     "curp"=>$indice->curp, 
@@ -48,22 +50,27 @@ class RepositorioCommand extends Command
                     "type"=>1,
                     "codigo"=>"11111",
                 ]);
+                
                 $apiHelper->searchPatient();
                 if(!$apiHelper->isValid()) continue;
-
+                
                 $apiHelper->getData();
                 if(!$apiHelper->isValid()) continue;
-
+                
+                
                 $data = $apiHelper->retriveData();
+                //dd($apiHelper);
                 foreach($data as $element){
                     if(isset($element["bundle"])){
                         $curl = new \App\Tools\CurlHelper(env("REPOSITORIO_URL")."api/store",["bundle"=>$element["bundle"]->toJson()]);
                         $response = $curl->postJWT();
+                        if(strpos($response, "Almacenado correctamente") === false){
+                            return $response;
+                        }
+                        //dd($response);
                     }
                 }
             }
-            $repositorio->activa = 0;
-            $repositorio->save();
             echo "Done\n";
         }
         else{

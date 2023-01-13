@@ -10,6 +10,7 @@ use \App\Http\Controllers\BlockchainController;
 use App\Http\Controllers\SistemaController;
 use \App\Http\Controllers\TestController;
 use \App\Http\Controllers\UserHospitalController;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,3 +97,7 @@ Route::post("/user/forgot/password", [PasswordRecoveryController::class, "forgot
 Route::get("/user/forgot/password/finish", [PasswordRecoveryController::class, "forgotPasswordEmailFinish"]);
 Route::get("/user/forgot/password/{token}", [PasswordRecoveryController::class, "forgotPasswordEmailToken"]);
 Route::post("/user/forgot/password/{token}", [PasswordRecoveryController::class, "forgotPasswordEmailTokenSubmit"]);
+
+Route::get("test", function(){
+    (new \App\Console\Commands\RepositorioCommand())->handle();
+})->middleware(["auth", "admin"]);

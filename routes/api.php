@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ApiTestController;
+use App\Models\Repositorio;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +25,12 @@ Route::prefix('/{version}')->middleware(["auth.api"])->group(function(){
     Route::post('/test/json', [ApiTestController::class, "testJson"]);
 });
 
-Route::post("/repositorio", [ApiController::class, "repositorio"]);
+Route::post("/repositorio", [ApiController::class, "repositorio"])->middleware(["auth.api"]);
+
+Route::post("/actualizar/repositorio", function (){
+    set_time_limit(-1);
+    $repositorio = new Repositorio();
+    $repositorio->activa = true;
+    $repositorio->save();
+    Artisan::queue("repositorio");
+});//->middleware(["auth.api"]);
