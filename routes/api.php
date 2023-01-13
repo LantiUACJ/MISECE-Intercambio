@@ -25,7 +25,7 @@ Route::prefix('/{version}')->middleware(["auth.api"])->group(function(){
     Route::post('/test/json', [ApiTestController::class, "testJson"]);
 });
 
-Route::post("/repositorio", [ApiController::class, "repositorio"])->middleware(["auth.api"]);
+Route::post("/repositorio", [ApiController::class, "repositorio"]);//->middleware(["auth.api"]);
 
 Route::post("/actualizar/repositorio", function (){
     set_time_limit(-1);
