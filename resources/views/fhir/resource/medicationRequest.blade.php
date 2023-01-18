@@ -18,7 +18,7 @@
     @if (isset($obj->status))
         <p><b>Estado:</b></p>
         <div class="element">
-            {{str_replace(["active","on-hold","cancelled","completed","entered-in-error","stopped","draft","unknown"], ["active","on-hold","cancelled","completed","entered-in-error","stopped","draft","unknown"], $obj->intent)}}
+            {{str_replace(["active","on-hold","cancelled","completed","entered-in-error","stopped","draft","unknown"], ["active","on-hold","cancelled","completed","entered-in-error","stopped","draft","unknown"], $obj->status)}}
         </div>
     @endif
     @if (isset($obj->statusReason))
