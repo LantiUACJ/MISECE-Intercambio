@@ -27,7 +27,6 @@
         </div>
         <div class="row nomargin">
             <div class="col s12 m12 center">
-                
                 <div class="nav" id="menu">
                     <div class="nav-content">
                         <div class="nav-logo">
@@ -38,6 +37,11 @@
                             <a class="link-menu" href="#beneficios">Beneficios </a>
                             <a class="link-menu" href="#nosotros">Nosotros </a>
                             <a class="link-menu" href="#contacto">Contacto </a>
+                            <a class="link-menu dropdown-trigger" href="#!" data-target="dropdown1">Repositorio<i class="material-icons right">arrow_drop_down</i></a>
+                            <ul id="dropdown1" class="dropdown-content">
+                                <li><a class="link-menu" href="{{env('REPOSITORIO_URL') . 'consultar'}}">Consultar</a></li>
+                                <li><a class="link-menu" href="{{env('REPOSITORIO_URL') . 'descargar'}}">Descargar</a></li>
+                            </ul>
                             <a class="link-menu" href="{{url('login')}}">Iniciar sesión </a>
                         </div>
                         <div class="nav-icons">
@@ -47,7 +51,7 @@
                     </div>
                 </div>
                 <div class="backshadow" id="drop">
-
+                    
                 </div>
             </div>
         </div>
@@ -241,6 +245,13 @@
                                     </div>
                                     <p>victor.morales@uacj.mx</p>
                                     <!--<p>Ciudad de México</p>-->
+                                    <p class="footer-title">Documentos</p>
+                                    <div class="title-element small-element">
+                                        <span class="line-one"></span>
+                                        <span class="line-two"></span>
+                                    </div>
+                                    <p><a href="https://misecepublic.s3.amazonaws.com/Esta%CC%81ndar+y+Gui%CC%81a+Te%CC%81cnica+de+Interoperabilidad+para+Sistemas+de+Expediente+Cli%CC%81nico+Electro%CC%81nico+a+trave%CC%81s+del+MISECE.pdf">Estándar y Guía Técnica de Interoperabilidad</a></p>
+                                    <p><a href="https://misecepublic.s3.amazonaws.com/Documento+de+lineamientos+y+procedimiento+de+certificaci%C3%B3n+para+el+est%C3%A1ndar+de+Expediente+Cl%C3%ADnico+Electr%C3%B3nico+MICESE.pdf">Lineamientos y procedimiento de certificación</a></p>
                                 </div>
                                 <div class="col s12 m4 footer-col">
                                     <p class="footer-title">Acerca De </p>
@@ -287,6 +298,7 @@
 
     <script>
         $(document).ready(function(){
+            $(".dropdown-trigger").dropdown();
             $('ul.tabs').tabs({
             swipeable : true,
             responsiveThreshold : 1920
@@ -300,11 +312,10 @@
                 
             });
             $(".link-menu").click(function(){
-                if ($(window).width() < 1140) {
-                $("#menu").removeClass("opened-menu");
-                $("#drop").removeClass("opened-menu");
-                $("#menuicon").removeClass("activebtn");
-
+                if ($(window).width() < 1140 && !$(this).hasClass("dropdown-trigger")) {
+                    $("#menu").removeClass("opened-menu");
+                    $("#drop").removeClass("opened-menu");
+                    $("#menuicon").removeClass("activebtn");
                 }
             })
             $("#drop").click(function(){
