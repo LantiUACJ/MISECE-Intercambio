@@ -13,31 +13,41 @@ class Organization extends DomainResource{
 
     public function __construct($json = null){
         $this->resourceType = "Organization";
+
+        $this->identifier = [];
+        $this->type = [];
+        $this->alias = [];
+        $this->telecom = [];
+        $this->address = [];
+        $this->contact = [];
+        $this->endpoint = [];
         parent::__construct($json);
+
+
         if($json) $this->loadData($json);
     }
     private function loadData($json){
         if(isset($json->identifier))
             foreach($json->identifier as $identifier)
-                $arrayData["identifier"][] = Identifier::Load($identifier);
+                $this->identifier[] = Identifier::Load($identifier);
         if(isset($json->active))
-            $arrayData["active"] = $json->active;
+            $this->active = $json->active;
         if(isset($json->type))
             foreach($json->type as $type)
-                $arrayData["type"][] = CodeableConcept::Load($type);
+                $this->type[] = CodeableConcept::Load($type);
         if(isset($json->name))
-            $arrayData["name"] = $json->name;
+            $this->name = $json->name;
         if(isset($json->alias))
             foreach($json->alias as $alias)
-                $arrayData["alias"][] = $alias;
+                $this->alias[] = $alias;
         if(isset($json->telecom))
             foreach($json->telecom as $telecom)
-                $arrayData["telecom"][] = ContactPoint::Load($telecom);
+                $this->telecom[] = ContactPoint::Load($telecom);
         if(isset($json->address))
             foreach($json->address as $address)
-                $arrayData["address"][] = Address::Load($address);
+                $this->address[] = Address::Load($address);
         if(isset($json->partOf))
-            $arrayData["partOf"] = Reference::Load($json->partOf);
+            $this->partOf = Reference::Load($json->partOf);
         if(isset($json->contact))
             foreach($json->contact as $contact){
                 $data = [];
@@ -49,11 +59,11 @@ class Organization extends DomainResource{
                     $data["telecom"] =  ContactPoint::Load($contact->telecom);
                 if(isset($contact->address))
                     $data["address"] =  CodeableConcept::Load($contact->address);
-                $arrayData["contact"][] = $data;
+                $this->contact[] = $data;
             }
         if(isset($json->endpoint))
             foreach($json->endpoint as $endpoint)
-                $arrayData["endpoint"][] = Reference::Load($endpoint);
+                $this->endpoint[] = Reference::Load($endpoint);
     }
 
     /* obligatorio array (2..*) 

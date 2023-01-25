@@ -20,7 +20,7 @@ class Setup extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Genera usuarios';
 
     /**
      * Create a new command instance.
