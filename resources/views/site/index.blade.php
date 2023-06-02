@@ -45,7 +45,7 @@
                             <a class="link-menu" href="{{url('login')}}">Iniciar sesión </a>
                         </div>
                         <div class="nav-icons">
-                            <img src="{{asset('concayt.png')}}" alt="">
+                            <img src="{{asset('conahcyt.png')}}" alt="">
                             <img src="{{asset('uacj.png')}}" alt="">
                         </div>
                     </div>
@@ -214,7 +214,7 @@
                         </p>
                         <div class="logos-brief">
                             <img src="{{asset('uacj.png')}}" alt="">
-                            <img src="{{asset('concayt.png')}}" alt="">
+                            <img src="{{asset('conahcyt.png')}}" alt="">
                         </div>
                     </div>
 
