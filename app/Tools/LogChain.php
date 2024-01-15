@@ -3,7 +3,6 @@ namespace App\Tools;
 
 use Web3\Web3;
 use Web3\Providers\HttpProvider;
-use Web3\RequestManagers\HttpRequestManager;
 use Web3\Contract;
 use App\Models\Log;
 use Web3p\EthereumTx\Transaction;
@@ -25,7 +24,7 @@ class LogChain{
     function store($log){
         //dd($log);
         $start = microtime(true);
-        $provider = new HttpProvider(new HttpRequestManager($this->ip, 15));
+        $provider = new HttpProvider($this->ip, 15);
         $contract = new Contract($provider, $this->abi);
         $data = [
             "fecha"=> $log->fecha,
@@ -70,7 +69,7 @@ class LogChain{
     }
 
     function find($id){
-        $provider = new HttpProvider(new HttpRequestManager($this->ip, 15));
+        $provider = new HttpProvider($this->ip, 15);
         $contract = new Contract($provider, $this->abi);
         $data = "";
         $contract->at($this->contractAddress)->call("getRecord", bin2hex($id), function($err, $succ) use(&$data){
@@ -85,7 +84,7 @@ class LogChain{
 
     function errorFreeTransaction($nonce = 0){
         $start = microtime(true);
-        $provider = new HttpProvider(new HttpRequestManager($this->ip, 15));
+        $provider = new HttpProvider($this->ip, 15);
         $contract = new Contract($provider, $this->abi);
         $transactionCount = new class{ public function toString(){}};
         if($nonce == 0){
@@ -153,7 +152,7 @@ class LogChain{
     }
 
     function getTransactionCountAcc(){
-        $provider = new HttpProvider(new HttpRequestManager($this->ip, 15));
+        $provider = new HttpProvider($this->ip, 15);
         $contract = new Contract($provider, $this->abi);
         $txCount = new class {function toString(){}};
         $contract->eth->getTransactionCount($this->account, function ($err, $transactionCountResult) use(&$txCount) {
@@ -167,7 +166,7 @@ class LogChain{
     }
 
     function deploy(){
-        $provider = new HttpProvider(new HttpRequestManager($this->ip, 15));
+        $provider = new HttpProvider($this->ip, 15);
         $contract = new Contract($provider, $this->abi);
         $tx = new Transaction([
             'nonce' => "0x" . dechex($this->getTransactionCountAcc()),
