@@ -39,6 +39,8 @@ class SmartContractDeploy extends Command
     public function handle()
     {
         $logChain = new LogChain();
-        return $logChain->deploy();
+        $add = $logChain->deploy();
+        $this->info($add);
+        return true;
     }
 }
